@@ -468,5 +468,263 @@ test("Core mod.info lists the same foreign mods", function()
     end
 end)
 
+-- ==================================================================== v0.5
+local MODS = "Contents/mods/"
+for _, m in ipairs({ "ZEGunsOfBohemiaIso", "ZEGunsOfBohemiaReload", "ZEGunsOfBohemiaHolding", "ZEGunsOfBohemiaCalls" }) do
+    package.path = MODS .. m .. "/42/media/lua/shared/?.lua;" .. package.path
+end
+require "ZGB/ZGB_Events"; require "ZGB/ZGB_Addons"; require "ZGB/ZGB_Sandbox"; require "ZGB/ZGB_Casings"
+require "ZGBIso/ZGB_Def_IsoView"
+require "ZGBReload/ZGB_Reload"
+require "ZGBHolding/ZGB_Holding"
+require "ZGBCalls/ZGB_Def_Calls"
+local E, AD, SB, AF, RF, CS = ZGB.Events, ZGB.Addons, ZGB.Sandbox, ZGB.AnimFactory, ZGB.RecoilFactory, ZGB.Casings
+local RL, HD, CL = ZGB.Reload, ZGB.Holding, ZGB.Calls
+local G = WF.get
+
+print("events and addons")
+test("events reach every listener; a failing one doesn't stop the rest", function()
+    E._reset()
+    local got = {}
+    E.on("t.ev", function(p) got[#got + 1] = p.n end)
+    E.on("t.ev", function() error("boom") end)
+    E.on("t.ev", function(p) got[#got + 1] = p.n * 2 end)
+    eq(E.emit("t.ev", { n = 2 }), 2); eq(got[1], 2); eq(got[2], 4)
+    E._reset()
+end)
+test("missing essential addons are reported until they register", function()
+    AD._reset()
+    eq(#AD.missingEssentials(), 2)
+    AD.register{ id = "reload" }; AD.register{ id = "holding" }
+    eq(#AD.missingEssentials(), 0)
+    AD._reset()
+end)
+test("sandbox: default without SandboxVars, override wins", function()
+    eq(SB.get("ZGBX", "A", 7), 7)
+    SandboxVars = { ZGBX = { A = "12" } }; eq(SB.get("ZGBX", "A", 7), 12)
+    SB.set("ZGBX", "A", 3); eq(SB.get("ZGBX", "A", 7), 3)
+    SandboxVars = nil; SB._reset()
+end)
+
+print("animation factory")
+test("every gun has a known anim type", function()
+    for _, s in ipairs(WF.all()) do assert(AF.getType(s.animType), s.id .. ": " .. tostring(s.animType)) end
+    eq(G("SteyrAUG").animType, "bullpup"); eq(G("ColtSAA").animType, "revolver_gate"); eq(G("Rem700").animType, "bolt_internal")
+end)
+test("iso view resolves every clip of every anim type", function()
+    for _, t in ipairs(AF.types()) do
+        local missing = AF.missingClips("iso", t.id)
+        assert(#missing == 0, t.id .. " missing iso clips: " .. table.concat(missing, ", "))
+    end
+end)
+test("child types inherit and override (bullpup is a slower rifle)", function()
+    local rifle, bull = AF.getType("rifle"), AF.getType("bullpup")
+    assert(bull.timings.magIn > rifle.timings.magIn)
+    eq(bull.timings.magDrop, rifle.timings.magDrop)
+    eq(#bull.reloads.empty, #rifle.reloads.empty)
+end)
+test("reload sequences: per-round and only-if-empty steps", function()
+    local cyl = AF.sequence("revolver", "cylinder", 6, true); eq(#cyl, 3 + 6)
+    eq(#AF.sequence("pump", "single", 4, false), 4)
+    local dry = AF.sequence("pump", "single", 4, true); eq(#dry, 5); eq(dry[5].clip, "cycle")
+    eq(AF.sequence("handgun", "single", 3, true), nil)
+end)
+test("iso build: script params by type, stance variants fall back", function()
+    eq(AF.build("iso", glock).scriptParams.SwingAnim, "Handgun")
+    eq(AF.build("iso", ak).scriptParams.SwingAnim, "Rifle")
+    local novice = AF.build("iso", ak, "novice")
+    local expert = AF.build("iso", ak, "expert")
+    assert(novice.clips.idle.lowered > expert.clips.idle.lowered, "novice carries lower")
+    eq(AF.build("iso", ak, "nonsense").clips.idle.anim, AF.build("iso", ak).clips.idle.anim)
+    eq(novice.variables.ZGB_Stance, "novice"); eq(novice.variables.ZGB_AnimType, "rifle")
+end)
+
+print("recoil")
+test("spray pattern: deterministic, as long as the biggest magazine", function()
+    local p = RF.patternFor(ak)
+    eq(p.length, 75); eq(p.profile, "climb_right")
+    RF._cache = {}
+    near(RF.patternFor(ak).shots[30].x, p.shots[30].x)
+end)
+test("profiles shape the spray; caliber sets its size", function()
+    assert(RF.patternFor(ak).shots[30].x > 0, "AK drifts right")
+    assert(RF.patternFor(G("ThompsonM1928")).shots[30].x < 0, "Thompson drifts left")
+    assert(RF.patternFor(G("DesertEagle")).vertical > RF.patternFor(glock).vertical)
+end)
+test("iso recoil: first shot free, penalty grows and caps", function()
+    eq(RF.iso(ak, 1).hitPenalty, 0)
+    local a, b = RF.iso(ak, 5).hitPenalty, RF.iso(ak, 15).hitPenalty
+    assert(a > 0 and b >= a)
+    assert(RF.iso(G("M16A2"), 100).hitPenalty <= RF.ISO_PENALTY_CAP)
+    assert(RF.iso(ak, 5, 0.5).hitPenalty < a, "a compensator (lower recoil) shrinks it")
+end)
+test("kick class and burst tracking", function()
+    eq(RF.kickClass(G("BarrettM95")), "heavy"); eq(RF.kickClass(G("RugerMkII")), "light")
+    local st = {}
+    eq(RF.track(st, 10.0), 1); eq(RF.track(st, 10.2), 2); eq(RF.track(st, 11.5), 1)
+end)
+test("transient effects join the from-scratch stats pass", function()
+    local s = ZGB.Stats.compute(ak, {}, nil, nil, { { mods = { add = { hitChance = -10 } } } })
+    eq(s.hitChance, ak.stats.hitChance - 10)
+    eq(ZGB.Stats.compute(ak, {}).hitChance, ak.stats.hitChance)
+end)
+
+print("casings")
+test("semi-autos drop a casing per shot, bolt guns after cycling", function()
+    local c = CS.forEvent(glock, "fire"); eq(c.item, "ZGB.Casing_Pistol"); eq(c.delay, 0)
+    assert(CS.forEvent(G("Rem700"), "fire").delay > 0)
+    eq(CS.forEvent(m590, "fire").item, "ZGB.Casing_ShotgunHull")
+end)
+test("revolvers and break-actions drop their empties on reload", function()
+    eq(CS.forEvent(G("SW_Model10"), "fire"), nil)
+    eq(CS.forEvent(G("SW_Model10"), "reload", { spent = 4 }).count, 4)
+    eq(CS.forEvent(G("CoachGun"), "reload", { spent = 2 }).count, 2)
+    eq(CS.forEvent(G("SW_Model10"), "reload", { spent = 0 }), nil)
+end)
+
+print("reloading addon")
+test("reload kind follows the gun and its state", function()
+    eq(RL.kindFor(glock, { rounds = 5 }), "tactical"); eq(RL.kindFor(glock, { rounds = 0 }), "empty")
+    eq(RL.kindFor(G("SW_Model10"), {}), "cylinder"); eq(RL.kindFor(G("ColtSAA"), {}), "gate")
+    eq(RL.kindFor(G("CoachGun"), {}), "break"); eq(RL.kindFor(m590, {}), "single")
+    eq(RL.kindFor(G("Rem700"), {}), "single")
+end)
+test("chambered +1 only for closed-bolt guns", function()
+    eq(RL.hasChamber(glock), true); eq(RL.capacity(glock, 17), 18)
+    eq(RL.hasChamber(G("Uzi")), false); eq(RL.hasChamber(G("SW_Model10")), false)
+    eq(RL.hasChamber(m590), true); eq(RL.hasChamber(G("CoachGun")), false)
+    eq(RL.plan(glock, { rounds = 3 }).chamberPlusOne, true)
+    eq(RL.plan(glock, { rounds = 0 }).chamberPlusOne, false)
+end)
+test("plan timing: skill speeds it up, drums slow it down, sandbox scales", function()
+    local base = RL.plan(ak, { rounds = 0 }, { skill = 0 }).duration
+    assert(RL.plan(ak, { rounds = 0 }, { skill = 10 }).duration < base)
+    assert(RL.plan(ak, { rounds = 0, magTier = "drum" }, { skill = 0 }).duration > base)
+    near(RL.plan(ak, { rounds = 0 }, { skill = 0, speed = 200 }).duration, base / 2)
+    assert(RL.plan(ak, { rounds = 0 }).duration > RL.plan(ak, { rounds = 5 }).duration, "empty is slower than tactical")
+end)
+test("internal reloads load what's missing; revolvers reload every chamber", function()
+    eq(RL.plan(m590, { rounds = 5 }).rounds, 3)
+    local rv = RL.plan(G("SW_Model10"), { rounds = 2 }); eq(rv.rounds, 6); eq(rv.spent, 4)
+end)
+test("reload steps come due in order", function()
+    local plan = RL.plan(glock, { rounds = 0 }, { skill = 0 })
+    local due, nxt = RL.dueSteps(plan, 0, 1); eq(#due, 1); eq(due[1].step.clip, "magDrop")
+    due, nxt = RL.dueSteps(plan, plan.duration, nxt); eq(#due, 2); eq(nxt, 4)
+end)
+
+print("tactical holding addon")
+test("stance follows Aiming level", function()
+    eq(HD.stanceFor(0), "novice"); eq(HD.stanceFor(3), "trained"); eq(HD.stanceFor(7), "proficient"); eq(HD.stanceFor(10), "expert")
+end)
+test("sandbox: level link off, fixed stance, custom thresholds, disabled", function()
+    eq(HD.stanceFor(0, { useLevel = false, fixed = "expert" }), "expert")
+    eq(HD.stanceFor(2, { thresholds = { trained = 2 } }), "trained")
+    eq(HD.stanceFor(10, { enabled = false }), nil)
+    SB.set("ZGBHolding", "UseAimingLevel", false); SB.set("ZGBHolding", "FixedStance", 2)
+    eq(HD.stanceFor(0, HD.optionsFromSandbox(SB)), "trained")
+    SB._reset()
+end)
+test("first-person passive hold steadies with experience", function()
+    local a, b, c = HD.fpPassive(0), HD.fpPassive(4), HD.fpPassive(10)
+    assert(a.sway > b.sway and b.sway > c.sway)
+    near(c.sway, HD.get("expert").fp.sway)
+end)
+test("every stance has an iso idle and aim variant", function()
+    for _, s in ipairs(HD.all()) do
+        local _, _, key = AF.resolve("iso", "rifle", "idle", s.id); eq(key, "idle@" .. s.id)
+        _, _, key = AF.resolve("iso", "handgun", "aim", s.id); eq(key, "aim@" .. s.id)
+    end
+end)
+
+print("callouts addon")
+test("reload callouts match the reload kind", function()
+    local line, call = CL.pick("reload.start", { kind = "tactical", spec = ak }, {}, { now = 0 })
+    eq(call.id, "reload_tactical"); assert(line)
+    eq(select(2, CL.pick("reload.start", { kind = "single", spec = m590 }, {}, { now = 0 })).id, "reload_shells")
+    eq(select(2, CL.pick("reload.start", { kind = "single", spec = G("Win1894") }, {}, { now = 0 })).id, "reload_rounds")
+end)
+test("cooldown blocks chatter; urgent calls interrupt", function()
+    local st = {}
+    assert(CL.pick("reload.start", { kind = "tactical" }, st, { now = 0, cooldown = 4 }))
+    eq(CL.pick("reload.start", { kind = "tactical" }, st, { now = 1, cooldown = 4 }), nil)
+    assert(CL.pick("ammo.empty", {}, st, { now = 2, cooldown = 4 }), "out of ammo interrupts")
+    assert(CL.pick("reload.start", { kind = "tactical" }, st, { now = 7, cooldown = 4 }))
+end)
+test("categories can be switched off; sidearm and grenade calls", function()
+    eq(CL.pick("ammo.empty", {}, {}, { now = 0, enabled = { ammo = false } }), nil)
+    eq(select(2, CL.pick("weapon.equip", { previous = ak, spec = glock }, {}, { now = 0 })).id, "sidearm")
+    eq(CL.pick("weapon.equip", { previous = glock, spec = ak }, {}, { now = 0 }), nil)
+    eq(CL.pick("grenade.throw", { kind = "frag" }, {}, { now = 0 }), "FRAG OUT!")
+end)
+
+print("addon packaging")
+test("every addon has mod.info requiring Core, and a common/ folder", function()
+    for _, m in ipairs({ "ZEGunsOfBohemiaIso", "ZEGunsOfBohemiaReload", "ZEGunsOfBohemiaHolding", "ZEGunsOfBohemiaCalls" }) do
+        local f = assert(io.open(MODS .. m .. "/42/mod.info"), m)
+        local info = f:read("*a"); f:close()
+        assert(string.find(info, "require=\\ZEGunsOfBohemiaCore", 1, true), m .. " must require Core")
+        assert(string.find(info, "modversion=" .. ZGB.VERSION, 1, true), m .. " version")
+        assert(io.open(MODS .. m .. "/common/README.txt"), m .. " needs common/")
+    end
+end)
+test("every sandbox option has a label", function()
+    for _, m in ipairs({ "ZEGunsOfBohemiaIso", "ZEGunsOfBohemiaReload", "ZEGunsOfBohemiaHolding", "ZEGunsOfBohemiaCalls" }) do
+        local opts = io.open(MODS .. m .. "/42/media/sandbox-options.txt"):read("*a")
+        local labels = io.open(MODS .. m .. "/42/media/lua/shared/Translate/EN/Sandbox_EN.txt"):read("*a")
+        for key in string.gmatch(opts, "translation = ([%w_]+)") do
+            assert(string.find(labels, "Sandbox_" .. key .. " =", 1, true), m .. ": no label for " .. key)
+        end
+    end
+end)
+
+print("addon clients (stub game)")
+test("clients load and react: equip -> stance -> anim variables, reload -> callout + casings", function()
+    -- the smallest slice of the game the client files touch
+    local handlers = {}
+    Events = setmetatable({}, { __index = function(t, name)
+        local ev = { Add = function(fn) handlers[name] = handlers[name] or {}; table.insert(handlers[name], fn) end }
+        rawset(t, name, ev); return ev
+    end })
+    Perks = { Aiming = "Aiming", Reloading = "Reloading" }
+    ZombRand = function(n) return 0 end
+    local dropped = {}
+    local square = { AddWorldInventoryItem = function(_, ft) local wi = { ft = ft }; dropped[#dropped + 1] = wi; return wi end }
+    local player = { vars = {}, said = {}, aiming = 0 }
+    function player:setVariable(k, v) self.vars[k] = v end
+    function player:Say(s) self.said[#self.said + 1] = s end
+    function player:getPerkLevel(perk) return perk == "Aiming" and self.aiming or 0 end
+    function player:getForwardDirection() return { getX = function() return 1 end, getY = function() return 0 end } end
+    function player:getCurrentSquare() return square end
+    function player:getX() return 10.5 end
+    function player:getY() return 10.5 end
+    for _, m in ipairs({ "ZEGunsOfBohemiaIso", "ZEGunsOfBohemiaReload", "ZEGunsOfBohemiaHolding", "ZEGunsOfBohemiaCalls" }) do
+        package.path = MODS .. m .. "/42/media/lua/client/?.lua;" .. package.path
+    end
+    E._reset(); AD._reset()
+    package.loaded["ZGBIso/ZGB_ViewIso"] = nil
+    require "ZGBIso/ZGB_IsoClient"
+    require "ZGBHolding/ZGB_HoldingClient"
+    require "ZGBCalls/ZGB_CallsClient"
+    eq(#AD.missingEssentials(), 1, "holding registered, reload not yet:")
+    require "ZGBReload/ZGB_ReloadHooks"
+    eq(#AD.missingEssentials(), 0)
+
+    E.emit("weapon.equip", { player = player, gun = {}, spec = ak })
+    eq(player.vars.ZGB_AnimType, "rifle"); eq(player.vars.ZGB_Stance, "novice")
+    eq(player.vars.ZGB_Kick, RF.kickClass(ak))
+    player.aiming = 9
+    for _, fn in ipairs(handlers.LevelPerk or {}) do fn(player, "Aiming") end
+    eq(player.vars.ZGB_Stance, "expert")
+
+    E.emit("weapon.fire", { player = player, gun = Mock.item("ZGB.Glock17"), spec = glock, shot = 1 })
+    eq(#dropped, 1); eq(dropped[1].ft, "ZGB.Casing_Pistol")
+    E.emit("reload.start", { player = player, spec = G("SW_Model10"), kind = "cylinder", spent = 5 })
+    eq(#dropped, 6, "five empties out of the cylinder:")
+    eq(player.said[#player.said], "RELOADING!")
+    Events, Perks, ZombRand = nil, nil, nil
+    E._reset()
+end)
+
 print(string.format("\n%d passed, %d failed", passed, failed))
 if failed > 0 then os.exit(1) end

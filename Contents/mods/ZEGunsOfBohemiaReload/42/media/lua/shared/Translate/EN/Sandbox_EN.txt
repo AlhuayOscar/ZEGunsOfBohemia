@@ -1,0 +1,5 @@
+Sandbox_EN = {
+    Sandbox_ZGB = "ZE Guns Of Bohemia",
+    Sandbox_ZGBReload_Speed = "Reload speed (%)",
+    Sandbox_ZGBReload_Speed_tooltip = "100 is normal. Higher is faster. Applies on top of the gun type, magazine size and Reloading skill.",
+}

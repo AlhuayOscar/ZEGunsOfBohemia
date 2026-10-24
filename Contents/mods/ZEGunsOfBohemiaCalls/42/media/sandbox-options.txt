@@ -1,0 +1,37 @@
+VERSION = 1,
+
+option ZGBCalls.Enabled
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBCalls_Enabled,
+}
+
+option ZGBCalls.Cooldown
+{
+    type = integer, min = 0, max = 60, default = 4,
+    page = ZGB, translation = ZGBCalls_Cooldown,
+}
+
+option ZGBCalls.Reloads
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBCalls_Reloads,
+}
+
+option ZGBCalls.Ammo
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBCalls_Ammo,
+}
+
+option ZGBCalls.Weapon
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBCalls_Weapon,
+}
+
+option ZGBCalls.Grenades
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBCalls_Grenades,
+}

@@ -1,0 +1,6 @@
+name=ZE Guns Of Bohemia - Tactical Holding
+id=ZEGunsOfBohemiaHolding
+description=Essential addon for ZE Guns Of Bohemia: how your character holds a gun depends on their Aiming level, from a shaky low carry to a high compressed ready. Configurable in sandbox options, including turning the level link off.
+require=\ZEGunsOfBohemiaCore
+modversion=0.5.0
+versionMin=42.0

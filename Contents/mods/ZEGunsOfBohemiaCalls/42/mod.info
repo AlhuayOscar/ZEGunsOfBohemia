@@ -1,0 +1,6 @@
+name=ZE Guns Of Bohemia - Callouts
+id=ZEGunsOfBohemiaCalls
+description=Optional addon for ZE Guns Of Bohemia: your character calls out what they are doing (CHANGING MAG!, I'M OUT!, LAST MAG!, and FRAG OUT! once grenades arrive). Each kind of callout can be switched off in sandbox options.
+require=\ZEGunsOfBohemiaCore
+modversion=0.5.0
+versionMin=42.0

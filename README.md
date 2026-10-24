@@ -7,7 +7,7 @@ and first person — without the animation overlap, flicker and crashes you get
 when you mix isometric gun packs with ZombieBuddy-based first-person (viewpoint / ADS) mods.
 
 ![Build](https://img.shields.io/badge/Project%20Zomboid-Build%2042-8b0000)
-![Version](https://img.shields.io/badge/version-0.4.0-blue)
+![Version](https://img.shields.io/badge/version-0.5.0-blue)
 ![Status](https://img.shields.io/badge/status-pre--alpha-orange)
 ![License](https://img.shields.io/badge/license-CC0--1.0-lightgrey)
 
@@ -26,6 +26,7 @@ when you mix isometric gun packs with ZombieBuddy-based first-person (viewpoint 
 - [Installation](#installation)
 - [Compatibility](#compatibility)
 - [How it works](#how-it-works)
+- [The addons](#the-addons)
 - [Adding a gun](#adding-a-gun)
 - [Development](#development)
 - [Before the first in-game run — VERIFY list](#before-the-first-in-game-run--verify-list)
@@ -163,8 +164,12 @@ ZE Guns Of Bohemia isn't on the Steam Workshop yet. To run it locally:
    ```
    The repo's `Contents/mods/...` layout is the Workshop format, so the game picks it up as-is.
 2. In **Mods**, enable:
-   - **ZE Guns Of Bohemia - Core** (always), and
-   - **exactly one** view addon: **ZE Guns Of Bohemia - Isometric** for now.
+   - **ZE Guns Of Bohemia - Core** (always),
+   - the essential addons **ZE Guns Of Bohemia - Reloading** and **ZE Guns Of Bohemia - Tactical Holding**,
+   - **exactly one** view addon: **ZE Guns Of Bohemia - Isometric** for now,
+   - optionally **ZE Guns Of Bohemia - Callouts**.
+
+   Core tells you on game start if a view addon or an essential addon is missing.
 3. Start a new game. Existing saves keep their vanilla guns (conversion isn't done yet).
 
 ## Compatibility
@@ -201,10 +206,15 @@ but don't send the B42 sync calls.
 Contents/mods/
   ZEGunsOfBohemiaCore/   logic, items, UI, loot. No animations, no Java. Always enabled.
   ZEGunsOfBohemiaIso/    isometric view addon (pure Lua). Registers provider "iso".
+  ZEGunsOfBohemiaReload/ essential: reloading system (reload kinds, timing, events)
+  ZEGunsOfBohemiaHolding/ essential: tactical holding (stance by Aiming level)
+  ZEGunsOfBohemiaCalls/  optional: callouts ("CHANGING MAG!")
   ZEGunsOfBohemiaFP/     (planned) first-person addon, requires ZombieBuddy. Provider "fp".
 tests/                   offline tests (Lua 5.1) with a fake inventory
-tools/gen_scripts.lua    regenerates weapon, magazine, part and ammo item scripts from the Lua catalogs
+tools/gen_scripts.lua    regenerates weapon, magazine, part, ammo and casing item scripts from the Lua catalogs
 tools/gen_catalog.lua    dumps the catalogue to docs/catalogue.json (for the 3D side and docs)
+tools/gen_animsets.lua   writes draft iso AnimSet nodes to docs/animsets/iso/ from the animation factory
+docs/FIRST_PERSON.md     isometric vs first person: what each view does with the same data
 ```
 
 Each mod folder follows the B42 layout: `42/` (mod.info + media) and `common/`.
@@ -215,7 +225,11 @@ Each mod folder follows the B42 layout: `42/` (mod.info + media) and `common/`.
 | `Factory/ZGB_WeaponFactory` | `define{}` → validated spec. `MaxAmmo` comes from the standard magazine; stats scale with caliber energy | no |
 | `Factory/ZGB_MagazineFactory` | `define{}` for magazines: caliber, tier, capacity; tier rules and loot weights | no |
 | `Factory/ZGB_PartFactory` | `define{}` for attachments: `kind`, `interface`, `provides`, `mods` | no |
-| `Factory/ZGB_AmmoCatalog` | ammo variant effects × which variants exist per caliber | no |
+| `Factory/ZGB_AmmoCatalog` | ammo variant effects × which variants exist per caliber; spent casing per caliber group | no |
+| `Factory/ZGB_AnimFactory` + `Defs/ZGB_Def_Anims` | anim types (how a gun moves and reloads) and views (how a camera shows it) | no |
+| `Factory/ZGB_RecoilFactory` + `Defs/ZGB_Def_Recoil` | spray patterns per gun; iso and FP applications | no |
+| `ZGB_Events`, `ZGB_Addons`, `ZGB_Sandbox` | event bus between systems, addon registry, sandbox reads | no |
+| `ZGB_Casings` | when and what a gun ejects | no |
 | `ZGB_Attachments` | rules engine: canAttach / canDetach / requirement chains / UI tree | no |
 | `ZGB_Stats` | final stats = base + parts + magazine + ammo (add → mul → set → clamp) | no |
 | `ZGB_Magazines`, `ZGB_Ammo` | magazine choice and the load-all planner | no |
@@ -223,12 +237,116 @@ Each mod folder follows the B42 layout: `42/` (mod.info + media) and `common/`.
 | `ZGB_ScriptApply` | at boot, writes every spec into the item scripts | yes |
 | `ZGB_ItemBridge` | the **only** place that calls live item / weapon methods | yes |
 | `ZGB_Service`, `ZGB_PartActions`, `ZGB_MagazineActions`, `ZGB_AmmoActions` | timed actions | yes |
-| `client/.../ZGB_ReloadHooks` | wraps vanilla reload / insert / eject | yes |
+| `client/.../ZGB_ClientHooks` | menus; emits `weapon.equip`, `weapon.fire`, `ammo.empty` | yes |
 | `client/.../ZGB_GunsmithWindow` | attachment UI | yes |
 | `server/.../ZGB_Distributions` | swaps vanilla guns for ours in loot, adds variants | yes |
-| `ZGBIso/ZGB_ViewIso` | archetype → isometric animation set | no |
+| Iso `ZGBIso/ZGB_Def_IsoView`, `ZGB_ViewIso` | the iso view: clip map, stance variants, script params | no |
+| Iso `client/ZGBIso/ZGB_IsoClient` | anim variables, burst recoil penalty, case dropping | yes |
+| Reload `ZGBReload/ZGB_Reload` | reload rules: kind, chamber +1, plan and timing | no |
+| Reload `client/ZGBReload/ZGB_ReloadHooks` | wraps vanilla reload / insert / eject, emits `reload.*` | yes |
+| Holding `ZGBHolding/ZGB_Holding` | stances and which one a level gets | no |
+| Calls `ZGBCalls/ZGB_Calls`, `ZGB_Def_Calls` | callout rules and lines | no |
 
 Files marked "no" never touch the game API, which is what lets them run in the offline tests.
+
+## The addons
+
+Core holds the data and the rules engines. Everything a player sees or does
+with a gun comes from addons that talk to each other only through the event
+bus (`ZGB_Events`), so each one can change or be replaced on its own:
+
+```
+ Core ──weapon.equip / weapon.fire / ammo.empty──►┐
+ Reloading ──reload.start / step / complete, ammo.lastMag──►├──► Isometric view (animation, recoil, casings)
+ Tactical Holding ──hold.changed──►┘                    └──► Callouts (shouts)
+```
+
+### Animation factory (Core) and the isometric view
+
+Animation follows the same factory pattern as guns:
+
+- **Anim types** (`Defs/ZGB_Def_Anims.lua`) say how a kind of gun moves: its
+  abstract clips (idle, aim, fire, magOut, magIn, chargingHandle, loadRound,
+  openCylinder...), reload sequences, clip timings and when it ejects casings.
+  There are 12: handgun, revolver, revolver_gate, rifle, smg, bullpup,
+  bolt_mag, bolt_internal, lever, pump, semi_shotgun, break_action. A type can
+  extend another (`base`), so a bullpup only states what differs from a rifle.
+- **Views** apply the factory to one camera. The Isometric addon defines view
+  `iso` (`ZGB_Def_IsoView.lua`): every abstract clip maps to a vanilla
+  skeleton clip as a stand-in until our own clips exist, tuned per type with
+  playback speed. The first-person addon will define view `fp` with its own clips.
+- A gun picks its type with `animType` (archetype default, per-gun override:
+  AUG and P90 are bullpups, the SAA and Nagant load through a gate...).
+- The iso addon sets AnimSet variables `ZGB_AnimType`, `ZGB_Stance` and
+  `ZGB_Kick` on the character. `tools/gen_animsets.lua` writes the matching
+  AnimSet nodes as **drafts** in `docs/animsets/iso/` (132 nodes). They are not
+  loaded by the game until the node format is confirmed in game (VERIFY list).
+- **Case dropping (iso):** semi-autos drop a casing per shot, bolt, pump and
+  lever guns after the action cycles, revolvers and break-actions drop all
+  their empties when you reload. Casings land on the ejection side and are
+  cleaned up after a while (sandbox: on/off, lifetime, max on the ground).
+
+### Recoil and spray patterns (Core)
+
+Each gun has a spray pattern built from a named profile (`vertical`,
+`climb_right`, `climb_left`, `s_curve`, `erratic`, `low`, `kick`) and its own
+numbers: the archetype's recoil values times the caliber's energy. The pattern
+is seeded from the gun, so it is the same every time and can be learned (AK-47
+climbs then drifts right, Thompson drifts left, PPSh-41 sways in an S).
+Attachments that lower recoil shrink the whole pattern.
+
+- **Iso:** no camera to move, so recoil is a kick animation (light, medium,
+  heavy) plus a hit-chance penalty that follows the pattern during a burst and
+  resets when you stop firing (sandbox switch).
+- **First person:** the camera will follow the pattern itself. See
+  [`docs/FIRST_PERSON.md`](docs/FIRST_PERSON.md) for every difference between the two views.
+
+### Reloading (essential addon)
+
+- **Tactical reload** with rounds left keeps the chambered round (+1) on
+  closed-bolt guns. **Empty reloads** drop the magazine and release the slide
+  or bolt, and take longer. Open-bolt guns (Uzi, MAC-10, Thompson, PPSh-41,
+  AA-12), revolvers and break-actions have no +1.
+- Guns without magazines reload the way they're built: one round at a time
+  into tubes and internal boxes, dump-and-reload for swing-out revolvers, one
+  chamber at a time through a loading gate, open-extract-load for break-actions.
+- Time = the anim type's clip timings × magazine tier (drums are slower) ×
+  Reloading skill × sandbox **Reload speed**.
+- Emits `reload.start`, `reload.step` (each clip as it plays), `reload.complete`
+  and `ammo.lastMag` when no loaded spare magazine is left.
+
+### Tactical holding (essential addon)
+
+How a character holds the gun depends on their **Aiming** level:
+
+| Stance | Default level | Iso look |
+|---|---|---|
+| Novice | 0 | muzzle carried low, shaky, slow to raise |
+| Trained | 3 | low ready |
+| Proficient | 6 | steady ready |
+| Expert | 9 | high compressed ready, snaps onto target |
+
+Sandbox options: switch it off, move each level threshold, or turn the level
+link off ("no level cap") so everyone uses one fixed stance. In iso the
+stance only changes how the character looks. In first person it will be
+passive: an inexperienced shooter's idle hold sways more (`fpPassive`).
+
+### Callouts (optional addon)
+
+The character shouts what they're doing: **CHANGING MAG!** on a tactical
+reload, **RELOADING!** when empty, **LOADING SHELLS!**, **I'M OUT!**,
+**LAST MAG!**, **SWITCHING TO PISTOL!**, and **FRAG OUT! / SMOKE OUT! /
+FLASHBANG!** once grenades exist. Calls are data (`ZGB_Def_Calls.lua`), share a
+cooldown, and urgent ones interrupt it. Sandbox: on/off, cooldown, and each
+category (reloads, ammo, weapon, grenades).
+
+### Writing your own addon
+
+Register with `ZGB.Addons.register{ id, name, modId, version }`, listen with
+`ZGB.Events.on("reload.start", fn)`, and add data through the factories:
+`AnimFactory.defineType / defineView`, `RecoilFactory.defineProfile`,
+`Holding.defineStance`, `Calls.defineCall`, plus the gun, magazine, part and
+caliber factories. Read sandbox options with `ZGB.Sandbox.get`.
 
 ### Attachments: how "a red dot needs a mount on an AK" works
 
@@ -312,7 +430,7 @@ On Windows, `winget install DEVCOM.LuaJIT` works: run the same commands with `lu
 LuaJIT accepts `goto`, so don't rely on it to catch that one.
 
 ```bash
-lua5.1 tests/run_tests.lua      # 73 tests: catalogue integrity, factory, magazine rules, attachment chains, stats, ammo, load-all, loot, mod gates
+lua5.1 tests/run_tests.lua      # 103 tests: catalogue, magazines, attachments, stats, ammo, loot, mod gates, animation factory, recoil, casings, the three addons, and the addon clients against a stub game
 ```
 
 ```bash
@@ -321,6 +439,10 @@ lua5.1 tools/gen_scripts.lua    # after editing anything in Defs/ or ZGB_AmmoCat
 
 ```bash
 lua5.1 tools/gen_catalog.lua    # refresh docs/catalogue.json
+```
+
+```bash
+lua5.1 tools/gen_animsets.lua   # refresh the draft iso AnimSet nodes in docs/animsets/iso/
 ```
 
 Conventions:
@@ -347,6 +469,11 @@ install to check against. Each is marked `-- VERIFY` in the code:
 10. **Foreign gun-mod ids** in `ZGB_Mode.FOREIGN_GUN_MOD_IDS` and Core's `mod.info` `incompatible=`. Brita, both Arsenal[26] ids and Ammocraft are confirmed; `VFExpansion1`, `firearmmod` and `Guns93` are guesses. Also check that `mod.info` accepts the `(`, `)` and `[` `]` in the Arsenal ids.
 11. **Reload types** for the new archetypes: `revolver`, and `boltactionnomag` for lever actions (vanilla has no lever reload).
 12. **Vanilla gun and magazine ids** used by `replaces` and `ZGB_Distributions.VANILLA_MAGAZINES` (`Pistol2`, `Pistol3`, `Revolver_Short`, `M14Clip`, `44Clip`...).
+13. **Animation (v0.5):** the vanilla clip names in `ZGB_Def_IsoView.lua` (`Bob_IdleRifle`, `Bob_AimHandgun`...), the AnimSet node format and folder of the drafts in `docs/animsets/iso/` (move them into the Iso addon's `media/AnimSets/player/` once confirmed), and `setVariable` on the character.
+14. **Events used by the addons:** `OnWeaponSwing` fires for ranged shots, `LevelPerk` arguments, `getTimestampMs`, `ZombRand`; timed-action fields `maxTime` and `start` on `ISInsertMagazine` / `ISReloadWeaponAction`.
+15. **Case dropping:** `IsoGridSquare:AddWorldInventoryItem` and removing world items (`transmitRemoveItemFromSquare`, `removeFromWorld`).
+16. **Sandbox and labels:** the `sandbox-options.txt` syntax (enum options included) and that each addon's `Sandbox_EN.txt` is merged with the others (B42 may expect JSON translations).
+17. **Speech:** `IsoPlayer:Say` for callouts.
 
 ## Roadmap
 
@@ -358,8 +485,11 @@ install to check against. Each is marked `-- VERIFY` in the code:
 - [x] Isometric view addon
 - [x] 70-gun catalogue, three magazine tiers, shared magazines, caliber-scaled stats (v0.4)
 - [x] Block foreign gun / reload frameworks (v0.4)
+- [x] Essential addons: Reloading and Tactical Holding; optional Callouts (v0.5)
+- [x] Animation factory with the isometric view, case dropping, spray patterns per gun (v0.5)
+- [ ] Confirm the iso AnimSet drafts in game and ship them; real clips once models exist
 - [ ] First in-game test and the VERIFY list
-- [ ] Tactical holding system (our own, replaces the need for holster / sling mods)
+- [ ] Grenades (the callouts are already waiting for `grenade.throw`)
 - [ ] Speedloaders and stripper clips for revolvers and internal-box rifles
 - [ ] Addon API docs (calibers, magazines, parts, guns, ammo effects)
 - [ ] Fire-mode switching

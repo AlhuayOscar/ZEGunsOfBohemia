@@ -13,6 +13,7 @@ print = function() end          -- silence mod logging
 require "ZGB/Defs/ZGB_Def_Parts"
 require "ZGB/Defs/ZGB_Def_Weapons"
 require "ZGB/ZGB_Attachments"
+require "ZGB/Factory/ZGB_RecoilFactory"
 print = realPrint
 
 local WF, MF, PF, AC, R = ZGB.WeaponFactory, ZGB.MagazineFactory, ZGB.PartFactory, ZGB.AmmoCatalog, ZGB.Attachments
@@ -74,7 +75,11 @@ for _, s in ipairs(WF.all()) do
         internalCapacity = s.internalCapacity, magazines = {}, slots = {},
         replaces = s.replaces, rarity = (not s.replaces) and s.rarity or nil,
         model = "ZGB_" .. s.id,
+        animType = s.animType, openBolt = s.openBolt or false,
     }
+    local rp = ZGB.RecoilFactory.patternFor(s)
+    g.recoil = { pattern = rp.profile, vertical = math.floor(rp.vertical * 100 + 0.5) / 100,
+                 horizontal = math.floor(rp.horizontal * 100 + 0.5) / 100, kick = ZGB.RecoilFactory.kickClass(s) }
     for _, m in ipairs(s.magazines) do
         g.magazines[#g.magazines + 1] = { id = m.id, name = m.displayName, tier = m.tier, capacity = m.capacity }
     end
@@ -126,9 +131,17 @@ for _, id in ipairs(ZGB.sortedKeys(AC.CALIBERS)) do
     calibers[#calibers + 1] = { id = id, label = c.label, group = c.group, energy = c.energy, variants = vs }
 end
 
+local animTypes = {}
+for _, t in ipairs(ZGB.AnimFactory.types()) do
+    local reloads = {}
+    for _, kind in ipairs(ZGB.sortedKeys(t.reloads)) do reloads[#reloads + 1] = kind end
+    animTypes[#animTypes + 1] = { id = t.id, label = t.label, base = t.base, hands = t.hands, feed = t.feed,
+                                  clips = t.clips, reloads = reloads, casing = t.casing }
+end
+
 local doc = {
     version = ZGB.VERSION, categories = ZGB.CATEGORIES, tiers = MF.TIER_ORDER,
-    guns = guns, magazines = mags, parts = parts, calibers = calibers,
+    guns = guns, magazines = mags, parts = parts, calibers = calibers, animTypes = animTypes,
 }
 local path = arg[1] or "docs/catalogue.json"
 local f = assert(io.open(path, "w"))

@@ -1,0 +1,18 @@
+Sandbox_EN = {
+    Sandbox_ZGB = "ZE Guns Of Bohemia",
+    Sandbox_ZGBHolding_Enabled = "Tactical holding",
+    Sandbox_ZGBHolding_Enabled_tooltip = "Characters hold guns differently depending on how experienced they are. Off: vanilla holding.",
+    Sandbox_ZGBHolding_UseAimingLevel = "Holding follows Aiming level",
+    Sandbox_ZGBHolding_UseAimingLevel_tooltip = "On: the stance improves as Aiming levels up. Off: no level requirement, everyone uses the fixed stance below.",
+    Sandbox_ZGBHolding_FixedStance = "Stance when not using Aiming level",
+    Sandbox_ZGBHolding_FixedStance_option1 = "Novice (low carry, shaky)",
+    Sandbox_ZGBHolding_FixedStance_option2 = "Trained (low ready)",
+    Sandbox_ZGBHolding_FixedStance_option3 = "Proficient (steady ready)",
+    Sandbox_ZGBHolding_FixedStance_option4 = "Expert (high compressed ready)",
+    Sandbox_ZGBHolding_TrainedLevel = "Aiming level for Trained",
+    Sandbox_ZGBHolding_TrainedLevel_tooltip = "Lowest Aiming level that holds a gun like a trained shooter.",
+    Sandbox_ZGBHolding_ProficientLevel = "Aiming level for Proficient",
+    Sandbox_ZGBHolding_ProficientLevel_tooltip = "Lowest Aiming level that holds a gun like a proficient shooter.",
+    Sandbox_ZGBHolding_ExpertLevel = "Aiming level for Expert",
+    Sandbox_ZGBHolding_ExpertLevel_tooltip = "Lowest Aiming level that holds a gun like an expert.",
+}

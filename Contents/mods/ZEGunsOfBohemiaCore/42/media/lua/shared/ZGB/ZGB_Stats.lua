@@ -25,8 +25,10 @@ S.CLAMP = {
 
 --- magFullType (optional): the loaded magazine; its `mods` count like a part's.
 --- ammoFullType (optional): the loaded ammo variant (AP, HP, slug...).
+--- extra (optional): list of { mods = { add=, mul=, set= } } for transient effects
+--- such as the burst recoil penalty. They join the same from-scratch pass.
 --- order: all add -> all mul -> all set -> clamp.
-function S.compute(spec, att, magFullType, ammoFullType)
+function S.compute(spec, att, magFullType, ammoFullType, extra)
     local out = ZGB.copy(spec.stats or {})
     local PF = ZGB.PartFactory
     local parts = {}
@@ -41,6 +43,9 @@ function S.compute(spec, att, magFullType, ammoFullType)
     if ammoFullType then
         local v = ZGB.AmmoCatalog.variantOfItem(ammoFullType)
         if v and v.caliber == spec.caliber then parts[#parts + 1] = v end
+    end
+    for _, e in ipairs(extra or {}) do
+        if e.mods then parts[#parts + 1] = { mods = { add = e.mods.add or {}, mul = e.mods.mul or {}, set = e.mods.set } } end
     end
     if spec.ballistics and spec.ballistics.projectileCount and out.projectileCount == nil then
         out.projectileCount = spec.ballistics.projectileCount

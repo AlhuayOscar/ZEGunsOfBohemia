@@ -29,6 +29,9 @@
          side_mount = { kind="mount", accepts={"ak_dovetail"}, label="Side mount", order=1 },
          ...
       },
+      animType    = "bullpup",              -- optional: overrides the archetype's (ZGB_Def_Anims)
+      openBolt    = true,                   -- optional: fires from an open bolt (no round chambered)
+      recoil      = { pattern = "climb_right", fp = { vertical = 1.6 } },   -- optional (ZGB_Def_Recoil)
       category    = "revolver",             -- optional: overrides the archetype's catalogue group
       rarity      = 0.3,                    -- loot weight next to its family (1 = as common as vanilla)
       model       = "ZGB_AK47",             -- optional: WeaponSprite once the 3D model exists
@@ -100,6 +103,14 @@ local function validate(def, spec)
             if not s.kind or type(s.accepts) ~= "table" or #s.accepts == 0 then
                 errs[#errs + 1] = "slot '" .. slotId .. "' needs kind + accepts{}"
             end
+        end
+        local AF, RF = ZGB.AnimFactory, ZGB.RecoilFactory
+        if AF and next(AF._types) and not AF.getType(spec.animType or "") then
+            errs[#errs + 1] = "unknown animType '" .. tostring(spec.animType) .. "' (see ZGB_Def_Anims)"
+        end
+        local pattern = spec.recoil and spec.recoil.pattern
+        if RF and pattern and next(RF._profiles) and not RF.getProfile(pattern) then
+            errs[#errs + 1] = "unknown recoil pattern '" .. pattern .. "' (see ZGB_Def_Recoil)"
         end
     end
     return errs

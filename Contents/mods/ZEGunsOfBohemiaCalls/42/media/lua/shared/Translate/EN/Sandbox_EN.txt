@@ -1,0 +1,11 @@
+Sandbox_EN = {
+    Sandbox_ZGB = "ZE Guns Of Bohemia",
+    Sandbox_ZGBCalls_Enabled = "Callouts",
+    Sandbox_ZGBCalls_Enabled_tooltip = "Characters shout what they are doing, like CHANGING MAG! or I'M OUT!",
+    Sandbox_ZGBCalls_Cooldown = "Seconds between callouts",
+    Sandbox_ZGBCalls_Cooldown_tooltip = "A more urgent callout (out of ammo, grenades) can still interrupt.",
+    Sandbox_ZGBCalls_Reloads = "Reload callouts",
+    Sandbox_ZGBCalls_Ammo = "Ammo callouts (out of ammo, last magazine)",
+    Sandbox_ZGBCalls_Weapon = "Weapon callouts (switching to sidearm)",
+    Sandbox_ZGBCalls_Grenades = "Grenade callouts",
+}

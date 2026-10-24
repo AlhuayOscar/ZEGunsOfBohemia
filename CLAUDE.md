@@ -10,7 +10,9 @@ Project Zomboid Build 42 firearms mod. Two devs: one does code (Lua now, Java la
 4. **Game-API calls not yet confirmed on a real install are marked `-- VERIFY` and wrapped in `pcall`**: a wrong name logs a warning and disables that feature, it never crashes. When one is confirmed in game, remove its `VERIFY` tag.
 5. **Stats are recomputed from scratch** (base + parts + loaded magazine + loaded ammo; add → mul → set → clamp). Never apply deltas to current values.
 6. **We own the gun basics; foreign gun/reload frameworks are blocked.** Reloading, magazines, ammo loading and (planned) tactical holding are ours. Other gun packs, reload mods and generic gun frameworks are listed in `ZGB_Mode.FOREIGN_GUN_MOD_IDS` AND Core `mod.info` `incompatible=` (a test keeps them in sync). If one is active, `ZGB.Mode.isBlocked()` is true and hooks, menus and loot do nothing. New features come in as addons on our factories, never by tolerating another framework.
-7. **Wrappers around vanilla functions (`ZGB_ReloadHooks`) always call the original and are installed once.**
+7. **Wrappers around vanilla functions (`ZGB_ReloadHooks`, now in the Reloading addon) always call the original and are installed once.**
+9. **Systems talk through `ZGB.Events`, never by calling each other.** Core emits weapon.* / ammo.*, Reloading emits reload.*, Holding emits hold.changed; views and Callouts only listen. Every new behaviour is data in a factory (`AnimFactory.defineType/defineView`, `RecoilFactory.defineProfile`, `Holding.defineStance`, `Calls.defineCall`), not a special case.
+10. **Views are applications of the animation factory.** Anim types (Core `Defs/ZGB_Def_Anims.lua`) are camera-independent; a view (`iso` in the Iso addon, later `fp`) maps every abstract clip. Never put camera-specific data in an anim type, and keep every clip mapped (a test checks `missingClips`).
 8. **Magazine rules:** tiers are only `standard`, `extended`, `drum`; at most one per tier per gun, and only tiers that exist for that gun in real life. A magazine has ONE caliber and holds only that caliber's catalog loads. Internal-fed guns (revolvers, tubes, internal boxes) use `internalCapacity` and take no magazines.
 
 ## Layout
@@ -23,8 +25,12 @@ Contents/mods/ZEGunsOfBohemiaCore/42/   logic, items, UI, loot (no anims, no Jav
   media/lua/client/ZGB/                  context menus, reload hooks, UI/ZGB_GunsmithWindow
   media/lua/server/ZGB/                  ZGB_Distributions (loot)
   media/scripts/                         item skeletons, ALL generated (weapons, magazines, parts, ammo)
-Contents/mods/ZEGunsOfBohemiaIso/42/    iso view provider (archetype -> vanilla anim set)
-Contents/mods/ZEGunsOfBohemiaFP/        (future) first-person provider, needs ZombieBuddy
+Contents/mods/ZEGunsOfBohemiaIso/42/    view "iso": clip map + stance variants, anim variables, burst recoil, case dropping
+Contents/mods/ZEGunsOfBohemiaReload/42/ ESSENTIAL addon: reload rules (ZGB_Reload) + vanilla reload hooks
+Contents/mods/ZEGunsOfBohemiaHolding/42/ ESSENTIAL addon: stance by Aiming level + sandbox options
+Contents/mods/ZEGunsOfBohemiaCalls/42/  optional addon: callouts
+Contents/mods/ZEGunsOfBohemiaFP/        (future) first-person provider, needs ZombieBuddy (see docs/FIRST_PERSON.md)
+docs/                                     catalogue.json, animsets/iso drafts (NOT loaded by the game), FIRST_PERSON.md
 tests/run_tests.lua, tests/mock_game.lua  offline tests (Lua 5.1)
 tools/gen_scripts.lua                     regenerates every item script from the catalogue
 tools/gen_catalog.lua                     dumps the catalogue to docs/catalogue.json (3D model list)
@@ -35,9 +41,10 @@ B42 layout: every mod folder needs both `42/` (mod.info + media) and `common/`. 
 ## Commands
 
 ```
-lua5.1 tests/run_tests.lua     # must stay green (73 tests at v0.4.0)
+lua5.1 tests/run_tests.lua     # must stay green (103 tests at v0.5.0)
 lua5.1 tools/gen_scripts.lua   # after editing anything in Defs/ or ZGB_AmmoCatalog.lua
 lua5.1 tools/gen_catalog.lua   # then refresh docs/catalogue.json
+lua5.1 tools/gen_animsets.lua  # after editing anim types, the iso view or stances
 ```
 
 Kahlua (PZ's Lua) is roughly Lua 5.1: no `goto`, no integer division `//`, no `utf8` lib. This Windows machine has no `lua5.1`: use LuaJIT at `%LOCALAPPDATA%\Programs\LuaJIT\bin\luajit.exe`. LuaJIT accepts `goto`, so grep for it separately.
@@ -54,7 +61,8 @@ Kahlua (PZ's Lua) is roughly Lua 5.1: no `goto`, no integer division `//`, no `u
 
 - Not yet run in game: work through the VERIFY list in README.md on the first test.
 - Mod IDs of ZombieBuddy / viewpoint mod in `ZGB_Mode.FP_MOD_IDS` and Iso `mod.info` are guesses; so are `VFExpansion1`, `firearmmod` and `Guns93` in `FOREIGN_GUN_MOD_IDS`.
-- Next systems: our own tactical holding; speedloaders / stripper clips; addon API docs.
+- v0.5 systems (animation factory, iso view, recoil, casings, reloading, holding, callouts) are unverified in game; their game calls are VERIFY items 13-17 in README. The iso AnimSet nodes are drafts in docs/animsets/iso until the node format is confirmed.
+- Next systems: grenades (callouts already listen for `grenade.throw`); speedloaders / stripper clips; FP view; addon API docs.
 - Todo: fire-mode switching, weapon light, converting vanilla guns in existing saves, translations, MP sync (send* calls), armor/tracer effects for AP/tracer traits.
 - Later: the FP addon reads `spec.fp`, `spec.recoil.fp` and each optic's `fp.sightAlignment`.
 - Open 3D decision: vanilla can't render mounts/handguards (only 6 part types) — bake mount into optic models, or swap the gun model variant when a mount is fitted.

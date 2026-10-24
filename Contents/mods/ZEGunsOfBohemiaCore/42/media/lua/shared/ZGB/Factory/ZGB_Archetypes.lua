@@ -39,6 +39,7 @@ local SHOTGUN_SOUNDS = { fire = "ShotgunShoot" }
 local HUNTING_SOUNDS = { fire = "HuntingRifleShoot" }
 
 A.pistol = {
+    animType    = "handgun",           -- see Defs/ZGB_Def_Anims.lua
     category    = "handgun",
     refCaliber  = "9x19",
     twoHanded   = false,
@@ -51,10 +52,11 @@ A.pistol = {
         aimTime = 20, recoilDelay = 12, hitChance = 40, critChance = 20,
         reloadTime = 25, soundRadius = 50, weight = 1.0,
     },
-    recoil = { fp = { vertical = 1.6, horizontal = 0.5, recovery = 0.9 } },
+    recoil = { pattern = "vertical", fp = { vertical = 1.6, horizontal = 0.5, recovery = 0.9 } },
 }
 
 A.revolver = {
+    animType    = "revolver",           -- see Defs/ZGB_Def_Anims.lua
     category    = "revolver",
     refCaliber  = "38spl",
     twoHanded   = false,
@@ -67,10 +69,11 @@ A.revolver = {
         aimTime = 22, recoilDelay = 14, hitChance = 42, critChance = 22,
         reloadTime = 35, soundRadius = 50, weight = 1.0,
     },
-    recoil = { fp = { vertical = 2.0, horizontal = 0.4, recovery = 0.85 } },
+    recoil = { pattern = "kick", fp = { vertical = 2.0, horizontal = 0.4, recovery = 0.85 } },
 }
 
 A.smg = {
+    animType    = "smg",           -- see Defs/ZGB_Def_Anims.lua
     category    = "smg",
     refCaliber  = "9x19",
     twoHanded   = true,
@@ -83,10 +86,11 @@ A.smg = {
         aimTime = 22, recoilDelay = 8, hitChance = 35, critChance = 15,
         reloadTime = 28, soundRadius = 60, weight = 2.5,
     },
-    recoil = { fp = { vertical = 1.0, horizontal = 0.6, recovery = 0.85 } },
+    recoil = { pattern = "vertical", fp = { vertical = 1.0, horizontal = 0.6, recovery = 0.85 } },
 }
 
 A.assault_rifle = {
+    animType    = "rifle",           -- see Defs/ZGB_Def_Anims.lua
     category    = "assault_rifle",
     refCaliber  = "556x45",
     twoHanded   = true,
@@ -99,10 +103,11 @@ A.assault_rifle = {
         aimTime = 30, recoilDelay = 15, hitChance = 30, critChance = 25,
         reloadTime = 30, soundRadius = 90, weight = 3.5,
     },
-    recoil = { fp = { vertical = 1.4, horizontal = 0.7, recovery = 0.8 } },
+    recoil = { pattern = "vertical", fp = { vertical = 1.4, horizontal = 0.7, recovery = 0.8 } },
 }
 
 A.dmr = {
+    animType    = "rifle",           -- see Defs/ZGB_Def_Anims.lua
     category    = "dmr",
     refCaliber  = "308win",
     twoHanded   = true,
@@ -115,10 +120,11 @@ A.dmr = {
         aimTime = 34, recoilDelay = 24, hitChance = 30, critChance = 32,
         reloadTime = 32, soundRadius = 100, weight = 4.5,
     },
-    recoil = { fp = { vertical = 2.0, horizontal = 0.6, recovery = 0.75 } },
+    recoil = { pattern = "kick", fp = { vertical = 2.0, horizontal = 0.6, recovery = 0.75 } },
 }
 
 A.shotgun = {
+    animType    = "pump",           -- see Defs/ZGB_Def_Anims.lua
     category    = "shotgun",
     refCaliber  = "12ga",
     twoHanded   = true,
@@ -132,10 +138,11 @@ A.shotgun = {
         reloadTime = 35, soundRadius = 100, weight = 3.5,
     },
     ballistics = { projectileCount = 5 },
-    recoil = { fp = { vertical = 3.0, horizontal = 1.0, recovery = 0.6 } },
+    recoil = { pattern = "kick", fp = { vertical = 3.0, horizontal = 1.0, recovery = 0.6 } },
 }
 
 A.bolt_rifle = {
+    animType    = "bolt_mag",           -- see Defs/ZGB_Def_Anims.lua
     category    = "sniper",
     refCaliber  = "308win",
     twoHanded   = true,
@@ -148,10 +155,11 @@ A.bolt_rifle = {
         aimTime = 40, recoilDelay = 40, hitChance = 25, critChance = 40,
         reloadTime = 35, soundRadius = 110, weight = 4.0,
     },
-    recoil = { fp = { vertical = 2.4, horizontal = 0.5, recovery = 0.7 } },
+    recoil = { pattern = "kick", fp = { vertical = 2.4, horizontal = 0.5, recovery = 0.7 } },
 }
 
 A.lever_rifle = {
+    animType    = "lever",           -- see Defs/ZGB_Def_Anims.lua
     category    = "lever",
     refCaliber  = "3030",
     twoHanded   = true,
@@ -164,7 +172,7 @@ A.lever_rifle = {
         aimTime = 30, recoilDelay = 22, hitChance = 30, critChance = 30,
         reloadTime = 30, soundRadius = 95, weight = 3.3,
     },
-    recoil = { fp = { vertical = 2.0, horizontal = 0.4, recovery = 0.75 } },
+    recoil = { pattern = "kick", fp = { vertical = 2.0, horizontal = 0.4, recovery = 0.75 } },
 }
 
 return A

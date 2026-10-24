@@ -14,6 +14,8 @@
     `rarity`:   loot weight next to its family when it replaces nothing.
 ]]
 require "ZGB/Defs/ZGB_Def_Magazines"
+require "ZGB/Defs/ZGB_Def_Anims"
+require "ZGB/Defs/ZGB_Def_Recoil"
 require "ZGB/Factory/ZGB_WeaponFactory"
 local W = ZGB.WeaponFactory
 
@@ -43,7 +45,7 @@ W.define{ id = "Glock19", archetype = "pistol", displayName = "Glock 19", calibe
     magazines = { standard = "Glock19_Mag15", extended = "Glock17_Mag33", drum = "Glock_Drum50" },
     stats = { weight = 0.60 }, rarity = 0.5,
     slots = { under_rail = under(), muzzle = muzzle("muzzle_pistol_9mm") } }
-W.define{ id = "Glock18C", archetype = "pistol", displayName = "Glock 18C", caliber = "9x19",
+W.define{ id = "Glock18C", recoil = { pattern = "erratic" }, archetype = "pistol", displayName = "Glock 18C", caliber = "9x19",
     magazines = GLOCK9, fireModes = AUTO, stats = { weight = 0.62 }, rarity = 0.05,
     slots = { under_rail = under() },
     notes = "Ported (compensated) slide: no muzzle slot." }
@@ -102,7 +104,7 @@ W.define{ id = "SW_Model29", archetype = "revolver", displayName = "S&W Model 29
     internalCapacity = 6, stats = { weight = 1.4 }, replaces = { "Base.Revolver_Long" } }
 W.define{ id = "ColtAnaconda", archetype = "revolver", displayName = "Colt Anaconda", caliber = "44mag",
     internalCapacity = 6, stats = { weight = 1.5 }, rarity = 0.15 }
-W.define{ id = "ColtSAA", archetype = "revolver", displayName = "Colt Single Action Army", caliber = "45colt",
+W.define{ id = "ColtSAA", animType = "revolver_gate", archetype = "revolver", displayName = "Colt Single Action Army", caliber = "45colt",
     internalCapacity = 6, stats = { weight = 1.0, reloadTime = 45 }, replaces = { "Base.Revolver" },
     notes = "Single action, loading gate: loads one chamber at a time (slower reload)." }
 W.define{ id = "TaurusJudge", archetype = "revolver", displayName = "Taurus Judge", caliber = "410ga",
@@ -113,7 +115,7 @@ W.define{ id = "RugerSuperRedhawk", archetype = "revolver", displayName = "Ruger
     slots = { scope_rings = mount("ruger_integral", "Integral ring cuts") } }
 W.define{ id = "SW_Model500", archetype = "revolver", displayName = "S&W Model 500", caliber = "500sw",
     internalCapacity = 5, stats = { weight = 2.0 }, rarity = 0.05 }
-W.define{ id = "NagantM1895", archetype = "revolver", displayName = "Nagant M1895", caliber = "762x38r",
+W.define{ id = "NagantM1895", animType = "revolver_gate", archetype = "revolver", displayName = "Nagant M1895", caliber = "762x38r",
     internalCapacity = 7, stats = { weight = 0.8, reloadTime = 50 }, rarity = 0.08,
     notes = "Gas-seal revolver, loads through a gate one round at a time." }
 W.define{ id = "DesertEagle", archetype = "pistol", category = "revolver", displayName = "Desert Eagle Mark XIX",
@@ -123,7 +125,7 @@ W.define{ id = "DesertEagle", archetype = "pistol", category = "revolver", displ
     notes = "Mag-fed hand cannon; integral top rail." }
 
 -- ================================================================ assault rifles (8)
-W.define{ id = "AK47", archetype = "assault_rifle", displayName = "AK-47", caliber = "762x39",
+W.define{ id = "AK47", recoil = { pattern = "climb_right" }, archetype = "assault_rifle", displayName = "AK-47", caliber = "762x39",
     magazines = { standard = "AK47_Mag30", extended = "AK_Mag40", drum = "AK47_Drum75" },
     stats    = { minDamage = 1.4, maxDamage = 2.1, recoilDelay = 16, weight = 3.6 },
     rarity   = 0.3,
@@ -139,7 +141,7 @@ W.define{ id = "AK47", archetype = "assault_rifle", displayName = "AK-47", calib
         ironSight = { eyeOffset = { 0, 0.03, 0 } },
     },
 }
-W.define{ id = "AK74", archetype = "assault_rifle", displayName = "AK-74", caliber = "545x39",
+W.define{ id = "AK74", recoil = { pattern = "low" }, archetype = "assault_rifle", displayName = "AK-74", caliber = "545x39",
     magazines = { standard = "AK74_Mag30", extended = "AK74_Mag45" }, stats = { weight = 3.3 }, rarity = 0.15,
     slots = { side_mount = mount("ak_dovetail", "Side mount"), muzzle = muzzle("ak74_24x15"),
               handguard = handguard("ak_handguard"), stock = stock("ak_stock"), sling = sling() } }
@@ -152,15 +154,15 @@ W.define{ id = "M4A1", archetype = "assault_rifle", displayName = "M4A1", calibe
     magazines = STANAG, stats = { weight = 2.9 }, rarity = 0.3,
     slots = { optic_rail = optic(), under_rail = under(), muzzle = muzzle("muzzle_rifle_556"),
               stock = stock("ar_buffer_tube"), sling = sling() } }
-W.define{ id = "HK416", archetype = "assault_rifle", displayName = "HK416", caliber = "556x45",
+W.define{ id = "HK416", recoil = { pattern = "low" }, archetype = "assault_rifle", displayName = "HK416", caliber = "556x45",
     magazines = STANAG, stats = { weight = 3.3 }, rarity = 0.1,
     slots = { optic_rail = optic(), under_rail = under(), muzzle = muzzle("muzzle_rifle_556"),
               stock = stock("ar_buffer_tube"), sling = sling() } }
-W.define{ id = "SteyrAUG", archetype = "assault_rifle", displayName = "Steyr AUG A1", caliber = "556x45",
+W.define{ id = "SteyrAUG", animType = "bullpup", archetype = "assault_rifle", displayName = "Steyr AUG A1", caliber = "556x45",
     magazines = { standard = "AUG_Mag30", extended = "AUG_Mag42" }, stats = { weight = 3.6, aimTime = 26 }, rarity = 0.08,
     slots = { sling = sling() },
     notes = "Bullpup with an integral 1.5x optic in the carry handle: no optic slot." }
-W.define{ id = "IMI_Galil", archetype = "assault_rifle", displayName = "IMI Galil ARM", caliber = "556x45",
+W.define{ id = "IMI_Galil", recoil = { pattern = "climb_right" }, archetype = "assault_rifle", displayName = "IMI Galil ARM", caliber = "556x45",
     magazines = { standard = "Galil_Mag35", extended = "Galil_Mag50" }, stats = { weight = 4.0 }, rarity = 0.08,
     slots = { sling = sling() },
     notes = "Built-in folding stock and bipod (part of the gun model)." }
@@ -188,20 +190,20 @@ W.define{ id = "Mk12SPR", archetype = "dmr", displayName = "Mk 12 SPR", caliber 
               stock = stock("ar_buffer_tube"), sling = sling() } }
 
 -- ================================================================ sniper rifles, bolt action (8)
-W.define{ id = "Rem700", archetype = "bolt_rifle", displayName = "Remington 700", caliber = "308win",
+W.define{ id = "Rem700", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Remington 700", caliber = "308win",
     reloadType = "boltactionnomag", internalCapacity = 4, stats = { weight = 3.4 },
     replaces = { "Base.HuntingRifle", "Base.VarmintRifle" },
     slots = { scope_base = scopeBase(), bipod = bipod(), sling = sling() } }
-W.define{ id = "Win70", archetype = "bolt_rifle", displayName = "Winchester Model 70", caliber = "3006",
+W.define{ id = "Win70", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Winchester Model 70", caliber = "3006",
     reloadType = "boltactionnomag", internalCapacity = 5, stats = { weight = 3.6 }, rarity = 0.5,
     slots = { scope_base = scopeBase(), bipod = bipod(), sling = sling() } }
-W.define{ id = "MosinNagant", archetype = "bolt_rifle", displayName = "Mosin-Nagant M91/30", caliber = "762x54r",
+W.define{ id = "MosinNagant", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Mosin-Nagant M91/30", caliber = "762x54r",
     reloadType = "boltactionnomag", internalCapacity = 5, stats = { weight = 4.0 }, rarity = 0.2,
     slots = { pu_mount = mount("mosin_receiver", "Receiver side mount"), sling = sling() } }
-W.define{ id = "Kar98k", archetype = "bolt_rifle", displayName = "Mauser Kar98k", caliber = "792x57",
+W.define{ id = "Kar98k", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Mauser Kar98k", caliber = "792x57",
     reloadType = "boltactionnomag", internalCapacity = 5, stats = { weight = 3.9 }, rarity = 0.1,
     slots = { sling = sling() } }
-W.define{ id = "LeeEnfieldNo4", archetype = "bolt_rifle", displayName = "Lee-Enfield No. 4", caliber = "303brit",
+W.define{ id = "LeeEnfieldNo4", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Lee-Enfield No. 4", caliber = "303brit",
     reloadType = "boltactionnomag", internalCapacity = 10, stats = { weight = 4.1 }, rarity = 0.1,
     slots = { sling = sling() },
     notes = "Fixed 10-round box loaded with stripper clips; treated as internal." }
@@ -219,34 +221,34 @@ W.define{ id = "BarrettM95", archetype = "bolt_rifle", displayName = "Barrett M9
     notes = "Bullpup, integral bipod and muzzle brake (part of the gun model)." }
 
 -- ================================================================ submachine guns (8)
-W.define{ id = "MP5A3", archetype = "smg", displayName = "HK MP5A3", caliber = "9x19",
+W.define{ id = "MP5A3", recoil = { pattern = "low" }, archetype = "smg", displayName = "HK MP5A3", caliber = "9x19",
     magazines = { standard = "MP5_Mag30", drum = "MP5_CMag100" }, fireModes = { "auto", "burst", "single" },
     stats = { weight = 2.5 }, rarity = 0.15,
     slots = { claw_mount = mount("hk_claw", "Claw mount"), handguard = handguard("hk_handguard"),
               muzzle = adapter("hk_3lug", "3-lug barrel", 3), sling = sling() },
     notes = "Suppressor chain: 3-lug adapter first, then a 9mm can." }
-W.define{ id = "Uzi", archetype = "smg", displayName = "IMI Uzi", caliber = "9x19",
+W.define{ id = "Uzi", openBolt = true, recoil = { pattern = "erratic" }, archetype = "smg", displayName = "IMI Uzi", caliber = "9x19",
     magazines = { standard = "Uzi_Mag32", extended = "Uzi_Mag50" }, stats = { weight = 3.5 }, rarity = 0.15,
     slots = { sling = sling() } }
-W.define{ id = "MAC10", archetype = "smg", displayName = "MAC-10", caliber = "45acp",
+W.define{ id = "MAC10", openBolt = true, recoil = { pattern = "erratic" }, archetype = "smg", displayName = "MAC-10", caliber = "45acp",
     magazines = { standard = "MAC10_Mag30" }, stats = { weight = 2.8, hitChance = 28 }, rarity = 0.1,
     slots = { muzzle = muzzle("muzzle_pistol_45"), sling = sling() } }
-W.define{ id = "ThompsonM1928", archetype = "smg", displayName = "Thompson M1928A1", caliber = "45acp",
+W.define{ id = "ThompsonM1928", openBolt = true, recoil = { pattern = "climb_left" }, archetype = "smg", displayName = "Thompson M1928A1", caliber = "45acp",
     magazines = { standard = "Thompson_Mag20", extended = "Thompson_Mag30", drum = "Thompson_Drum50" },
     stats = { weight = 4.9 }, rarity = 0.05, slots = { sling = sling() } }
 W.define{ id = "UMP45", archetype = "smg", displayName = "HK UMP45", caliber = "45acp",
     magazines = { standard = "UMP45_Mag25" }, stats = { weight = 2.3 }, rarity = 0.08,
     slots = { optic_rail = optic(), under_rail = under(), muzzle = muzzle("muzzle_pistol_45"), sling = sling() } }
-W.define{ id = "FN_P90", archetype = "smg", displayName = "FN P90", caliber = "57x28",
+W.define{ id = "FN_P90", animType = "bullpup", recoil = { pattern = "low" }, archetype = "smg", displayName = "FN P90", caliber = "57x28",
     magazines = { standard = "P90_Mag50" }, stats = { weight = 2.6 }, rarity = 0.03,
     slots = { sling = sling() },
     notes = "Top-mounted translucent magazine; integral ring sight." }
-W.define{ id = "KrissVector", archetype = "smg", displayName = "KRISS Vector", caliber = "45acp",
+W.define{ id = "KrissVector", recoil = { pattern = "low" }, archetype = "smg", displayName = "KRISS Vector", caliber = "45acp",
     magazines = { standard = "Glock21_Mag13", extended = "Glock21_Mag26" }, stats = { weight = 2.7, recoilDelay = 6 },
     rarity = 0.04,
     slots = { optic_rail = optic(), under_rail = under(), muzzle = muzzle("muzzle_pistol_45"), sling = sling() },
     notes = "Takes Glock 21 magazines." }
-W.define{ id = "PPSh41", archetype = "smg", displayName = "PPSh-41", caliber = "762x25",
+W.define{ id = "PPSh41", openBolt = true, recoil = { pattern = "s_curve" }, archetype = "smg", displayName = "PPSh-41", caliber = "762x25",
     magazines = { standard = "PPSh_Mag35", drum = "PPSh_Drum71" }, stats = { weight = 3.6 }, rarity = 0.05,
     slots = { sling = sling() } }
 
@@ -258,11 +260,11 @@ W.define{ id = "Rem870", archetype = "shotgun", displayName = "Remington 870", c
     internalCapacity = 4, stats = { weight = 3.6 }, rarity = 0.8,
     slots = { scope_base = scopeBase(), sidesaddle = sidesaddle(), choke = muzzle("choke_12ga"),
               stock = stock("r870_stock"), sling = sling() } }
-W.define{ id = "BenelliM4", archetype = "shotgun", displayName = "Benelli M4", caliber = "12ga",
+W.define{ id = "BenelliM4", animType = "semi_shotgun", archetype = "shotgun", displayName = "Benelli M4", caliber = "12ga",
     internalCapacity = 5, stats = { weight = 3.8, recoilDelay = 15 }, rarity = 0.1,
     slots = { optic_rail = optic(), sidesaddle = sidesaddle(), choke = muzzle("choke_12ga"), sling = sling() },
     notes = "Semi-automatic: faster follow-up shots." }
-W.define{ id = "Saiga12", archetype = "shotgun", displayName = "Saiga-12", caliber = "12ga",
+W.define{ id = "Saiga12", animType = "rifle", archetype = "shotgun", displayName = "Saiga-12", caliber = "12ga",
     reloadType = "handgun", magazines = { standard = "Saiga12_Mag5", extended = "Saiga12_Mag10", drum = "Saiga12_Drum20" },
     stats = { weight = 3.6, recoilDelay = 16 }, rarity = 0.08,
     slots = { side_mount = mount("ak_dovetail", "Side mount"), sling = sling() } }
@@ -270,12 +272,12 @@ W.define{ id = "KSG", archetype = "shotgun", displayName = "Kel-Tec KSG", calibe
     internalCapacity = 14, stats = { weight = 3.5 }, rarity = 0.05,
     slots = { optic_rail = optic(), under_rail = under(), sling = sling() },
     notes = "Bullpup with two 7-round tubes." }
-W.define{ id = "CoachGun", archetype = "shotgun", displayName = "Double-Barrel Coach Gun", caliber = "12ga",
+W.define{ id = "CoachGun", animType = "break_action", archetype = "shotgun", displayName = "Double-Barrel Coach Gun", caliber = "12ga",
     reloadType = "doublebarrelshotgun", internalCapacity = 2, stats = { weight = 3.2 },
     replaces = { "Base.DoubleBarrelShotgun", "Base.DoubleBarrelShotgunSawnoff", "Base.ShotgunSawnoff" } }
 W.define{ id = "Win1897", archetype = "shotgun", displayName = "Winchester Model 1897", caliber = "12ga",
     internalCapacity = 5, stats = { weight = 3.6 }, rarity = 0.15, slots = { sling = sling() } }
-W.define{ id = "AA12", archetype = "shotgun", displayName = "AA-12", caliber = "12ga",
+W.define{ id = "AA12", animType = "rifle", openBolt = true, recoil = { pattern = "low" }, archetype = "shotgun", displayName = "AA-12", caliber = "12ga",
     reloadType = "handgun", magazines = { standard = "AA12_Mag8", drum = "AA12_Drum32" }, fireModes = AUTO,
     stats = { weight = 5.2, recoilDelay = 10 }, rarity = 0.01,
     slots = { optic_rail = optic(), sling = sling() } }

@@ -1,0 +1,25 @@
+VERSION = 1,
+
+option ZGBIso.Casings
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBIso_Casings,
+}
+
+option ZGBIso.CasingLifetime
+{
+    type = integer, min = 0, max = 240, default = 10,
+    page = ZGB, translation = ZGBIso_CasingLifetime,
+}
+
+option ZGBIso.MaxCasings
+{
+    type = integer, min = 0, max = 500, default = 60,
+    page = ZGB, translation = ZGBIso_MaxCasings,
+}
+
+option ZGBIso.RecoilPenalty
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBIso_RecoilPenalty,
+}

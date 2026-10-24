@@ -1,0 +1,7 @@
+VERSION = 1,
+
+option ZGBReload.Speed
+{
+    type = integer, min = 25, max = 400, default = 100,
+    page = ZGB, translation = ZGBReload_Speed,
+}

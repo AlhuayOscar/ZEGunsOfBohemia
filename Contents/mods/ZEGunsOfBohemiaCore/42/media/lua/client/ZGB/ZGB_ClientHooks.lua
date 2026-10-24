@@ -2,6 +2,9 @@
     ZGB_ClientHooks.lua  —  context menu entry + keep stats fresh on equip.
 ]]
 require "ZGB/ZGB_Service"
+require "ZGB/ZGB_Events"
+require "ZGB/ZGB_Addons"
+require "ZGB/Factory/ZGB_RecoilFactory"
 require "ZGB/UI/ZGB_GunsmithWindow"
 require "ZGB/ZGB_MagazineActions"
 require "ZGB/ZGB_AmmoActions"
@@ -110,16 +113,41 @@ local function onFillInventoryMenu(playerNum, context, items)
     end
 end
 
+local equipped = {}   -- player -> spec of the gun in hand (for weapon.unequip)
+
 local function onEquip(character, item)
     if ZGB.Mode.isBlocked() then return end
-    if item and ZGB.WeaponFactory.isOurs(item) then
+    local spec = item and ZGB.WeaponFactory.specOf(item)
+    if equipped[character] and equipped[character] ~= spec then
+        ZGB.Events.emit("weapon.unequip", { player = character, spec = equipped[character] })
+    end
+    equipped[character] = spec
+    if spec then
         ZGB.Service.refresh(character, item)
-        ZGB.Mode.notify("onWeaponEquipped", character, item, ZGB.WeaponFactory.specOf(item))
+        ZGB.Mode.notify("onWeaponEquipped", character, item, spec)
+        ZGB.Events.emit("weapon.equip", { player = character, gun = item, spec = spec })
+    end
+end
+
+-- weapon.fire with the shot's place in the current burst (recoil, casings, calls)
+local bursts = setmetatable({}, { __mode = "k" })
+local function now() return (getTimestampMs and getTimestampMs() or os.time() * 1000) / 1000 end   -- VERIFY
+
+local function onSwing(character, weapon)
+    if ZGB.Mode.isBlocked() or not weapon then return end
+    local spec = ZGB.WeaponFactory.specOf(weapon)
+    if not spec then return end
+    bursts[weapon] = bursts[weapon] or {}
+    local shot = ZGB.RecoilFactory.track(bursts[weapon], now())
+    ZGB.Events.emit("weapon.fire", { player = character, gun = weapon, spec = spec, shot = shot })
+    if ZGB.Item.gunAmmo(weapon) <= 1 then          -- this was the last round
+        ZGB.Events.emit("ammo.empty", { player = character, gun = weapon, spec = spec })
     end
 end
 
 Events.OnFillInventoryObjectContextMenu.Add(onFillInventoryMenu)
 Events.OnEquipPrimary.Add(onEquip)
+if Events.OnWeaponSwing then Events.OnWeaponSwing.Add(onSwing) end            -- VERIFY: fires for ranged shots
 
 -- Tell the player once if no view addon (or two of them) is active.
 Events.OnGameStart.Add(function()
@@ -129,6 +157,13 @@ Events.OnGameStart.Add(function()
         msg = ZGB.Mode.conflicts[1]
     elseif not ZGB.Mode.get() then
         msg = "ZE Guns Of Bohemia: no view addon enabled. Enable 'ZE Guns Of Bohemia - Isometric'."
+    else
+        local missing = ZGB.Addons.missingEssentials()
+        if #missing > 0 then
+            local names = {}
+            for _, m in ipairs(missing) do names[#names + 1] = m.name end
+            msg = "ZE Guns Of Bohemia: essential addon(s) not enabled: " .. table.concat(names, ", ")
+        end
     end
     if msg then
         local p = getSpecificPlayer(0)

@@ -70,6 +70,17 @@ local function callSetter(item, setter, value)
     end
 end
 
+-- Transient stat effects (burst recoil penalty ...): item -> key -> { mods = {...} }.
+-- Not saved; weak keys so dropped items are collected.
+I.transient = I.transient or setmetatable({}, { __mode = "k" })
+
+--- Set (or clear with mods = nil) a transient effect, then re-apply stats.
+function I.setTransient(item, key, mods)
+    I.transient[item] = I.transient[item] or {}
+    I.transient[item][key] = mods and { mods = mods } or nil
+    return I.applyStats(item)
+end
+
 --- Recompute and push stats onto the instance. Idempotent — safe to call often.
 function I.applyStats(item)
     local spec = ZGB.WeaponFactory.specOf(item)
@@ -86,7 +97,9 @@ function I.applyStats(item)
     end
 
     local mag = I.loadedMagazine(item)
-    local stats = ZGB.Stats.compute(spec, att, mag, I.loadedAmmo(item))
+    local extra = {}
+    for _, e in pairs(I.transient[item] or {}) do extra[#extra + 1] = e end
+    local stats = ZGB.Stats.compute(spec, att, mag, I.loadedAmmo(item), extra)
     for key, setter in pairs(I.SETTERS) do
         if stats[key] ~= nil then callSetter(item, setter, stats[key]) end
     end
@@ -252,6 +265,84 @@ function I.giveAmmo(inventory, ammoFt, n)
     if n <= 0 then return end
     local ok = pcall(function() inventory:AddItems(ammoFt, n) end)          -- VERIFY; MP sync
     if not ok then for _ = 1, n do inventory:AddItem(ammoFt) end end
+end
+
+-- ------------------------------------------------------------ character (addons)
+-- Used by the reload, holding, calls and view addons. Every call is guarded:
+-- a wrong name logs once and returns the fallback.
+local warnedCalls = {}
+local function guarded(name, fallback, fn)
+    local ok, v = pcall(fn)
+    if ok then return v end
+    if not warnedCalls[name] then
+        warnedCalls[name] = true
+        ZGB.warn("Game call failed (check name for this build):", name, v)
+    end
+    return fallback
+end
+
+--- Perk level 0-10, e.g. I.perkLevel(player, "Aiming").
+function I.perkLevel(character, perkName)
+    return guarded("getPerkLevel", 0, function()
+        return character:getPerkLevel(Perks[perkName])                        -- VERIFY
+    end) or 0
+end
+
+--- Animation variable read by AnimSet conditions (iso / fp views).
+function I.setAnimVariable(character, key, value)
+    return guarded("setVariable", false, function()
+        character:setVariable(key, tostring(value)); return true              -- VERIFY
+    end)
+end
+
+--- Overhead speech text (callouts).
+function I.say(character, text)
+    return guarded("Say", false, function() character:Say(text); return true end)   -- VERIFY
+end
+
+--- Facing as a unit vector (dx, dy).
+function I.facing(character)
+    local v = guarded("getForwardDirection", nil, function() return character:getForwardDirection() end)  -- VERIFY
+    if not v then return 1, 0 end
+    return v:getX(), v:getY()
+end
+
+--- Drop an item on the ground at an offset (tiles) from the character. Returns the world item.
+function I.dropWorldItem(character, fullType, dx, dy)
+    return guarded("AddWorldInventoryItem", nil, function()
+        local sq = character:getCurrentSquare()
+        local x = (character:getX() % 1) + (dx or 0)
+        local y = (character:getY() % 1) + (dy or 0)
+        x, y = math.min(math.max(x, 0.05), 0.95), math.min(math.max(y, 0.05), 0.95)
+        return sq:AddWorldInventoryItem(fullType, x, y, 0)                     -- VERIFY
+    end)
+end
+
+--- Remove a world item dropped by dropWorldItem.
+function I.removeWorldItem(worldItemOrItem)
+    return guarded("removeWorldItem", false, function()
+        local wi = worldItemOrItem.getWorldItem and worldItemOrItem:getWorldItem() or worldItemOrItem
+        local sq = wi:getSquare()
+        if sq then sq:transmitRemoveItemFromSquare(wi) end                       -- VERIFY
+        wi:removeFromWorld(); wi:removeFromSquare()                              -- VERIFY
+        return true
+    end)
+end
+
+--- Rounds currently in the gun (magazine + chamber as vanilla counts it).
+function I.gunAmmo(gun)
+    return guarded("getCurrentAmmoCount", 0, function() return gun:getCurrentAmmoCount() end) or 0
+end
+
+--- Scale a timed action's duration (reload speed). factor 1 = unchanged.
+function I.scaleActionTime(action, factor)
+    return guarded("maxTime", false, function()
+        if action.maxTime and action.maxTime > 0 then
+            action.maxTime = math.max(1, math.floor(action.maxTime * factor + 0.5))   -- VERIFY field
+            return true
+        end
+        return false
+    end)
 end
 
 return I
