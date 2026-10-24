@@ -1,0 +1,95 @@
+/*
+    ZE Guns Of Bohemia - item SKELETONS.
+
+    Only identity + visuals live here. Damage, range, ammo, MaxAmmo, magazine,
+    reload type, sounds and animations are written at boot by
+    ZGB_ScriptApply.lua from the factory spec (ZGB_Def_Weapons.lua).
+    => Never put MaxAmmo / AmmoType / anims here; the spec is the truth.
+
+    VERIFY: field names follow Build 42 style. Before the first test, open your
+    game's vanilla AssaultRifle / Pistol / Shotgun script (media/scripts/...)
+    and copy any REQUIRED identity fields your build has that are missing here.
+
+    Icons / WeaponSprite point at vanilla assets as placeholders until the
+    custom models are in.
+*/
+module ZGB
+{
+    imports { Base }
+
+    /* ------------------------------------------------ weapons */
+    item AK47
+    {
+        DisplayCategory = Firearm,
+        ItemType        = base:weapon,
+        SubCategory     = Firearm,
+        Ranged          = TRUE,
+        IsAimedFirearm  = TRUE,
+        Icon            = AssaultRifle,
+        WeaponSprite    = AssaultRifle,
+        Tags            = ZGBWeapon,
+    }
+
+    item Glock17
+    {
+        DisplayCategory = Firearm,
+        ItemType        = base:weapon,
+        SubCategory     = Firearm,
+        Ranged          = TRUE,
+        IsAimedFirearm  = TRUE,
+        Icon            = Pistol,
+        WeaponSprite    = Pistol,
+        Tags            = ZGBWeapon,
+    }
+
+    item M590
+    {
+        DisplayCategory = Firearm,
+        ItemType        = base:weapon,
+        SubCategory     = Firearm,
+        Ranged          = TRUE,
+        IsAimedFirearm  = TRUE,
+        Icon            = Shotgun,
+        WeaponSprite    = Shotgun,
+        Tags            = ZGBWeapon,
+    }
+
+    /* ------------------------------------------------ magazines (capacity set by factory) */
+    item AK47_Mag30
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = AK-47 30rd Magazine,
+        Icon            = 556Clip,
+        Weight          = 0.3,
+    }
+
+    item Glock17_Mag17
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = Glock 17 Magazine,
+        Icon            = 9mmClip,
+        Weight          = 0.1,
+    }
+
+    item AK47_Drum75
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = AK-47 75rd Drum,
+        Icon            = 556Clip,
+        Weight          = 1.4,
+    }
+
+    item Glock17_Mag33
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = Glock 33rd Extended Magazine,
+        Icon            = 9mmClip,
+        Weight          = 0.2,
+    }
+
+    /* ammo variants: see ZGB_items_ammo.txt (generated from ZGB_AmmoCatalog.lua) */
+}

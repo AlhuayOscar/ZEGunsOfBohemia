@@ -1,0 +1,5 @@
+name=ZE Guns Of Bohemia - Core
+id=ZEGunsOfBohemiaCore
+description=Factory-built firearms: one spec per gun drives ammo, stats, sounds, attachments and animations. Needs ONE view addon (Isometric or First Person).
+modversion=0.3.0
+versionMin=42.0
