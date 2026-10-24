@@ -24,7 +24,7 @@ require "ZGBReload/ZGB_Reload"
 local I, M, E, SB, R = ZGB.Item, ZGB.Magazines, ZGB.Events, ZGB.Sandbox, ZGB.Reload
 
 ZGB.Addons.register{ id = "reload", name = "ZE Guns Of Bohemia - Reloading", modId = "ZEGunsOfBohemiaReload",
-                     version = "0.5.0", essential = true }
+                     version = "0.6.0", essential = true }
 
 -- ---------------------------------------------------------------- planned reloads
 local active = setmetatable({}, { __mode = "k" })   -- action -> { plan, payload, t0, next }

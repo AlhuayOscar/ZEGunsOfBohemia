@@ -7,7 +7,7 @@ and first person — without the animation overlap, flicker and crashes you get
 when you mix isometric gun packs with ZombieBuddy-based first-person (viewpoint / ADS) mods.
 
 ![Build](https://img.shields.io/badge/Project%20Zomboid-Build%2042-8b0000)
-![Version](https://img.shields.io/badge/version-0.5.0-blue)
+![Version](https://img.shields.io/badge/version-0.6.0-blue)
 ![Status](https://img.shields.io/badge/status-pre--alpha-orange)
 ![License](https://img.shields.io/badge/license-CC0--1.0-lightgrey)
 
@@ -27,6 +27,8 @@ when you mix isometric gun packs with ZombieBuddy-based first-person (viewpoint 
 - [Compatibility](#compatibility)
 - [How it works](#how-it-works)
 - [The addons](#the-addons)
+- [3D models](#3d-models)
+- [Testing in game](#testing-in-game)
 - [Adding a gun](#adding-a-gun)
 - [Development](#development)
 - [Before the first in-game run — VERIFY list](#before-the-first-in-game-run--verify-list)
@@ -94,7 +96,7 @@ ZE Guns Of Bohemia is built the other way around:
 
 ## What's in the box
 
-70 guns, 65 magazines, 48 attachments and 32 calibers. The full catalogue with
+70 guns, 65 magazines, 58 attachments and 32 calibers, each with a placeholder 3D model (see [3D models](#3d-models)). The full catalogue with
 every attachment slot and what it needs is generated into
 [`docs/catalogue.json`](docs/catalogue.json) by `tools/gen_catalog.lua`.
 Numbers after the caliber are magazine capacities (standard/extended/drum),
@@ -279,8 +281,10 @@ Animation follows the same factory pattern as guns:
   AUG and P90 are bullpups, the SAA and Nagant load through a gate...).
 - The iso addon sets AnimSet variables `ZGB_AnimType`, `ZGB_Stance` and
   `ZGB_Kick` on the character. `tools/gen_animsets.lua` writes the matching
-  AnimSet nodes as **drafts** in `docs/animsets/iso/` (132 nodes). They are not
-  loaded by the game until the node format is confirmed in game (VERIFY list).
+  AnimSet nodes: the **idle and aim** nodes (96, one per anim type x stance)
+  ship in the Iso addon (`media/AnimSets/player/`) since v0.6; the fire-kick
+  nodes (36) are still drafts in `docs/animsets/iso/fire/`. Sandbox
+  "Holding and recoil animations" switches ours off to compare with vanilla.
 - **Case dropping (iso):** semi-autos drop a casing per shot, bolt, pump and
   lever guns after the action cycles, revolvers and break-actions drop all
   their empties when you reload. Casings land on the ejection side and are
@@ -402,6 +406,59 @@ consistent. Inserting a mag switches the gun to that ammo and its stats change
   another type are skipped. "Unload all ... magazines" empties them so you can switch.
 - one timed action per magazine: cancelling keeps what's already loaded.
 
+## 3D models
+
+Every gun, attachment, magazine and casing has a placeholder model generated
+from `Defs/ZGB_Def_Models.lua` (boxes and cylinders at real-world size), in its
+own folder under `media/models_X/ZGB/` so the artist can replace them one by
+one. The generator also makes inventory icons, the side-view sprites for the
+attachment window, the colour atlas and the model scripts with attachment
+points. Full guide: [`docs/MODELS.md`](docs/MODELS.md).
+
+How attachments show on the gun (`ZGB_Visuals`):
+
+- **Drawn by the game:** optics, muzzle devices, grips, bipods, slings and AR
+  stocks have their own model. Core attaches a visual twin (`ZGB.Vis_<Id>`, a
+  vanilla WeaponPart with no stats, never in loot) so vanilla draws it on the
+  gun's `scope` / `canon` / `stock` / `sling` / `recoilpad` point.
+- **Built into a variant:** mounts, rail handguards, adapters, lasers, lights,
+  shell holders, recoil pads and stocks that replace the original. The Iso
+  addon switches the gun to the variant model for its current parts
+  (`AK47__Handguard_AK_Quad__Mount_AK_SideRail`). 366 variants cover every
+  combination the rules allow.
+- The **attachment window** draws the build as a side view, and previews the
+  selected part on the gun before you fit it.
+
+New attachments in v0.6: 5.56, .308 and AK flash hiders, a 9mm pistol
+compensator, angled and stubby grips, rifle and pistol lasers, a rubber recoil
+pad and a buttstock shell holder (shotguns, lever and bolt guns get recoil pad
+and buttstock slots).
+
+Known placeholder gap: on shotguns, a recoil pad or buttstock shell holder
+stays where the original stock ended when a folding stock replaces it.
+
+## Testing in game
+
+A checklist for the first runs. Enable Core, Reloading, Tactical Holding,
+Isometric (and Callouts), start a new game, and use debug mode to spawn items
+(`ZGB.AK47`, `ZGB.Mount_AK_SideRail`, `ZGB.Optic_RedDot`...).
+
+| Check | What you should see | If not |
+|---|---|---|
+| Item icons | Side-view icons for ZGB guns, parts and magazines | `Icon = ZGB_<Id>` / texture naming (VERIFY 18) |
+| Gun in hand | The placeholder model of the gun, held at the grip | `WeaponSprite = ZGB.<Id>` format, `.X` axes / scale, origin (VERIFY 18-19) |
+| Attachment window | Right-click gun -> Gunsmith: side view of the build at the top | `getTexture` path, `drawTextureScaled` (VERIFY 21) |
+| Optic / suppressor | The part visible on the gun after attaching | visual twin `Vis_` items, `ModelWeaponPart` (VERIFY 20) |
+| Side mount / handguard / laser | The gun switches to a model with it built in | `setWeaponSprite`, `resetEquippedHandsModels` (VERIFY 20) |
+| Holding stance | Lower, shakier carry at low Aiming | shipped AnimSets (VERIFY 13); toggle sandbox "Holding and recoil animations" |
+| Callouts | CHANGING MAG! over the character on a reload | `Say`, reload hooks (VERIFY 14, 17) |
+| Casings | Brass next to you after firing | `AddWorldInventoryItem` (VERIFY 15) |
+| Recoil | Long bursts lose accuracy, single shots don't | `OnWeaponSwing` (VERIFY 14) |
+
+A wrong game-API name logs one `[ZGB][WARN]` line in `console.txt` and turns
+that feature off instead of crashing. Searching the log for `[ZGB]` shows
+what worked and what didn't.
+
 ## Adding a gun
 
 1. If it takes magazines nobody defined yet, add them to `Defs/ZGB_Def_Magazines.lua`
@@ -430,7 +487,7 @@ On Windows, `winget install DEVCOM.LuaJIT` works: run the same commands with `lu
 LuaJIT accepts `goto`, so don't rely on it to catch that one.
 
 ```bash
-lua5.1 tests/run_tests.lua      # 103 tests: catalogue, magazines, attachments, stats, ammo, loot, mod gates, animation factory, recoil, casings, the three addons, and the addon clients against a stub game
+lua5.1 tests/run_tests.lua      # 113 tests: catalogue, magazines, attachments, stats, ammo, loot, mod gates, animation factory, recoil, casings, models and variants, the three addons, and the addon clients against a stub game
 ```
 
 ```bash
@@ -442,7 +499,11 @@ lua5.1 tools/gen_catalog.lua    # refresh docs/catalogue.json
 ```
 
 ```bash
-lua5.1 tools/gen_animsets.lua   # refresh the draft iso AnimSet nodes in docs/animsets/iso/
+lua5.1 tools/gen_animsets.lua   # refresh the iso AnimSet nodes (idle/aim shipped, fire drafts)
+```
+
+```bash
+lua5.1 tools/gen_models.lua     # placeholder models, icons, preview sprites, model scripts (then gen_scripts.lua)
 ```
 
 Conventions:
@@ -474,6 +535,10 @@ install to check against. Each is marked `-- VERIFY` in the code:
 15. **Case dropping:** `IsoGridSquare:AddWorldInventoryItem` and removing world items (`transmitRemoveItemFromSquare`, `removeFromWorld`).
 16. **Sandbox and labels:** the `sandbox-options.txt` syntax (enum options included) and that each addon's `Sandbox_EN.txt` is merged with the others (B42 may expect JSON translations).
 17. **Speech:** `IsoPlayer:Say` for callouts.
+18. **Models (v0.6):** `.X` text format, axes, winding and `scale` (change `AXES` / `WINDING` / `SCALE` in `tools/gen_models.lua`), the model script syntax with `attachment` blocks, `WeaponSprite` / `WorldStaticModel` with the `ZGB.` prefix, and `Icon = ZGB_<Id>` resolving to `media/textures/Item_ZGB_<Id>.png`.
+19. **Hand placement:** the gun origin is the top of the grip; if guns sit wrong in the hand, move the origin in the shapes (`ZGB_Def_Models.lua`).
+20. **Attached parts:** `base:weaponpart` item fields (`PartType`, `MountOn` with the module prefix), the `ModelWeaponPart = <twin> <model> anchor <point>` order, `instanceItem`, `attachWeaponPart`, `HandWeapon:setWeaponSprite`, `IsoGameCharacter:resetEquippedHandsModels`.
+21. **Attachment window preview:** `getTexture("media/textures/ZGB/Preview/<Id>.png")` and `ISUIElement:drawTextureScaled`.
 
 ## Roadmap
 
@@ -487,7 +552,8 @@ install to check against. Each is marked `-- VERIFY` in the code:
 - [x] Block foreign gun / reload frameworks (v0.4)
 - [x] Essential addons: Reloading and Tactical Holding; optional Callouts (v0.5)
 - [x] Animation factory with the isometric view, case dropping, spray patterns per gun (v0.5)
-- [ ] Confirm the iso AnimSet drafts in game and ship them; real clips once models exist
+- [x] Placeholder models for every gun, attachment, magazine and casing; model variants; attachment window preview; idle/aim AnimSets shipped (v0.6)
+- [ ] Confirm models, animations and the fire-kick AnimSets in game; real models and clips from the 3D side
 - [ ] First in-game test and the VERIFY list
 - [ ] Grenades (the callouts are already waiting for `grenade.throw`)
 - [ ] Speedloaders and stripper clips for revolvers and internal-box rifles
@@ -502,15 +568,12 @@ install to check against. Each is marked `-- VERIFY` in the code:
 
 ## Notes for the 3D side
 
+- Start with [`docs/MODELS.md`](docs/MODELS.md): folder layout, coordinates,
+  attachment points and how to replace a placeholder.
 - The model list (every gun, magazine and attachment, with ids, magazine sizes
-  and which attachments need a mount first) is in `docs/catalogue.json`,
-  regenerated with `tools/gen_catalog.lua`. Name each model `ZGB_<id>`.
-- Vanilla can render parts in only 6 types (Scope, Clip, Sling, Canon, Stock, RecoilPad).
-  Parts with `vanillaPartType` are mirrored into vanilla purely so their model shows;
-  stats always come from our Lua.
-- **Mounts and handguards have no vanilla part type.** Open decision: bake the mount
-  into the optic model (one model per optic + mount combo), or swap the gun's model
-  variant when a mount is fitted. Worth settling before modelling optics.
+  and which attachments need a mount first) is in `docs/catalogue.json`.
+- The mounts / handguards question is settled: the gun switches to a **model
+  variant** with those parts built in (see [3D models](#3d-models)).
 - Each optic has an `fp.sightAlignment` (eye offset + zoom) — fill it per model so ADS lines up.
 
 ## Team

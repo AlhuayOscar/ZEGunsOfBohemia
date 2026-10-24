@@ -1,13 +1,15 @@
 --[[
-    Generates DRAFT AnimSet nodes for the isometric view from the animation
+    Generates AnimSet nodes for the isometric view from the animation
     factory (anim types x holding stances, plus fire nodes per kick class):
 
-        lua5.1 tools/gen_animsets.lua      -> docs/animsets/iso/<state>/ZGB_*.xml
+        lua5.1 tools/gen_animsets.lua
+          idle + aim  -> Contents/mods/ZEGunsOfBohemiaIso/42/media/AnimSets/player/<state>/   (SHIPPED, v0.6)
+          fire        -> docs/animsets/iso/fire/                                           (draft)
 
-    They are drafts on purpose: the node format and the vanilla clip names
-    are unverified, and a malformed AnimSet must never reach players. Once the
-    first in-game test confirms the format (README VERIFY list), copy the
-    folders into Contents/mods/ZEGunsOfBohemiaIso/42/media/AnimSets/player/.
+    The idle / aim (holding stance) nodes ship in the Iso addon so they can be
+    benchmarked in game; sandbox "Holding and recoil animations" turns them
+    off. Node format, folder names and vanilla clip names are still VERIFY
+    items. Fire-kick nodes stay drafts until the fire state folder is known.
 
     Each node only matches when our variables are set (ZGB_AnimType,
     ZGB_Stance, ZGB_Kick), which the iso addon does for ZGB guns only, so
@@ -26,6 +28,7 @@ print = realPrint
 
 local AF, H = ZGB.AnimFactory, ZGB.Holding
 local OUT = arg[1] or "docs/animsets/iso/"
+local SHIP = "Contents/mods/ZEGunsOfBohemiaIso/42/media/AnimSets/player/"
 local isWindows = package.config:sub(1, 1) == "\\"
 
 local function mkdir(path)
@@ -53,8 +56,9 @@ end
 
 local count = 0
 local function write(state, name, text)
-    mkdir(OUT .. state)
-    local f = assert(io.open(OUT .. state .. "/" .. name .. ".xml", "w"))
+    local dir = (state == "fire") and OUT or SHIP
+    mkdir(dir .. state)
+    local f = assert(io.open(dir .. state .. "/" .. name .. ".xml", "w"))
     f:write(text); f:close()
     count = count + 1
 end
@@ -77,4 +81,4 @@ for _, t in ipairs(AF.types()) do
             { { "ZGB_AnimType", t.id }, { "ZGB_Kick", kick } }, "Heavier kick plays the shot slower and bigger."))
     end
 end
-print(string.format("wrote %d draft AnimSet nodes to %s", count, OUT))
+print(string.format("wrote %d AnimSet nodes (idle/aim shipped to %s, fire drafts to %s)", count, SHIP, OUT))

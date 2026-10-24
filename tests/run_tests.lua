@@ -678,6 +678,124 @@ test("every sandbox option has a label", function()
     end
 end)
 
+print("models and visuals (v0.6)")
+require "ZGB/ZGB_Visuals"
+local MDF, VIS = ZGB.ModelFactory, ZGB.Visuals
+local SCRIPTS = "Contents/mods/ZEGunsOfBohemiaCore/42/media/scripts/"
+local function readFile(path) local f = io.open(path, "rb"); if not f then return nil end local s = f:read("*a"); f:close(); return s end
+local function catalogueGuns()
+    local out = {}
+    for _, s in ipairs(WF.all()) do if s.id ~= "TGun" then out[#out + 1] = s end end   -- TGun is a test-only gun
+    return out
+end
+local function pngSize(path)
+    local s = readFile(path); if not s then return nil end
+    local function u32(i) local a, b, c, d = s:byte(i, i + 3); return ((a * 256 + b) * 256 + c) * 256 + d end
+    assert(s:sub(1, 8) == "\137PNG\r\n\26\n", path .. " is not a PNG")
+    return u32(17), u32(21)
+end
+test("every gun has a model and every slot a mounting point", function()
+    for _, s in ipairs(catalogueGuns()) do
+        assert(MDF.gunModel(s), s.id .. " has no model")
+        for sid in pairs(s.slots) do assert(MDF.slotPoint(s, sid), s.id .. "." .. sid .. " has no point") end
+    end
+end)
+test("every attachment has a model except internal ones; modes are consistent", function()
+    for _, p in ipairs(PF.all()) do
+        if string.sub(p.id, 1, 2) ~= "T_" then
+            local mode = VIS.mode(p)
+            if p.noModel then eq(mode, "none", p.id) else assert(MDF.partModel(p), p.id .. " has no model") end
+            if mode == "rendered" then assert(p.vanillaPartType, p.id) end
+        end
+    end
+    eq(VIS.mode(PF.get("Optic_RedDot")), "rendered"); eq(VIS.mode(PF.get("Mount_AK_SideRail")), "baked")
+    eq(VIS.mode(PF.get("Stock_AK_Folding")), "baked", "replaces the wooden stock:")
+    eq(VIS.mode(PF.get("Choke_Full")), "none")
+end)
+test("new v0.6 attachments fit where they should", function()
+    eq((R.canAttach(G("M4A1"), {}, "FlashHider_556")), true)
+    eq((R.canAttach(glock, {}, "Comp_Pistol9")), true)
+    eq((R.canAttach(G("M4A1"), {}, "Laser_Rifle")), true)
+    eq((R.canAttach(m590, {}, "RecoilPad_Rubber")), true)
+    eq((R.canAttach(G("Win1894"), {}, "ShellHolder_Butt")), true)
+    eq(R.isCompatible(G("M4A1"), "RecoilPad_Rubber"), false)
+end)
+test("variants: base first, bounded, unique names", function()
+    local total = 0
+    for _, s in ipairs(catalogueGuns()) do
+        local vs, seen = VIS.variants(s), {}
+        eq(next(vs[1]), nil, s.id .. " base first:")
+        assert(#vs < VIS.MAX_VARIANTS, s.id .. " hit the variant cap")
+        for _, att in ipairs(vs) do
+            local id = VIS.modelId(s, att)
+            assert(not seen[id], "duplicate variant " .. id); seen[id] = true
+        end
+        total = total + #vs
+    end
+    assert(total < 500, "too many variants: " .. total)
+end)
+test("a side mount moves the scope point on top of it", function()
+    local base = VIS.variantModel(ak, {})
+    eq(base.points.scope, nil, "bare AK has nowhere for an optic:")
+    local m = VIS.variantModel(ak, { side_mount = "ZGB.Mount_AK_SideRail" })
+    eq(m.id, "AK47__Mount_AK_SideRail")
+    assert(m.points.scope[2] > MDF.gunModel(ak).points.top[2], "scope sits above the receiver")
+    near(m.points.scope[3], 0)
+end)
+test("replacement parts hide the piece they replace", function()
+    local hidden = VIS.hiddenTags(ak, { stock = "ZGB.Stock_AK_Folding" })
+    eq(hidden.stock, true)
+    local m = VIS.variantModel(ak, { stock = "ZGB.Stock_AK_Folding" })
+    for _, p in ipairs(m.prims) do assert(p.tag ~= "stock", "the wooden stock is still there") end
+    eq(VIS.previewLayers(ak, { stock = "ZGB.Stock_AK_Folding" })[1].sprite, "AK47_nostock")
+end)
+test("rendered parts don't change the model; baked ones do", function()
+    eq(VIS.modelId(G("M4A1"), { optic_rail = "ZGB.Optic_RedDot", muzzle = "ZGB.Suppressor_Rifle556" }), "M4A1")
+    eq(VIS.modelId(G("M4A1"), { under_rail = "ZGB.Laser_Rifle" }), "M4A1__Laser_Rifle")
+end)
+test("preview layout lines up with the generated sprites", function()
+    local w, h = pngSize("Contents/mods/ZEGunsOfBohemiaCore/42/media/textures/ZGB/Preview/AK47.png")
+    local lay = VIS.previewRects(ak, { side_mount = "ZGB.Mount_AK_SideRail", optic_rail = "ZGB.Optic_RedDot" })
+    eq(lay.rects[1].w, w); eq(lay.rects[1].h, h)
+    local dot = lay.rects[3]
+    eq(dot.sprite, "Optic_RedDot")
+    local dw, dh = pngSize("Contents/mods/ZEGunsOfBohemiaCore/42/media/textures/ZGB/Preview/Optic_RedDot.png")
+    eq(dot.w, dw); eq(dot.h, dh)
+    assert(dot.y < 0 + h * 0.4, "the red dot sits on top")
+end)
+test("generated files match the catalogue (run tools/gen_models.lua + gen_scripts.lua)", function()
+    local models = assert(readFile(SCRIPTS .. "ZGB_models.txt"), "ZGB_models.txt missing")
+    local weapons = assert(readFile(SCRIPTS .. "ZGB_items_weapons.txt"))
+    local parts = assert(readFile(SCRIPTS .. "ZGB_items_parts.txt"))
+    for _, s in ipairs(catalogueGuns()) do
+        for _, att in ipairs(VIS.variants(s)) do
+            local id = VIS.modelId(s, att)
+            assert(string.find(models, "model " .. id .. "\n", 1, true), "model script missing " .. id)
+        end
+        assert(readFile("Contents/mods/ZEGunsOfBohemiaCore/42/media/textures/Item_ZGB_" .. s.id .. ".png"), "icon missing " .. s.id)
+    end
+    for _, p in ipairs(PF.all()) do
+        if VIS.mode(p) == "rendered" then
+            assert(string.find(parts, "item Vis_" .. p.id .. "[\r\n]"), "visual twin missing " .. p.id)
+            assert(string.find(models, "model " .. p.id .. "\n", 1, true), "part model missing " .. p.id)
+        end
+    end
+    for twin, model in string.gmatch(weapons, "ModelWeaponPart = (%S+) (%S+) anchor") do
+        assert(string.find(models, "model " .. model:gsub("^ZGB%.", "") .. "\n", 1, true), "ModelWeaponPart points at missing model " .. model)
+    end
+    assert(readFile("Contents/mods/ZEGunsOfBohemiaCore/42/media/models_X/ZGB/Guns/AssaultRifles/AK47/AK47__Mount_AK_SideRail.X"))
+    assert(readFile("Contents/mods/ZEGunsOfBohemiaCore/42/media/models_X/ZGB/Attachments/Suppressors/Suppressor_Rifle556/Suppressor_Rifle556.X"))
+end)
+test("PNG writer round-trips size and signature", function()
+    package.path = "tools/lib/?.lua;" .. package.path
+    local Img = require "zgb_image"
+    local im = Img.new(5, 3); Img.fillRect(im, 0, 0, 5, 3, 200, 10, 10, 255)
+    local tmp = os.tmpname()
+    Img.save(im, tmp)
+    local w, h = pngSize(tmp); eq(w, 5); eq(h, 3)
+    os.remove(tmp)
+end)
+
 print("addon clients (stub game)")
 test("clients load and react: equip -> stance -> anim variables, reload -> callout + casings", function()
     -- the smallest slice of the game the client files touch
@@ -722,6 +840,21 @@ test("clients load and react: equip -> stance -> anim variables, reload -> callo
     E.emit("reload.start", { player = player, spec = G("SW_Model10"), kind = "cylinder", spent = 5 })
     eq(#dropped, 6, "five empties out of the cylinder:")
     eq(player.said[#player.said], "RELOADING!")
+
+    -- model variants follow the attachments
+    require "ZGBIso/ZGB_IsoModels"
+    local gun = Mock.item("ZGB.AK47")
+    function gun:setWeaponSprite(m) self.sprite = m end
+    local refreshed = 0
+    function player:resetEquippedHandsModels() refreshed = refreshed + 1 end
+    ZGB.Item.setAttachments(gun, { side_mount = "ZGB.Mount_AK_SideRail" })
+    ZGB.Mode.notify("onAttachmentsChanged", player, gun, ak)
+    eq(gun.sprite, "ZGB.AK47__Mount_AK_SideRail"); eq(refreshed, 1)
+    ZGB.Mode.notify("onAttachmentsChanged", player, gun, ak)
+    eq(refreshed, 1, "same model: no refresh:")
+    SB.set("ZGBIso", "ModelVariants", false)
+    ZGB.Mode.notify("onAttachmentsChanged", player, gun, ak)
+    eq(gun.sprite, "ZGB.AK47"); SB._reset()
     Events, Perks, ZombRand = nil, nil, nil
     E._reset()
 end)

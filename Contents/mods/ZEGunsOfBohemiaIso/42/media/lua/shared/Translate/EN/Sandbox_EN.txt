@@ -8,4 +8,9 @@ Sandbox_EN = {
     Sandbox_ZGBIso_MaxCasings_tooltip = "Oldest casings are removed first once this many are on the ground.",
     Sandbox_ZGBIso_RecoilPenalty = "Recoil affects sustained fire",
     Sandbox_ZGBIso_RecoilPenalty_tooltip = "Each shot in a burst lowers hit chance along the gun's spray pattern; it resets when you stop firing.",
+
+    Sandbox_ZGBIso_ModelVariants = "Guns show their attachments",
+    Sandbox_ZGBIso_ModelVariants_tooltip = "Mounts, handguards, lasers, lights, shell holders and recoil pads change the gun's model. Off: the bare gun model.",
+    Sandbox_ZGBIso_CustomAnimations = "Holding and recoil animations",
+    Sandbox_ZGBIso_CustomAnimations_tooltip = "Use ZE Guns Of Bohemia's stance and kick animations. Off: vanilla gun animations (for comparison or if something looks wrong).",
 }

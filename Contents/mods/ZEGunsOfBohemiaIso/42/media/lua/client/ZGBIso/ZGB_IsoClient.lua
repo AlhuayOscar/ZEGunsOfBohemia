@@ -24,6 +24,10 @@ local stanceOf = setmetatable({}, { __mode = "k" })   -- player -> current stanc
 
 local function applyVariables(player, spec)
     if not ZGB.Mode.is("iso") then return end
+    if not SB.get("ZGBIso", "CustomAnimations", true) then          -- vanilla animation: nodes never match
+        I.setAnimVariable(player, "ZGB_AnimType", "none")
+        return
+    end
     local built = AF.build("iso", spec, stanceOf[player])
     if not built then return end
     for k, v in pairs(built.variables) do I.setAnimVariable(player, k, v) end

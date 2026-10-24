@@ -27,9 +27,18 @@ local IsoProvider = {
 
     --- Full build for one gun in one stance (clips + AnimSet variables).
     build = function(spec, stance) return AF.build("iso", spec, stance) end,
+
+    -- Core calls these; the client side (ZGB_IsoModels) swaps the gun to the
+    -- model variant that matches its attachments.
+    onWeaponEquipped = function(player, item, spec)
+        if ZGB.IsoModels then ZGB.IsoModels.apply(player, item, spec) end
+    end,
+    onAttachmentsChanged = function(player, item, spec)
+        if ZGB.IsoModels then ZGB.IsoModels.apply(player, item, spec) end
+    end,
 }
 
-ZGB.Addons.register{ id = "iso", name = "ZE Guns Of Bohemia - Isometric", modId = "ZEGunsOfBohemiaIso", version = "0.5.0" }
+ZGB.Addons.register{ id = "iso", name = "ZE Guns Of Bohemia - Isometric", modId = "ZEGunsOfBohemiaIso", version = "0.6.0" }
 
 -- Hard stop: never register alongside a first-person / Java animation mod.
 local fp = Mode.activeFpMods()

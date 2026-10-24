@@ -12,7 +12,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 17rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock17_Mag17,
+        WorldStaticModel = ZGB.Glock17_Mag17,
         Weight          = 0.08,
         Tags            = ZGBMagazine,
     }
@@ -22,7 +23,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 19 15rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock19_Mag15,
+        WorldStaticModel = ZGB.Glock19_Mag15,
         Weight          = 0.07,
         Tags            = ZGBMagazine,
     }
@@ -32,7 +34,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 33rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock17_Mag33,
+        WorldStaticModel = ZGB.Glock17_Mag33,
         Weight          = 0.15,
         Tags            = ZGBMagazine,
     }
@@ -42,7 +45,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 50rd Drum,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock_Drum50,
+        WorldStaticModel = ZGB.Glock_Drum50,
         Weight          = 0.6,
         Tags            = ZGBMagazine,
     }
@@ -52,7 +56,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Beretta 92 15rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Beretta92_Mag15,
+        WorldStaticModel = ZGB.Beretta92_Mag15,
         Weight          = 0.09,
         Tags            = ZGBMagazine,
     }
@@ -62,7 +67,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Beretta 92 30rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Beretta92_Mag30,
+        WorldStaticModel = ZGB.Beretta92_Mag30,
         Weight          = 0.16,
         Tags            = ZGBMagazine,
     }
@@ -72,7 +78,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = SIG P226 15rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_P226_Mag15,
+        WorldStaticModel = ZGB.P226_Mag15,
         Weight          = 0.09,
         Tags            = ZGBMagazine,
     }
@@ -82,7 +89,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = SIG P226 20rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_P226_Mag20,
+        WorldStaticModel = ZGB.P226_Mag20,
         Weight          = 0.11,
         Tags            = ZGBMagazine,
     }
@@ -92,7 +100,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = CZ 75 16rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_CZ75_Mag16,
+        WorldStaticModel = ZGB.CZ75_Mag16,
         Weight          = 0.09,
         Tags            = ZGBMagazine,
     }
@@ -102,7 +111,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = CZ 75 26rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_CZ75_Mag26,
+        WorldStaticModel = ZGB.CZ75_Mag26,
         Weight          = 0.14,
         Tags            = ZGBMagazine,
     }
@@ -112,7 +122,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = SIG M17 17rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_M17_Mag17,
+        WorldStaticModel = ZGB.M17_Mag17,
         Weight          = 0.09,
         Tags            = ZGBMagazine,
     }
@@ -122,7 +133,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = SIG M17 21rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_M17_Mag21,
+        WorldStaticModel = ZGB.M17_Mag21,
         Weight          = 0.11,
         Tags            = ZGBMagazine,
     }
@@ -132,7 +144,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = MP5 30rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_MP5_Mag30,
+        WorldStaticModel = ZGB.MP5_Mag30,
         Weight          = 0.12,
         Tags            = ZGBMagazine,
     }
@@ -142,7 +155,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = MP5 100rd Twin Drum (C-Mag),
-        Icon            = 9mmClip,
+        Icon            = ZGB_MP5_CMag100,
+        WorldStaticModel = ZGB.MP5_CMag100,
         Weight          = 0.9,
         Tags            = ZGBMagazine,
     }
@@ -152,7 +166,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Uzi 32rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Uzi_Mag32,
+        WorldStaticModel = ZGB.Uzi_Mag32,
         Weight          = 0.2,
         Tags            = ZGBMagazine,
     }
@@ -162,7 +177,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Uzi 50rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Uzi_Mag50,
+        WorldStaticModel = ZGB.Uzi_Mag50,
         Weight          = 0.3,
         Tags            = ZGBMagazine,
     }
@@ -172,7 +188,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = M1911 7rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_M1911_Mag7,
+        WorldStaticModel = ZGB.M1911_Mag7,
         Weight          = 0.07,
         Tags            = ZGBMagazine,
     }
@@ -182,7 +199,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = M1911 10rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_M1911_Mag10,
+        WorldStaticModel = ZGB.M1911_Mag10,
         Weight          = 0.1,
         Tags            = ZGBMagazine,
     }
@@ -192,7 +210,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 21 13rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock21_Mag13,
+        WorldStaticModel = ZGB.Glock21_Mag13,
         Weight          = 0.09,
         Tags            = ZGBMagazine,
     }
@@ -202,7 +221,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 21 26rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock21_Mag26,
+        WorldStaticModel = ZGB.Glock21_Mag26,
         Weight          = 0.17,
         Tags            = ZGBMagazine,
     }
@@ -212,7 +232,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = HK USP45 12rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_USP45_Mag12,
+        WorldStaticModel = ZGB.USP45_Mag12,
         Weight          = 0.1,
         Tags            = ZGBMagazine,
     }
@@ -222,7 +243,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = MAC-10 30rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_MAC10_Mag30,
+        WorldStaticModel = ZGB.MAC10_Mag30,
         Weight          = 0.2,
         Tags            = ZGBMagazine,
     }
@@ -232,7 +254,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Thompson 20rd Stick Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Thompson_Mag20,
+        WorldStaticModel = ZGB.Thompson_Mag20,
         Weight          = 0.2,
         Tags            = ZGBMagazine,
     }
@@ -242,7 +265,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Thompson 30rd Stick Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Thompson_Mag30,
+        WorldStaticModel = ZGB.Thompson_Mag30,
         Weight          = 0.28,
         Tags            = ZGBMagazine,
     }
@@ -252,7 +276,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Thompson 50rd L-Drum,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Thompson_Drum50,
+        WorldStaticModel = ZGB.Thompson_Drum50,
         Weight          = 1.1,
         Tags            = ZGBMagazine,
     }
@@ -262,7 +287,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = UMP45 25rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_UMP45_Mag25,
+        WorldStaticModel = ZGB.UMP45_Mag25,
         Weight          = 0.15,
         Tags            = ZGBMagazine,
     }
@@ -272,7 +298,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 22 15rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock22_Mag15,
+        WorldStaticModel = ZGB.Glock22_Mag15,
         Weight          = 0.08,
         Tags            = ZGBMagazine,
     }
@@ -282,7 +309,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Glock 22 22rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_Glock22_Mag22,
+        WorldStaticModel = ZGB.Glock22_Mag22,
         Weight          = 0.12,
         Tags            = ZGBMagazine,
     }
@@ -292,7 +320,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Walther PPK 7rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_PPK_Mag7,
+        WorldStaticModel = ZGB.PPK_Mag7,
         Weight          = 0.05,
         Tags            = ZGBMagazine,
     }
@@ -302,7 +331,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Ruger Mk II 10rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_MkII_Mag10,
+        WorldStaticModel = ZGB.MkII_Mag10,
         Weight          = 0.05,
         Tags            = ZGBMagazine,
     }
@@ -312,7 +342,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Makarov PM 8rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_PM_Mag8,
+        WorldStaticModel = ZGB.PM_Mag8,
         Weight          = 0.06,
         Tags            = ZGBMagazine,
     }
@@ -322,7 +353,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Tokarev TT-33 8rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_TT33_Mag8,
+        WorldStaticModel = ZGB.TT33_Mag8,
         Weight          = 0.06,
         Tags            = ZGBMagazine,
     }
@@ -332,7 +364,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = PPSh-41 35rd Box Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_PPSh_Mag35,
+        WorldStaticModel = ZGB.PPSh_Mag35,
         Weight          = 0.25,
         Tags            = ZGBMagazine,
     }
@@ -342,7 +375,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = PPSh-41 71rd Drum,
-        Icon            = 9mmClip,
+        Icon            = ZGB_PPSh_Drum71,
+        WorldStaticModel = ZGB.PPSh_Drum71,
         Weight          = 1.2,
         Tags            = ZGBMagazine,
     }
@@ -352,7 +386,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Five-seveN 20rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_FiveSeven_Mag20,
+        WorldStaticModel = ZGB.FiveSeven_Mag20,
         Weight          = 0.06,
         Tags            = ZGBMagazine,
     }
@@ -362,7 +397,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Five-seveN 30rd Extended Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_FiveSeven_Mag30,
+        WorldStaticModel = ZGB.FiveSeven_Mag30,
         Weight          = 0.09,
         Tags            = ZGBMagazine,
     }
@@ -372,7 +408,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = P90 50rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_P90_Mag50,
+        WorldStaticModel = ZGB.P90_Mag50,
         Weight          = 0.2,
         Tags            = ZGBMagazine,
     }
@@ -382,7 +419,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Desert Eagle .50 7rd Magazine,
-        Icon            = 9mmClip,
+        Icon            = ZGB_DEagle_Mag7,
+        WorldStaticModel = ZGB.DEagle_Mag7,
         Weight          = 0.16,
         Tags            = ZGBMagazine,
     }
@@ -392,7 +430,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = AK-47 30rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_AK47_Mag30,
+        WorldStaticModel = ZGB.AK47_Mag30,
         Weight          = 0.3,
         Tags            = ZGBMagazine,
     }
@@ -402,7 +441,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = RPK 40rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_AK_Mag40,
+        WorldStaticModel = ZGB.AK_Mag40,
         Weight          = 0.4,
         Tags            = ZGBMagazine,
     }
@@ -412,7 +452,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = AK-47 75rd Drum,
-        Icon            = 556Clip,
+        Icon            = ZGB_AK47_Drum75,
+        WorldStaticModel = ZGB.AK47_Drum75,
         Weight          = 1.4,
         Tags            = ZGBMagazine,
     }
@@ -422,7 +463,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = AK-74 30rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_AK74_Mag30,
+        WorldStaticModel = ZGB.AK74_Mag30,
         Weight          = 0.23,
         Tags            = ZGBMagazine,
     }
@@ -432,7 +474,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = RPK-74 45rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_AK74_Mag45,
+        WorldStaticModel = ZGB.AK74_Mag45,
         Weight          = 0.35,
         Tags            = ZGBMagazine,
     }
@@ -442,7 +485,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = STANAG 30rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_STANAG_Mag30,
+        WorldStaticModel = ZGB.STANAG_Mag30,
         Weight          = 0.12,
         Tags            = ZGBMagazine,
     }
@@ -452,7 +496,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = STANAG 40rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_STANAG_Mag40,
+        WorldStaticModel = ZGB.STANAG_Mag40,
         Weight          = 0.16,
         Tags            = ZGBMagazine,
     }
@@ -462,7 +507,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = STANAG 100rd Twin Drum (C-Mag),
-        Icon            = 556Clip,
+        Icon            = ZGB_STANAG_CMag100,
+        WorldStaticModel = ZGB.STANAG_CMag100,
         Weight          = 1,
         Tags            = ZGBMagazine,
     }
@@ -472,7 +518,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Steyr AUG 30rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_AUG_Mag30,
+        WorldStaticModel = ZGB.AUG_Mag30,
         Weight          = 0.13,
         Tags            = ZGBMagazine,
     }
@@ -482,7 +529,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Steyr AUG 42rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_AUG_Mag42,
+        WorldStaticModel = ZGB.AUG_Mag42,
         Weight          = 0.17,
         Tags            = ZGBMagazine,
     }
@@ -492,7 +540,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Galil 35rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_Galil_Mag35,
+        WorldStaticModel = ZGB.Galil_Mag35,
         Weight          = 0.25,
         Tags            = ZGBMagazine,
     }
@@ -502,7 +551,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Galil 50rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_Galil_Mag50,
+        WorldStaticModel = ZGB.Galil_Mag50,
         Weight          = 0.35,
         Tags            = ZGBMagazine,
     }
@@ -512,7 +562,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = G36 30rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_G36_Mag30,
+        WorldStaticModel = ZGB.G36_Mag30,
         Weight          = 0.13,
         Tags            = ZGBMagazine,
     }
@@ -522,7 +573,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = G36 100rd Twin Drum (C-Mag),
-        Icon            = 556Clip,
+        Icon            = ZGB_G36_CMag100,
+        WorldStaticModel = ZGB.G36_CMag100,
         Weight          = 1,
         Tags            = ZGBMagazine,
     }
@@ -532,7 +584,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = M14 20rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_M14_Mag20,
+        WorldStaticModel = ZGB.M14_Mag20,
         Weight          = 0.24,
         Tags            = ZGBMagazine,
     }
@@ -542,7 +595,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = M14 30rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_M14_Mag30,
+        WorldStaticModel = ZGB.M14_Mag30,
         Weight          = 0.33,
         Tags            = ZGBMagazine,
     }
@@ -552,7 +606,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = SR-25 20rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_SR25_Mag20,
+        WorldStaticModel = ZGB.SR25_Mag20,
         Weight          = 0.15,
         Tags            = ZGBMagazine,
     }
@@ -562,7 +617,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = SR-25 25rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_SR25_Mag25,
+        WorldStaticModel = ZGB.SR25_Mag25,
         Weight          = 0.18,
         Tags            = ZGBMagazine,
     }
@@ -572,7 +628,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = SVD 10rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_SVD_Mag10,
+        WorldStaticModel = ZGB.SVD_Mag10,
         Weight          = 0.2,
         Tags            = ZGBMagazine,
     }
@@ -582,7 +639,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = AWM .338 5rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_AWM_Mag5,
+        WorldStaticModel = ZGB.AWM_Mag5,
         Weight          = 0.2,
         Tags            = ZGBMagazine,
     }
@@ -592,7 +650,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = AICS 10rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_AICS_Mag10,
+        WorldStaticModel = ZGB.AICS_Mag10,
         Weight          = 0.15,
         Tags            = ZGBMagazine,
     }
@@ -602,7 +661,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Barrett M95 5rd Magazine,
-        Icon            = 308Clip,
+        Icon            = ZGB_M95_Mag5,
+        WorldStaticModel = ZGB.M95_Mag5,
         Weight          = 0.4,
         Tags            = ZGBMagazine,
     }
@@ -612,7 +672,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Saiga-12 5rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_Saiga12_Mag5,
+        WorldStaticModel = ZGB.Saiga12_Mag5,
         Weight          = 0.3,
         Tags            = ZGBMagazine,
     }
@@ -622,7 +683,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Saiga-12 10rd Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_Saiga12_Mag10,
+        WorldStaticModel = ZGB.Saiga12_Mag10,
         Weight          = 0.5,
         Tags            = ZGBMagazine,
     }
@@ -632,7 +694,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = Saiga-12 20rd Drum,
-        Icon            = 556Clip,
+        Icon            = ZGB_Saiga12_Drum20,
+        WorldStaticModel = ZGB.Saiga12_Drum20,
         Weight          = 1.6,
         Tags            = ZGBMagazine,
     }
@@ -642,7 +705,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = AA-12 8rd Box Magazine,
-        Icon            = 556Clip,
+        Icon            = ZGB_AA12_Mag8,
+        WorldStaticModel = ZGB.AA12_Mag8,
         Weight          = 0.4,
         Tags            = ZGBMagazine,
     }
@@ -652,7 +716,8 @@ module ZGB
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = AA-12 32rd Drum,
-        Icon            = 556Clip,
+        Icon            = ZGB_AA12_Drum32,
+        WorldStaticModel = ZGB.AA12_Drum32,
         Weight          = 2.2,
         Tags            = ZGBMagazine,
     }

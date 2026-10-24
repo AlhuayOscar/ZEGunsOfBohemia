@@ -10,7 +10,7 @@ require "ZGBCalls/ZGB_Def_Calls"
 
 local E, SB, I, C = ZGB.Events, ZGB.Sandbox, ZGB.Item, ZGB.Calls
 
-ZGB.Addons.register{ id = "calls", name = "ZE Guns Of Bohemia - Callouts", modId = "ZEGunsOfBohemiaCalls", version = "0.5.0" }
+ZGB.Addons.register{ id = "calls", name = "ZE Guns Of Bohemia - Callouts", modId = "ZEGunsOfBohemiaCalls", version = "0.6.0" }
 
 local state = setmetatable({}, { __mode = "k" })      -- player -> cooldown state
 local lastSpec = setmetatable({}, { __mode = "k" })   -- player -> previous gun spec (sidearm call)

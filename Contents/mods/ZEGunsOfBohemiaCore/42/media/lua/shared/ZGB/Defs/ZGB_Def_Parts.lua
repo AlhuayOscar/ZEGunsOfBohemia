@@ -254,3 +254,41 @@ P.define{
     kind = "sling", interface = "sling_loop", vanillaPartType = "Sling",
     mods = { add = { aimTime = -2, weight = 0.08 }, mul = { hitChance = 0.99 } },
 }
+
+-- ---------------------------------------------------------------- v0.6: more muzzle devices, grips, lasers,
+-- ---------------------------------------------------------------- recoil pads and shell holders
+muzzle("FlashHider_556",        "5.56 Flash Hider",        "muzzle_rifle_556",  { add = { weight = 0.06 }, mul = { soundRadius = 0.95 } })
+muzzle("FlashHider_308",        ".308 Flash Hider",        "muzzle_rifle_308",  { add = { weight = 0.08 }, mul = { soundRadius = 0.95 } })
+muzzle("Muzzle_AK_FlashHider",  "AK Flash Hider",          "ak_muzzle_14l",     { add = { weight = 0.06 }, mul = { soundRadius = 0.95 } })
+muzzle("Comp_Pistol9",          "9mm Pistol Compensator",  "muzzle_pistol_9mm", { add = { recoilDelay = -2, weight = 0.05 }, mul = { soundRadius = 1.05 } })
+
+P.define{
+    id = "Grip_Angled", displayName = "Angled Foregrip",
+    kind = "underbarrel", interface = "picatinny_under", vanillaPartType = "RecoilPad",
+    mods = { add = { recoilDelay = -2, aimTime = -2, weight = 0.08 } },
+}
+P.define{
+    id = "Grip_Stubby", displayName = "Stubby Grip",
+    kind = "underbarrel", interface = "picatinny_under", vanillaPartType = "RecoilPad",
+    mods = { add = { recoilDelay = -3, aimTime = -1, weight = 0.06 } },
+}
+P.define{
+    id = "Laser_Rifle", displayName = "Rifle Laser Module",
+    kind = "underbarrel", interface = "picatinny_under",
+    mods = { add = { aimTime = -3, weight = 0.12 }, mul = { hitChance = 1.04 } },
+}
+P.define{
+    id = "Laser_Pistol", displayName = "Pistol Laser",
+    kind = "underbarrel", interface = "picatinny_under",
+    mods = { add = { aimTime = -2, weight = 0.06 }, mul = { hitChance = 1.03 } },
+}
+P.define{
+    id = "RecoilPad_Rubber", displayName = "Rubber Recoil Pad",
+    kind = "recoilpad", interface = "butt_plate", attachTime = 120,
+    mods = { add = { recoilDelay = -4, weight = 0.15 } },
+}
+P.define{
+    id = "ShellHolder_Butt", displayName = "Buttstock Shell Holder",
+    kind = "shellholder", interface = "buttstock_sleeve", attachTime = 80,
+    mods = { add = { reloadTime = -3, weight = 0.15 } },
+}

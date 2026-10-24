@@ -23,3 +23,15 @@ option ZGBIso.RecoilPenalty
     type = boolean, default = true,
     page = ZGB, translation = ZGBIso_RecoilPenalty,
 }
+
+option ZGBIso.ModelVariants
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBIso_ModelVariants,
+}
+
+option ZGBIso.CustomAnimations
+{
+    type = boolean, default = true,
+    page = ZGB, translation = ZGBIso_CustomAnimations,
+}

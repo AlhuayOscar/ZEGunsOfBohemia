@@ -3,5 +3,5 @@ id=ZEGunsOfBohemiaIso
 description=Isometric view addon for ZE Guns Of Bohemia. Pure Lua, no Java. Do not use together with the First Person addon or ZombieBuddy-based first-person mods.
 require=\ZEGunsOfBohemiaCore
 incompatible=\ZombieBuddy,\Viewpoint,\ZEGunsOfBohemiaFP
-modversion=0.5.0
+modversion=0.6.0
 versionMin=42.0

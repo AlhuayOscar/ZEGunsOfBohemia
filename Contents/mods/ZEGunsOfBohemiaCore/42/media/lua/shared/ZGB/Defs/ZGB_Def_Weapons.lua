@@ -31,6 +31,8 @@ local function bipod()          return { kind = "bipod",      accepts = { "sling
 local function sidesaddle()     return { kind = "sidesaddle", accepts = { "shotgun_receiver" }, label = "Receiver side",order = 6 } end
 local function adapter(i, label, order) return { kind = "adapter", accepts = { i }, label = label, order = order } end
 local function scopeBase()      return mount("drilled_tapped", "Scope base") end
+local function recoilPad()      return { kind = "recoilpad",  accepts = { "butt_plate" },       label = "Recoil pad",   order = 7 } end
+local function buttHolder()     return { kind = "shellholder",accepts = { "buttstock_sleeve" }, label = "Buttstock sleeve", order = 8 } end
 
 local AUTO, BURST = { "auto", "single" }, { "burst", "single" }
 local GLOCK9  = { standard = "Glock17_Mag17", extended = "Glock17_Mag33", drum = "Glock_Drum50" }
@@ -175,10 +177,10 @@ W.define{ id = "HK_G36", archetype = "assault_rifle", displayName = "HK G36", ca
 W.define{ id = "M14", archetype = "dmr", displayName = "M14", caliber = "308win",
     magazines = { standard = "M14_Mag20", extended = "M14_Mag30" }, stats = { weight = 4.5 },
     replaces = { "Base.AssaultRifle2" },
-    slots = { scope_mount = mount("m14_receiver", "Receiver mount"), muzzle = muzzle("muzzle_rifle_308"), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), scope_mount = mount("m14_receiver", "Receiver mount"), muzzle = muzzle("muzzle_rifle_308"), sling = sling() } }
 W.define{ id = "SVD", archetype = "dmr", displayName = "SVD Dragunov", caliber = "762x54r",
     magazines = { standard = "SVD_Mag10" }, stats = { weight = 4.3 }, rarity = 0.08,
-    slots = { side_rail = optic("svd_side_rail"), sling = sling() },
+    slots = { recoil_pad = recoilPad(), side_rail = optic("svd_side_rail"), sling = sling() },
     notes = "Side rail takes the PSO-1 only." }
 W.define{ id = "SR25", archetype = "dmr", displayName = "Knight's SR-25", caliber = "308win",
     magazines = { standard = "SR25_Mag20", extended = "SR25_Mag25" }, stats = { weight = 4.9 }, rarity = 0.1,
@@ -193,19 +195,19 @@ W.define{ id = "Mk12SPR", archetype = "dmr", displayName = "Mk 12 SPR", caliber 
 W.define{ id = "Rem700", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Remington 700", caliber = "308win",
     reloadType = "boltactionnomag", internalCapacity = 4, stats = { weight = 3.4 },
     replaces = { "Base.HuntingRifle", "Base.VarmintRifle" },
-    slots = { scope_base = scopeBase(), bipod = bipod(), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), bipod = bipod(), sling = sling() } }
 W.define{ id = "Win70", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Winchester Model 70", caliber = "3006",
     reloadType = "boltactionnomag", internalCapacity = 5, stats = { weight = 3.6 }, rarity = 0.5,
-    slots = { scope_base = scopeBase(), bipod = bipod(), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), bipod = bipod(), sling = sling() } }
 W.define{ id = "MosinNagant", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Mosin-Nagant M91/30", caliber = "762x54r",
     reloadType = "boltactionnomag", internalCapacity = 5, stats = { weight = 4.0 }, rarity = 0.2,
-    slots = { pu_mount = mount("mosin_receiver", "Receiver side mount"), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), pu_mount = mount("mosin_receiver", "Receiver side mount"), sling = sling() } }
 W.define{ id = "Kar98k", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Mauser Kar98k", caliber = "792x57",
     reloadType = "boltactionnomag", internalCapacity = 5, stats = { weight = 3.9 }, rarity = 0.1,
-    slots = { sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), sling = sling() } }
 W.define{ id = "LeeEnfieldNo4", animType = "bolt_internal", archetype = "bolt_rifle", displayName = "Lee-Enfield No. 4", caliber = "303brit",
     reloadType = "boltactionnomag", internalCapacity = 10, stats = { weight = 4.1 }, rarity = 0.1,
-    slots = { sling = sling() },
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), sling = sling() },
     notes = "Fixed 10-round box loaded with stripper clips; treated as internal." }
 W.define{ id = "AI_AWM", archetype = "bolt_rifle", displayName = "Accuracy International AWM", caliber = "338lm",
     magazines = { standard = "AWM_Mag5" }, stats = { weight = 6.5 }, rarity = 0.03,
@@ -255,14 +257,14 @@ W.define{ id = "PPSh41", openBolt = true, recoil = { pattern = "s_curve" }, arch
 -- ================================================================ shotguns (8)
 W.define{ id = "M590", archetype = "shotgun", displayName = "Mossberg 590", caliber = "12ga",
     internalCapacity = 8, stats = { weight = 3.4 }, replaces = { "Base.Shotgun" },
-    slots = { scope_base = scopeBase(), sidesaddle = sidesaddle(), stock = stock("m590_stock"), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), sidesaddle = sidesaddle(), stock = stock("m590_stock"), sling = sling() } }
 W.define{ id = "Rem870", archetype = "shotgun", displayName = "Remington 870", caliber = "12ga",
     internalCapacity = 4, stats = { weight = 3.6 }, rarity = 0.8,
-    slots = { scope_base = scopeBase(), sidesaddle = sidesaddle(), choke = muzzle("choke_12ga"),
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), sidesaddle = sidesaddle(), choke = muzzle("choke_12ga"),
               stock = stock("r870_stock"), sling = sling() } }
 W.define{ id = "BenelliM4", animType = "semi_shotgun", archetype = "shotgun", displayName = "Benelli M4", caliber = "12ga",
     internalCapacity = 5, stats = { weight = 3.8, recoilDelay = 15 }, rarity = 0.1,
-    slots = { optic_rail = optic(), sidesaddle = sidesaddle(), choke = muzzle("choke_12ga"), sling = sling() },
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), optic_rail = optic(), sidesaddle = sidesaddle(), choke = muzzle("choke_12ga"), sling = sling() },
     notes = "Semi-automatic: faster follow-up shots." }
 W.define{ id = "Saiga12", animType = "rifle", archetype = "shotgun", displayName = "Saiga-12", caliber = "12ga",
     reloadType = "handgun", magazines = { standard = "Saiga12_Mag5", extended = "Saiga12_Mag10", drum = "Saiga12_Drum20" },
@@ -270,13 +272,13 @@ W.define{ id = "Saiga12", animType = "rifle", archetype = "shotgun", displayName
     slots = { side_mount = mount("ak_dovetail", "Side mount"), sling = sling() } }
 W.define{ id = "KSG", archetype = "shotgun", displayName = "Kel-Tec KSG", caliber = "12ga",
     internalCapacity = 14, stats = { weight = 3.5 }, rarity = 0.05,
-    slots = { optic_rail = optic(), under_rail = under(), sling = sling() },
+    slots = { recoil_pad = recoilPad(), optic_rail = optic(), under_rail = under(), sling = sling() },
     notes = "Bullpup with two 7-round tubes." }
-W.define{ id = "CoachGun", animType = "break_action", archetype = "shotgun", displayName = "Double-Barrel Coach Gun", caliber = "12ga",
+W.define{ id = "CoachGun", slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), }, animType = "break_action", archetype = "shotgun", displayName = "Double-Barrel Coach Gun", caliber = "12ga",
     reloadType = "doublebarrelshotgun", internalCapacity = 2, stats = { weight = 3.2 },
     replaces = { "Base.DoubleBarrelShotgun", "Base.DoubleBarrelShotgunSawnoff", "Base.ShotgunSawnoff" } }
 W.define{ id = "Win1897", archetype = "shotgun", displayName = "Winchester Model 1897", caliber = "12ga",
-    internalCapacity = 5, stats = { weight = 3.6 }, rarity = 0.15, slots = { sling = sling() } }
+    internalCapacity = 5, stats = { weight = 3.6 }, rarity = 0.15, slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), sling = sling() } }
 W.define{ id = "AA12", animType = "rifle", openBolt = true, recoil = { pattern = "low" }, archetype = "shotgun", displayName = "AA-12", caliber = "12ga",
     reloadType = "handgun", magazines = { standard = "AA12_Mag8", drum = "AA12_Drum32" }, fireModes = AUTO,
     stats = { weight = 5.2, recoilDelay = 10 }, rarity = 0.01,
@@ -285,19 +287,19 @@ W.define{ id = "AA12", animType = "rifle", openBolt = true, recoil = { pattern =
 -- ================================================================ lever-action rifles (6)
 W.define{ id = "Win1894", archetype = "lever_rifle", displayName = "Winchester Model 1894", caliber = "3030",
     internalCapacity = 7, stats = { weight = 3.0 }, rarity = 0.6,
-    slots = { scope_base = scopeBase(), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), sling = sling() } }
 W.define{ id = "Marlin336", archetype = "lever_rifle", displayName = "Marlin 336", caliber = "3030",
     internalCapacity = 6, stats = { weight = 3.2 }, rarity = 0.6,
-    slots = { scope_base = scopeBase(), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), sling = sling() } }
 W.define{ id = "HenryBigBoy", archetype = "lever_rifle", displayName = "Henry Big Boy", caliber = "44mag",
     internalCapacity = 10, stats = { weight = 3.9 }, rarity = 0.3,
-    slots = { scope_base = scopeBase(), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), sling = sling() } }
 W.define{ id = "Marlin1894", archetype = "lever_rifle", displayName = "Marlin 1894C", caliber = "357mag",
     internalCapacity = 9, stats = { weight = 2.9 }, rarity = 0.3,
-    slots = { scope_base = scopeBase(), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), sling = sling() } }
 W.define{ id = "HenryH001", archetype = "lever_rifle", displayName = "Henry H001 .22", caliber = "22lr",
     internalCapacity = 15, stats = { weight = 2.4 }, rarity = 0.5,
-    slots = { receiver_groove = optic("dovetail_22"), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), receiver_groove = optic("dovetail_22"), sling = sling() } }
 W.define{ id = "Marlin1895GG", archetype = "lever_rifle", displayName = "Marlin 1895 Guide Gun", caliber = "4570",
     internalCapacity = 6, stats = { weight = 3.2 }, rarity = 0.15,
-    slots = { scope_base = scopeBase(), sling = sling() } }
+    slots = { recoil_pad = recoilPad(), butt_holder = buttHolder(), scope_base = scopeBase(), sling = sling() } }

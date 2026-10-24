@@ -7,10 +7,8 @@
     ZGB_ScriptApply.lua from the factory spec.
     => Never put MaxAmmo / AmmoType / anims here; the spec is the truth.
 
-    VERIFY: field names follow Build 42 style. Before the first test, open your
-    game's vanilla AssaultRifle / Pistol / Shotgun script (media/scripts/...)
-    and copy any REQUIRED identity fields your build has that are missing here.
-    Icon / WeaponSprite are vanilla placeholders until a gun's `model` is set.
+    VERIFY: field names follow Build 42 style (WeaponSprite / WorldStaticModel
+    with a module prefix, ModelWeaponPart order). Compare with a vanilla gun.
 */
 module ZGB
 {
@@ -24,9 +22,15 @@ module ZGB
         DisplayName     = Glock 17,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_Glock17,
+        WeaponSprite    = ZGB.Glock17,
+        WorldStaticModel = ZGB.Glock17,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol9 ZGB.Suppressor_Pistol9 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Comp_Pistol9 ZGB.Comp_Pistol9 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Glock19
@@ -37,9 +41,15 @@ module ZGB
         DisplayName     = Glock 19,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_Glock19,
+        WeaponSprite    = ZGB.Glock19,
+        WorldStaticModel = ZGB.Glock19,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol9 ZGB.Suppressor_Pistol9 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Comp_Pistol9 ZGB.Comp_Pistol9 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Glock18C
@@ -50,9 +60,13 @@ module ZGB
         DisplayName     = Glock 18C,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_Glock18C,
+        WeaponSprite    = ZGB.Glock18C,
+        WorldStaticModel = ZGB.Glock18C,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Beretta92FS
@@ -63,9 +77,12 @@ module ZGB
         DisplayName     = Beretta 92FS,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_Beretta92FS,
+        WeaponSprite    = ZGB.Beretta92FS,
+        WorldStaticModel = ZGB.Beretta92FS,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol9 ZGB.Suppressor_Pistol9 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Comp_Pistol9 ZGB.Comp_Pistol9 anchor canon,
     }
 
     item SIG_P226
@@ -76,9 +93,13 @@ module ZGB
         DisplayName     = SIG Sauer P226,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_SIG_P226,
+        WeaponSprite    = ZGB.SIG_P226,
+        WorldStaticModel = ZGB.SIG_P226,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item CZ75
@@ -89,9 +110,11 @@ module ZGB
         DisplayName     = CZ 75,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_CZ75,
+        WeaponSprite    = ZGB.CZ75,
+        WorldStaticModel = ZGB.CZ75,
         Tags            = ZGBWeapon,
+
     }
 
     item SIG_M17
@@ -102,9 +125,14 @@ module ZGB
         DisplayName     = SIG Sauer M17,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_SIG_M17,
+        WeaponSprite    = ZGB.SIG_M17,
+        WorldStaticModel = ZGB.SIG_M17,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_Pistol_RMR ZGB.Optic_Pistol_RMR anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Colt1911
@@ -115,9 +143,11 @@ module ZGB
         DisplayName     = Colt M1911A1,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_Colt1911,
+        WeaponSprite    = ZGB.Colt1911,
+        WorldStaticModel = ZGB.Colt1911,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol45 ZGB.Suppressor_Pistol45 anchor canon,
     }
 
     item Glock21
@@ -128,9 +158,14 @@ module ZGB
         DisplayName     = Glock 21,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_Glock21,
+        WeaponSprite    = ZGB.Glock21,
+        WorldStaticModel = ZGB.Glock21,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol45 ZGB.Suppressor_Pistol45 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item HK_USP45
@@ -141,9 +176,14 @@ module ZGB
         DisplayName     = HK USP45 Tactical,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_HK_USP45,
+        WeaponSprite    = ZGB.HK_USP45,
+        WorldStaticModel = ZGB.HK_USP45,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol45 ZGB.Suppressor_Pistol45 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Glock22
@@ -154,9 +194,13 @@ module ZGB
         DisplayName     = Glock 22,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_Glock22,
+        WeaponSprite    = ZGB.Glock22,
+        WorldStaticModel = ZGB.Glock22,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item WaltherPPK
@@ -167,9 +211,11 @@ module ZGB
         DisplayName     = Walther PPK,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_WaltherPPK,
+        WeaponSprite    = ZGB.WaltherPPK,
+        WorldStaticModel = ZGB.WaltherPPK,
         Tags            = ZGBWeapon,
+
     }
 
     item RugerMkII
@@ -180,9 +226,11 @@ module ZGB
         DisplayName     = Ruger Mk II,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_RugerMkII,
+        WeaponSprite    = ZGB.RugerMkII,
+        WorldStaticModel = ZGB.RugerMkII,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rimfire ZGB.Suppressor_Rimfire anchor canon,
     }
 
     item MakarovPM
@@ -193,9 +241,11 @@ module ZGB
         DisplayName     = Makarov PM,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_MakarovPM,
+        WeaponSprite    = ZGB.MakarovPM,
+        WorldStaticModel = ZGB.MakarovPM,
         Tags            = ZGBWeapon,
+
     }
 
     item TokarevTT33
@@ -206,9 +256,11 @@ module ZGB
         DisplayName     = Tokarev TT-33,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_TokarevTT33,
+        WeaponSprite    = ZGB.TokarevTT33,
+        WorldStaticModel = ZGB.TokarevTT33,
         Tags            = ZGBWeapon,
+
     }
 
     item FN_FiveSeven
@@ -219,9 +271,14 @@ module ZGB
         DisplayName     = FN Five-seveN,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_FN_FiveSeven,
+        WeaponSprite    = ZGB.FN_FiveSeven,
+        WorldStaticModel = ZGB.FN_FiveSeven,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_Pistol_RMR ZGB.Optic_Pistol_RMR anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item SW_Model10
@@ -232,9 +289,11 @@ module ZGB
         DisplayName     = S&W Model 10,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_SW_Model10,
+        WeaponSprite    = ZGB.SW_Model10,
+        WorldStaticModel = ZGB.SW_Model10,
         Tags            = ZGBWeapon,
+
     }
 
     item ColtPython
@@ -245,9 +304,11 @@ module ZGB
         DisplayName     = Colt Python,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_ColtPython,
+        WeaponSprite    = ZGB.ColtPython,
+        WorldStaticModel = ZGB.ColtPython,
         Tags            = ZGBWeapon,
+
     }
 
     item RugerGP100
@@ -258,9 +319,11 @@ module ZGB
         DisplayName     = Ruger GP100,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_RugerGP100,
+        WeaponSprite    = ZGB.RugerGP100,
+        WorldStaticModel = ZGB.RugerGP100,
         Tags            = ZGBWeapon,
+
     }
 
     item SW_686Plus
@@ -271,9 +334,11 @@ module ZGB
         DisplayName     = S&W 686 Plus,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_SW_686Plus,
+        WeaponSprite    = ZGB.SW_686Plus,
+        WorldStaticModel = ZGB.SW_686Plus,
         Tags            = ZGBWeapon,
+
     }
 
     item SW_Model29
@@ -284,9 +349,11 @@ module ZGB
         DisplayName     = S&W Model 29,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_SW_Model29,
+        WeaponSprite    = ZGB.SW_Model29,
+        WorldStaticModel = ZGB.SW_Model29,
         Tags            = ZGBWeapon,
+
     }
 
     item ColtAnaconda
@@ -297,9 +364,11 @@ module ZGB
         DisplayName     = Colt Anaconda,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_ColtAnaconda,
+        WeaponSprite    = ZGB.ColtAnaconda,
+        WorldStaticModel = ZGB.ColtAnaconda,
         Tags            = ZGBWeapon,
+
     }
 
     item ColtSAA
@@ -310,9 +379,11 @@ module ZGB
         DisplayName     = Colt Single Action Army,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_ColtSAA,
+        WeaponSprite    = ZGB.ColtSAA,
+        WorldStaticModel = ZGB.ColtSAA,
         Tags            = ZGBWeapon,
+
     }
 
     item TaurusJudge
@@ -323,9 +394,11 @@ module ZGB
         DisplayName     = Taurus Judge,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_TaurusJudge,
+        WeaponSprite    = ZGB.TaurusJudge,
+        WorldStaticModel = ZGB.TaurusJudge,
         Tags            = ZGBWeapon,
+
     }
 
     item RugerSuperRedhawk
@@ -336,9 +409,15 @@ module ZGB
         DisplayName     = Ruger Super Redhawk,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_RugerSuperRedhawk,
+        WeaponSprite    = ZGB.RugerSuperRedhawk,
+        WorldStaticModel = ZGB.RugerSuperRedhawk,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
     }
 
     item SW_Model500
@@ -349,9 +428,11 @@ module ZGB
         DisplayName     = S&W Model 500,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_SW_Model500,
+        WeaponSprite    = ZGB.SW_Model500,
+        WorldStaticModel = ZGB.SW_Model500,
         Tags            = ZGBWeapon,
+
     }
 
     item NagantM1895
@@ -362,9 +443,11 @@ module ZGB
         DisplayName     = Nagant M1895,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Revolver,
-        WeaponSprite    = Revolver,
+        Icon            = ZGB_NagantM1895,
+        WeaponSprite    = ZGB.NagantM1895,
+        WorldStaticModel = ZGB.NagantM1895,
         Tags            = ZGBWeapon,
+
     }
 
     item DesertEagle
@@ -375,9 +458,15 @@ module ZGB
         DisplayName     = Desert Eagle Mark XIX,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Pistol,
-        WeaponSprite    = Pistol,
+        Icon            = ZGB_DesertEagle,
+        WeaponSprite    = ZGB.DesertEagle,
+        WorldStaticModel = ZGB.DesertEagle,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
     }
 
     item AK47
@@ -388,9 +477,23 @@ module ZGB
         DisplayName     = AK-47,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_AK47,
+        WeaponSprite    = ZGB.AK47,
+        WorldStaticModel = ZGB.AK47,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Muzzle_AK_Suppressor ZGB.Muzzle_AK_Suppressor anchor canon,
+        ModelWeaponPart = ZGB.Vis_Muzzle_AK_Compensator ZGB.Muzzle_AK_Compensator anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Muzzle_AK_FlashHider ZGB.Muzzle_AK_FlashHider anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item AK74
@@ -401,9 +504,22 @@ module ZGB
         DisplayName     = AK-74,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_AK74,
+        WeaponSprite    = ZGB.AK74,
+        WorldStaticModel = ZGB.AK74,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_AK74 ZGB.Suppressor_AK74 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_AK74 ZGB.Brake_AK74 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item M16A2
@@ -414,9 +530,23 @@ module ZGB
         DisplayName     = M16A2,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_M16A2,
+        WeaponSprite    = ZGB.M16A2,
+        WorldStaticModel = ZGB.M16A2,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rifle556 ZGB.Suppressor_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_Rifle556 ZGB.Brake_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_FlashHider_556 ZGB.FlashHider_556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item M4A1
@@ -427,9 +557,25 @@ module ZGB
         DisplayName     = M4A1,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_M4A1,
+        WeaponSprite    = ZGB.M4A1,
+        WorldStaticModel = ZGB.M4A1,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rifle556 ZGB.Suppressor_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_Rifle556 ZGB.Brake_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Collapsible ZGB.Stock_AR_Collapsible anchor stock,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Precision ZGB.Stock_AR_Precision anchor stock,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_FlashHider_556 ZGB.FlashHider_556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item HK416
@@ -440,9 +586,25 @@ module ZGB
         DisplayName     = HK416,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_HK416,
+        WeaponSprite    = ZGB.HK416,
+        WorldStaticModel = ZGB.HK416,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rifle556 ZGB.Suppressor_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_Rifle556 ZGB.Brake_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Collapsible ZGB.Stock_AR_Collapsible anchor stock,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Precision ZGB.Stock_AR_Precision anchor stock,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_FlashHider_556 ZGB.FlashHider_556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item SteyrAUG
@@ -453,9 +615,12 @@ module ZGB
         DisplayName     = Steyr AUG A1,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_SteyrAUG,
+        WeaponSprite    = ZGB.SteyrAUG,
+        WorldStaticModel = ZGB.SteyrAUG,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item IMI_Galil
@@ -466,9 +631,12 @@ module ZGB
         DisplayName     = IMI Galil ARM,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_IMI_Galil,
+        WeaponSprite    = ZGB.IMI_Galil,
+        WorldStaticModel = ZGB.IMI_Galil,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item HK_G36
@@ -479,9 +647,12 @@ module ZGB
         DisplayName     = HK G36,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_HK_G36,
+        WeaponSprite    = ZGB.HK_G36,
+        WorldStaticModel = ZGB.HK_G36,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item M14
@@ -492,9 +663,20 @@ module ZGB
         DisplayName     = M14,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle2,
-        WeaponSprite    = AssaultRifle2,
+        Icon            = ZGB_M14,
+        WeaponSprite    = ZGB.M14,
+        WorldStaticModel = ZGB.M14,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rifle308 ZGB.Suppressor_Rifle308 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_Rifle308 ZGB.Brake_Rifle308 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_FlashHider_308 ZGB.FlashHider_308 anchor canon,
     }
 
     item SVD
@@ -505,9 +687,13 @@ module ZGB
         DisplayName     = SVD Dragunov,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle2,
-        WeaponSprite    = AssaultRifle2,
+        Icon            = ZGB_SVD,
+        WeaponSprite    = ZGB.SVD,
+        WorldStaticModel = ZGB.SVD,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_PSO1 ZGB.Optic_PSO1 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item SR25
@@ -518,9 +704,25 @@ module ZGB
         DisplayName     = Knight's SR-25,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle2,
-        WeaponSprite    = AssaultRifle2,
+        Icon            = ZGB_SR25,
+        WeaponSprite    = ZGB.SR25,
+        WorldStaticModel = ZGB.SR25,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rifle308 ZGB.Suppressor_Rifle308 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_Rifle308 ZGB.Brake_Rifle308 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Collapsible ZGB.Stock_AR_Collapsible anchor stock,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Precision ZGB.Stock_AR_Precision anchor stock,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_FlashHider_308 ZGB.FlashHider_308 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Mk12SPR
@@ -531,9 +733,25 @@ module ZGB
         DisplayName     = Mk 12 SPR,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle2,
-        WeaponSprite    = AssaultRifle2,
+        Icon            = ZGB_Mk12SPR,
+        WeaponSprite    = ZGB.Mk12SPR,
+        WorldStaticModel = ZGB.Mk12SPR,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rifle556 ZGB.Suppressor_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_Rifle556 ZGB.Brake_Rifle556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Collapsible ZGB.Stock_AR_Collapsible anchor stock,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Precision ZGB.Stock_AR_Precision anchor stock,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_FlashHider_556 ZGB.FlashHider_556 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Rem700
@@ -544,9 +762,18 @@ module ZGB
         DisplayName     = Remington 700,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_Rem700,
+        WeaponSprite    = ZGB.Rem700,
+        WorldStaticModel = ZGB.Rem700,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Bipod_Harris ZGB.Bipod_Harris anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Win70
@@ -557,9 +784,18 @@ module ZGB
         DisplayName     = Winchester Model 70,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_Win70,
+        WeaponSprite    = ZGB.Win70,
+        WorldStaticModel = ZGB.Win70,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Bipod_Harris ZGB.Bipod_Harris anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item MosinNagant
@@ -570,9 +806,13 @@ module ZGB
         DisplayName     = Mosin-Nagant M91/30,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_MosinNagant,
+        WeaponSprite    = ZGB.MosinNagant,
+        WorldStaticModel = ZGB.MosinNagant,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_PU ZGB.Optic_PU anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Kar98k
@@ -583,9 +823,12 @@ module ZGB
         DisplayName     = Mauser Kar98k,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_Kar98k,
+        WeaponSprite    = ZGB.Kar98k,
+        WorldStaticModel = ZGB.Kar98k,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item LeeEnfieldNo4
@@ -596,9 +839,12 @@ module ZGB
         DisplayName     = Lee-Enfield No. 4,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_LeeEnfieldNo4,
+        WeaponSprite    = ZGB.LeeEnfieldNo4,
+        WorldStaticModel = ZGB.LeeEnfieldNo4,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item AI_AWM
@@ -609,9 +855,19 @@ module ZGB
         DisplayName     = Accuracy International AWM,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_AI_AWM,
+        WeaponSprite    = ZGB.AI_AWM,
+        WorldStaticModel = ZGB.AI_AWM,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Bipod_Harris ZGB.Bipod_Harris anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_338 ZGB.Suppressor_338 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item RugerRPR
@@ -622,9 +878,23 @@ module ZGB
         DisplayName     = Ruger Precision Rifle,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_RugerRPR,
+        WeaponSprite    = ZGB.RugerRPR,
+        WorldStaticModel = ZGB.RugerRPR,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Bipod_Harris ZGB.Bipod_Harris anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Rifle308 ZGB.Suppressor_Rifle308 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Brake_Rifle308 ZGB.Brake_Rifle308 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Collapsible ZGB.Stock_AR_Collapsible anchor stock,
+        ModelWeaponPart = ZGB.Vis_Stock_AR_Precision ZGB.Stock_AR_Precision anchor stock,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_FlashHider_308 ZGB.FlashHider_308 anchor canon,
     }
 
     item BarrettM95
@@ -635,9 +905,17 @@ module ZGB
         DisplayName     = Barrett M95,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_BarrettM95,
+        WeaponSprite    = ZGB.BarrettM95,
+        WorldStaticModel = ZGB.BarrettM95,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item MP5A3
@@ -648,9 +926,22 @@ module ZGB
         DisplayName     = HK MP5A3,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_MP5A3,
+        WeaponSprite    = ZGB.MP5A3,
+        WorldStaticModel = ZGB.MP5A3,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol9 ZGB.Suppressor_Pistol9 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Comp_Pistol9 ZGB.Comp_Pistol9 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item Uzi
@@ -661,9 +952,12 @@ module ZGB
         DisplayName     = IMI Uzi,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_Uzi,
+        WeaponSprite    = ZGB.Uzi,
+        WorldStaticModel = ZGB.Uzi,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item MAC10
@@ -674,9 +968,13 @@ module ZGB
         DisplayName     = MAC-10,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_MAC10,
+        WeaponSprite    = ZGB.MAC10,
+        WorldStaticModel = ZGB.MAC10,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol45 ZGB.Suppressor_Pistol45 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item ThompsonM1928
@@ -687,9 +985,12 @@ module ZGB
         DisplayName     = Thompson M1928A1,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_ThompsonM1928,
+        WeaponSprite    = ZGB.ThompsonM1928,
+        WorldStaticModel = ZGB.ThompsonM1928,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item UMP45
@@ -700,9 +1001,21 @@ module ZGB
         DisplayName     = HK UMP45,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_UMP45,
+        WeaponSprite    = ZGB.UMP45,
+        WorldStaticModel = ZGB.UMP45,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol45 ZGB.Suppressor_Pistol45 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item FN_P90
@@ -713,9 +1026,12 @@ module ZGB
         DisplayName     = FN P90,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_FN_P90,
+        WeaponSprite    = ZGB.FN_P90,
+        WorldStaticModel = ZGB.FN_P90,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item KrissVector
@@ -726,9 +1042,21 @@ module ZGB
         DisplayName     = KRISS Vector,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_KrissVector,
+        WeaponSprite    = ZGB.KrissVector,
+        WorldStaticModel = ZGB.KrissVector,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Suppressor_Pistol45 ZGB.Suppressor_Pistol45 anchor canon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item PPSh41
@@ -739,9 +1067,12 @@ module ZGB
         DisplayName     = PPSh-41,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = AssaultRifle,
-        WeaponSprite    = AssaultRifle,
+        Icon            = ZGB_PPSh41,
+        WeaponSprite    = ZGB.PPSh41,
+        WorldStaticModel = ZGB.PPSh41,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item M590
@@ -752,9 +1083,17 @@ module ZGB
         DisplayName     = Mossberg 590,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_M590,
+        WeaponSprite    = ZGB.M590,
+        WorldStaticModel = ZGB.M590,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Rem870
@@ -765,9 +1104,17 @@ module ZGB
         DisplayName     = Remington 870,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_Rem870,
+        WeaponSprite    = ZGB.Rem870,
+        WorldStaticModel = ZGB.Rem870,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item BenelliM4
@@ -778,9 +1125,17 @@ module ZGB
         DisplayName     = Benelli M4,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_BenelliM4,
+        WeaponSprite    = ZGB.BenelliM4,
+        WorldStaticModel = ZGB.BenelliM4,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Saiga12
@@ -791,9 +1146,17 @@ module ZGB
         DisplayName     = Saiga-12,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_Saiga12,
+        WeaponSprite    = ZGB.Saiga12,
+        WorldStaticModel = ZGB.Saiga12,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item KSG
@@ -804,9 +1167,20 @@ module ZGB
         DisplayName     = Kel-Tec KSG,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_KSG,
+        WeaponSprite    = ZGB.KSG,
+        WorldStaticModel = ZGB.KSG,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Grip_Vertical ZGB.Grip_Vertical anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Grip_Angled ZGB.Grip_Angled anchor recoilpad,
+        ModelWeaponPart = ZGB.Vis_Grip_Stubby ZGB.Grip_Stubby anchor recoilpad,
     }
 
     item CoachGun
@@ -817,9 +1191,11 @@ module ZGB
         DisplayName     = Double-Barrel Coach Gun,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_CoachGun,
+        WeaponSprite    = ZGB.CoachGun,
+        WorldStaticModel = ZGB.CoachGun,
         Tags            = ZGBWeapon,
+
     }
 
     item Win1897
@@ -830,9 +1206,12 @@ module ZGB
         DisplayName     = Winchester Model 1897,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_Win1897,
+        WeaponSprite    = ZGB.Win1897,
+        WorldStaticModel = ZGB.Win1897,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item AA12
@@ -843,9 +1222,17 @@ module ZGB
         DisplayName     = AA-12,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = Shotgun,
-        WeaponSprite    = Shotgun,
+        Icon            = ZGB_AA12,
+        WeaponSprite    = ZGB.AA12,
+        WorldStaticModel = ZGB.AA12,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Win1894
@@ -856,9 +1243,17 @@ module ZGB
         DisplayName     = Winchester Model 1894,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_Win1894,
+        WeaponSprite    = ZGB.Win1894,
+        WorldStaticModel = ZGB.Win1894,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Marlin336
@@ -869,9 +1264,17 @@ module ZGB
         DisplayName     = Marlin 336,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_Marlin336,
+        WeaponSprite    = ZGB.Marlin336,
+        WorldStaticModel = ZGB.Marlin336,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item HenryBigBoy
@@ -882,9 +1285,17 @@ module ZGB
         DisplayName     = Henry Big Boy,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_HenryBigBoy,
+        WeaponSprite    = ZGB.HenryBigBoy,
+        WorldStaticModel = ZGB.HenryBigBoy,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Marlin1894
@@ -895,9 +1306,17 @@ module ZGB
         DisplayName     = Marlin 1894C,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_Marlin1894,
+        WeaponSprite    = ZGB.Marlin1894,
+        WorldStaticModel = ZGB.Marlin1894,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item HenryH001
@@ -908,9 +1327,13 @@ module ZGB
         DisplayName     = Henry H001 .22,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_HenryH001,
+        WeaponSprite    = ZGB.HenryH001,
+        WorldStaticModel = ZGB.HenryH001,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_Rimfire4x ZGB.Optic_Rimfire4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 
     item Marlin1895GG
@@ -921,8 +1344,16 @@ module ZGB
         DisplayName     = Marlin 1895 Guide Gun,
         Ranged          = TRUE,
         IsAimedFirearm  = TRUE,
-        Icon            = HuntingRifle,
-        WeaponSprite    = HuntingRifle,
+        Icon            = ZGB_Marlin1895GG,
+        WeaponSprite    = ZGB.Marlin1895GG,
+        WorldStaticModel = ZGB.Marlin1895GG,
         Tags            = ZGBWeapon,
+        ModelWeaponPart = ZGB.Vis_Optic_RedDot ZGB.Optic_RedDot anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Holo ZGB.Optic_Holo anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_4x ZGB.Optic_4x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Hunting3x9 ZGB.Optic_Hunting3x9 anchor scope,
+        ModelWeaponPart = ZGB.Vis_Optic_Scope8x ZGB.Optic_Scope8x anchor scope,
+        ModelWeaponPart = ZGB.Vis_Sling_2Point ZGB.Sling_2Point anchor sling,
+        ModelWeaponPart = ZGB.Vis_Sling_1Point ZGB.Sling_1Point anchor sling,
     }
 }

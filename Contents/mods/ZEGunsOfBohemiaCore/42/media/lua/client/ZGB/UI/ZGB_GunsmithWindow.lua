@@ -15,6 +15,10 @@
 
     Selecting a part shows the stat change it would cause. Attach/Detach queue
     the timed actions; the window refreshes itself when the gun changes.
+
+    The preview at the top draws the gun as built (side view, from the sprites
+    tools/gen_models.lua generates). Selecting a part you haven't fitted shows
+    the gun WITH that part, so you see the result before attaching it.
 ]]
 require "ISUI/ISCollapsableWindow"
 require "ISUI/ISScrollingListBox"
@@ -64,7 +68,7 @@ function ZGB_GunsmithWindow.open(player, weapon)
     local num = player:getPlayerNum()
     local existing = ZGB_GunsmithWindow.instances[num]
     if existing then existing:close() end
-    local w = ZGB_GunsmithWindow:new(100, 100, 560, 520, player, weapon)
+    local w = ZGB_GunsmithWindow:new(100, 100, 600, 680, player, weapon)
     w:initialise()
     w:addToUIManager()
     ZGB_GunsmithWindow.instances[num] = w
@@ -82,7 +86,8 @@ function ZGB_GunsmithWindow:createChildren()
     ISCollapsableWindow.createChildren(self)
     local th = self:titleBarHeight()
     self.fontH = getTextManager():getFontHeight(UIFont.Small)
-    self.headerH = self.fontH * 2 + 14
+    self.previewH = 150
+    self.headerH = self.fontH * 2 + 14 + self.previewH
     self.footerH = self.fontH * 6 + 50
 
     self.list = ISScrollingListBox:new(10, th + self.headerH, self.width - 20,
@@ -261,14 +266,17 @@ function ZGB_GunsmithWindow:render()
 
     -- footer: stats, with preview for the selected part
     local row = self:selectedRow()
-    local preview
+    local preview, previewAtt
     if row and row.kind == "part" and not row.installed then
-        local nextAtt = R.attach(self.spec, self.att, row.part)
-        if nextAtt then preview = ZGB.Stats.compute(self.spec, nextAtt, self.mag, self.ammoFt) end
+        previewAtt = R.attach(self.spec, self.att, row.part)
+        if previewAtt then preview = ZGB.Stats.compute(self.spec, previewAtt, self.mag, self.ammoFt) end
     elseif row and row.kind == "part" and row.installed then
         local nextAtt = R.detach(self.spec, self.att, row.slotId)
         if nextAtt then preview = ZGB.Stats.compute(self.spec, nextAtt, self.mag, self.ammoFt) end
     end
+
+    -- the gun as built (or with the selected part fitted)
+    self:drawBuild(12, th + fh * 2 + 18, self.width - 24, self.previewH - 8, previewAtt or self.att, previewAtt ~= nil)
 
     local y0 = self.height - self.footerH + 6
     local colW = math.floor((self.width - 24) / 2)
@@ -288,6 +296,37 @@ function ZGB_GunsmithWindow:render()
                     good and 0.4 or 1, good and 1 or 0.4, 0.4, 1, UIFont.Small)
             end
         end
+    end
+end
+
+-- ------------------------------------------------------------ build preview
+local textures = {}
+local function sprite(name)
+    if textures[name] == nil then
+        local ok, t = pcall(getTexture, "media/textures/ZGB/Preview/" .. name .. ".png")          -- VERIFY path form
+        textures[name] = (ok and t) or false
+    end
+    return textures[name] or nil
+end
+
+function ZGB_GunsmithWindow:drawBuild(x, y, w, h, att, isPreview)
+    self:drawRect(x, y, w, h, 0.35, 0.05, 0.06, 0.07)
+    self:drawRectBorder(x, y, w, h, 0.6, 0.4, 0.42, 0.45)
+    local ok, layout = pcall(ZGB.Visuals.previewRects, self.spec, att)
+    if not ok or not layout then return end
+    local b = layout.bounds
+    local bw, bh = b[3] - b[1], b[4] - b[2]
+    local s = math.min((w - 16) / bw, (h - 16) / bh, 1.5)
+    local ox = x + (w - bw * s) / 2 - b[1] * s
+    local oy = y + (h - bh * s) / 2 - b[2] * s
+    for _, r in ipairs(layout.rects) do
+        local tex = sprite(r.sprite)
+        if tex then
+            self:drawTextureScaled(tex, ox + r.x * s, oy + r.y * s, r.w * s, r.h * s, 1, 1, 1, 1)
+        end
+    end
+    if isPreview then
+        self:drawText("Preview", x + 6, y + 4, 1, 0.75, 0.3, 1, UIFont.Small)
     end
 end
 

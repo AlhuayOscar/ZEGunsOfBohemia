@@ -11,7 +11,8 @@ module ZGB
         DisplayCategory = Junk,
         ItemType        = base:normal,
         DisplayName     = Spent Large Rifle Casing,
-        Icon            = Bullets9mm,
+        Icon            = ZGB_Casing_RifleLarge,
+        WorldStaticModel = ZGB.Casing_RifleLarge,
         Weight          = 0.005,
         Tags            = ZGBCasing,
     }
@@ -21,7 +22,8 @@ module ZGB
         DisplayCategory = Junk,
         ItemType        = base:normal,
         DisplayName     = Spent Pistol Casing,
-        Icon            = Bullets9mm,
+        Icon            = ZGB_Casing_Pistol,
+        WorldStaticModel = ZGB.Casing_Pistol,
         Weight          = 0.005,
         Tags            = ZGBCasing,
     }
@@ -31,7 +33,8 @@ module ZGB
         DisplayCategory = Junk,
         ItemType        = base:normal,
         DisplayName     = Spent Rifle Casing,
-        Icon            = Bullets9mm,
+        Icon            = ZGB_Casing_Rifle,
+        WorldStaticModel = ZGB.Casing_Rifle,
         Weight          = 0.005,
         Tags            = ZGBCasing,
     }
@@ -41,7 +44,8 @@ module ZGB
         DisplayCategory = Junk,
         ItemType        = base:normal,
         DisplayName     = Spent Shotgun Hull,
-        Icon            = ShotgunShells,
+        Icon            = ZGB_Casing_ShotgunHull,
+        WorldStaticModel = ZGB.Casing_ShotgunHull,
         Weight          = 0.005,
         Tags            = ZGBCasing,
     }

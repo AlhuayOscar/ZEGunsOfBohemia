@@ -13,6 +13,7 @@ Project Zomboid Build 42 firearms mod. Two devs: one does code (Lua now, Java la
 7. **Wrappers around vanilla functions (`ZGB_ReloadHooks`, now in the Reloading addon) always call the original and are installed once.**
 9. **Systems talk through `ZGB.Events`, never by calling each other.** Core emits weapon.* / ammo.*, Reloading emits reload.*, Holding emits hold.changed; views and Callouts only listen. Every new behaviour is data in a factory (`AnimFactory.defineType/defineView`, `RecoilFactory.defineProfile`, `Holding.defineStance`, `Calls.defineCall`), not a special case.
 10. **Views are applications of the animation factory.** Anim types (Core `Defs/ZGB_Def_Anims.lua`) are camera-independent; a view (`iso` in the Iso addon, later `fp`) maps every abstract clip. Never put camera-specific data in an anim type, and keep every clip mapped (a test checks `missingClips`).
+11. **Models are data too.** Placeholder geometry, attachment points and per-gun sizes live in `Defs/ZGB_Def_Models.lua` (ModelFactory). `ZGB_Visuals` decides per part: "rendered" (vanilla draws it via a `Vis_<Id>` twin on a channel point) or "baked" (into a gun model variant). Never hand-edit `models_X/ZGB/`, `textures/ZGB/`, `Item_ZGB_*.png` or `ZGB_models.txt`: `tools/gen_models.lua` wipes and rewrites them. Every new part needs a model (or `noModel = true`); tests fail otherwise.
 8. **Magazine rules:** tiers are only `standard`, `extended`, `drum`; at most one per tier per gun, and only tiers that exist for that gun in real life. A magazine has ONE caliber and holds only that caliber's catalog loads. Internal-fed guns (revolvers, tubes, internal boxes) use `internalCapacity` and take no magazines.
 
 ## Layout
@@ -30,7 +31,10 @@ Contents/mods/ZEGunsOfBohemiaReload/42/ ESSENTIAL addon: reload rules (ZGB_Reloa
 Contents/mods/ZEGunsOfBohemiaHolding/42/ ESSENTIAL addon: stance by Aiming level + sandbox options
 Contents/mods/ZEGunsOfBohemiaCalls/42/  optional addon: callouts
 Contents/mods/ZEGunsOfBohemiaFP/        (future) first-person provider, needs ZombieBuddy (see docs/FIRST_PERSON.md)
-docs/                                     catalogue.json, animsets/iso drafts (NOT loaded by the game), FIRST_PERSON.md
+  Core media/models_X/ZGB/                 GENERATED placeholder models, one folder per item (Guns/<Cat>/<Id>/, Attachments/<Type>/<Id>/, Magazines/, Casings/)
+  Iso media/AnimSets/player/{idle,aim}/    GENERATED stance AnimSet nodes (shipped since v0.6)
+docs/                                     catalogue.json, animsets/iso/fire drafts, FIRST_PERSON.md, MODELS.md (3D artist guide)
+tools/gen_models.lua, tools/lib/zgb_image.lua  models, icons, preview sprites, model scripts (PNG writer + side-view rasterizer)
 tests/run_tests.lua, tests/mock_game.lua  offline tests (Lua 5.1)
 tools/gen_scripts.lua                     regenerates every item script from the catalogue
 tools/gen_catalog.lua                     dumps the catalogue to docs/catalogue.json (3D model list)
@@ -41,7 +45,8 @@ B42 layout: every mod folder needs both `42/` (mod.info + media) and `common/`. 
 ## Commands
 
 ```
-lua5.1 tests/run_tests.lua     # must stay green (103 tests at v0.5.0)
+lua5.1 tests/run_tests.lua     # must stay green (113 tests at v0.6.0)
+lua5.1 tools/gen_models.lua    # after editing models, parts or guns (before gen_scripts; tests read its output)
 lua5.1 tools/gen_scripts.lua   # after editing anything in Defs/ or ZGB_AmmoCatalog.lua
 lua5.1 tools/gen_catalog.lua   # then refresh docs/catalogue.json
 lua5.1 tools/gen_animsets.lua  # after editing anim types, the iso view or stances
@@ -65,7 +70,7 @@ Kahlua (PZ's Lua) is roughly Lua 5.1: no `goto`, no integer division `//`, no `u
 - Next systems: grenades (callouts already listen for `grenade.throw`); speedloaders / stripper clips; FP view; addon API docs.
 - Todo: fire-mode switching, weapon light, converting vanilla guns in existing saves, translations, MP sync (send* calls), armor/tracer effects for AP/tracer traits.
 - Later: the FP addon reads `spec.fp`, `spec.recoil.fp` and each optic's `fp.sightAlignment`.
-- Open 3D decision: vanilla can't render mounts/handguards (only 6 part types) — bake mount into optic models, or swap the gun model variant when a mount is fitted.
+- 3D decision made (v0.6): parts vanilla can't draw are baked into gun model variants (366, generated); the Iso addon swaps `setWeaponSprite` on attachment change. Model/attachment game calls are VERIFY items 18-21. Known gap: recoil pad / butt shell holder don't follow a replacement folding stock.
 
 ## Working style
 

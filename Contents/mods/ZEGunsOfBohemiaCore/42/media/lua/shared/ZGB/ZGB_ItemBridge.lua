@@ -15,6 +15,7 @@ require "ZGB/ZGB_Attachments"
 require "ZGB/ZGB_Stats"
 require "ZGB/ZGB_Magazines"
 require "ZGB/ZGB_Ammo"
+require "ZGB/ZGB_Visuals"
 
 ZGB.Item = ZGB.Item or {}
 local I = ZGB.Item
@@ -163,7 +164,9 @@ end
 -- anyway).
 function I.mirrorVanillaAttach(character, item, partSpec)
     if not partSpec.vanillaPartType then return end
-    local vp = instanceItem and instanceItem(partSpec.fullType)       -- VERIFY B42 item creation
+    if ZGB.Visuals and ZGB.Visuals.mode(partSpec) ~= "rendered" then return end   -- baked into a model variant
+    local twin = ZGB.Visuals and ZGB.Visuals.twinOf(partSpec) or partSpec.fullType
+    local vp = instanceItem and instanceItem(twin)                     -- VERIFY B42 item creation
     if not vp or not instanceof(vp, "WeaponPart") then
         ZGB.debug("No vanilla WeaponPart for", partSpec.fullType, "(fine until models exist)")
         return
@@ -326,6 +329,21 @@ function I.removeWorldItem(worldItemOrItem)
         if sq then sq:transmitRemoveItemFromSquare(wi) end                       -- VERIFY
         wi:removeFromWorld(); wi:removeFromSquare()                              -- VERIFY
         return true
+    end)
+end
+
+--- Point the gun at another model script (an attachment variant). Returns true on success.
+function I.setWeaponModel(item, modelFullId)
+    return guarded("setWeaponSprite", false, function()
+        item:setWeaponSprite(modelFullId)                                       -- VERIFY
+        return true
+    end)
+end
+
+--- Make the character re-read the models in their hands after a model change.
+function I.refreshHandModels(character)
+    return guarded("resetEquippedHandsModels", false, function()
+        character:resetEquippedHandsModels(); return true                      -- VERIFY
     end)
 end
 

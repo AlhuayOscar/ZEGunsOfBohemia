@@ -6,7 +6,7 @@
     and addons use it to check for each other without reading mod ids.
 
       ZGB.Addons.register{ id = "reload", name = "Reloading", modId = "ZEGunsOfBohemiaReload",
-                           version = "0.5.0", essential = true }
+                           version = "0.6.0", essential = true }
 ]]
 require "ZGB/ZGB_Core"
 

@@ -2,5 +2,5 @@ name=ZE Guns Of Bohemia - Core
 id=ZEGunsOfBohemiaCore
 description=Factory-built firearms: one spec per gun drives ammo, magazines, stats, sounds, attachments and animations. Ships its own reloading and magazine systems, so it is NOT compatible with other gun or reloading frameworks. Needs ONE view addon (Isometric or First Person) and the essential addons Reloading and Tactical Holding. Callouts are optional.
 incompatible=\Brita,\Arsenal(26)GunFighter[MAIN MOD 2.0],\Arsenal(26)GunFighter,\VFExpansion1,\firearmmod,\Guns93,\ammocraft,\ammocraftfirearms
-modversion=0.5.0
+modversion=0.6.0
 versionMin=42.0

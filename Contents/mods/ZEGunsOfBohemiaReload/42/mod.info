@@ -2,5 +2,5 @@ name=ZE Guns Of Bohemia - Reloading
 id=ZEGunsOfBohemiaReload
 description=Essential addon for ZE Guns Of Bohemia: tactical and empty magazine reloads, chambered +1, revolver, tube, gate and break-action reloads timed by gun type, magazine tier and Reloading skill.
 require=\ZEGunsOfBohemiaCore
-modversion=0.5.0
+modversion=0.6.0
 versionMin=42.0
