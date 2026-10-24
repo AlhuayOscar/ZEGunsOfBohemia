@@ -31,6 +31,17 @@ module ZGB
         Tags            = ZGBAmmo,
     }
 
+    item Ammo_12ga_FLECHETTE
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 12 Gauge Flechette,
+        Icon            = ShotgunShells,
+        Weight          = 0.04,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
     item Ammo_223rem_HP
     {
         DisplayCategory = Ammo,
@@ -97,12 +108,122 @@ module ZGB
         Tags            = ZGBAmmo,
     }
 
+    item Ammo_3006_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .30-06 Springfield FMJ,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_3006_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .30-06 Springfield Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_3006_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .30-06 Springfield Armor Piercing,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_3006_TRACER
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .30-06 Springfield Tracer,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_3030_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .30-30 Win Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_3030_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .30-30 Win Hollow Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_303brit_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .303 British FMJ,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_303brit_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .303 British Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_303brit_TRACER
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .303 British Tracer,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_303brit_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .303 British Armor Piercing,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
     item Ammo_308win_AP
     {
         DisplayCategory = Ammo,
         ItemType        = base:normal,
-        DisplayName     = .308 Win Armor Piercing,
-        Icon            = 556Bullets,
+        DisplayName     = .308 Win / 7.62x51mm Armor Piercing,
+        Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
         Tags            = ZGBAmmo,
@@ -112,8 +233,8 @@ module ZGB
     {
         DisplayCategory = Ammo,
         ItemType        = base:normal,
-        DisplayName     = .308 Win Tracer,
-        Icon            = 556Bullets,
+        DisplayName     = .308 Win / 7.62x51mm Tracer,
+        Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
         Tags            = ZGBAmmo,
@@ -123,9 +244,108 @@ module ZGB
     {
         DisplayCategory = Ammo,
         ItemType        = base:normal,
-        DisplayName     = .308 Win Soft Point,
-        Icon            = 556Bullets,
+        DisplayName     = .308 Win / 7.62x51mm Soft Point,
+        Icon            = 308Bullets,
         Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_308win_MATCH
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .308 Win / 7.62x51mm Match (Long Range),
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_338lm_MATCH
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .338 Lapua Magnum Match (Long Range),
+        Icon            = 308Bullets,
+        Weight          = 0.05,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_338lm_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .338 Lapua Magnum Armor Piercing,
+        Icon            = 308Bullets,
+        Weight          = 0.05,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_338lm_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .338 Lapua Magnum Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.05,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_357mag_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .357 Magnum Jacketed Soft Point,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_357mag_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .357 Magnum Hollow Point,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_357mag_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .357 Magnum FMJ,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_380acp_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .380 ACP FMJ,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_380acp_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .380 ACP Hollow Point,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -152,13 +372,79 @@ module ZGB
         Tags            = ZGBAmmo,
     }
 
+    item Ammo_38spl_WC
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .38 Special Wadcutter,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_40sw_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .40 S&W FMJ,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_40sw_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .40 S&W Hollow Point,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_410ga_BUCK
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .410 Bore 00 Buckshot,
+        Icon            = ShotgunShells,
+        Weight          = 0.04,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_410ga_BIRD
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .410 Bore Birdshot,
+        Icon            = ShotgunShells,
+        Weight          = 0.04,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_410ga_SLUG
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .410 Bore Slug,
+        Icon            = ShotgunShells,
+        Weight          = 0.04,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
     item Ammo_44mag_HP
     {
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = .44 Magnum Hollow Point,
         Icon            = Bullets44,
-        Weight          = 0.02,
+        Weight          = 0.015,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -169,7 +455,51 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = .44 Magnum Soft Point,
         Icon            = Bullets44,
-        Weight          = 0.02,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_454casull_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .454 Casull Soft Point,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_454casull_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .454 Casull Hollow Point,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_4570_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .45-70 Govt Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_4570_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .45-70 Govt Hollow Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -180,7 +510,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = .45 ACP Hollow Point,
         Icon            = Bullets45,
-        Weight          = 0.015,
+        Weight          = 0.012,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -191,6 +521,160 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = .45 ACP +P,
         Icon            = Bullets45,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_45colt_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .45 Colt Lead Round Nose,
+        Icon            = Bullets45,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_45colt_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .45 Colt Hollow Point,
+        Icon            = Bullets45,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_500sw_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .500 S&W Magnum Soft Point,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_500sw_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .500 S&W Magnum Hollow Point,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_50ae_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .50 AE FMJ,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_50ae_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .50 AE Hollow Point,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_50bmg_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .50 BMG FMJ,
+        Icon            = 308Bullets,
+        Weight          = 0.12,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_50bmg_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .50 BMG Armor Piercing,
+        Icon            = 308Bullets,
+        Weight          = 0.12,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_50bmg_TRACER
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .50 BMG Tracer,
+        Icon            = 308Bullets,
+        Weight          = 0.12,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_50bmg_MATCH
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .50 BMG Match (Long Range),
+        Icon            = 308Bullets,
+        Weight          = 0.12,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_545x39_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.45x39mm FMJ,
+        Icon            = 556Bullets,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_545x39_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.45x39mm Armor Piercing,
+        Icon            = 556Bullets,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_545x39_TRACER
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.45x39mm Tracer,
+        Icon            = 556Bullets,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_545x39_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.45x39mm Hollow Point,
+        Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
         Tags            = ZGBAmmo,
@@ -229,13 +713,134 @@ module ZGB
         Tags            = ZGBAmmo,
     }
 
+    item Ammo_556x45_MATCH
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.56x45mm Match (Long Range),
+        Icon            = 556Bullets,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_57x28_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.7x28mm Sporting (SS197),
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_57x28_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.7x28mm Armor Piercing,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_57x28_TRACER
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.7x28mm Tracer,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_57x28_SUBSONIC
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 5.7x28mm Subsonic,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_65cm_MATCH
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 6.5 Creedmoor Match (Long Range),
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_65cm_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 6.5 Creedmoor Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_65cm_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 6.5 Creedmoor Hollow Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x25_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x25mm Tokarev FMJ,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x25_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x25mm Tokarev Armor Piercing,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x38r_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x38mmR Nagant FMJ,
+        Icon            = Bullets38,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
     item Ammo_762x39_FMJ
     {
         DisplayCategory = Ammo,
         ItemType        = base:normal,
         DisplayName     = 7.62x39mm FMJ,
         Icon            = 556Bullets,
-        Weight          = 0.02,
+        Weight          = 0.015,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -246,7 +851,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 7.62x39mm Armor Piercing,
         Icon            = 556Bullets,
-        Weight          = 0.02,
+        Weight          = 0.015,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -257,7 +862,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 7.62x39mm Tracer,
         Icon            = 556Bullets,
-        Weight          = 0.02,
+        Weight          = 0.015,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -268,7 +873,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 7.62x39mm Hollow Point,
         Icon            = 556Bullets,
-        Weight          = 0.02,
+        Weight          = 0.015,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -279,7 +884,139 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 7.62x39mm Soft Point,
         Icon            = 556Bullets,
-        Weight          = 0.02,
+        Weight          = 0.015,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x54r_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x54mmR FMJ,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x54r_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x54mmR Armor Piercing,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x54r_TRACER
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x54mmR Tracer,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x54r_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x54mmR Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_762x54r_MATCH
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.62x54mmR 7N1 Sniper (Long Range),
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_792x57_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.92x57mm Mauser FMJ,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_792x57_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.92x57mm Mauser Armor Piercing,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_792x57_TRACER
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.92x57mm Mauser Tracer,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_792x57_SP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 7.92x57mm Mauser Soft Point,
+        Icon            = 308Bullets,
+        Weight          = 0.03,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_9x18_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 9x18mm Makarov FMJ,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_9x18_HP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 9x18mm Makarov Hollow Point,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
+        Count           = 5,
+        Tags            = ZGBAmmo,
+    }
+
+    item Ammo_9x18_AP
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = 9x18mm Makarov Armor Piercing,
+        Icon            = Bullets9mm,
+        Weight          = 0.012,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -290,7 +1027,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 9x19mm Hollow Point,
         Icon            = Bullets9mm,
-        Weight          = 0.015,
+        Weight          = 0.012,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -301,7 +1038,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 9x19mm +P,
         Icon            = Bullets9mm,
-        Weight          = 0.015,
+        Weight          = 0.012,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -312,7 +1049,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 9x19mm Subsonic,
         Icon            = Bullets9mm,
-        Weight          = 0.015,
+        Weight          = 0.012,
         Count           = 5,
         Tags            = ZGBAmmo,
     }
@@ -323,7 +1060,7 @@ module ZGB
         ItemType        = base:normal,
         DisplayName     = 9x19mm Armor Piercing,
         Icon            = Bullets9mm,
-        Weight          = 0.015,
+        Weight          = 0.012,
         Count           = 5,
         Tags            = ZGBAmmo,
     }

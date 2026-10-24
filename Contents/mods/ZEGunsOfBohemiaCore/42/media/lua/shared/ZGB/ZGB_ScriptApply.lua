@@ -66,24 +66,29 @@ function SA.applyAll()
     if not provider then
         ZGB.warn("No view addon active (ZEGunsOfBohemiaIso / ZEGunsOfBohemiaFP). Stats applied, animations left as scripted.")
     end
-    local count = 0
+    local count, magsDone = 0, {}
     for _, spec in ipairs(ZGB.WeaponFactory.all()) do
         local item = scriptItem(spec.fullType)
         if not item then
-            ZGB.err("Spec has no script item:", spec.fullType, "- add it to media/scripts")
+            ZGB.err("Spec has no script item:", spec.fullType, "- run tools/gen_scripts.lua")
         else
             local anim = provider and provider.getAnimParams(spec.archetype, spec) or nil
             for _, kv in ipairs(SA.paramsFor(spec, anim)) do param(item, kv[1], kv[2]) end
 
-            -- every magazine script gets ITS capacity + the gun's ammo — the old "wrong mag size" bug
+            -- every magazine script gets ITS capacity + its caliber's default ammo — the old
+            -- "wrong mag size" bug. Shared magazines (STANAG...) are written once; GunType
+            -- names the first gun that takes it.
             for _, m in ipairs(spec.magazines or {}) do
-                local mag = scriptItem(m.item)
-                if mag then
-                    param(mag, "MaxAmmo", m.capacity)
-                    param(mag, "AmmoType", spec.ammo)
-                    param(mag, "GunType", spec.fullType)   -- VERIFY field name
-                else
-                    ZGB.err("Magazine script missing:", m.item)
+                if not magsDone[m.item] then
+                    magsDone[m.item] = true
+                    local mag = scriptItem(m.item)
+                    if mag then
+                        param(mag, "MaxAmmo", m.capacity)
+                        param(mag, "AmmoType", spec.ammo)
+                        param(mag, "GunType", spec.fullType)   -- VERIFY field name
+                    else
+                        ZGB.err("Magazine script missing:", m.item)
+                    end
                 end
             end
             count = count + 1

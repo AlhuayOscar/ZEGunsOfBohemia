@@ -47,6 +47,49 @@ function Mode.activeFpMods()
     return found
 end
 
+--[[ Foreign gun / reload frameworks.
+     ZE Guns Of Bohemia ships its own reloading, magazines, ammo and holding,
+     and is NOT compatible with mods that rework guns or reloading generically:
+     two systems patching the same reload functions is exactly the class of bug
+     this mod exists to avoid. Extensions go through our own addon API instead.
+     The same ids are in ZEGunsOfBohemiaCore mod.info `incompatible=`; this is
+     the runtime net. If one is active, Core switches itself off (no hooks,
+     no loot changes) and says why.
+     !! VERIFY: confirmed ids are marked; the rest are best guesses. ]]
+Mode.FOREIGN_GUN_MOD_IDS = {
+    "Brita",                                -- Brita's Weapon Pack (confirmed)
+    "Arsenal(26)GunFighter[MAIN MOD 2.0]",  -- Arsenal[26] GunFighter 2.0 (confirmed)
+    "Arsenal(26)GunFighter",                -- Arsenal[26] GunFighter legacy (confirmed)
+    "VFExpansion1",                         -- Vanilla Firearms Expansion        VERIFY
+    "firearmmod",                           -- Firearms B41 / B42                 VERIFY
+    "Guns93",                               -- Guns of 93                         VERIFY
+    "ammocraft",                            -- Ammocraft (confirmed)
+    "ammocraftfirearms",                    -- Ammocraft firearms (confirmed)
+}
+
+function Mode.activeForeignGunMods()
+    local found = {}
+    for _, id in ipairs(Mode.FOREIGN_GUN_MOD_IDS) do
+        if Mode.isModActive(id) then found[#found + 1] = id end
+    end
+    return found
+end
+
+--- True when a foreign gun / reload mod is active; computed once per session.
+function Mode.isBlocked()
+    if Mode.blocked == nil then
+        local found = Mode.activeForeignGunMods()
+        Mode.blocked = #found > 0
+        if Mode.blocked then
+            local msg = "ZE Guns Of Bohemia disabled itself: incompatible gun/reload mod(s) active: " ..
+                        table.concat(found, ", ") .. ". Disable them; extend ZE Guns Of Bohemia through its addon API instead."
+            Mode.conflicts[#Mode.conflicts + 1] = msg
+            ZGB.err(msg)
+        end
+    end
+    return Mode.blocked
+end
+
 --[[ Provider contract (what a view addon must implement):
 
     provider = {

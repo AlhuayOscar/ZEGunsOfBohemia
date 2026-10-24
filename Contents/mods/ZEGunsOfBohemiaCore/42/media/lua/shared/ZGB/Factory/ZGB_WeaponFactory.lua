@@ -8,36 +8,58 @@
 
     That is what kills the "wrong magazine size" class of bugs: MaxAmmo is not
     inherited from whatever vanilla gun a script was copied from, it is DERIVED
-    from `magazine.capacity` here.
+    from the standard magazine's capacity (or internalCapacity) here.
 
     ------------------------------------------------------------------ schema
     {
       id          = "AK47",                 -- required, becomes ZGB.AK47
       archetype   = "assault_rifle",        -- required, see ZGB_Archetypes
       displayName = "AK-47",                -- required
-      caliber     = "762x39",                -- required: a key of ZGB_AmmoCatalog.CALIBERS
-                                             -- (spec.ammoVariants / spec.ammo are derived from it)
-      magazine    = { item = "ZGB.AK47_Mag30", capacity = 30 },  -- required for mag-fed
-      altMagazines= { { item = "ZGB.AK47_Drum75", capacity = 75, label = "75rd drum",
-                        mods = { add = { weight = 1.2, aimTime = 5 } } } },   -- mods apply while loaded
-      stats       = { ...overrides of archetype stats... },
+      caliber     = "762x39",               -- required: a key of ZGB_AmmoCatalog.CALIBERS
+                                            -- (spec.ammoVariants / spec.ammo are derived from it)
+      magazines   = {                       -- mag-fed: ids from ZGB_Def_Magazines, one per tier
+          standard = "AK47_Mag30",          --   required for mag-fed guns
+          extended = "AK_Mag40",            --   optional, only if it exists for real
+          drum     = "AK47_Drum75",         --   optional, only if it exists for real
+      },
+      internalCapacity = 6,                 -- cylinder / tube / internal box instead of magazines
+      stats       = { ...overrides... },    -- anything set here is NOT caliber-scaled
       sounds      = { fire=, rack=, click=, insertAmmo=, ejectAmmo=, shellFall= },
-      slots       = {                      -- what the bare gun physically has
+      slots       = {                       -- what the bare gun physically has
          side_mount = { kind="mount", accepts={"ak_dovetail"}, label="Side mount", order=1 },
          ...
       },
-      fp          = { ... },               -- reserved for the first-person addon
+      category    = "revolver",             -- optional: overrides the archetype's catalogue group
+      rarity      = 0.3,                    -- loot weight next to its family (1 = as common as vanilla)
+      model       = "ZGB_AK47",             -- optional: WeaponSprite once the 3D model exists
+      notes       = "...",                  -- optional: shown in the catalogue (for the 3D side)
+      fp          = { ... },                -- reserved for the first-person addon
     }
 ]]
 require "ZGB/ZGB_Core"
 require "ZGB/Factory/ZGB_Archetypes"
 require "ZGB/Factory/ZGB_AmmoCatalog"
+require "ZGB/Factory/ZGB_MagazineFactory"
 
 ZGB.WeaponFactory = ZGB.WeaponFactory or { _specs = {}, _order = {}, errors = {} }
 local WF = ZGB.WeaponFactory
+local MF = ZGB.MagazineFactory
 
 local REQUIRED = { "id", "archetype", "displayName", "caliber" }
-local MAG_FREE_RELOADS = { shotgun = true, boltactionnomag = true, revolver = true, doublebarrelshotgun = true }
+WF.MAG_FREE_RELOADS = { shotgun = true, boltactionnomag = true, revolver = true, doublebarrelshotgun = true }
+
+-- How strongly muzzle energy moves each stat (stat *= (E / E_ref) ^ exponent).
+WF.ENERGY_EXPONENT = { minDamage = 0.35, maxDamage = 0.35, range = 0.15, recoilDelay = 0.30, soundRadius = 0.20 }
+
+--- Multiplier for `stat` of a gun in `caliberId` built on an archetype tuned for `refCaliber`.
+function WF.caliberScale(stat, caliberId, refCaliber)
+    local exp = WF.ENERGY_EXPONENT[stat]
+    local cal, ref = ZGB.AmmoCatalog.CALIBERS[caliberId], ZGB.AmmoCatalog.CALIBERS[refCaliber or ""]
+    if not exp or not cal or not ref or not cal.energy or not ref.energy then return 1 end
+    return (cal.energy / ref.energy) ^ exp
+end
+
+local function round2(x) return math.floor(x * 100 + 0.5) / 100 end
 
 local function validate(def, spec)
     local errs = {}
@@ -51,27 +73,28 @@ local function validate(def, spec)
         errs[#errs + 1] = "unknown caliber '" .. tostring(def.caliber) .. "' (add it to ZGB_AmmoCatalog)"
     end
     if spec then
-        local magFed = not MAG_FREE_RELOADS[spec.reloadType]
+        local magFed = not WF.MAG_FREE_RELOADS[spec.reloadType]
+        local mags = def.magazines or {}
+        for tier, magId in pairs(mags) do
+            local m = MF.get(magId)
+            if not MF.TIERS[tier] then
+                errs[#errs + 1] = "magazines." .. tostring(tier) .. ": tiers are standard, extended, drum"
+            elseif not m then
+                errs[#errs + 1] = "magazines." .. tier .. ": unknown magazine '" .. tostring(magId) .. "'"
+            elseif m.tier ~= tier then
+                errs[#errs + 1] = "magazines." .. tier .. ": '" .. magId .. "' is tier " .. m.tier
+            elseif m.caliber ~= def.caliber then
+                errs[#errs + 1] = "magazines." .. tier .. ": '" .. magId .. "' is " .. m.caliber .. ", gun is " .. tostring(def.caliber)
+            end
+        end
         if magFed then
-            if not spec.magazine or not spec.magazine.item then
-                errs[#errs + 1] = "mag-fed weapon needs magazine.item"
+            if not mags.standard then errs[#errs + 1] = "mag-fed weapon needs magazines.standard" end
+            if def.internalCapacity then errs[#errs + 1] = "mag-fed weapon can't have internalCapacity" end
+        else
+            if next(mags) then errs[#errs + 1] = spec.reloadType .. " weapon can't take magazines" end
+            if type(spec.internalCapacity) ~= "number" or spec.internalCapacity < 1 then
+                errs[#errs + 1] = "tube/internal weapon needs internalCapacity"
             end
-            -- default magazine + every alternative must be valid and unique
-            local all, seen = { spec.magazine or {} }, {}
-            for _, m in ipairs(spec.altMagazines or {}) do all[#all + 1] = m end
-            for i, m in ipairs(all) do
-                local label = (i == 1) and "magazine" or ("altMagazines[" .. (i - 1) .. "]")
-                if not m.item then
-                    if i > 1 then errs[#errs + 1] = label .. " needs item" end
-                elseif type(m.capacity) ~= "number" or m.capacity < 1 or m.capacity % 1 ~= 0 then
-                    errs[#errs + 1] = label .. ".capacity must be a positive integer"
-                elseif seen[m.item] then
-                    errs[#errs + 1] = label .. " duplicates " .. m.item
-                end
-                if m.item then seen[m.item] = true end
-            end
-        elseif type(spec.internalCapacity) ~= "number" then
-            errs[#errs + 1] = "tube/internal weapon needs internalCapacity"
         end
         for slotId, s in pairs(spec.slots or {}) do
             if not s.kind or type(s.accepts) ~= "table" or #s.accepts == 0 then
@@ -82,38 +105,47 @@ local function validate(def, spec)
     return errs
 end
 
+local function reject(def, errs)
+    WF.errors[#WF.errors + 1] = { id = def.id, errors = errs }
+    ZGB.err("Weapon '" .. tostring(def.id) .. "' rejected:", table.concat(errs, "; "))
+    return nil, errs
+end
+
 --- Define and register a weapon. Returns spec, or nil + list of errors.
 function WF.define(def)
     local errs = validate(def, nil)
-    if #errs > 0 then
-        WF.errors[#WF.errors + 1] = { id = def.id, errors = errs }
-        ZGB.err("Weapon '" .. tostring(def.id) .. "' rejected:", table.concat(errs, "; "))
-        return nil, errs
-    end
+    if #errs > 0 then return reject(def, errs) end
 
-    local spec = ZGB.merge(ZGB.Archetypes[def.archetype], def)
+    local arch = ZGB.Archetypes[def.archetype]
+    local spec = ZGB.merge(arch, def)
     spec.fullType = ZGB.fullType(def.id)
     spec.slots    = spec.slots or {}
     spec.sounds   = spec.sounds or {}
     spec.fp       = spec.fp or {}
+    spec.category = def.category or arch.category
+    spec.rarity   = def.rarity or 0.2
 
     errs = validate(def, spec)
-    if #errs > 0 then
-        WF.errors[#WF.errors + 1] = { id = def.id, errors = errs }
-        ZGB.err("Weapon '" .. def.id .. "' rejected:", table.concat(errs, "; "))
-        return nil, errs
+    if #errs > 0 then return reject(def, errs) end
+
+    -- Caliber decides punch, archetype decides handling, the definition overrides both.
+    local own = def.stats or {}
+    for stat in pairs(WF.ENERGY_EXPONENT) do
+        if own[stat] == nil and spec.stats[stat] then
+            spec.stats[stat] = round2(spec.stats[stat] * WF.caliberScale(stat, spec.caliber, arch.refCaliber))
+        end
     end
 
     -- Derived values: the ONLY place ammo capacity is decided.
-    -- spec.magazines = default first, then alternatives; each { item, capacity, label, mods }
-    spec.magazines = {}
-    if spec.magazine then
-        spec.magazine.default = true
-        spec.magazines[1] = spec.magazine
-        for _, m in ipairs(spec.altMagazines or {}) do spec.magazines[#spec.magazines + 1] = m end
-        for _, m in ipairs(spec.magazines) do
-            m.mods = m.mods or {}
-            m.mods.add, m.mods.mul = m.mods.add or {}, m.mods.mul or {}
+    -- spec.magazines = tier order (standard first); each a copy of the magazine spec + `default`.
+    spec.magazines, spec.magazine = {}, nil
+    for _, tier in ipairs(MF.TIER_ORDER) do
+        local id = (def.magazines or {})[tier]
+        if id then
+            local m = ZGB.copy(MF.get(id))
+            m.default = (tier == "standard")
+            spec.magazines[#spec.magazines + 1] = m
+            if m.default then spec.magazine = m end
         end
     end
     spec.maxAmmo = spec.magazine and spec.magazine.capacity or spec.internalCapacity
@@ -148,6 +180,17 @@ function WF.isOurs(item) return WF.specOf(item) ~= nil end
 function WF.all()
     local out = {}
     for i, ft in ipairs(WF._order) do out[i] = WF._specs[ft] end
+    return out
+end
+
+--- Guns that take a given magazine item (shared magazines list several).
+function WF.gunsForMagazine(magFullType)
+    local out = {}
+    for _, spec in ipairs(WF.all()) do
+        for _, m in ipairs(spec.magazines) do
+            if m.item == magFullType then out[#out + 1] = spec; break end
+        end
+    end
     return out
 end
 

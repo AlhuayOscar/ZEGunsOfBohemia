@@ -79,6 +79,7 @@ end
 
 local function installHooks()
     if ZGB._reloadHooksInstalled then return end   -- never double-wrap
+    if ZGB.Mode.isBlocked() then return end        -- a foreign reload mod owns these functions
     ZGB._reloadHooksInstalled = true
     -- (2) record magazine after insert. B42 does the work in complete(); also wrap
     -- perform() so SP on builds without complete() is covered. applyStats is idempotent.

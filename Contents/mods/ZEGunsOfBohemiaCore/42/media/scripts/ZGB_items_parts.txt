@@ -19,11 +19,111 @@ module ZGB
         Tags            = ZGBPart,
     }
 
+    item Mount_AR_CarryHandle
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Carry Handle Rail Mount,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Mount_ScopeBase
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Picatinny Scope Base,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Mount_HK_Claw
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = HK Claw Rail Mount,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Mount_M14
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = M14 Scope Mount,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Mount_Mosin_PU
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Mosin PU Side Mount,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Mount_Ruger_Rings
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Ruger Ring Mount Rail,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
     item Handguard_AK_Quad
     {
         DisplayCategory = WeaponPart,
         ItemType        = base:normal,
         DisplayName     = AK Quad-Rail Handguard,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Handguard_AR_Quad
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AR Quad-Rail Handguard,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Handguard_MP5_Rail
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = MP5 Railed Handguard,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Adapter_USP_Rail
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = USP Rail Adapter,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Adapter_HK_3Lug
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = HK 3-Lug Thread Adapter,
         Icon            = Scope,
         Weight          = 0.2,
         Tags            = ZGBPart,
@@ -39,6 +139,16 @@ module ZGB
         Tags            = ZGBPart,
     }
 
+    item Optic_Holo
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Holographic Sight,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
     item Optic_4x
     {
         DisplayCategory = WeaponPart,
@@ -49,21 +159,61 @@ module ZGB
         Tags            = ZGBPart,
     }
 
-    item Muzzle_AK_Suppressor
+    item Optic_Hunting3x9
     {
         DisplayCategory = WeaponPart,
         ItemType        = base:normal,
-        DisplayName     = AK Suppressor,
+        DisplayName     = 3-9x Hunting Scope,
         Icon            = Scope,
         Weight          = 0.2,
         Tags            = ZGBPart,
     }
 
-    item Muzzle_AK_Compensator
+    item Optic_Scope8x
     {
         DisplayCategory = WeaponPart,
         ItemType        = base:normal,
-        DisplayName     = AK Compensator,
+        DisplayName     = 8x Precision Scope,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Optic_Pistol_RMR
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Pistol Red Dot (RMR),
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Optic_PSO1
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = PSO-1 4x Scope,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Optic_PU
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = PU 3.5x Scope,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Optic_Rimfire4x
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = 4x Rimfire Scope,
         Icon            = Scope,
         Weight          = 0.2,
         Tags            = ZGBPart,
@@ -89,6 +239,176 @@ module ZGB
         Tags            = ZGBPart,
     }
 
+    item Light_Pistol
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Pistol Light,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Bipod_Harris
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Harris Bipod,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Suppressor_Pistol9
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = 9mm Pistol Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Suppressor_Pistol45
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = .45 Pistol Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Suppressor_Rimfire
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = .22 Rimfire Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Suppressor_Rifle556
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = 5.56 Rifle Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Brake_Rifle556
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = 5.56 Muzzle Brake,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Suppressor_Rifle308
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = .308 Rifle Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Brake_Rifle308
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = .308 Muzzle Brake,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Muzzle_AK_Suppressor
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AK Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Muzzle_AK_Compensator
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AK Compensator,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Suppressor_AK74
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AK-74 Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Brake_AK74
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AK-74 Muzzle Brake,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Suppressor_338
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = .338 Magnum Suppressor,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Choke_Full
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Full Choke,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Choke_Modified
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Modified Choke,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Choke_ImprovedCylinder
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Improved Cylinder Choke,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
     item Stock_AK_Folding
     {
         DisplayCategory = WeaponPart,
@@ -99,11 +419,71 @@ module ZGB
         Tags            = ZGBPart,
     }
 
+    item Stock_AR_Collapsible
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AR Collapsible Stock,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Stock_AR_Precision
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AR Precision Stock,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Stock_M590_PistolGrip
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Mossberg Pistol-Grip Stock,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Stock_870_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Remington 870 Folding Stock,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Sidesaddle_Shotgun
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Shotgun Side Saddle,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
     item Sling_2Point
     {
         DisplayCategory = WeaponPart,
         ItemType        = base:normal,
         DisplayName     = 2-Point Sling,
+        Icon            = Scope,
+        Weight          = 0.2,
+        Tags            = ZGBPart,
+    }
+
+    item Sling_1Point
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = 1-Point Sling,
         Icon            = Scope,
         Weight          = 0.2,
         Tags            = ZGBPart,

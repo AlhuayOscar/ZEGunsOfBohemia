@@ -15,10 +15,13 @@ local Mode = ZGB.Mode
 
 local ANIMS = {
     pistol        = { SwingAnim = "Handgun", IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
+    revolver      = { SwingAnim = "Handgun", IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
     smg           = { SwingAnim = "Rifle",   IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
     assault_rifle = { SwingAnim = "Rifle",   IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
+    dmr           = { SwingAnim = "Rifle",   IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
     shotgun       = { SwingAnim = "Rifle",   IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
     bolt_rifle    = { SwingAnim = "Rifle",   IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
+    lever_rifle   = { SwingAnim = "Rifle",   IdleAnim = "Idle_Weapon2", RunAnim = "Run_Weapon2" },
 }
 
 local IsoProvider = {

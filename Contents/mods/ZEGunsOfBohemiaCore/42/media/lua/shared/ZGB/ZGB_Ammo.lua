@@ -19,19 +19,15 @@ ZGB.Ammo = ZGB.Ammo or {}
 local A = ZGB.Ammo
 
 -- ------------------------------------------------------------ magazine index
--- magazine item -> { caliber, capacity }, built from every registered weapon.
+-- magazine item -> { caliber, capacity, label, tier }: every magazine some registered
+-- gun takes. Caliber and capacity come from the magazine itself (ZGB_MagazineFactory).
 local magIndex
 function A.magazineInfo(magFullType)
     if not magIndex then
         magIndex = {}
         for _, spec in ipairs(ZGB.WeaponFactory.all()) do
             for _, m in ipairs(spec.magazines or {}) do
-                local known = magIndex[m.item]
-                if known and (known.caliber ~= spec.caliber or known.capacity ~= m.capacity) then
-                    ZGB.warn("Magazine", m.item, "defined differently by two guns; keeping the first")
-                elseif not known then
-                    magIndex[m.item] = { caliber = spec.caliber, capacity = m.capacity, label = m.label }
-                end
+                magIndex[m.item] = { caliber = m.caliber, capacity = m.capacity, label = m.label, tier = m.tier }
             end
         end
     end

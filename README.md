@@ -7,7 +7,7 @@ and first person — without the animation overlap, flicker and crashes you get
 when you mix isometric gun packs with ZombieBuddy-based first-person (viewpoint / ADS) mods.
 
 ![Build](https://img.shields.io/badge/Project%20Zomboid-Build%2042-8b0000)
-![Version](https://img.shields.io/badge/version-0.3.0-blue)
+![Version](https://img.shields.io/badge/version-0.4.0-blue)
 ![Status](https://img.shields.io/badge/status-pre--alpha-orange)
 ![License](https://img.shields.io/badge/license-CC0--1.0-lightgrey)
 
@@ -54,6 +54,12 @@ ZE Guns Of Bohemia is built the other way around:
 - **Nothing crashes on an unknown API.** Every game call that hasn't been
   confirmed on a real install is wrapped in `pcall`: a wrong name logs a warning
   and switches that one feature off.
+- **Self-contained on purpose.** Reloading, magazines, ammo loading and (soon)
+  tactical holding are built in, so you don't need other gun mods for the basics.
+  In return, ZE Guns Of Bohemia is **not compatible** with other reloading mods
+  or generic gun frameworks: two systems patching the same reload code is the
+  kind of bug this mod exists to avoid. Extensions are welcome as addons built
+  on our own API.
 
 ## Features
 
@@ -64,12 +70,17 @@ ZE Guns Of Bohemia is built the other way around:
 - **Gunsmith window.** Right-click a gun → **Gunsmith...** for the full attachment
   tree, including "ghost" slots that appear once a mount is on, with ownership,
   install state and a stat preview for the selected part.
-- **Multiple magazines per gun.** Standard, extended and drum mags, each with its
-  own capacity and handling penalties that only apply while loaded. **R** picks
-  the fullest carried magazine automatically.
+- **70 real guns in 32 calibers.** Pistols, revolvers and hand cannons, assault
+  rifles, DMRs, bolt-action sniper rifles, SMGs, shotguns and lever actions.
+  Damage, range, recoil and noise scale from each caliber's real muzzle energy.
+- **Three magazine tiers.** Standard, extended and drum, and only the ones that
+  exist for that gun. Extended and drum mags carry handling penalties while
+  loaded. Real shared magazines are shared in game too (a STANAG fits the M16A2,
+  M4A1, HK416 and Mk 12). **R** picks the fullest carried magazine automatically.
 - **Ammo variants per caliber.** FMJ, Hollow Point, +P, Armor Piercing, Tracer,
-  Soft Point, Subsonic, High Velocity, and Buckshot / Birdshot / Slug for shotguns.
-  Each changes damage, crits, noise or range.
+  Soft Point, Subsonic, High Velocity, Match (long range), Wadcutter, and
+  Buckshot / Birdshot / Slug / Flechette for shotguns. Each caliber only gets the
+  loads that really exist for it, and a magazine holds only its caliber's loads.
 - **Load all / Unload all magazines** in one menu click, topping off partly
   filled mags with the same ammo and never mixing types.
 - **Stats recomputed from scratch** (base + parts + loaded magazine + loaded
@@ -77,36 +88,70 @@ ZE Guns Of Bohemia is built the other way around:
 - **Vanilla-friendly.** Standard rounds of vanilla calibers reuse the vanilla
   items, so vanilla ammo boxes, crafting and other ammo mods keep working.
 - **Loot integration.** Vanilla guns and magazines in loot tables are replaced
-  by ours; variant ammo and extended mags spawn by rarity.
+  by ours. Every other gun spawns next to its family by rarity, magazines spawn
+  next to their gun by tier, and variant ammo spawns next to standard rounds.
 
 ## What's in the box
 
-**Guns**
+70 guns, 65 magazines, 48 attachments and 32 calibers. The full catalogue with
+every attachment slot and what it needs is generated into
+[`docs/catalogue.json`](docs/catalogue.json) by `tools/gen_catalog.lua`.
+Numbers after the caliber are magazine capacities (standard/extended/drum),
+or "int" for an internal cylinder, tube or box.
 
-| Gun | Family | Caliber | Feeds from |
-|---|---|---|---|
-| AK-47 | assault rifle | 7.62x39mm | 30rd mag, 75rd drum |
-| Glock 17 | pistol | 9x19mm | 17rd mag, 33rd extended |
-| Mossberg 590 | shotgun | 12 Gauge | 8-round tube |
-
-**Attachments:** AK side-rail optic mount, AK quad-rail handguard, red dot sight,
-4x combat scope, AK suppressor, AK compensator, vertical foregrip, weapon light,
-AK folding stock, 2-point sling.
-
-**Ammo by caliber** (first entry is the default round):
-
-| Caliber | Variants |
+| Category | Guns |
 |---|---|
-| .22 LR | Round Nose, High Velocity, Hollow Point (weak), Subsonic |
-| 9x19mm | FMJ, HP, +P, Subsonic, AP |
-| .38 Special | FMJ, HP, +P |
-| .45 ACP | FMJ, HP, +P (already subsonic, no AP) |
-| .44 Magnum | FMJ, HP, Soft Point |
-| 5.56x45mm | FMJ, AP, Tracer, Soft Point |
-| .223 Rem | FMJ, HP, Soft Point |
-| 7.62x39mm | FMJ, AP, Tracer, HP, Soft Point |
-| .308 Win | FMJ, AP, Tracer, Soft Point |
-| 12 Gauge | 00 Buckshot, Birdshot, Slug (1 projectile, long range) |
+| Handguns (16) | Glock 17 (9x19mm, 17/33/50), Glock 19 (9x19mm, 15/33/50), Glock 18C (9x19mm, 17/33/50), Beretta 92FS (9x19mm, 15/30), SIG Sauer P226 (9x19mm, 15/20), CZ 75 (9x19mm, 16/26), SIG Sauer M17 (9x19mm, 17/21), Colt M1911A1 (.45 ACP, 7/10), Glock 21 (.45 ACP, 13/26), HK USP45 Tactical (.45 ACP, 12), Glock 22 (.40 S&W, 15/22), Walther PPK (.380 ACP, 7), Ruger Mk II (.22 LR, 10), Makarov PM (9x18mm Makarov, 8), Tokarev TT-33 (7.62x25mm Tokarev, 8), FN Five-seveN (5.7x28mm, 20/30) |
+| Revolvers & hand cannons (12) | S&W Model 10 (.38 Special, 6 int), Colt Python (.357 Magnum, 6 int), Ruger GP100 (.357 Magnum, 6 int), S&W 686 Plus (.357 Magnum, 7 int), S&W Model 29 (.44 Magnum, 6 int), Colt Anaconda (.44 Magnum, 6 int), Colt Single Action Army (.45 Colt, 6 int), Taurus Judge (.410 Bore, 5 int), Ruger Super Redhawk (.454 Casull, 6 int), S&W Model 500 (.500 S&W Magnum, 5 int), Nagant M1895 (7.62x38mmR Nagant, 7 int), Desert Eagle Mark XIX (.50 AE, 7) |
+| Assault rifles (8) | AK-47 (7.62x39mm, 30/40/75), AK-74 (5.45x39mm, 30/45), M16A2 (5.56x45mm, 30/40/100), M4A1 (5.56x45mm, 30/40/100), HK416 (5.56x45mm, 30/40/100), Steyr AUG A1 (5.56x45mm, 30/42), IMI Galil ARM (5.56x45mm, 35/50), HK G36 (5.56x45mm, 30/100) |
+| Designated marksman rifles (4) | M14 (.308 Win / 7.62x51mm, 20/30), SVD Dragunov (7.62x54mmR, 10), Knight's SR-25 (.308 Win / 7.62x51mm, 20/25), Mk 12 SPR (5.56x45mm, 30/40/100) |
+| Sniper rifles (bolt action) (8) | Remington 700 (.308 Win / 7.62x51mm, 4 int), Winchester Model 70 (.30-06 Springfield, 5 int), Mosin-Nagant M91/30 (7.62x54mmR, 5 int), Mauser Kar98k (7.92x57mm Mauser, 5 int), Lee-Enfield No. 4 (.303 British, 10 int), Accuracy International AWM (.338 Lapua Magnum, 5), Ruger Precision Rifle (6.5 Creedmoor, 10), Barrett M95 (.50 BMG, 5) |
+| Submachine guns (8) | HK MP5A3 (9x19mm, 30/100), IMI Uzi (9x19mm, 32/50), MAC-10 (.45 ACP, 30), Thompson M1928A1 (.45 ACP, 20/30/50), HK UMP45 (.45 ACP, 25), FN P90 (5.7x28mm, 50), KRISS Vector (.45 ACP, 13/26), PPSh-41 (7.62x25mm Tokarev, 35/71) |
+| Shotguns (8) | Mossberg 590 (12 Gauge, 8 int), Remington 870 (12 Gauge, 4 int), Benelli M4 (12 Gauge, 5 int), Saiga-12 (12 Gauge, 5/10/20), Kel-Tec KSG (12 Gauge, 14 int), Double-Barrel Coach Gun (12 Gauge, 2 int), Winchester Model 1897 (12 Gauge, 5 int), AA-12 (12 Gauge, 8/32) |
+| Lever-action rifles (6) | Winchester Model 1894 (.30-30 Win, 7 int), Marlin 336 (.30-30 Win, 6 int), Henry Big Boy (.44 Magnum, 10 int), Marlin 1894C (.357 Magnum, 9 int), Henry H001 .22 (.22 LR, 15 int), Marlin 1895 Guide Gun (.45-70 Govt, 6 int) |
+
+**Attachments:** optics (red dot, holographic, 4x, 3-9x hunting, 8x precision,
+pistol RMR, PSO-1, PU, rimfire 4x), mounts (AK side rail, carry handle, scope
+base, HK claw, M14, Mosin PU, Ruger rings), railed handguards, rail and 3-lug
+adapters, foregrip, lights, bipod, suppressors and brakes per thread, shotgun
+chokes, stocks, side saddle and slings.
+
+**Ammo by caliber** (first entry is the default round, sorted by muzzle energy):
+
+| Caliber | Loads |
+|---|---|
+| .22 LR | Round Nose, High Velocity, Hollow Point, Subsonic |
+| .380 ACP | FMJ, Hollow Point |
+| 9x18mm Makarov | FMJ, Hollow Point, Armor Piercing |
+| .38 Special | FMJ, Hollow Point, +P, Wadcutter |
+| 5.7x28mm | Sporting (SS197), Armor Piercing, Tracer, Subsonic |
+| 7.62x38mmR Nagant | FMJ |
+| 9x19mm | FMJ, Hollow Point, +P, Subsonic, Armor Piercing |
+| .45 ACP | FMJ, Hollow Point, +P |
+| .40 S&W | FMJ, Hollow Point |
+| .45 Colt | Lead Round Nose, Hollow Point |
+| 7.62x25mm Tokarev | FMJ, Armor Piercing |
+| .357 Magnum | Jacketed Soft Point, Hollow Point, FMJ |
+| .410 Bore | 00 Buckshot, Birdshot, Slug |
+| .44 Magnum | FMJ, Hollow Point, Soft Point |
+| 5.45x39mm | FMJ, Armor Piercing, Tracer, Hollow Point |
+| .223 Rem | FMJ, Hollow Point, Soft Point |
+| 5.56x45mm | FMJ, Armor Piercing, Tracer, Soft Point, Match (Long Range) |
+| .50 AE | FMJ, Hollow Point |
+| 7.62x39mm | FMJ, Armor Piercing, Tracer, Hollow Point, Soft Point |
+| .454 Casull | Soft Point, Hollow Point |
+| .30-30 Win | Soft Point, Hollow Point |
+| 12 Gauge | 00 Buckshot, Birdshot, Slug, Flechette |
+| 6.5 Creedmoor | Match (Long Range), Soft Point, Hollow Point |
+| .303 British | FMJ, Soft Point, Tracer, Armor Piercing |
+| .308 Win / 7.62x51mm | FMJ, Armor Piercing, Tracer, Soft Point, Match (Long Range) |
+| .500 S&W Magnum | Soft Point, Hollow Point |
+| 7.62x54mmR | FMJ, Armor Piercing, Tracer, Soft Point, 7N1 Sniper (Long Range) |
+| .30-06 Springfield | FMJ, Soft Point, Armor Piercing, Tracer |
+| .45-70 Govt | Soft Point, Hollow Point |
+| 7.92x57mm Mauser | FMJ, Armor Piercing, Tracer, Soft Point |
+| .338 Lapua Magnum | Match (Long Range), Armor Piercing, Soft Point |
+| .50 BMG | FMJ, Armor Piercing, Tracer, Match (Long Range) |
 
 ## Installation
 
@@ -129,8 +174,23 @@ ZE Guns Of Bohemia isn't on the Steam Workshop yet. To run it locally:
 | Core + Isometric addon | vanilla isometric camera |
 | Core + First Person addon *(planned)* | ZombieBuddy-based first-person / viewpoint mods |
 | Isometric addon + ZombieBuddy / Viewpoint | **No** — blocked on purpose, that's the overlap this mod fixes |
-| Other ammo mods | Yes for standard rounds of vanilla calibers (we reuse the vanilla items) |
-| Other mods wrapping vanilla reload functions | Yes — our wrappers always call the original and install once |
+| Other gun packs, reloading mods, generic gun frameworks | **No** — blocked on purpose (see below) |
+| Mods that only add vanilla-caliber ammo | Yes for standard rounds of vanilla calibers (we reuse the vanilla items) |
+| Addons built on ZE Guns Of Bohemia's API | Yes — this is how to extend the mod |
+
+**Why other gun mods are blocked.** This mod brings its own reloading,
+magazine, ammo and (soon) tactical holding systems, so you don't need another
+mod for the basics. Mods that rework guns or reloading in general patch the
+same functions in ways we can't predict, which is exactly the overlap and
+crash problem this mod was built to fix. So Core lists known gun and reload
+mods under `incompatible=` in its `mod.info`, and if one is active anyway,
+Core switches itself off at runtime (no hooks, no loot changes) and tells the
+player why. The list lives in `ZGB_Mode.FOREIGN_GUN_MOD_IDS` and is checked
+against `mod.info` by the tests.
+
+Want a new effect, ammo type or gun? Build it as an addon: register calibers
+with `ZGB.AmmoCatalog.addCaliber`, magazines with `ZGB.MagazineFactory.define`,
+parts with `ZGB.PartFactory.define` and guns with `ZGB.WeaponFactory.define`.
 
 Multiplayer isn't supported yet: inventory changes are single-player correct
 but don't send the B42 sync calls.
@@ -143,21 +203,23 @@ Contents/mods/
   ZEGunsOfBohemiaIso/    isometric view addon (pure Lua). Registers provider "iso".
   ZEGunsOfBohemiaFP/     (planned) first-person addon, requires ZombieBuddy. Provider "fp".
 tests/                   offline tests (Lua 5.1) with a fake inventory
-tools/gen_scripts.lua    regenerates part and ammo item scripts from the Lua catalogs
+tools/gen_scripts.lua    regenerates weapon, magazine, part and ammo item scripts from the Lua catalogs
+tools/gen_catalog.lua    dumps the catalogue to docs/catalogue.json (for the 3D side and docs)
 ```
 
 Each mod folder follows the B42 layout: `42/` (mod.info + media) and `common/`.
 
 | File | Job | Touches game API? |
 |---|---|---|
-| `Factory/ZGB_Archetypes` | defaults per family (pistol, smg, assault_rifle, shotgun, bolt_rifle) | no |
-| `Factory/ZGB_WeaponFactory` | `define{}` → validated spec. `MaxAmmo` comes from `magazine.capacity` | no |
+| `Factory/ZGB_Archetypes` | defaults per family (pistol, revolver, smg, assault_rifle, dmr, shotgun, bolt_rifle, lever_rifle) and the catalogue categories | no |
+| `Factory/ZGB_WeaponFactory` | `define{}` → validated spec. `MaxAmmo` comes from the standard magazine; stats scale with caliber energy | no |
+| `Factory/ZGB_MagazineFactory` | `define{}` for magazines: caliber, tier, capacity; tier rules and loot weights | no |
 | `Factory/ZGB_PartFactory` | `define{}` for attachments: `kind`, `interface`, `provides`, `mods` | no |
 | `Factory/ZGB_AmmoCatalog` | ammo variant effects × which variants exist per caliber | no |
 | `ZGB_Attachments` | rules engine: canAttach / canDetach / requirement chains / UI tree | no |
 | `ZGB_Stats` | final stats = base + parts + magazine + ammo (add → mul → set → clamp) | no |
 | `ZGB_Magazines`, `ZGB_Ammo` | magazine choice and the load-all planner | no |
-| `ZGB_Mode` | view-provider gate (only one owner of animations) | `getActivatedMods` |
+| `ZGB_Mode` | view-provider gate (only one owner of animations) and the foreign gun-mod block | `getActivatedMods` |
 | `ZGB_ScriptApply` | at boot, writes every spec into the item scripts | yes |
 | `ZGB_ItemBridge` | the **only** place that calls live item / weapon methods | yes |
 | `ZGB_Service`, `ZGB_PartActions`, `ZGB_MagazineActions`, `ZGB_AmmoActions` | timed actions | yes |
@@ -181,9 +243,22 @@ have a `kind`, an `interface`, and may `provide` new slots.
 
 ### Magazines
 
-`magazine` is the default and `altMagazines` lists the rest. Each has its own
-`capacity` and optional `mods` that apply **only while it's loaded** (the AK drum
-adds weight, aim time and reload time).
+Magazines are items of their own, defined once in `Defs/ZGB_Def_Magazines.lua`.
+The rules:
+
+- **Three tiers only:** `standard`, `extended`, `drum`. A gun lists at most one
+  magazine per tier, and only the tiers that really exist for it (a 1911 has
+  standard + extended, an AWM only standard). Guns without a detachable magazine
+  (revolvers, tube shotguns, lever actions, internal-box bolt actions) use
+  `internalCapacity` instead and can't take magazines.
+- **One caliber per magazine.** A magazine holds any load its caliber comes in
+  and nothing else, so a .22 magazine can never hold a long-range load (.22 LR
+  has none) and none spawns in loot.
+- **Shared where real.** STANAG mags fit the M16A2, M4A1, HK416 and Mk 12; Glock 9mm
+  extended mags and drums fit the G17, G18C and G19; Glock 21 mags fit the KRISS Vector.
+- **Tier penalties while loaded:** extended adds a little aim time and weight,
+  drums add more aim time, reload time and weight. A magazine can override its
+  tier's default (the AK drum does).
 
 - **Right-click the gun → Load magazine** lists the fullest carried mag of each
   type. Swapping queues eject → retarget → insert, so ejecting always hands back the right item.
@@ -211,30 +286,41 @@ consistent. Inserting a mag switches the gun to that ammo and its stats change
 
 ## Adding a gun
 
-1. In `Defs/ZGB_Def_Weapons.lua`, add a
-   `ZGB.WeaponFactory.define{ id, archetype, displayName, caliber, magazine = { item, capacity }, slots = { ... } }`.
-   Anything you leave out comes from the archetype.
-2. In `media/scripts/ZGB_items_weapons.txt`, add a skeleton `item <id>`
-   (identity + model only) and its magazine item.
-3. That's it. Stats, capacity, sounds and animations come from the spec at boot.
+1. If it takes magazines nobody defined yet, add them to `Defs/ZGB_Def_Magazines.lua`
+   (caliber, tier, real capacity).
+2. In `Defs/ZGB_Def_Weapons.lua`, add a
+   `ZGB.WeaponFactory.define{ id, archetype, displayName, caliber, magazines = { standard = ..., extended = ..., drum = ... }, slots = { ... } }`
+   (or `internalCapacity = n` instead of `magazines`). Give it `replaces = {...}`
+   or a loot `rarity`. Anything you leave out comes from the archetype, and
+   damage / range / recoil / noise are scaled from the caliber.
+3. Run `tools/gen_scripts.lua` and `tools/gen_catalog.lua`. The item skeletons
+   and the catalogue are generated; stats, capacity, sounds and animations come
+   from the spec at boot.
 
 > [!IMPORTANT]
-> Never put `MaxAmmo`, `AmmoType` or animations in an item script by hand. The spec overwrites them.
+> Never put `MaxAmmo`, `AmmoType` or animations in an item script by hand, and
+> never edit the generated `ZGB_items_*.txt` files. The spec overwrites them.
 
 New attachments go in `Defs/ZGB_Def_Parts.lua`, new ammo in
-`Factory/ZGB_AmmoCatalog.lua`. After editing either one, regenerate the item
-scripts (`*_parts.txt` and `*_ammo.txt` are generated files).
+`Factory/ZGB_AmmoCatalog.lua`. The tests check that every slot has a part that
+fits it, every part fits some gun, and every caliber in use has somewhere to spawn.
 
 ## Development
 
 Requires **Lua 5.1** (Project Zomboid's Kahlua is roughly 5.1: no `goto`, no `//`, no `utf8`).
+On Windows, `winget install DEVCOM.LuaJIT` works: run the same commands with `luajit`.
+LuaJIT accepts `goto`, so don't rely on it to catch that one.
 
 ```bash
-lua5.1 tests/run_tests.lua      # 55 tests: factory, rules, chains, stats, magazines, ammo, load-all planner, loot, mode gate
+lua5.1 tests/run_tests.lua      # 73 tests: catalogue integrity, factory, magazine rules, attachment chains, stats, ammo, load-all, loot, mod gates
 ```
 
 ```bash
-lua5.1 tools/gen_scripts.lua    # after editing ZGB_Def_Parts.lua or ZGB_AmmoCatalog.lua
+lua5.1 tools/gen_scripts.lua    # after editing anything in Defs/ or ZGB_AmmoCatalog.lua
+```
+
+```bash
+lua5.1 tools/gen_catalog.lua    # refresh docs/catalogue.json
 ```
 
 Conventions:
@@ -258,6 +344,9 @@ install to check against. Each is marked `-- VERIFY` in the code:
 7. **Magazine hooks** (`ZGB_ReloadHooks`, `ZGB_MagazineActions`): `ISInsertMagazine` / `ISEjectMagazine` constructors and the `gun` field, `ISReloadWeaponAction.BeginAutomaticReload`, `setMagazineType`, `isContainsClip`, `getAllTypeRecurse`. If one is missing, a warning is logged and that feature turns off.
 8. **Ammo** (`ZGB_ItemBridge`): `setAmmoType` / `getAmmoType` on magazines and guns, `getCountTypeRecurse`, whether `RemoveOneOf` reaches into bags, `AddItems`; the vanilla ammo ids in `ZGB_AmmoCatalog`; `Count` in the ammo scripts.
 9. **MP**: inventory add/remove in `ZGB_Service` is single-player correct; MP needs the B42 send* sync calls.
+10. **Foreign gun-mod ids** in `ZGB_Mode.FOREIGN_GUN_MOD_IDS` and Core's `mod.info` `incompatible=`. Brita, both Arsenal[26] ids and Ammocraft are confirmed; `VFExpansion1`, `firearmmod` and `Guns93` are guesses. Also check that `mod.info` accepts the `(`, `)` and `[` `]` in the Arsenal ids.
+11. **Reload types** for the new archetypes: `revolver`, and `boltactionnomag` for lever actions (vanilla has no lever reload).
+12. **Vanilla gun and magazine ids** used by `replaces` and `ZGB_Distributions.VANILLA_MAGAZINES` (`Pistol2`, `Pistol3`, `Revolver_Short`, `M14Clip`, `44Clip`...).
 
 ## Roadmap
 
@@ -267,7 +356,12 @@ install to check against. Each is marked `-- VERIFY` in the code:
 - [x] Ammo variants, Load all / Unload all magazines
 - [x] Loot distribution
 - [x] Isometric view addon
+- [x] 70-gun catalogue, three magazine tiers, shared magazines, caliber-scaled stats (v0.4)
+- [x] Block foreign gun / reload frameworks (v0.4)
 - [ ] First in-game test and the VERIFY list
+- [ ] Tactical holding system (our own, replaces the need for holster / sling mods)
+- [ ] Speedloaders and stripper clips for revolvers and internal-box rifles
+- [ ] Addon API docs (calibers, magazines, parts, guns, ammo effects)
 - [ ] Fire-mode switching
 - [ ] Weapon light behaviour
 - [ ] Converting vanilla guns in existing saves; code-spawned guns (zombie holsters)
@@ -278,6 +372,9 @@ install to check against. Each is marked `-- VERIFY` in the code:
 
 ## Notes for the 3D side
 
+- The model list (every gun, magazine and attachment, with ids, magazine sizes
+  and which attachments need a mount first) is in `docs/catalogue.json`,
+  regenerated with `tools/gen_catalog.lua`. Name each model `ZGB_<id>`.
 - Vanilla can render parts in only 6 types (Scope, Clip, Sling, Canon, Stock, RecoilPad).
   Parts with `vanillaPartType` are mirrored into vanilla purely so their model shows;
   stats always come from our Lua.

@@ -1,7 +1,7 @@
 --[[
     Offline tests for the pure-logic part of ZE Guns Of Bohemia (factory, rules, stats).
     Run from the ZEGunsOfBohemia folder with any Lua 5.1:
-        lua tests/run_tests.lua
+        lua5.1 tests/run_tests.lua
 ]]
 package.path = "Contents/mods/ZEGunsOfBohemiaCore/42/media/lua/shared/?.lua;" .. package.path
 
@@ -13,7 +13,7 @@ require "ZGB/ZGB_Attachments"
 require "ZGB/ZGB_Stats"
 require "ZGB/ZGB_ScriptApply"
 
-local R, WF, PF = ZGB.Attachments, ZGB.WeaponFactory, ZGB.PartFactory
+local R, WF, PF, MF = ZGB.Attachments, ZGB.WeaponFactory, ZGB.PartFactory, ZGB.MagazineFactory
 local passed, failed = 0, 0
 local function test(name, fn)
     local ok, e = pcall(fn)
@@ -25,24 +25,103 @@ local function eq(a, b, msg) if a ~= b then error((msg or "") .. " expected " ..
 local ak, glock, m590 = WF.get("AK47"), WF.get("Glock17"), WF.get("M590")
 
 print("factory")
-test("all example weapons registered", function() eq(#WF.all(), 3); eq(#WF.errors, 0) end)
-test("maxAmmo derived from magazine", function() eq(ak.maxAmmo, 30); eq(glock.maxAmmo, 17) end)
+local function near(a, b, msg) if math.abs(a - b) > 1e-6 then error((msg or "") .. " expected " .. tostring(b) .. ", got " .. tostring(a), 2) end end
+
+test("whole catalogue registers with no errors", function()
+    eq(#WF.all(), 70); eq(#WF.errors, 0); eq(#MF.errors, 0); eq(#PF.errors, 0)
+end)
+test("catalogue counts per category", function()
+    local want = { handgun = 16, revolver = 12, assault_rifle = 8, dmr = 4, sniper = 8, smg = 8, shotgun = 8, lever = 6 }
+    local got = {}
+    for _, s in ipairs(WF.all()) do got[s.category] = (got[s.category] or 0) + 1 end
+    for cat, n in pairs(want) do eq(got[cat], n, cat .. ":") end
+end)
+test("maxAmmo derived from standard magazine", function() eq(ak.maxAmmo, 30); eq(glock.maxAmmo, 17) end)
 test("tube-fed uses internalCapacity", function() eq(m590.maxAmmo, 8) end)
 test("archetype defaults merged, overrides win", function()
-    eq(ak.stats.recoilDelay, 16); eq(ak.stats.range, 20); eq(ak.twoHanded, true)
+    eq(ak.stats.recoilDelay, 16); eq(ak.stats.minDamage, 1.4); eq(ak.twoHanded, true)
+end)
+test("caliber scales stats the definition didn't set", function()
+    local want = 20 * WF.caliberScale("range", "762x39", "556x45")
+    near(ak.stats.range, math.floor(want * 100 + 0.5) / 100)
+    eq(WF.caliberScale("range", "556x45", "556x45"), 1)
+    local mk2, de = WF.get("RugerMkII"), WF.get("DesertEagle")
+    assert(mk2.stats.maxDamage < glock.stats.maxDamage and glock.stats.maxDamage < de.stats.maxDamage,
+           ".22 < 9mm < .50 AE")
 end)
 test("mag-fed gun without magazine is rejected", function()
     local spec, errs = WF.define{ id = "BadGun", archetype = "assault_rifle", displayName = "x", caliber = "9x19" }
     eq(spec, nil); assert(#errs > 0)
     WF.errors = {}
 end)
-test("bad magazine capacity is rejected", function()
-    local spec = WF.define{ id = "BadGun2", archetype = "pistol", displayName = "x", caliber = "9x19",
-                            magazine = { item = "m", capacity = 7.5 } }
-    eq(spec, nil); WF.errors = {}
-end)
 test("unknown archetype is rejected", function()
     eq(WF.define{ id = "B3", archetype = "railgun", displayName = "x", caliber = "9x19" }, nil); WF.errors = {}
+end)
+test("internal-fed gun can't take magazines", function()
+    eq(WF.define{ id = "B4", archetype = "revolver", displayName = "x", caliber = "38spl", internalCapacity = 6,
+                  magazines = { standard = "Glock17_Mag17" } }, nil); WF.errors = {}
+end)
+
+print("magazine rules")
+test("bad magazine capacity is rejected", function()
+    eq(MF.define{ id = "TM1", displayName = "x", caliber = "9x19", tier = "standard", capacity = 7.5 }, nil); MF.errors = {}
+end)
+test("only three tiers exist", function()
+    eq(MF.define{ id = "TM2", displayName = "x", caliber = "9x19", tier = "box", capacity = 10 }, nil); MF.errors = {}
+end)
+test("magazine of another caliber is rejected", function()
+    local spec, errs = WF.define{ id = "B5", archetype = "pistol", displayName = "x", caliber = "45acp",
+                                  magazines = { standard = "Glock17_Mag17" } }
+    eq(spec, nil); assert(string.find(errs[1], "9x19", 1, true)); WF.errors = {}
+end)
+test("magazine in the wrong tier is rejected", function()
+    eq(WF.define{ id = "B6", archetype = "pistol", displayName = "x", caliber = "9x19",
+                  magazines = { standard = "Glock17_Mag17", drum = "Glock17_Mag33" } }, nil); WF.errors = {}
+end)
+test("every gun: at most one magazine per tier, all its own caliber", function()
+    for _, s in ipairs(WF.all()) do
+        local seen = {}
+        assert(#s.magazines <= 3, s.id)
+        for _, m in ipairs(s.magazines) do
+            assert(not seen[m.tier], s.id .. " has two " .. m.tier); seen[m.tier] = true
+            eq(m.caliber, s.caliber, s.id .. " " .. m.item .. ":")
+        end
+        if #s.magazines > 0 then eq(s.magazines[1].tier, "standard", s.id .. ":") end
+    end
+end)
+test("shared magazines feed several guns", function()
+    eq(#WF.gunsForMagazine("ZGB.STANAG_Mag30"), 4)
+    local vector = WF.get("KrissVector")
+    eq(vector.magazine.item, "ZGB.Glock21_Mag13")
+end)
+test("magazine ammo follows its caliber: no long-range .22", function()
+    for _, v in ipairs(ZGB.AmmoCatalog.variantsFor(MF.get("MkII_Mag10").caliber)) do
+        assert(v.key ~= "match", ".22 must not have a match load")
+    end
+end)
+
+print("catalogue integrity")
+test("every slot interface has a part that fits it", function()
+    local offered = {}
+    for _, p in ipairs(PF.all()) do offered[p.kind .. "/" .. p.interface] = true end
+    local function check(owner, slotId, s)
+        for _, i in ipairs(s.accepts) do
+            if string.sub(i, 1, 2) ~= "t_" then
+                assert(offered[s.kind .. "/" .. i], owner .. "." .. slotId .. " accepts " .. s.kind .. "/" .. i .. " but no part offers it")
+            end
+        end
+    end
+    for _, g in ipairs(WF.all()) do for id, s in pairs(g.slots) do check(g.id, id, s) end end
+    for _, p in ipairs(PF.all()) do for id, s in pairs(p.provides) do check(p.id, id, s) end end
+end)
+test("every part fits at least one gun", function()
+    for _, p in ipairs(PF.all()) do
+        local fits = false
+        for _, g in ipairs(WF.all()) do
+            if R.isCompatible(g, p.fullType) then fits = true; break end
+        end
+        assert(fits, p.id .. " fits no gun")
+    end
 end)
 
 print("attachment rules")
@@ -94,7 +173,7 @@ test("two-step chain is discovered (adapter -> mount -> optic)", function()
     -- AK side_mount accepts kind "mount" — T_Adapter is kind t_kind so it can't go there;
     -- give a fresh gun a slot for it:
     local gun = WF.define{ id = "TGun", archetype = "pistol", displayName = "t", caliber = "9x19",
-        magazine = { item = "m", capacity = 5 }, slots = { a = { kind = "t_kind", accepts = { "ak_dovetail" } } } }
+        magazines = { standard = "Glock17_Mag17" }, slots = { a = { kind = "t_kind", accepts = { "ak_dovetail" } } } }
     local _, reason, info = R.canAttach(gun, {}, "T_Optic")
     eq(reason, "needs"); eq(info.chains[1][1], "ZGB.T_Adapter"); eq(info.chains[1][2], "ZGB.T_Mount")
 end)
@@ -154,8 +233,10 @@ end)
 print("magazines")
 require "ZGB/ZGB_Magazines"
 local M = ZGB.Magazines
-test("AK lists default + drum, default first", function()
-    local l = M.list(ak); eq(#l, 2); eq(l[1].item, "ZGB.AK47_Mag30"); eq(l[2].item, "ZGB.AK47_Drum75")
+test("AK lists standard, extended, drum in tier order", function()
+    local l = M.list(ak); eq(#l, 3)
+    eq(l[1].item, "ZGB.AK47_Mag30"); eq(l[2].item, "ZGB.AK_Mag40"); eq(l[3].item, "ZGB.AK47_Drum75")
+    eq(l[1].default, true); eq(l[2].default, false)
 end)
 test("capacity follows loaded mag, default otherwise", function()
     eq(M.capacityFor(ak, "ZGB.AK47_Drum75"), 75); eq(M.capacityFor(ak, nil), 30)
@@ -185,28 +266,45 @@ test("drum penalty only while loaded", function()
     eq(drum.aimTime, base.aimTime + 6)
     assert(math.abs(drum.weight - (base.weight + 1.4)) < 1e-9)
 end)
-test("duplicate magazine rejected", function()
-    eq(WF.define{ id = "Dup", archetype = "pistol", displayName = "x", caliber = "9x19",
-        magazine = { item = "m", capacity = 5 }, altMagazines = { { item = "m", capacity = 9 } } }, nil)
-    WF.errors = {}
+test("extended tier gets the default tier penalty", function()
+    local base = ZGB.Stats.compute(glock, {}, "ZGB.Glock17_Mag17")
+    local ext  = ZGB.Stats.compute(glock, {}, "ZGB.Glock17_Mag33")
+    eq(ext.aimTime, base.aimTime + MF.TIERS.extended.mods.add.aimTime)
 end)
-test("bad alt capacity rejected", function()
+test("unknown magazine id rejected", function()
     eq(WF.define{ id = "Dup2", archetype = "pistol", displayName = "x", caliber = "9x19",
-        magazine = { item = "m", capacity = 5 }, altMagazines = { { item = "m2", capacity = 0 } } }, nil)
+        magazines = { standard = "NoSuchMag" } }, nil)
     WF.errors = {}
 end)
 
 print("loot")
-test("vanilla guns replaced, drums added at reduced weight", function()
+local lootFound
+test("vanilla guns and mags replaced from the catalogue's `replaces`", function()
     package.path = "Contents/mods/ZEGunsOfBohemiaCore/42/media/lua/server/?.lua;" .. package.path
     ProceduralDistributions = { list = { GunStore = { items = { "Pistol", 10, "556Clip", 20, "Axe", 5 },
                                                      junk = { items = { "Base.AssaultRifle", 2 } } } } }
     require "ZGB/ZGB_Distributions"
     ZGB.Distributions.apply()
     local items = ProceduralDistributions.list.GunStore.items
-    eq(items[1], "ZGB.Glock17"); eq(items[3], "ZGB.AK47_Mag30"); eq(items[5], "Axe")
-    eq(items[7], "ZGB.AK47_Drum75"); assert(math.abs(items[8] - 3) < 1e-9)
-    eq(ProceduralDistributions.list.GunStore.junk.items[1], "ZGB.AK47")
+    eq(items[1], "ZGB.Beretta92FS"); eq(items[3], "ZGB.STANAG_Mag30"); eq(items[5], "Axe")
+    eq(ProceduralDistributions.list.GunStore.junk.items[1], "ZGB.M16A2")
+    lootFound = {}
+    for i = 1, #items, 2 do lootFound[items[i]] = items[i + 1] end
+end)
+test("family guns spawn next to their anchor at their rarity", function()
+    near(lootFound["ZGB.Glock17"], 10 * glock.rarity)
+    eq(lootFound["ZGB.AK47"], nil, "rifles don't spawn in a pistol slot:")
+end)
+test("magazines spawn by tier; shared mags keep the best weight", function()
+    near(lootFound["ZGB.Beretta92_Mag30"], 10 * MF.TIERS.extended.loot)
+    near(lootFound["ZGB.Glock17_Mag17"], 10 * glock.rarity * MF.TIERS.standard.loot)
+    eq(lootFound["ZGB.Beretta92_Mag15"], nil, "standard mag already comes from 9mmClip:")
+end)
+test("every family has an anchor that replaces a vanilla gun", function()
+    for _, c in ipairs(ZGB.CATEGORIES) do
+        local anchor = WF.get(ZGB.Distributions.FAMILY_ANCHORS[c.id])
+        assert(anchor and anchor.replaces, c.id)
+    end
 end)
 
 print("ammo")
@@ -216,15 +314,22 @@ test("gun ammo derived from caliber; vanilla item reused for standard 9mm", func
     eq(glock.ammo, "Base.Bullets9mm"); eq(ak.ammo, "ZGB.Ammo_762x39_FMJ"); eq(m590.ammo, "Base.ShotgunShells")
 end)
 test("unknown caliber rejected", function()
-    eq(WF.define{ id = "X1", archetype = "pistol", displayName = "x", caliber = "50bmg",
-                  magazine = { item = "m", capacity = 5 } }, nil); WF.errors = {}
+    eq(WF.define{ id = "X1", archetype = "pistol", displayName = "x", caliber = "6mm_railgun",
+                  magazines = { standard = "Glock17_Mag17" } }, nil); WF.errors = {}
 end)
 test("realistic variant sets", function()
     local function keys(c) local t = {} for _, v in ipairs(AC.variantsFor(c)) do t[v.key] = true end return t end
-    local k45, k556, k22 = keys("45acp"), keys("556x45"), keys("22lr")
+    local k45, k556, k22, k3030 = keys("45acp"), keys("556x45"), keys("22lr"), keys("3030")
     assert(not k45.subsonic and not k45.ap, ".45: no subsonic/AP")
-    assert(k556.ap and k556.tracer and k556.sp, "5.56: AP/tracer/SP")
-    assert(not k22.ap and not k22.tracer, ".22: no AP/tracer")
+    assert(k556.ap and k556.tracer and k556.sp and k556.match, "5.56: AP/tracer/SP/match")
+    assert(not k22.ap and not k22.tracer and not k22.match, ".22: no AP/tracer/long range")
+    assert(not k3030.match and not k3030.fmj, ".30-30: tube-fed, flat noses only")
+end)
+test("every caliber has an energy and the default variant first", function()
+    for id, cal in pairs(AC.CALIBERS) do
+        assert(type(cal.energy) == "number", id .. " has no energy")
+        eq(AC.variantsFor(id)[1].default, true, id .. ":")
+    end
 end)
 test(".22 HP is weaker than 9mm HP (per-caliber override)", function()
     local function hp(c) for _, v in ipairs(AC.variantsFor(c)) do if v.key == "hp" then return v end end end
@@ -238,8 +343,9 @@ test("caliberOf: gun, magazine, ammo", function()
     eq(AM.caliberOf("ZGB.AK47"), "762x39"); eq(AM.caliberOf("ZGB.AK47_Drum75"), "762x39")
     eq(AM.caliberOf("ZGB.Ammo_762x39_TRACER"), "762x39"); eq(AM.caliberOf("Base.Axe"), nil)
 end)
-test("magazines of caliber include drums", function()
-    local l = AM.magazinesOfCaliber("762x39"); eq(#l, 2)
+test("magazines of caliber include every tier", function()
+    local l = AM.magazinesOfCaliber("762x39"); eq(#l, 3)
+    eq(AM.magazineInfo("ZGB.STANAG_CMag100").tier, "drum")
 end)
 local FMJ, AP = "ZGB.Ammo_762x39_FMJ", "ZGB.Ammo_762x39_AP"
 local function mags() return {
@@ -290,7 +396,14 @@ test("variant loot: rarer variants spawn next to standard ammo", function()
     for i = 1, #items, 2 do found[items[i]] = items[i + 1] end
     assert(found["ZGB.Ammo_9x19_HP"] and found["ZGB.Ammo_9x19_HP"] < 10, "9mm HP next to 9mm")
     assert(found["ZGB.Ammo_762x39_FMJ"], "7.62x39 anchored to 5.56")
-    eq(found["ZGB.Ammo_22lr_FMJ"], nil)   -- no gun uses .22 yet
+    assert(found["ZGB.Ammo_22lr_FMJ"] and found["ZGB.Ammo_22lr_FMJ"] < 10, ".22 anchored to 9mm")
+    eq(ZGB.Distributions.extras["Base.223Bullets"], nil, "no gun uses .223 Rem: no variants")
+end)
+test("every caliber a gun uses has somewhere to spawn", function()
+    for _, s in ipairs(WF.all()) do
+        local std = AC.variantsFor(s.caliber)[1]
+        assert(std.isVanilla or ZGB.Distributions.AMMO_ANCHORS[s.caliber], s.caliber .. " has no loot anchor")
+    end
 end)
 
 print("ammo actions (mock inventory)")
@@ -333,6 +446,26 @@ test("unload all returns rounds of the right type", function()
     local p, _, _, apMag = setup()
     ZGB.LoadAll.queueUnloadAll(p, "762x39"); Mock.runQueue()
     eq(apMag.ammo, 0); eq(ZGB.Item.ammoCounts(p.inv, "762x39")[AP], 35)
+end)
+
+print("foreign gun mods")
+test("an active foreign gun/reload mod blocks the core", function()
+    local active = { "SomeMap", "\\Brita" }
+    getActivatedMods = function()
+        return { size = function() return #active end, get = function(_, i) return active[i + 1] end }
+    end
+    ZGB.Mode.blocked, ZGB.Mode.conflicts = nil, {}
+    eq(ZGB.Mode.isBlocked(), true)
+    assert(string.find(ZGB.Mode.conflicts[1], "Brita", 1, true))
+    getActivatedMods, ZGB.Mode.blocked, ZGB.Mode.conflicts = nil, nil, {}
+    eq(ZGB.Mode.isBlocked(), false)
+end)
+test("Core mod.info lists the same foreign mods", function()
+    local f = assert(io.open("Contents/mods/ZEGunsOfBohemiaCore/42/mod.info"))
+    local info = f:read("*a"); f:close()
+    for _, id in ipairs(ZGB.Mode.FOREIGN_GUN_MOD_IDS) do
+        assert(string.find(info, "\\" .. id, 1, true), id .. " missing from incompatible=")
+    end
 end)
 
 print(string.format("\n%d passed, %d failed", passed, failed))

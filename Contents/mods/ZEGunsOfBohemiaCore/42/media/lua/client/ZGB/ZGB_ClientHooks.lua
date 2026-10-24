@@ -87,6 +87,7 @@ local function addShellChoiceMenu(player, context, gun, spec)
 end
 
 local function onFillInventoryMenu(playerNum, context, items)
+    if ZGB.Mode.isBlocked() then return end
     local player = getSpecificPlayer(playerNum)
     for _, v in ipairs(items) do
         local item = firstItem(v)
@@ -110,6 +111,7 @@ local function onFillInventoryMenu(playerNum, context, items)
 end
 
 local function onEquip(character, item)
+    if ZGB.Mode.isBlocked() then return end
     if item and ZGB.WeaponFactory.isOurs(item) then
         ZGB.Service.refresh(character, item)
         ZGB.Mode.notify("onWeaponEquipped", character, item, ZGB.WeaponFactory.specOf(item))
@@ -122,6 +124,7 @@ Events.OnEquipPrimary.Add(onEquip)
 -- Tell the player once if no view addon (or two of them) is active.
 Events.OnGameStart.Add(function()
     local msg
+    ZGB.Mode.isBlocked()   -- records a conflict message if a foreign gun mod is active
     if #ZGB.Mode.conflicts > 0 then
         msg = ZGB.Mode.conflicts[1]
     elseif not ZGB.Mode.get() then

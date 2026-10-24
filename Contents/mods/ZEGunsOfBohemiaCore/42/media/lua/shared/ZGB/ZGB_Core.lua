@@ -7,7 +7,7 @@
 
 ZGB = ZGB or {}
 
-ZGB.VERSION = "0.3.0"
+ZGB.VERSION = "0.4.0"
 ZGB.MODULE  = "ZGB"          -- script module of our items: ZGB.AK47, ZGB.Optic_RedDot, ...
 ZGB.DEBUG   = (getDebug ~= nil and getDebug()) or false
 
