@@ -1,14 +1,14 @@
 ZE GUNS OF BOHEMIA - LISTA DE MODELOS 3D (v0.8.0)
 Gerado por tools/gen_model_list.lua a partir dos dados do mod. Não editar à mão.
 ==============================================================================
-TOTAL: 202 modelos para fazer
+TOTAL: 224 modelos para fazer
    76 armas
-   55 attachments (+ 3 sem modelo: chokes internos)
+   77 attachments (+ 3 sem modelo: chokes internos)
    67 carregadores
     4 cápsulas vazias
 
 [x] = já tem modelo real baixado (CC0 / CC-BY, ver CREDITS.txt): 109
-[ ] = ainda é placeholder: 93
+[ ] = ainda é placeholder: 115
 
 REGRAS
   - Nome do arquivo = ID do item. Ex.: AK47.fbx, Optic_RedDot.fbx
@@ -293,7 +293,7 @@ FUZIS DE ASSALTO (10)
       - Muzzle: Muzzle_AK_Suppressor, Muzzle_AK_Compensator, Muzzle_AK_FlashHider
       - Handguard: Handguard_AK_Quad
           - Under rail (depois de Handguard_AK_Quad): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
-      - Stock: Stock_AK_Folding
+      - Stock: Stock_AK_Wood, Stock_AK74_Polymer, Stock_Saiga, Stock_AK_Folding
       - Sling: Sling_2Point, Sling_1Point
 
 [x] AK74 - AK-74
@@ -307,7 +307,7 @@ FUZIS DE ASSALTO (10)
       - Handguard: Handguard_AK_Quad
           - Under rail (depois de Handguard_AK_Quad): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_AK74, Brake_AK74
-      - Stock: Stock_AK_Folding
+      - Stock: Stock_AK_Wood, Stock_AK74_Polymer, Stock_Saiga, Stock_AK_Folding
       - Sling: Sling_2Point, Sling_1Point
 
 [x] M16A2 - M16A2
@@ -321,6 +321,7 @@ FUZIS DE ASSALTO (10)
       - Handguard: Handguard_AR_Quad
           - Under rail (depois de Handguard_AR_Quad): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Carry handle and fixed A2 stock; optics need the carry-handle mount.
 
@@ -333,7 +334,7 @@ FUZIS DE ASSALTO (10)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
-      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
 
 [x] M4A4 - M4A4
@@ -345,7 +346,7 @@ FUZIS DE ASSALTO (10)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
-      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Counter-Strike's M4: not a real service designation. Built as a flat-top full-auto M4 carbine.
 
@@ -358,7 +359,7 @@ FUZIS DE ASSALTO (10)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
-      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Counter-Strike's suppressor-ready M4A1: the same carbine, made to wear a 5.56 suppressor.
 
@@ -371,7 +372,7 @@ FUZIS DE ASSALTO (10)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
-      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
 
 [x] SteyrAUG - Steyr AUG A1
@@ -389,6 +390,7 @@ FUZIS DE ASSALTO (10)
     Calibre:     5.56x45mm   Comprimento: 0,98 m   Acabamento: polímero preto
     Carregador:  Galil_Mag35 (padrão, 35) | Galil_Mag50 (estendido, 50)
     Encaixes:
+      - Stock: Stock_Galil_Folding
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Built-in folding stock and bipod (part of the gun model).
 
@@ -398,6 +400,7 @@ FUZIS DE ASSALTO (10)
     Calibre:     5.56x45mm   Comprimento: 1,00 m   Acabamento: polímero preto
     Carregador:  G36_Mag30 (padrão, 30) | G36_CMag100 (tambor, 100)
     Encaixes:
+      - Stock: Stock_G36_Folding
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Integral optic in the carry handle: no optic slot.
 
@@ -436,7 +439,7 @@ FUZIS DMR (ATIRADOR DESIGNADO) (4)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Rifle308, Brake_Rifle308, FlashHider_308
-      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
 
 [x] Mk12SPR - Mk 12 SPR
@@ -448,7 +451,7 @@ FUZIS DMR (ATIRADOR DESIGNADO) (4)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
-      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
 
 
@@ -545,7 +548,7 @@ FUZIS DE PRECISÃO (FERROLHO) (9)
     Encaixes:
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Muzzle: Suppressor_Rifle308, Brake_Rifle308, FlashHider_308
-      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Bipod stud: Bipod_Harris
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        5/8-24 thread takes the .308 can; AR buffer tube takes AR stocks.
@@ -575,6 +578,7 @@ SUBMETRALHADORAS (8)
           - Under rail (depois de Handguard_MP5_Rail): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - 3-lug barrel: Adapter_HK_3Lug
           - Muzzle thread (depois de Adapter_HK_3Lug): Suppressor_Pistol9, Comp_Pistol9
+      - Stock: Stock_MP5
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Suppressor chain: 3-lug adapter first, then a 9mm can.
 
@@ -584,6 +588,7 @@ SUBMETRALHADORAS (8)
     Calibre:     9x19mm   Comprimento: 0,64 m   Acabamento: aço
     Carregador:  Uzi_Mag32 (padrão, 32) | Uzi_Mag50 (estendido, 50)
     Encaixes:
+      - Stock: Stock_Uzi_Folding
       - Sling: Sling_2Point, Sling_1Point
 
 [x] MAC10 - MAC-10
@@ -601,6 +606,7 @@ SUBMETRALHADORAS (8)
     Calibre:     .45 ACP   Comprimento: 0,85 m   Acabamento: madeira + aço oxidado
     Carregador:  Thompson_Mag20 (padrão, 20) | Thompson_Mag30 (estendido, 30) | Thompson_Drum50 (tambor, 50)
     Encaixes:
+      - Stock: Stock_Thompson
       - Sling: Sling_2Point, Sling_1Point
 
 [x] UMP45 - HK UMP45
@@ -612,6 +618,7 @@ SUBMETRALHADORAS (8)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Pistol45
+      - Stock: Stock_UMP_Folding
       - Sling: Sling_2Point, Sling_1Point
 
 [x] FN_P90 - FN P90
@@ -632,6 +639,7 @@ SUBMETRALHADORAS (8)
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
       - Muzzle: Suppressor_Pistol45
+      - Stock: Stock_AR_A2, Stock_AR_M4, Stock_M4A4, Stock_M4A1S, Stock_HK416, Stock_SR25, Stock_Mk12, Stock_RPR, Stock_Kriss, Stock_AR_Collapsible, Stock_AR_Precision
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Takes Glock 21 magazines.
 
@@ -654,7 +662,7 @@ ESCOPETAS (9)
     Encaixes:
       - Scope base: Mount_ScopeBase
           - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
-      - Stock: Stock_M590_PistolGrip
+      - Stock: Stock_M590, Stock_M590_PistolGrip
       - Receiver side: Sidesaddle_Shotgun
       - Recoil pad: RecoilPad_Rubber
       - Buttstock sleeve: ShellHolder_Butt
@@ -669,7 +677,7 @@ ESCOPETAS (9)
       - Scope base: Mount_ScopeBase
           - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Muzzle: Choke_Full, Choke_Modified, Choke_ImprovedCylinder
-      - Stock: Stock_870_Folding
+      - Stock: Stock_870_Wood, Stock_870_Folding
       - Receiver side: Sidesaddle_Shotgun
       - Recoil pad: RecoilPad_Rubber
       - Buttstock sleeve: ShellHolder_Butt
@@ -683,6 +691,7 @@ ESCOPETAS (9)
     Encaixes:
       - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
       - Muzzle: Choke_Full, Choke_Modified, Choke_ImprovedCylinder
+      - Stock: Stock_Benelli
       - Receiver side: Sidesaddle_Shotgun
       - Recoil pad: RecoilPad_Rubber
       - Buttstock sleeve: ShellHolder_Butt
@@ -696,6 +705,7 @@ ESCOPETAS (9)
     Carregador:  interno, 8 cartuchos (sem modelo de carregador)
     Encaixes:
       - Muzzle: Choke_Full, Choke_Modified, Choke_ImprovedCylinder
+      - Stock: Stock_SPAS_Folding
       - Sling: Sling_2Point, Sling_1Point
     Obs.:        Pump-action with the folding stock and its arm hook; the semi-auto mode is not modelled.
 
@@ -707,6 +717,7 @@ ESCOPETAS (9)
     Encaixes:
       - Side mount: Mount_AK_SideRail
           - Optic rail (depois de Mount_AK_SideRail): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Stock: Stock_AK_Wood, Stock_AK74_Polymer, Stock_Saiga, Stock_AK_Folding
       - Sling: Sling_2Point, Sling_1Point
 
 [x] KSG - Kel-Tec KSG
@@ -824,7 +835,7 @@ RIFLES DE ALAVANCA (6)
       - Sling: Sling_2Point, Sling_1Point
 
 ==============================================================================
-2. ATTACHMENTS (55 com modelo)
+2. ATTACHMENTS (77 com modelo)
 ==============================================================================
 
 MIRAS (9)
@@ -1188,37 +1199,169 @@ FREIOS DE BOCA E COMPENSADORES (5)
     Com peça antes: MP5A3 (precisa Adapter_HK_3Lug)
 
 
-CORONHAS (5)
+CORONHAS (27)
 ------------------------------------------------------------------------------
+[ ] Stock_AK_Wood - AK-47 Wooden Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AK_Wood/Stock_AK_Wood.fbx
+    Tamanho:     30,0 x 13,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  AK47, AK74, Saiga12
+
+[ ] Stock_AK74_Polymer - AK-74 Polymer Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AK74_Polymer/Stock_AK74_Polymer.fbx
+    Tamanho:     30,0 x 13,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  AK47, AK74, Saiga12
+
+[ ] Stock_Saiga - Saiga-12 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_Saiga/Stock_Saiga.fbx
+    Tamanho:     30,0 x 13,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  AK47, AK74, Saiga12
+
+[ ] Stock_Galil_Folding - Galil Folding Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_Galil_Folding/Stock_Galil_Folding.fbx
+    Tamanho:     26,0 x 1,5 x 0,8 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  IMI_Galil
+
+[ ] Stock_AR_A2 - M16A2 Fixed Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AR_A2/Stock_AR_A2.fbx
+    Tamanho:     30,0 x 13,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_AR_M4 - M4 Carbine Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AR_M4/Stock_AR_M4.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_M4A4 - M4A4 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_M4A4/Stock_M4A4.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_M4A1S - M4A1-S Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_M4A1S/Stock_M4A1S.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_HK416 - HK416 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_HK416/Stock_HK416.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_SR25 - SR-25 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_SR25/Stock_SR25.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_Mk12 - Mk 12 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_Mk12/Stock_Mk12.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_RPR - Ruger Precision Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_RPR/Stock_RPR.fbx
+    Tamanho:     34,0 x 10,5 x 4,4 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_Kriss - KRISS Vector Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_Kriss/Stock_Kriss.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
+
+[ ] Stock_G36_Folding - G36 Folding Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_G36_Folding/Stock_G36_Folding.fbx
+    Tamanho:     30,0 x 13,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  HK_G36
+
+[ ] Stock_MP5 - MP5 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_MP5/Stock_MP5.fbx
+    Tamanho:     17,0 x 12,5 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  MP5A3
+
+[ ] Stock_UMP_Folding - UMP45 Folding Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_UMP_Folding/Stock_UMP_Folding.fbx
+    Tamanho:     20,0 x 1,5 x 0,8 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  UMP45
+
+[ ] Stock_Uzi_Folding - Uzi Folding Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_Uzi_Folding/Stock_Uzi_Folding.fbx
+    Tamanho:     25,0 x 13,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  Uzi
+
+[ ] Stock_Thompson - Thompson Wooden Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_Thompson/Stock_Thompson.fbx
+    Tamanho:     25,0 x 13,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  ThompsonM1928
+
+[ ] Stock_M590 - Mossberg 590 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_M590/Stock_M590.fbx
+    Tamanho:     33,0 x 11,0 x 4,4 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M590
+
+[ ] Stock_870_Wood - Remington 870 Wooden Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_870_Wood/Stock_870_Wood.fbx
+    Tamanho:     33,0 x 11,0 x 4,4 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  Rem870
+
+[ ] Stock_Benelli - Benelli M4 Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_Benelli/Stock_Benelli.fbx
+    Tamanho:     33,0 x 11,0 x 4,4 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  BenelliM4
+
+[ ] Stock_SPAS_Folding - SPAS-12 Folding Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_SPAS_Folding/Stock_SPAS_Folding.fbx
+    Tamanho:     33,0 x 11,0 x 4,4 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  SPAS12
+
 [x] Stock_AK_Folding - AK Folding Stock
     Modelo real: Ultimate Gun Pack (Quaternius, CC0 1.0) - o artista pode substituir
     Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AK_Folding/Stock_AK_Folding.fbx
     Tamanho:     25,0 x 8,0 x 0,8 cm
-    Aparece:     montado dentro da variante da arma (substitui: stock da arma)
-    Encaixa em:  AK47, AK74
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  AK47, AK74, Saiga12
 
 [ ] Stock_AR_Collapsible - AR Collapsible Stock
     Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AR_Collapsible/Stock_AR_Collapsible.fbx
     Tamanho:     26,0 x 9,0 x 3,8 cm
     Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
-    Encaixa em:  M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
 
 [ ] Stock_AR_Precision - AR Precision Stock
     Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AR_Precision/Stock_AR_Precision.fbx
     Tamanho:     26,0 x 14,0 x 4,4 cm
     Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
-    Encaixa em:  M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR, KrissVector
 
 [ ] Stock_M590_PistolGrip - Mossberg Pistol-Grip Stock
     Pasta:       models_X/ZGB/Attachments/Stocks/Stock_M590_PistolGrip/Stock_M590_PistolGrip.fbx
     Tamanho:     32,0 x 15,5 x 4,4 cm
-    Aparece:     montado dentro da variante da arma (substitui: stock da arma)
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
     Encaixa em:  M590
 
 [ ] Stock_870_Folding - Remington 870 Folding Stock
     Pasta:       models_X/ZGB/Attachments/Stocks/Stock_870_Folding/Stock_870_Folding.fbx
     Tamanho:     28,0 x 8,2 x 1,0 cm
-    Aparece:     montado dentro da variante da arma (substitui: stock da arma)
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
     Encaixa em:  Rem870
 
 

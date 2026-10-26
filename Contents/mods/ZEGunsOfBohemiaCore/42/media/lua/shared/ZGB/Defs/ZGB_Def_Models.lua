@@ -91,6 +91,8 @@ local function longGun(d)
         add(p, tag(box(f.furn, rear, -0.07, -0.02, -0.08, 0.06, 0.02), "stock"))
     elseif d.stock == "buffer" then
         add(p, tag(cyl("alloy", "x", rear + 0.10, 0.045, 0, -0.08 - (rear + 0.10), 0.015), "buffer"))
+        -- the stock that slides on the tube: a part of its own (the gun's factory stock); the tube stays
+        add(p, tag(box(f.furn, rear, -0.06, -0.02, rear + 0.17, 0.065, 0.02), "stock"))
     elseif d.stock == "folded" then
         add(p, tag(box("steel", -0.08, 0.005, 0.022, recvFront - 0.02, 0.02, 0.03), "stock"))
     end
@@ -272,7 +274,7 @@ G("AI_AWM", "bolt", 1.23, "olive", { mag = "box", bore = 0.011 }); G("RugerRPR",
 G("BarrettM95", "bullpup", 1.14, "polymer", { bore = 0.015 })
 -- SMGs
 G("MP5A3", "smg", 0.70, "polymer", { stock = "buffer", mag = "curved", magMat = "steel" })
-G("Uzi", "smg", 0.64, "steel", { stock = "folded", stockLen = 0.0, mag = "grip", hg = 0.12 })
+G("Uzi", "smg", 0.64, "steel", { stock = "fixed", mag = "grip", hg = 0.12 })   -- stock out: the real model has it extended
 G("MAC10", "smg", 0.30, "steel", { stock = "none", mag = "grip", recv = 0.12, hg = 0.04 })
 G("ThompsonM1928", "smg", 0.85, "wood", { stock = "fixed", mag = "straight", hg = 0.14 })
 G("UMP45", "smg", 0.69, "polymer", { stock = "folded", stockLen = 0.0, mag = "straight", rail = true })
@@ -355,11 +357,11 @@ P("FlashHider_556", hider(0.011, 0.055)); P("FlashHider_308", hider(0.013, 0.06)
 P("Muzzle_AK_FlashHider", hider(0.011, 0.06)); P("Comp_Pistol9", function() return M{ box("steel", 0, -0.012, -0.013, 0.035, 0.015, 0.013) } end)
 
 -- stocks (grow backward from the receiver)
-P("Stock_AK_Folding",     function() return M({ box("steel", -0.25, 0.0, -0.004, 0.0, 0.01, 0.004), box("steel", -0.25, -0.06, -0.004, -0.23, 0.01, 0.004), box("steel", -0.25, -0.07, -0.004, 0.0, -0.06, 0.004) }, nil, { hides = { "stock" } }) end)
+P("Stock_AK_Folding",     function() return M({ box("steel", -0.25, 0.0, -0.004, 0.0, 0.01, 0.004), box("steel", -0.25, -0.06, -0.004, -0.23, 0.01, 0.004), box("steel", -0.25, -0.07, -0.004, 0.0, -0.06, 0.004) }) end)
 P("Stock_AR_Collapsible", function() return M{ box("polymer", -0.26, -0.06, -0.019, -0.10, 0.03, 0.019), cyl("alloy", "x", -0.10, 0.0, 0, 0.10, 0.015) } end)
 P("Stock_AR_Precision",   function() return M{ box("polymer", -0.32, -0.08, -0.022, -0.06, 0.04, 0.022), box("polymer", -0.20, 0.04, -0.015, -0.08, 0.06, 0.015) } end)
-P("Stock_M590_PistolGrip",function() return M({ box("polymer", -0.32, -0.075, -0.022, 0.0, 0.035, 0.022), box("polymer", -0.04, -0.12, -0.015, 0.0, 0.0, 0.015) }, nil, { hides = { "stock" } }) end)
-P("Stock_870_Folding",    function() return M({ box("steel", -0.28, 0.0, -0.005, 0.0, 0.012, 0.005), box("steel", -0.28, -0.07, -0.005, -0.26, 0.012, 0.005) }, nil, { hides = { "stock" } }) end)
+P("Stock_M590_PistolGrip",function() return M({ box("polymer", -0.32, -0.075, -0.022, 0.0, 0.035, 0.022), box("polymer", -0.04, -0.12, -0.015, 0.0, 0.0, 0.015) }) end)
+P("Stock_870_Folding",    function() return M({ box("steel", -0.28, 0.0, -0.005, 0.0, 0.012, 0.005), box("steel", -0.28, -0.07, -0.005, -0.26, 0.012, 0.005) }) end)
 
 -- shell holders, recoil pads, slings
 local function shells(n, x0, y, z, axis)

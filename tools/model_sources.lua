@@ -81,8 +81,8 @@ end
 
 S.MODELS = {
     -- ------------------------------------------------ guns: textured, detailed (3DModelsCC0)
-    AK47      = c("AK-47/AK47.fbx"),
-    M4A1      = c("M4A1/M4A1.fbx"),
+    AK47      = c("AK-47/AK47.fbx", { flip = "xz", stock_cut = -0.148 }),   -- stock cut: read off the ruler profile
+    M4A1      = c("M4A1/M4A1.fbx", { flip = "xz", stock_cut = -0.137, stock_grip = -0.165 }),
     MakarovPM = c("Pistol_MK/Makarov.fbx", { flip = "xz", exclude = { "Magazine" } }),   -- the file has a loose spare mag
     -- ------------------------------------------------ guns: named low-poly (chilly-durango)
     Colt1911    = ch("1911_Body"),       SteyrAUG   = ch("AUG_Body"),

@@ -52,8 +52,17 @@ end
 --- Re-apply stats + refund parts dropped by a spec change. Called on equip.
 function Svc.refresh(character, weapon)
     if not ZGB.WeaponFactory.isOurs(weapon) then return end
-    I.applyStats(weapon)
     local st = I.state(weapon)
+    if st.needsMirror and character then
+        -- parts it spawned with (its stock): the game draws them once they are attached
+        for _, ft in pairs(I.getAttachments(weapon)) do
+            local p = ZGB.PartFactory.get(ft)
+            if p then I.mirrorVanillaAttach(character, weapon, p) end
+        end
+        st.needsMirror = nil
+        ZGB.Mode.notify("onAttachmentsChanged", character, weapon, ZGB.WeaponFactory.specOf(weapon))
+    end
+    I.applyStats(weapon)
     if st.pendingRefund and character then
         giveBack(character, st.pendingRefund)
         st.pendingRefund = nil

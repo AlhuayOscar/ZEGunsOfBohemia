@@ -9,6 +9,7 @@
     build (open the decompiled HandWeapon / vanilla Lua if one errors).
 ]]
 require "ZGB/ZGB_Core"
+require "ZGB/ZGB_StockSpawn"
 require "ZGB/Factory/ZGB_WeaponFactory"
 require "ZGB/Factory/ZGB_PartFactory"
 require "ZGB/ZGB_Attachments"
@@ -26,7 +27,19 @@ local STATE_VERSION = 1
 -- Lives in item modData so it survives save/load and travels with the item.
 function I.state(item)
     local md = item:getModData()
-    if not md.ZGB then md.ZGB = { v = STATE_VERSION, attachments = {} } end
+    if not md.ZGB then
+        md.ZGB = { v = STATE_VERSION, attachments = {} }
+        -- first look at a found gun: it comes with a random stock that fits, or none
+        -- (ZGB_StockSpawn); equipping it then draws the stock (Service.refresh, needsMirror)
+        local spec = ZGB.WeaponFactory and ZGB.WeaponFactory.specOf(item)
+        if spec and ZGB.StockSpawn and ZombRand then
+            local slotId, ft = ZGB.StockSpawn.pick(spec, ZombRand)
+            if slotId and ft then
+                md.ZGB.attachments[slotId] = ft
+                md.ZGB.needsMirror = true
+            end
+        end
+    end
     md.ZGB.attachments = md.ZGB.attachments or {}
     return md.ZGB
 end

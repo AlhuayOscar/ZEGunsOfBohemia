@@ -685,6 +685,490 @@ module ZGB
         Weight          = 0.2,
     }
 
+    item Stock_AK_Wood
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AK-47 Wooden Stock,
+        Icon            = ZGB_Stock_AK_Wood,
+        WorldStaticModel = ZGB.Stock_AK_Wood,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_AK_Wood
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = AK-47 Wooden Stock,
+        Icon            = ZGB_Stock_AK_Wood,
+        WorldStaticModel = ZGB.Stock_AK_Wood,
+        Weight          = 0.0,
+        MountOn         = ZGB.AK47; ZGB.AK74; ZGB.Saiga12,
+    }
+
+    item Stock_AK74_Polymer
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = AK-74 Polymer Stock,
+        Icon            = ZGB_Stock_AK74_Polymer,
+        WorldStaticModel = ZGB.Stock_AK74_Polymer,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_AK74_Polymer
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = AK-74 Polymer Stock,
+        Icon            = ZGB_Stock_AK74_Polymer,
+        WorldStaticModel = ZGB.Stock_AK74_Polymer,
+        Weight          = 0.0,
+        MountOn         = ZGB.AK47; ZGB.AK74; ZGB.Saiga12,
+    }
+
+    item Stock_Saiga
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Saiga-12 Stock,
+        Icon            = ZGB_Stock_Saiga,
+        WorldStaticModel = ZGB.Stock_Saiga,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_Saiga
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Saiga-12 Stock,
+        Icon            = ZGB_Stock_Saiga,
+        WorldStaticModel = ZGB.Stock_Saiga,
+        Weight          = 0.0,
+        MountOn         = ZGB.AK47; ZGB.AK74; ZGB.Saiga12,
+    }
+
+    item Stock_Galil_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Galil Folding Stock,
+        Icon            = ZGB_Stock_Galil_Folding,
+        WorldStaticModel = ZGB.Stock_Galil_Folding,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_Galil_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Galil Folding Stock,
+        Icon            = ZGB_Stock_Galil_Folding,
+        WorldStaticModel = ZGB.Stock_Galil_Folding,
+        Weight          = 0.0,
+        MountOn         = ZGB.IMI_Galil,
+    }
+
+    item Stock_AR_A2
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = M16A2 Fixed Stock,
+        Icon            = ZGB_Stock_AR_A2,
+        WorldStaticModel = ZGB.Stock_AR_A2,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_AR_A2
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = M16A2 Fixed Stock,
+        Icon            = ZGB_Stock_AR_A2,
+        WorldStaticModel = ZGB.Stock_AR_A2,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_AR_M4
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = M4 Carbine Stock,
+        Icon            = ZGB_Stock_AR_M4,
+        WorldStaticModel = ZGB.Stock_AR_M4,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_AR_M4
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = M4 Carbine Stock,
+        Icon            = ZGB_Stock_AR_M4,
+        WorldStaticModel = ZGB.Stock_AR_M4,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_M4A4
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = M4A4 Stock,
+        Icon            = ZGB_Stock_M4A4,
+        WorldStaticModel = ZGB.Stock_M4A4,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_M4A4
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = M4A4 Stock,
+        Icon            = ZGB_Stock_M4A4,
+        WorldStaticModel = ZGB.Stock_M4A4,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_M4A1S
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = M4A1-S Stock,
+        Icon            = ZGB_Stock_M4A1S,
+        WorldStaticModel = ZGB.Stock_M4A1S,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_M4A1S
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = M4A1-S Stock,
+        Icon            = ZGB_Stock_M4A1S,
+        WorldStaticModel = ZGB.Stock_M4A1S,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_HK416
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = HK416 Stock,
+        Icon            = ZGB_Stock_HK416,
+        WorldStaticModel = ZGB.Stock_HK416,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_HK416
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = HK416 Stock,
+        Icon            = ZGB_Stock_HK416,
+        WorldStaticModel = ZGB.Stock_HK416,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_SR25
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = SR-25 Stock,
+        Icon            = ZGB_Stock_SR25,
+        WorldStaticModel = ZGB.Stock_SR25,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_SR25
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = SR-25 Stock,
+        Icon            = ZGB_Stock_SR25,
+        WorldStaticModel = ZGB.Stock_SR25,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_Mk12
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Mk 12 Stock,
+        Icon            = ZGB_Stock_Mk12,
+        WorldStaticModel = ZGB.Stock_Mk12,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_Mk12
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Mk 12 Stock,
+        Icon            = ZGB_Stock_Mk12,
+        WorldStaticModel = ZGB.Stock_Mk12,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_RPR
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Ruger Precision Stock,
+        Icon            = ZGB_Stock_RPR,
+        WorldStaticModel = ZGB.Stock_RPR,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_RPR
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Ruger Precision Stock,
+        Icon            = ZGB_Stock_RPR,
+        WorldStaticModel = ZGB.Stock_RPR,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_Kriss
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = KRISS Vector Stock,
+        Icon            = ZGB_Stock_Kriss,
+        WorldStaticModel = ZGB.Stock_Kriss,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_Kriss
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = KRISS Vector Stock,
+        Icon            = ZGB_Stock_Kriss,
+        WorldStaticModel = ZGB.Stock_Kriss,
+        Weight          = 0.0,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
+    }
+
+    item Stock_G36_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = G36 Folding Stock,
+        Icon            = ZGB_Stock_G36_Folding,
+        WorldStaticModel = ZGB.Stock_G36_Folding,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_G36_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = G36 Folding Stock,
+        Icon            = ZGB_Stock_G36_Folding,
+        WorldStaticModel = ZGB.Stock_G36_Folding,
+        Weight          = 0.0,
+        MountOn         = ZGB.HK_G36,
+    }
+
+    item Stock_MP5
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = MP5 Stock,
+        Icon            = ZGB_Stock_MP5,
+        WorldStaticModel = ZGB.Stock_MP5,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_MP5
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = MP5 Stock,
+        Icon            = ZGB_Stock_MP5,
+        WorldStaticModel = ZGB.Stock_MP5,
+        Weight          = 0.0,
+        MountOn         = ZGB.MP5A3,
+    }
+
+    item Stock_UMP_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = UMP45 Folding Stock,
+        Icon            = ZGB_Stock_UMP_Folding,
+        WorldStaticModel = ZGB.Stock_UMP_Folding,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_UMP_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = UMP45 Folding Stock,
+        Icon            = ZGB_Stock_UMP_Folding,
+        WorldStaticModel = ZGB.Stock_UMP_Folding,
+        Weight          = 0.0,
+        MountOn         = ZGB.UMP45,
+    }
+
+    item Stock_Uzi_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Uzi Folding Stock,
+        Icon            = ZGB_Stock_Uzi_Folding,
+        WorldStaticModel = ZGB.Stock_Uzi_Folding,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_Uzi_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Uzi Folding Stock,
+        Icon            = ZGB_Stock_Uzi_Folding,
+        WorldStaticModel = ZGB.Stock_Uzi_Folding,
+        Weight          = 0.0,
+        MountOn         = ZGB.Uzi,
+    }
+
+    item Stock_Thompson
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Thompson Wooden Stock,
+        Icon            = ZGB_Stock_Thompson,
+        WorldStaticModel = ZGB.Stock_Thompson,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_Thompson
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Thompson Wooden Stock,
+        Icon            = ZGB_Stock_Thompson,
+        WorldStaticModel = ZGB.Stock_Thompson,
+        Weight          = 0.0,
+        MountOn         = ZGB.ThompsonM1928,
+    }
+
+    item Stock_M590
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Mossberg 590 Stock,
+        Icon            = ZGB_Stock_M590,
+        WorldStaticModel = ZGB.Stock_M590,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_M590
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Mossberg 590 Stock,
+        Icon            = ZGB_Stock_M590,
+        WorldStaticModel = ZGB.Stock_M590,
+        Weight          = 0.0,
+        MountOn         = ZGB.M590,
+    }
+
+    item Stock_870_Wood
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Remington 870 Wooden Stock,
+        Icon            = ZGB_Stock_870_Wood,
+        WorldStaticModel = ZGB.Stock_870_Wood,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_870_Wood
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Remington 870 Wooden Stock,
+        Icon            = ZGB_Stock_870_Wood,
+        WorldStaticModel = ZGB.Stock_870_Wood,
+        Weight          = 0.0,
+        MountOn         = ZGB.Rem870,
+    }
+
+    item Stock_Benelli
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = Benelli M4 Stock,
+        Icon            = ZGB_Stock_Benelli,
+        WorldStaticModel = ZGB.Stock_Benelli,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_Benelli
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Benelli M4 Stock,
+        Icon            = ZGB_Stock_Benelli,
+        WorldStaticModel = ZGB.Stock_Benelli,
+        Weight          = 0.0,
+        MountOn         = ZGB.BenelliM4,
+    }
+
+    item Stock_SPAS_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:normal,
+        DisplayName     = SPAS-12 Folding Stock,
+        Icon            = ZGB_Stock_SPAS_Folding,
+        WorldStaticModel = ZGB.Stock_SPAS_Folding,
+        Weight          = 0.2,
+    }
+
+    item Vis_Stock_SPAS_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = SPAS-12 Folding Stock,
+        Icon            = ZGB_Stock_SPAS_Folding,
+        WorldStaticModel = ZGB.Stock_SPAS_Folding,
+        Weight          = 0.0,
+        MountOn         = ZGB.SPAS12,
+    }
+
     item Stock_AK_Folding
     {
         DisplayCategory = WeaponPart,
@@ -693,6 +1177,18 @@ module ZGB
         Icon            = ZGB_Stock_AK_Folding,
         WorldStaticModel = ZGB.Stock_AK_Folding,
         Weight          = 0.2,
+    }
+
+    item Vis_Stock_AK_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = AK Folding Stock,
+        Icon            = ZGB_Stock_AK_Folding,
+        WorldStaticModel = ZGB.Stock_AK_Folding,
+        Weight          = 0.0,
+        MountOn         = ZGB.AK47; ZGB.AK74; ZGB.Saiga12,
     }
 
     item Stock_AR_Collapsible
@@ -714,7 +1210,7 @@ module ZGB
         Icon            = ZGB_Stock_AR_Collapsible,
         WorldStaticModel = ZGB.Stock_AR_Collapsible,
         Weight          = 0.0,
-        MountOn         = ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
     }
 
     item Stock_AR_Precision
@@ -736,7 +1232,7 @@ module ZGB
         Icon            = ZGB_Stock_AR_Precision,
         WorldStaticModel = ZGB.Stock_AR_Precision,
         Weight          = 0.0,
-        MountOn         = ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR,
+        MountOn         = ZGB.M16A2; ZGB.M4A1; ZGB.M4A4; ZGB.M4A1S; ZGB.HK416; ZGB.SR25; ZGB.Mk12SPR; ZGB.RugerRPR; ZGB.KrissVector,
     }
 
     item Stock_M590_PistolGrip
@@ -749,6 +1245,18 @@ module ZGB
         Weight          = 0.2,
     }
 
+    item Vis_Stock_M590_PistolGrip
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Mossberg Pistol-Grip Stock,
+        Icon            = ZGB_Stock_M590_PistolGrip,
+        WorldStaticModel = ZGB.Stock_M590_PistolGrip,
+        Weight          = 0.0,
+        MountOn         = ZGB.M590,
+    }
+
     item Stock_870_Folding
     {
         DisplayCategory = WeaponPart,
@@ -757,6 +1265,18 @@ module ZGB
         Icon            = ZGB_Stock_870_Folding,
         WorldStaticModel = ZGB.Stock_870_Folding,
         Weight          = 0.2,
+    }
+
+    item Vis_Stock_870_Folding
+    {
+        DisplayCategory = WeaponPart,
+        ItemType        = base:weaponpart,
+        PartType        = Stock,
+        DisplayName     = Remington 870 Folding Stock,
+        Icon            = ZGB_Stock_870_Folding,
+        WorldStaticModel = ZGB.Stock_870_Folding,
+        Weight          = 0.0,
+        MountOn         = ZGB.Rem870,
     }
 
     item Sidesaddle_Shotgun

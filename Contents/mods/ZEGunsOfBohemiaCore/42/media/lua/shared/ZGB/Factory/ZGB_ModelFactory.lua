@@ -165,7 +165,15 @@ local function finish(model)
     return model
 end
 
+--- True when the gun's stock comes off (it has a stock slot): its model is built without it,
+--- and the stock it shipped with is a part of its own (Def_Parts factoryOf).
+function MF.removableStock(spec)
+    for _, s in pairs(spec.slots or {}) do if s.kind == "stock" then return true end end
+    return false
+end
+
 --- Model of a gun's base (nothing attached). nil if the gun has no model data.
+--- m.stockPrims: the prims tagged "stock" that a removable-stock gun leaves out.
 function MF.gunModel(spec)
     local key = "gun:" .. spec.id
     if MF._cache[key] then return MF._cache[key] end
@@ -173,6 +181,13 @@ function MF.gunModel(spec)
     local shape = dims and MF._shapes[dims.shape]
     if not shape then return nil end
     local m = finish(shape(dims, spec))
+    if MF.removableStock(spec) then
+        local keep, stock = {}, {}
+        for _, p in ipairs(m.prims) do
+            if p.tag == "stock" then stock[#stock + 1] = p else keep[#keep + 1] = p end
+        end
+        m.prims, m.stockPrims = keep, stock
+    end
     -- one-handed guns sit higher in the hand (MF.FRAMES.hand.gripDrop): prims and points together
     local drop = (not spec.twoHanded) and MF.FRAMES.hand.gripDrop or 0
     if drop ~= 0 then
@@ -191,9 +206,19 @@ function MF.partModel(part)
     if part.noModel then return nil end
     local key = "part:" .. part.id
     if MF._cache[key] then return MF._cache[key] end
-    local fn = MF._parts[part.id] or MF._kinds[part.kind]
-    if not fn then return nil end
-    local m = finish(fn(part))
+    local m
+    if part.factoryOf then
+        -- the stock a gun shipped with: the gun's own stock prims, mounting point at the origin
+        local spec = ZGB.WeaponFactory and ZGB.WeaponFactory.get(part.factoryOf)
+        local gun = spec and MF.gunModel(spec)
+        local at = gun and gun.points.stock
+        if not (gun and at and gun.stockPrims and #gun.stockPrims > 0) then return nil end
+        m = finish({ prims = MF.translate(gun.stockPrims, -at[1], -at[2], -at[3]) })
+    else
+        local fn = MF._parts[part.id] or MF._kinds[part.kind]
+        if not fn then return nil end
+        m = finish(fn(part))
+    end
     m.id, m.kind = part.id, "part"
     MF._cache[key] = m
     return m

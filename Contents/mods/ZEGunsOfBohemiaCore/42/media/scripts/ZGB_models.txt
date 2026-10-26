@@ -1671,171 +1671,6 @@ module ZGB
         }
     }
 
-    model AK47__Handguard_AK_Quad__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment recoilpad
-        {
-            offset = 0.0000 0.1800 0.0054,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Light_Weapon__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Light_Weapon__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Light_Pistol__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Light_Pistol__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Laser_Rifle__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Laser_Rifle__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Laser_Pistol__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Laser_Pistol__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model AK47__Handguard_AK_Quad__Light_Weapon__Mount_AK_SideRail
     {
         mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Light_Weapon__Mount_AK_SideRail,
@@ -1975,146 +1810,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0480 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment recoilpad
-        {
-            offset = 0.0000 0.1800 0.0054,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Light_Weapon__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Light_Weapon__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Light_Pistol__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Light_Pistol__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Laser_Rifle__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Laser_Rifle__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Handguard_AK_Quad__Laser_Pistol__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Handguard_AK_Quad__Laser_Pistol__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -2289,65 +1984,6 @@ module ZGB
         }
     }
 
-    model AK47__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK47__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK47/AK47__Stock_AK_Folding,
-        texture = ZGB/Guns/AK47,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3000 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model AK74
     {
         mesh = ZGB/Guns/AssaultRifles/AK74/AK74,
@@ -2450,171 +2086,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0480 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment recoilpad
-        {
-            offset = 0.0000 0.1800 0.0054,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Light_Weapon__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Light_Weapon__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Light_Pistol__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Light_Pistol__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Laser_Rifle__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Laser_Rifle__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Laser_Pistol__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Laser_Pistol__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -2763,146 +2234,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0480 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment recoilpad
-        {
-            offset = 0.0000 0.1800 0.0054,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Light_Weapon__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Light_Weapon__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Light_Pistol__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Light_Pistol__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Laser_Rifle__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Laser_Rifle__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Handguard_AK_Quad__Laser_Pistol__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Handguard_AK_Quad__Laser_Pistol__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -3077,65 +2408,6 @@ module ZGB
         }
     }
 
-    model AK74__Mount_AK_SideRail__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Mount_AK_SideRail__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0600,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model AK74__Stock_AK_Folding
-    {
-        mesh = ZGB/Guns/AssaultRifles/AK74/AK74__Stock_AK_Folding,
-        texture = ZGB/Guns/AK74,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.3360 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1920 -0.0120,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model M16A2
     {
         mesh = ZGB/Guns/AssaultRifles/M16A2/M16A2,
@@ -3154,6 +2426,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -3186,6 +2463,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -3225,6 +2507,11 @@ module ZGB
             offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -3255,6 +2542,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -3289,6 +2581,11 @@ module ZGB
             offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -3319,6 +2616,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -3353,6 +2655,11 @@ module ZGB
             offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -3385,6 +2692,11 @@ module ZGB
             offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -3410,6 +2722,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -3439,6 +2756,11 @@ module ZGB
             offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -3466,6 +2788,11 @@ module ZGB
             offset = 0.0000 -0.1920 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -3491,6 +2818,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -4297,6 +3629,11 @@ module ZGB
             offset = 0.0000 -0.0120 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -4317,6 +3654,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -5961,6 +5303,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -5986,6 +5333,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6018,6 +5370,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6057,6 +5414,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6087,6 +5449,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6121,6 +5488,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6151,6 +5523,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6185,6 +5562,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6210,6 +5592,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6239,6 +5626,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6266,6 +5658,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6291,6 +5688,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6325,6 +5727,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6350,6 +5757,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6384,6 +5796,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6409,6 +5826,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6438,6 +5860,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6463,6 +5890,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6492,6 +5924,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6512,6 +5949,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6536,6 +5978,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6558,6 +6005,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6578,6 +6030,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6607,6 +6064,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6621,12 +6083,17 @@ module ZGB
         scale = 1,
         attachment muzzle
         {
-            offset = 0.0000 0.3360 0.0270,
+            offset = 0.0000 0.1860 0.0270,
             rotate = -90.0000 0.0000 180.0000,
         }
         attachment sling
         {
-            offset = 0.0000 -0.0120 -0.0120,
+            offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6678,6 +6145,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6715,6 +6187,11 @@ module ZGB
             offset = 0.0000 -0.0120 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6745,6 +6222,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.0120 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6779,6 +6261,11 @@ module ZGB
             offset = 0.0000 -0.0120 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6811,6 +6298,11 @@ module ZGB
             offset = 0.0000 -0.0120 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6841,6 +6333,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.0120 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6902,6 +6399,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6932,6 +6434,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -6966,6 +6473,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -6998,6 +6510,11 @@ module ZGB
             offset = 0.0000 -0.1620 -0.0120,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -7028,6 +6545,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1620 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -7204,60 +6726,6 @@ module ZGB
         }
     }
 
-    model M590__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model M590__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/M590/M590__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun,
@@ -7276,50 +6744,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__RecoilPad_Rubber__ShellHolder_Butt__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__RecoilPad_Rubber__ShellHolder_Butt__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -7393,60 +6817,6 @@ module ZGB
         }
     }
 
-    model M590__Mount_ScopeBase__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__Mount_ScopeBase__ShellHolder_Butt__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__ShellHolder_Butt__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model M590__ShellHolder_Butt__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/M590/M590__ShellHolder_Butt__Sidesaddle_Shotgun,
@@ -7465,50 +6835,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__ShellHolder_Butt__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__ShellHolder_Butt__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -7609,60 +6935,6 @@ module ZGB
         }
     }
 
-    model M590__Mount_ScopeBase__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__Mount_ScopeBase__RecoilPad_Rubber__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__RecoilPad_Rubber__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model M590__RecoilPad_Rubber__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/M590/M590__RecoilPad_Rubber__Sidesaddle_Shotgun,
@@ -7681,50 +6953,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__RecoilPad_Rubber__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__RecoilPad_Rubber__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -7798,60 +7026,6 @@ module ZGB
         }
     }
 
-    model M590__Mount_ScopeBase__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__Mount_ScopeBase__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Mount_ScopeBase__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model M590__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/M590/M590__Sidesaddle_Shotgun,
@@ -7870,50 +7044,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__Sidesaddle_Shotgun__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Sidesaddle_Shotgun__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model M590__Stock_M590_PistolGrip
-    {
-        mesh = ZGB/Guns/Shotguns/M590/M590__Stock_M590_PistolGrip,
-        texture = ZGB/Guns/M590,
-        scale = 1,
-        attachment muzzle
-        {
-            offset = 0.0000 0.3720 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -8093,70 +7223,6 @@ module ZGB
         }
     }
 
-    model Rem870__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__RecoilPad_Rubber__ShellHolder_Butt__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model Rem870__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/Rem870/Rem870__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun,
@@ -8180,60 +7246,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__RecoilPad_Rubber__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__RecoilPad_Rubber__ShellHolder_Butt__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__RecoilPad_Rubber__ShellHolder_Butt__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -8317,70 +7329,6 @@ module ZGB
         }
     }
 
-    model Rem870__Mount_ScopeBase__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__Mount_ScopeBase__ShellHolder_Butt__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__ShellHolder_Butt__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model Rem870__ShellHolder_Butt__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/Rem870/Rem870__ShellHolder_Butt__Sidesaddle_Shotgun,
@@ -8404,60 +7352,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__ShellHolder_Butt__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__ShellHolder_Butt__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__ShellHolder_Butt__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -8573,70 +7467,6 @@ module ZGB
         }
     }
 
-    model Rem870__Mount_ScopeBase__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__Mount_ScopeBase__RecoilPad_Rubber__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__RecoilPad_Rubber__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model Rem870__RecoilPad_Rubber__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/Rem870/Rem870__RecoilPad_Rubber__Sidesaddle_Shotgun,
@@ -8660,60 +7490,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__RecoilPad_Rubber__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__RecoilPad_Rubber__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__RecoilPad_Rubber__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -8797,70 +7573,6 @@ module ZGB
         }
     }
 
-    model Rem870__Mount_ScopeBase__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__Mount_ScopeBase__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Mount_ScopeBase__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment scope
-        {
-            offset = 0.0000 0.0300 0.0414,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model Rem870__Sidesaddle_Shotgun
     {
         mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Sidesaddle_Shotgun,
@@ -8884,60 +7596,6 @@ module ZGB
         attachment stock
         {
             offset = 0.0000 -0.0300 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__Sidesaddle_Shotgun__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Sidesaddle_Shotgun__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
-    model Rem870__Stock_870_Folding
-    {
-        mesh = ZGB/Guns/Shotguns/Rem870/Rem870__Stock_870_Folding,
-        texture = ZGB/Guns/Rem870,
-        scale = 1,
-        attachment canon
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-        attachment muzzle
-        {
-            offset = 0.0000 0.4080 0.0270,
-            rotate = -90.0000 0.0000 180.0000,
-        }
-        attachment sling
-        {
-            offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -8972,6 +7630,11 @@ module ZGB
             offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -9002,6 +7665,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1680 -0.0360,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -9036,6 +7704,11 @@ module ZGB
             offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -9066,6 +7739,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1680 -0.0360,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -9100,6 +7778,11 @@ module ZGB
             offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -9130,6 +7813,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1680 -0.0360,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -9164,6 +7852,11 @@ module ZGB
             offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -9196,6 +7889,11 @@ module ZGB
             offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -9223,6 +7921,11 @@ module ZGB
             offset = 0.0000 -0.1680 -0.0360,
             rotate = 0.0000 0.0000 0.0000,
         }
+        attachment stock
+        {
+            offset = 0.0000 -0.0300 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
@@ -9243,6 +7946,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -9270,6 +7978,11 @@ module ZGB
         attachment sling
         {
             offset = 0.0000 -0.1920 -0.0120,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment stock
+        {
+            offset = 0.0000 -0.0480 0.0270,
             rotate = 0.0000 0.0000 0.0000,
         }
         attachment world
@@ -11519,6 +10232,380 @@ module ZGB
         }
     }
 
+    model Stock_AK_Wood
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_AK_Wood/Stock_AK_Wood,
+        texture = ZGB/Parts/Stock_AK_Wood,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_AK74_Polymer
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_AK74_Polymer/Stock_AK74_Polymer,
+        texture = ZGB/Parts/Stock_AK74_Polymer,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_Saiga
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_Saiga/Stock_Saiga,
+        texture = ZGB/Parts/Stock_Saiga,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_Galil_Folding
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_Galil_Folding/Stock_Galil_Folding,
+        texture = ZGB/ZGB_Atlas,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_AR_A2
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_AR_A2/Stock_AR_A2,
+        texture = ZGB/Parts/Stock_AR_A2,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_AR_M4
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_AR_M4/Stock_AR_M4,
+        texture = ZGB/Parts/Stock_AR_M4,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_M4A4
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_M4A4/Stock_M4A4,
+        texture = ZGB/Parts/Stock_M4A4,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_M4A1S
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_M4A1S/Stock_M4A1S,
+        texture = ZGB/Parts/Stock_M4A1S,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_HK416
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_HK416/Stock_HK416,
+        texture = ZGB/Parts/Stock_HK416,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_SR25
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_SR25/Stock_SR25,
+        texture = ZGB/Parts/Stock_SR25,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_Mk12
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_Mk12/Stock_Mk12,
+        texture = ZGB/Parts/Stock_Mk12,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_RPR
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_RPR/Stock_RPR,
+        texture = ZGB/Parts/Stock_RPR,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_Kriss
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_Kriss/Stock_Kriss,
+        texture = ZGB/Parts/Stock_Kriss,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_G36_Folding
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_G36_Folding/Stock_G36_Folding,
+        texture = ZGB/Parts/Stock_G36_Folding,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_MP5
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_MP5/Stock_MP5,
+        texture = ZGB/Parts/Stock_MP5,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_UMP_Folding
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_UMP_Folding/Stock_UMP_Folding,
+        texture = ZGB/ZGB_Atlas,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_Uzi_Folding
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_Uzi_Folding/Stock_Uzi_Folding,
+        texture = ZGB/Parts/Stock_Uzi_Folding,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_Thompson
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_Thompson/Stock_Thompson,
+        texture = ZGB/Parts/Stock_Thompson,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_M590
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_M590/Stock_M590,
+        texture = ZGB/Parts/Stock_M590,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_870_Wood
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_870_Wood/Stock_870_Wood,
+        texture = ZGB/Parts/Stock_870_Wood,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_Benelli
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_Benelli/Stock_Benelli,
+        texture = ZGB/Parts/Stock_Benelli,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Stock_SPAS_Folding
+    {
+        mesh = ZGB/Attachments/Stocks/Stock_SPAS_Folding/Stock_SPAS_Folding,
+        texture = ZGB/Parts/Stock_SPAS_Folding,
+        scale = 1,
+        attachment anchor
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
     model Stock_AK_Folding
     {
         mesh = ZGB/Attachments/Stocks/Stock_AK_Folding/Stock_AK_Folding,
@@ -12964,9 +12051,9 @@ module ZGB
         }
     }
 
-    model Casing_RifleLarge
+    model Casing_Pistol
     {
-        mesh = ZGB/Casings/Casing_RifleLarge/Casing_RifleLarge,
+        mesh = ZGB/Casings/Casing_Pistol/Casing_Pistol,
         texture = ZGB/ZGB_Atlas,
         scale = 1,
         attachment world
@@ -12976,9 +12063,9 @@ module ZGB
         }
     }
 
-    model Casing_Rifle
+    model Casing_RifleLarge
     {
-        mesh = ZGB/Casings/Casing_Rifle/Casing_Rifle,
+        mesh = ZGB/Casings/Casing_RifleLarge/Casing_RifleLarge,
         texture = ZGB/ZGB_Atlas,
         scale = 1,
         attachment world
@@ -13000,9 +12087,9 @@ module ZGB
         }
     }
 
-    model Casing_Pistol
+    model Casing_Rifle
     {
-        mesh = ZGB/Casings/Casing_Pistol/Casing_Pistol,
+        mesh = ZGB/Casings/Casing_Rifle/Casing_Rifle,
         texture = ZGB/ZGB_Atlas,
         scale = 1,
         attachment world

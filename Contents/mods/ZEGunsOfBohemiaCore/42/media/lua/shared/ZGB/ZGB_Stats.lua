@@ -23,6 +23,17 @@ S.CLAMP = {
     weight      = { 0.1, 50 },  projectileCount = { 1, 20 },
 }
 
+-- A gun built without its stock (it has a stock slot) and fired with none: its base numbers
+-- assume the stock it shipped with.
+S.NO_STOCK = { add = { aimTime = 8, recoilDelay = 6 }, mul = { hitChance = 0.85 } }
+
+local function stockless(spec, att)
+    for id, s in pairs(spec.slots or {}) do
+        if s.kind == "stock" and not (att or {})[id] then return true end
+    end
+    return false
+end
+
 --- magFullType (optional): the loaded magazine; its `mods` count like a part's.
 --- ammoFullType (optional): the loaded ammo variant (AP, HP, slug...).
 --- extra (optional): list of { mods = { add=, mul=, set= } } for transient effects
@@ -44,6 +55,7 @@ function S.compute(spec, att, magFullType, ammoFullType, extra)
         local v = ZGB.AmmoCatalog.variantOfItem(ammoFullType)
         if v and v.caliber == spec.caliber then parts[#parts + 1] = v end
     end
+    if stockless(spec, att) then parts[#parts + 1] = { mods = { add = S.NO_STOCK.add, mul = S.NO_STOCK.mul } } end
     for _, e in ipairs(extra or {}) do
         if e.mods then parts[#parts + 1] = { mods = { add = e.mods.add or {}, mul = e.mods.mul or {}, set = e.mods.set } } end
     end

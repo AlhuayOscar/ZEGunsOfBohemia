@@ -204,7 +204,7 @@ end)
 
 print("stats")
 test("stats recomputed, not accumulated", function()
-    local att = R.attach(ak, {}, "Mount_AK_SideRail")
+    local att = R.attach(ak, { stock = "ZGB.Stock_AK_Wood" }, "Mount_AK_SideRail")
     att = R.attach(ak, att, "Optic_RedDot")
     local a = ZGB.Stats.compute(ak, att)
     local b = ZGB.Stats.compute(ak, att)
@@ -595,9 +595,9 @@ test("kick class and burst tracking", function()
     eq(RF.track(st, 10.0), 1); eq(RF.track(st, 10.2), 2); eq(RF.track(st, 11.5), 1)
 end)
 test("transient effects join the from-scratch stats pass", function()
-    local s = ZGB.Stats.compute(ak, {}, nil, nil, { { mods = { add = { hitChance = -10 } } } })
+    local s = ZGB.Stats.compute(ak, { stock = "ZGB.Stock_AK_Wood" }, nil, nil, { { mods = { add = { hitChance = -10 } } } })
     eq(s.hitChance, ak.stats.hitChance - 10)
-    eq(ZGB.Stats.compute(ak, {}).hitChance, ak.stats.hitChance)
+    eq(ZGB.Stats.compute(ak, { stock = "ZGB.Stock_AK_Wood" }).hitChance, ak.stats.hitChance)
 end)
 
 print("casings")
@@ -740,7 +740,7 @@ test("every attachment has a model except internal ones; modes are consistent", 
         end
     end
     eq(VIS.mode(PF.get("Optic_RedDot")), "rendered"); eq(VIS.mode(PF.get("Mount_AK_SideRail")), "baked")
-    eq(VIS.mode(PF.get("Stock_AK_Folding")), "baked", "replaces the wooden stock:")
+    eq(VIS.mode(PF.get("Stock_AK_Folding")), "rendered", "guns are built without their stock (v0.8):")
     eq(VIS.mode(PF.get("Choke_Full")), "none")
 end)
 test("new v0.6 attachments fit where they should", function()
@@ -773,12 +773,46 @@ test("a side mount moves the scope point on top of it", function()
     assert(m.points.scope[2] > MDF.gunModel(ak).points.top[2], "scope sits above the receiver")
     near(m.points.scope[3], 0)
 end)
-test("replacement parts hide the piece they replace", function()
-    local hidden = VIS.hiddenTags(ak, { stock = "ZGB.Stock_AK_Folding" })
-    eq(hidden.stock, true)
-    local m = VIS.variantModel(ak, { stock = "ZGB.Stock_AK_Folding" })
-    for _, p in ipairs(m.prims) do assert(p.tag ~= "stock", "the wooden stock is still there") end
-    eq(VIS.previewLayers(ak, { stock = "ZGB.Stock_AK_Folding" })[1].sprite, "AK47_nostock")
+test("removable stocks: the gun is built without it, the stock it shipped with is a part", function()
+    -- every gun with a stock slot has no stock in its own model
+    for _, s in ipairs(WF.all()) do
+        if MDF.removableStock(s) then
+            for _, p in ipairs(MDF.gunModel(s).prims) do assert(p.tag ~= "stock", s.id .. " still has its stock") end
+        end
+    end
+    -- its factory stock is a part with a model, behind the mounting point, that fits the gun
+    for _, p in ipairs(PF.all()) do
+        if p.factoryOf then
+            local m = assert(MDF.partModel(p), p.id .. " has no model")
+            assert(R.canAttach(G(p.factoryOf), {}, p.id), p.id .. " doesn't fit " .. p.factoryOf)
+            eq(VIS.mode(p), "rendered", p.id)
+        end
+    end
+    eq(VIS.mode(PF.get("Stock_AK_Folding")), "rendered")
+    -- no stock costs: slower aim, more recoil, worse hit chance
+    local bare, wood = ZGB.Stats.compute(ak, {}), ZGB.Stats.compute(ak, { stock = "ZGB.Stock_AK_Wood" })
+    eq(wood.aimTime, ak.stats.aimTime)
+    assert(bare.aimTime > wood.aimTime and bare.recoilDelay > wood.recoilDelay and bare.hitChance < wood.hitChance)
+end)
+test("stock spawn: the factory stock most often, another that fits now and then, or none", function()
+    local SS = ZGB.StockSpawn
+    eq(SS.pick(G("Glock17"), function() return 0 end), nil, "no stock slot:")
+    local list, total, factory = SS.choices(ak), 0, nil
+    for _, c in ipairs(list) do
+        total = total + c.weight
+        if c.part and c.part.id == "Stock_AK_Wood" then factory = c.weight end
+    end
+    eq(factory, SS.WEIGHT.factory)
+    for _, c in ipairs(list) do
+        if c.part then eq(c.part.interface, "ak_stock") end
+    end
+    -- walk every outcome: each comes back, none is a stock of another family
+    local seen = {}
+    for r = 0, total - 1 do
+        local slot, ft = SS.pick(ak, function(n) assert(n == total); return r end)
+        eq(slot, "stock"); seen[ft or "none"] = true
+    end
+    assert(seen["ZGB.Stock_AK_Wood"] and seen["ZGB.Stock_AK_Folding"] and seen.none)
 end)
 test("rendered parts don't change the model; baked ones do", function()
     eq(VIS.modelId(G("M4A1"), { optic_rail = "ZGB.Optic_RedDot", muzzle = "ZGB.Suppressor_Rifle556" }), "M4A1")
@@ -821,7 +855,7 @@ test("generated files match the catalogue (run tools/gen_models.lua + gen_script
         assert(readFile(base .. ".X") or readFile(base .. ".fbx"), "no mesh file for " .. mesh)
         n = n + 1
     end
-    assert(n >= 490, "only " .. n .. " model scripts")
+    assert(n >= 470, "only " .. n .. " model scripts")   -- fewer variants since v0.8: stocks are drawn, not baked
 end)
 test("gun models: the muzzle is in front of the grip and the stock behind it", function()
     -- the grip is the model origin (where the hand holds it); MAC10 once had its muzzle at -0.03
@@ -1185,8 +1219,8 @@ test("gunworks plan: rate of fire only for auto / burst guns, bursts of 3", func
 end)
 test("gunworks plan: our layer adjusts from the base, skips RecoilDelay in Gunworks auto", function()
     local ak = G("AK47")
-    eq(#GP.layer(ak, {}), 0, "bare gun, nothing loaded:")
-    local rows, target = GP.layer(ak, { magazine = "ZGB.AK47_Drum75" })
+    eq(#GP.layer(ak, { attachments = { stock = "ZGB.Stock_AK_Wood" } }), 0, "factory stock, nothing loaded:")
+    local rows, target = GP.layer(ak, { attachments = { stock = "ZGB.Stock_AK_Wood" }, magazine = "ZGB.AK47_Drum75" })
     local by = {}
     for _, r in ipairs(rows) do eq(r.op, "Adjust"); by[r.stat] = r.value end
     eq(by.AimingTime, 6); eq(by.ReloadTime, 12)
@@ -1247,6 +1281,7 @@ test("gunworks adapter: registers the catalogue and runs our stat layer", functi
     eq(reg.rate["ZGB.M16A2"].burstCount, 3)
     -- a drum in the AK: our layer adds the tier's aim time on top of the base
     local ak = instanceItem("ZGB.AK47")
+    ZGB.Item.setAttachments(ak, { stock = "ZGB.Stock_AK_Wood" })
     local baseAim = ak:getAimingTime()
     function ak:isContainsClip() return true end
     ak:setMagazineType("ZGB.AK47_Drum75")

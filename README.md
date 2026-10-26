@@ -384,6 +384,23 @@ have a `kind`, an `interface`, and may `provide` new slots.
 - The Glock 17 has an `under_rail` directly, so a light goes straight on; the AK needs the quad-rail handguard first.
 - Removing a mount with an optic still on it is blocked ("remove Red Dot first").
 
+### Stocks come off (v0.8)
+
+A gun whose stock really comes off (AKs, ARs, MP5, UMP45, Uzi, KRISS, Thompson, G36,
+Galil, the pump and semi shotguns with replaceable stocks) is modelled **without** it.
+The stock it shipped with is a part of its own (`factoryOf` in `Def_Parts`: the AK-47's
+wooden stock is `Stock_AK_Wood`), drawn by the game on the gun's stock point like any
+other part. Its model is the piece cut off the gun's model: the placeholder's prims
+tagged `stock`, and for real models the Blender step cuts the mesh at the stock point
+(`cut_stock` in `import_models.py`), so it keeps the gun's texture.
+
+A found gun gets a random stock the first time it is looked at (`ZGB_StockSpawn`):
+its factory stock most often, now and then another stock that fits the same
+interface (any AR stock on any buffer tube), sometimes none. Without a stock it aims
+slower, kicks more and hits less (`ZGB_Stats.NO_STOCK`); the base numbers assume
+the factory stock. Guns whose stock is the whole furniture (bolt actions, the
+Winchester pumps, bullpups) keep it.
+
 ### Magazines
 
 Magazines are items of their own, defined once in `Defs/ZGB_Def_Magazines.lua`.

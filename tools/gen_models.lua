@@ -140,7 +140,18 @@ local manifest = { ppm = MF.PREVIEW_PPM, pad = MF.PREVIEW_PAD, atlas = REAL_ATLA
                    palette = {}, paletteGrid = MF.ATLAS_GRID, sources = {}, assets = {}, jobs = {}, previews = {}, icons = {},
                    out = { models = MODELS, textures = TEX, icons = CORE .. "textures/", lua = CORE .. "lua/shared/ZGB/Defs/" } }
 for name, m in pairs(MF.MATERIALS) do manifest.palette[name] = { i = m.i, rgb = m.rgb } end
-local function isReal(id) return Sources.MODELS[id] ~= nil end
+-- a factory stock is real when the gun it is cut from is (the Blender step cuts it off)
+local function isReal(id)
+    if Sources.MODELS[id] then return true end
+    local part = PF.get(id)
+    local gun = part and part.factoryOf and Sources.MODELS[part.factoryOf]
+    -- fix.stock_cut = false: the real model has no stock to cut (the part keeps its placeholder)
+    return gun ~= nil and (gun.fix or {}).stock_cut ~= false
+end
+local function factoryStockOf(gunId)
+    for _, p in ipairs(PF.all()) do if p.factoryOf == gunId then return p end end
+    return nil
+end
 local cacheOk = io.open(".cache/model_sources/LowPolyFirearms.blend", "rb")
 if cacheOk then cacheOk:close() else
     print("WARNING: .cache/model_sources/ is missing - real models need it (see tools/model_sources.lua). Run the Blender step only with it.")
@@ -172,9 +183,20 @@ for _, spec in ipairs(WF.all()) do
     local base = MF.gunModel(spec)
     local gunReal = isReal(spec.id)
     if gunReal then
-        realAsset(spec.id, "gun", folder, base.prims)
+        -- fitted to the WHOLE gun (stock included): the real mesh still has its stock, which
+        -- the Blender step then cuts off; fitted to the stockless box, the stock got squeezed
+        -- in front of the cut point and stayed on the gun
+        local whole = {}
+        for _, p in ipairs(base.prims) do whole[#whole + 1] = p end
+        for _, p in ipairs(base.stockPrims or {}) do whole[#whole + 1] = p end
+        realAsset(spec.id, "gun", folder, whole)
         -- where the barrel must end: the Blender step lines the real barrel up with it
         manifest.assets[spec.id].muzzle = base.points.muzzle
+        -- a removable stock is cut off the real mesh at the stock point; the piece is the
+        -- model of the gun's factory stock part
+        local fs = MF.removableStock(spec) and factoryStockOf(spec.id)
+        if fs and not isReal(fs.id) then fs = nil end
+        if fs then manifest.assets[spec.id].cutStock = { point = base.points.stock, part = fs.id } end
     end
     for _, att in ipairs(V.variants(spec)) do
         local vm = V.variantModel(spec, att)
@@ -230,6 +252,7 @@ for _, part in ipairs(PF.all()) do
     local points = m and ZGB.merge({ anchor = { 0, 0, 0 }, world = { 0, 0, 0 } }, m.provides)
     if m and isReal(part.id) then
         realAsset(part.id, "part", Paths.part(part), m.prims)
+        if part.factoryOf and not Sources.MODELS[part.id] then manifest.assets[part.id].cutFrom = part.factoryOf end
         job(part.id, Paths.part(part), { { real = part.id, pos = { 0, 0, 0 } } }, points, nil, partAtlas(part))
         manifest.icons[#manifest.icons + 1] = part.id
         manifest.previews[#manifest.previews + 1] = { name = part.id, asset = part.id }

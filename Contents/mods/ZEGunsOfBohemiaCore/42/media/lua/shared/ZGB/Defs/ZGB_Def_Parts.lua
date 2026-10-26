@@ -212,6 +212,39 @@ choke("Choke_Modified",           "Modified Choke",           { mul = { range = 
 choke("Choke_ImprovedCylinder",   "Improved Cylinder Choke",  { mul = { range = 0.95, hitChance = 1.06 } })
 
 -- ---------------------------------------------------------------- stocks
+-- Factory stocks (v0.8): a gun whose stock really comes off is modelled WITHOUT it, and the
+-- stock it shipped with is a part of its own (`factoryOf` = that gun). Its model is the piece
+-- cut off the gun's model (placeholder: the gun's "stock" prims; real models: the Blender step
+-- cuts the mesh at the stock point). Guns spawn with a random compatible stock or none
+-- (ZGB_StockSpawn), the factory one most often. No stats of its own: the gun's base numbers
+-- are with its factory stock; going without one costs (ZGB_Stats.NO_STOCK).
+local function factoryStock(id, name, iface, gun)
+    P.define{ id = id, displayName = name, kind = "stock", interface = iface, vanillaPartType = "Stock",
+              factoryOf = gun, mods = {} }
+end
+factoryStock("Stock_AK_Wood",        "AK-47 Wooden Stock",       "ak_stock",       "AK47")
+factoryStock("Stock_AK74_Polymer",   "AK-74 Polymer Stock",      "ak_stock",       "AK74")
+factoryStock("Stock_Saiga",          "Saiga-12 Stock",           "ak_stock",       "Saiga12")
+factoryStock("Stock_Galil_Folding",  "Galil Folding Stock",      "galil_stock",    "IMI_Galil")
+factoryStock("Stock_AR_A2",          "M16A2 Fixed Stock",        "ar_buffer_tube", "M16A2")
+factoryStock("Stock_AR_M4",          "M4 Carbine Stock",         "ar_buffer_tube", "M4A1")
+factoryStock("Stock_M4A4",           "M4A4 Stock",               "ar_buffer_tube", "M4A4")
+factoryStock("Stock_M4A1S",          "M4A1-S Stock",             "ar_buffer_tube", "M4A1S")
+factoryStock("Stock_HK416",          "HK416 Stock",              "ar_buffer_tube", "HK416")
+factoryStock("Stock_SR25",           "SR-25 Stock",              "ar_buffer_tube", "SR25")
+factoryStock("Stock_Mk12",           "Mk 12 Stock",              "ar_buffer_tube", "Mk12SPR")
+factoryStock("Stock_RPR",            "Ruger Precision Stock",    "ar_buffer_tube", "RugerRPR")
+factoryStock("Stock_Kriss",          "KRISS Vector Stock",       "ar_buffer_tube", "KrissVector")
+factoryStock("Stock_G36_Folding",    "G36 Folding Stock",        "g36_stock",      "HK_G36")
+factoryStock("Stock_MP5",            "MP5 Stock",                "hk_stock",       "MP5A3")
+factoryStock("Stock_UMP_Folding",    "UMP45 Folding Stock",      "ump_stock",      "UMP45")
+factoryStock("Stock_Uzi_Folding",    "Uzi Folding Stock",        "uzi_stock",      "Uzi")
+factoryStock("Stock_Thompson",       "Thompson Wooden Stock",    "thompson_stock", "ThompsonM1928")
+factoryStock("Stock_M590",           "Mossberg 590 Stock",       "m590_stock",     "M590")
+factoryStock("Stock_870_Wood",       "Remington 870 Wooden Stock","r870_stock",    "Rem870")
+factoryStock("Stock_Benelli",        "Benelli M4 Stock",         "benelli_stock",  "BenelliM4")
+factoryStock("Stock_SPAS_Folding",   "SPAS-12 Folding Stock",    "spas_stock",     "SPAS12")
+
 P.define{
     id = "Stock_AK_Folding", displayName = "AK Folding Stock",
     kind = "stock", interface = "ak_stock", vanillaPartType = "Stock",

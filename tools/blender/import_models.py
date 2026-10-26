@@ -361,6 +361,44 @@ def auto_orient(obj, aid, share=0.15):
         set_verts_our(obj.data, v)
         log("  %s: turned (%s)" % (aid, ", ".join(flips)))
 
+def fix_of(aid):
+    return (MAN["sources"].get(aid) or {}).get("fix") or {}
+
+def cut_stock(obj, point, aid, split_y=-0.005):
+    """Cut a gun's removable stock off: the gun keeps what is in front, the piece behind
+    becomes the model of its factory stock, mounting point (the gun's stock point) at the
+    origin, so attached it sits exactly where it was. Where to cut is read off the ruler
+    profiles (ZGB_PROFILES=1) into the pick's fix: `stock_cut` = x where the stock meets the
+    receiver; `stock_grip` = x behind which everything is stock, for guns whose pistol grip
+    leans back past stock_cut (ARs): between the two only what is above the grip line
+    (`split_y`, the top of the grip) goes with the stock. `stock_cut = false`: nothing to cut.
+    Returns the piece, or None."""
+    if os.environ.get("ZGB_PROFILES"): return None          # profiles want the whole gun
+    fix = fix_of(aid)
+    if fix.get("stock_cut") is False: return None
+    cut_x = fix.get("stock_cut", point[0]); grip_x = fix.get("stock_grip")
+    def is_stock(c):
+        if grip_x is None: return c[0] < cut_x
+        return c[0] < grip_x or (c[0] < cut_x and c[1] > split_y)
+    def keep(target, stock_side):
+        # whole faces by their centre (our x = Blender X, our y = Blender Z; to_bl)
+        bm = bmesh.new(); bm.from_mesh(target.data)
+        doomed = [f for f in bm.faces if is_stock((f.calc_center_median()[0], f.calc_center_median()[2])) != stock_side]
+        bmesh.ops.delete(bm, geom=doomed, context="FACES")
+        loose = [v for v in bm.verts if not v.link_faces]
+        bmesh.ops.delete(bm, geom=loose, context="VERTS")
+        bm.to_mesh(target.data); bm.free(); target.data.update()
+        return len(target.data.polygons)
+    piece = obj.copy(); piece.data = obj.data.copy(); bpy.context.scene.collection.objects.link(piece)
+    if keep(piece, True) == 0:
+        bpy.data.objects.remove(piece, do_unlink=True)
+        log("  %s: nothing behind x=%.3f, no stock cut" % (aid, cut_x))
+        return None
+    keep(obj, False)
+    translate(piece, [-point[0], -point[1], -point[2]])
+    log("  %s: stock cut off at x=%.3f%s (%d faces)" % (aid, cut_x, "" if grip_x is None else " / grip %.3f" % grip_x, len(piece.data.polygons)))
+    return piece
+
 def align_bore(obj, muzzle, aid, slice_m=0.012, max_shift=0.05):
     """Move a fitted gun so its real barrel ends on the muzzle point. Fitting by bounding box
     puts the bore wherever the model's proportions put it, so the shot, the flash and a
@@ -419,6 +457,7 @@ asset_key = {}  # asset id -> source key
 fitted = {}     # asset id -> object (fitted, hidden template)
 for aid, asset in sorted(MAN["assets"].items()):
     if ONLY and aid not in ONLY: continue
+    if asset.get("cutFrom"): continue                  # made when its gun is cut (cut_stock)
     src = MAN["sources"][aid]
     key = src["file"] + "#" + (src.get("object") or "")
     kind = asset["kind"]
@@ -438,6 +477,12 @@ for aid, asset in sorted(MAN["assets"].items()):
     fit(o, asset["bounds"], src.get("fix") or {})
     if asset["kind"] == "gun" and not (src.get("fix") or {}).get("flip"): auto_orient(o, aid)
     if asset.get("muzzle"): align_bore(o, asset["muzzle"], aid)
+    if asset.get("cutStock"):
+        piece = cut_stock(o, asset["cutStock"]["point"], aid)
+        if piece is not None:
+            sid = asset["cutStock"]["part"]
+            piece.hide_render = True; piece.hide_set(True)
+            fitted[sid] = piece; asset_key[sid] = key       # same bake: its block of the same texture
     o.hide_render = True; o.hide_set(True)
     fitted[aid] = o
 
@@ -445,6 +490,36 @@ for aid, asset in sorted(MAN["assets"].items()):
 # ------------------------------------------------------------------ review sheet (--review <png>)
 # Each cell: the fitted real model (top) above its placeholder (bottom), side view
 # from the right, muzzle should point right and the top should be up in both.
+if os.environ.get("ZGB_PROFILES"):
+    # one side view per gun with a removable stock, with a ruler to read where the stock
+    # starts: thin bars every 1 cm, red every 5 cm, green at x = 0 (the firing hand)
+    out_dir = os.path.join(REPO, ".cache", "profiles"); os.makedirs(out_dir, exist_ok=True)
+    scene = bpy.context.scene
+    scene.render.engine = "BLENDER_WORKBENCH"; scene.display.shading.light = "FLAT"
+    scene.display.shading.color_type = "OBJECT"
+    scene.world = bpy.data.worlds.new("w"); scene.world.color = (1, 1, 1)
+    cd = bpy.data.cameras.new("pc"); cd.type = "ORTHO"
+    cam = bpy.data.objects.new("pc", cd); scene.collection.objects.link(cam); scene.camera = cam
+    cam.rotation_euler = (math.radians(90), 0, 0)
+    x0, x1 = -0.50, 0.30
+    scene.render.resolution_x, scene.render.resolution_y = 1600, 520
+    cd.ortho_scale = x1 - x0; cam.location = Vector(to_bl((x0 + x1) / 2, 0.0, 5.0))
+    ticks = []; tick_atlas = Atlas("ticks", {}); tick_atlas.save(write=False)
+    for k in range(int(x0 * 100), int(x1 * 100) + 1):
+        o = prims_object([{"t": "box", "m": "steel", "a": [k / 100 - 0.0006, -0.13, 0.3], "b": [k / 100 + 0.0006, 0.13, 0.31]}], "tick", tick_atlas)
+        o.color = (0, 0.7, 0, 1) if k == 0 else ((0.9, 0, 0, 1) if k % 5 == 0 else (0.75, 0.75, 0.75, 1))
+        ticks.append(o)
+    for aid in sorted(fitted):
+        if not MAN["assets"][aid].get("cutStock"): continue
+        g = fitted[aid].copy(); g.data = fitted[aid].data.copy(); scene.collection.objects.link(g)
+        v = verts_our(g.data); set_verts_our(g.data, v - np.array([0, (v[:, 1].min() + v[:, 1].max()) / 2, 0]))
+        g.hide_set(False); g.hide_render = False; g.color = (0.15, 0.15, 0.15, 1)
+        scene.render.filepath = os.path.join(out_dir, aid + ".png")
+        bpy.ops.render.render(write_still=True)
+        bpy.data.objects.remove(g, do_unlink=True)
+    log("profiles in", out_dir)
+    sys.exit(0)
+
 if "--review" in sys.argv:
     out_png = sys.argv[sys.argv.index("--review") + 1]
     review_atlas = Atlas("review", {}); review_atlas.save(write=False)
