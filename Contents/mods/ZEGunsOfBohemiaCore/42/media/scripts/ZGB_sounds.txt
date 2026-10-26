@@ -15,7 +15,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_ak.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -27,7 +27,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_ak.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -39,7 +39,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_ar.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -51,7 +51,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_ar.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -63,7 +63,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_arisaka.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -75,7 +75,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_arisaka.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -87,7 +87,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_bolt.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -99,7 +99,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_bolt.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -111,7 +111,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_boltheavy.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -123,7 +123,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_boltheavy.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -135,7 +135,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_lever3030.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -147,7 +147,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_lever3030.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -159,7 +159,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_lever32.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -171,7 +171,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_lever32.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -183,7 +183,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_model12.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -195,7 +195,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_model12.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -207,7 +207,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_mosin.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -219,7 +219,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_mosin.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -231,7 +231,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_p22.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -243,7 +243,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_p22.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -255,7 +255,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_p380.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -267,7 +267,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_p380.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -279,7 +279,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_p45.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -291,7 +291,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_p45.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -303,7 +303,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_p9.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -315,7 +315,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_p9.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -327,7 +327,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_ppsh.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -339,7 +339,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_ppsh.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -351,7 +351,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_r38.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -363,7 +363,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_r38.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -375,7 +375,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_rmag.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -387,7 +387,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_rmag.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -399,7 +399,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_shotgun.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -411,7 +411,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_shotgun.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -423,7 +423,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_sks.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -435,7 +435,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_sks.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }
@@ -447,7 +447,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/fire_smg9.ogg,
-            distanceMax = 120,
+            distanceMax = 1000,
             volume = 1.00,
         }
     }
@@ -459,7 +459,7 @@ module Base
         clip
         {
             file = media/sound/ZGB/firesup_smg9.ogg,
-            distanceMax = 40,
+            distanceMax = 250,
             volume = 1.00,
         }
     }

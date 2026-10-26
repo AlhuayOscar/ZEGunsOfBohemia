@@ -100,7 +100,8 @@ for _, fam in ipairs((function() local k = {} for f in pairs(SND.FAMILIES) do k[
                  string.format("atrim=0:%.2f,afade=t=out:st=%.2f:d=%.2f,", len, len * 0.3, len * 0.7) .. MONO
     local file = "fire_" .. fam:lower() .. ".ogg"
     encode(src, base .. ",loudnorm=I=-12:TP=-1:LRA=7", OUT .. file)
-    script(SND.fireName(fam), file, 120, 1.0)
+    -- vanilla shots reach 1000 (M16Shoot): at 120 ours faded out and sounded muffled in game
+    script(SND.fireName(fam), file, 1000, 1.0)
     -- Suppressed: a short, sharp "thup" with no tail. The first version (same shot, lowpass 1400 Hz,
     -- half length) kept a long dull tail and sounded like a muffled shot on top of a plain one
     -- (sixth in-game test); cut to 0.35 s it then sounded like a dry click (seventh). Now: 0.8 s
@@ -113,7 +114,7 @@ for _, fam in ipairs((function() local k = {} for f in pairs(SND.FAMILIES) do k[
                 ",highpass=f=300,equalizer=f=150:t=q:w=1:g=-8,lowpass=f=4500,loudnorm=I=-20:TP=-4:LRA=5"
     local sfile = "firesup_" .. fam:lower() .. ".ogg"
     encode(src, sup, OUT .. sfile)
-    script(SND.suppressedName(fam), sfile, 40, 1.0)
+    script(SND.suppressedName(fam), sfile, 250, 1.0)
     n = n + 2
 end
 

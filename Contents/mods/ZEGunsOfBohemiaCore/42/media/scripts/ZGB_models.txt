@@ -12976,18 +12976,6 @@ module ZGB
         }
     }
 
-    model Casing_Pistol
-    {
-        mesh = ZGB/Casings/Casing_Pistol/Casing_Pistol,
-        texture = ZGB/ZGB_Atlas,
-        scale = 1,
-        attachment world
-        {
-            offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 0.0000 0.0000,
-        }
-    }
-
     model Casing_Rifle
     {
         mesh = ZGB/Casings/Casing_Rifle/Casing_Rifle,
@@ -13003,6 +12991,18 @@ module ZGB
     model Casing_ShotgunHull
     {
         mesh = ZGB/Casings/Casing_ShotgunHull/Casing_ShotgunHull,
+        texture = ZGB/ZGB_Atlas,
+        scale = 1,
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+    }
+
+    model Casing_Pistol
+    {
+        mesh = ZGB/Casings/Casing_Pistol/Casing_Pistol,
         texture = ZGB/ZGB_Atlas,
         scale = 1,
         attachment world

@@ -342,6 +342,40 @@ def fit(obj, bounds, fix):
         v = (v - (mn + mx) / 2) * s + (tmin + tmax) / 2
         set_verts_our(me, v)
 
+def auto_orient(obj, aid, share=0.15):
+    """Point a fitted gun the right way: the box fit knows sizes, not which end is the muzzle
+    or which side is up (some guns came in backwards or upside down in game). The muzzle end
+    is the thinner one (the rear carries the grip, stock or magazine), and the barrel runs in
+    the upper half of the gun. Flips turn about the box centre, so the fit still holds."""
+    v = verts_our(obj.data)
+    mn, mx = v.min(axis=0), v.max(axis=0); c = (mn + mx) / 2; L = mx[0] - mn[0]
+    front, rear = v[v[:, 0] > mx[0] - share * L], v[v[:, 0] < mn[0] + share * L]
+    def height(p): return (p[:, 1].max() - p[:, 1].min()) if len(p) else 0.0
+    flips = []
+    if height(front) > height(rear) * 1.15:                 # muzzle at the back: turn around (x and z)
+        v = (v - c) * np.array([-1.0, 1.0, -1.0]) + c; flips.append("front/back")
+        front = v[v[:, 0] > mx[0] - share * L]
+    if len(front) and float(np.median(front[:, 1])) < c[1]:   # barrel in the lower half: roll over (y and z)
+        v = (v - c) * np.array([1.0, -1.0, -1.0]) + c; flips.append("upside down")
+    if flips:
+        set_verts_our(obj.data, v)
+        log("  %s: turned (%s)" % (aid, ", ".join(flips)))
+
+def align_bore(obj, muzzle, aid, slice_m=0.012, max_shift=0.05):
+    """Move a fitted gun so its real barrel ends on the muzzle point. Fitting by bounding box
+    puts the bore wherever the model's proportions put it, so the shot, the flash and a
+    suppressor came out off the barrel (in game: from the chest). The barrel tip is the
+    front-most slice of the mesh; its median height / side is the bore."""
+    v = verts_our(obj.data)
+    tip = v[v[:, 0] > v[:, 0].max() - slice_m]
+    if len(tip) < 3: return
+    dy, dz = muzzle[1] - float(np.median(tip[:, 1])), muzzle[2] - float(np.median(tip[:, 2]))
+    if abs(dy) > max_shift or abs(dz) > max_shift:
+        log("  %s: bore %.3f / %.3f m off the muzzle point, too far to trust - left as fitted" % (aid, dy, dz))
+        return
+    set_verts_our(obj.data, v + np.array([0.0, dy, dz]))
+    log("  %s: bore aligned (%.3f, %.3f m)" % (aid, dy, dz))
+
 def translate(obj, pos):
     me = obj.data
     v = verts_our(me) + np.array(pos)
@@ -402,6 +436,8 @@ for aid, asset in sorted(MAN["assets"].items()):
     o = tpl.copy(); o.data = tpl.data.copy(); o.name = "asset_" + aid
     bpy.context.scene.collection.objects.link(o)
     fit(o, asset["bounds"], src.get("fix") or {})
+    if asset["kind"] == "gun" and not (src.get("fix") or {}).get("flip"): auto_orient(o, aid)
+    if asset.get("muzzle"): align_bore(o, asset["muzzle"], aid)
     o.hide_render = True; o.hide_set(True)
     fitted[aid] = o
 

@@ -171,7 +171,11 @@ for _, spec in ipairs(WF.all()) do
     local folder = Paths.gun(spec)
     local base = MF.gunModel(spec)
     local gunReal = isReal(spec.id)
-    if gunReal then realAsset(spec.id, "gun", folder, base.prims) end
+    if gunReal then
+        realAsset(spec.id, "gun", folder, base.prims)
+        -- where the barrel must end: the Blender step lines the real barrel up with it
+        manifest.assets[spec.id].muzzle = base.points.muzzle
+    end
     for _, att in ipairs(V.variants(spec)) do
         local vm = V.variantModel(spec, att)
         local placed, anyReal = {}, gunReal

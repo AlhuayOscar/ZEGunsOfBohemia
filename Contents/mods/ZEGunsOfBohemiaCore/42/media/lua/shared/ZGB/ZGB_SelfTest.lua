@@ -130,6 +130,8 @@ function T.checkGun(r, spec)
 
     -- stats pushed onto the instance
     local stats = I.applyStats(gun) or {}
+    -- after Gunworks' stat pass (it rebuilds the gun from its script): still our shot
+    expect(r, s, "fire sound (live)", I.probe(gun, "getSwingSound"), snd.fire)
     expect(r, s, "recoil delay", I.probe(gun, "getRecoilDelay"), stats.recoilDelay)
     expect(r, s, "max range", I.probe(gun, "getMaxRange"), stats.range)
     expect(r, s, "aim time", I.probe(gun, "getAimingTime"), stats.aimTime)
@@ -183,6 +185,7 @@ function T.checkGun(r, spec)
         expect(r, s, "suppressed sound", I.probe(gun, "getSwingSound"), snd.fireSuppressed)
         I.setAttachments(gun, {})
         I.applyStats(gun)
+        expect(r, s, "unsuppressed again", I.probe(gun, "getSwingSound"), snd.fire)
     end
 end
 
