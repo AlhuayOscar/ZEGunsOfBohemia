@@ -526,6 +526,23 @@ What only the game can tell is in the [VERIFY list](#before-the-first-in-game-ru
 
 ## Testing in game
 
+### Self-test on a dedicated server (no window, no clicks)
+
+`tools/pzserver/run_test.ps1` boots the Project Zomboid dedicated server (Steam app
+380870, downloaded with SteamCMD's anonymous login) on a scratch profile
+(`-cachedir`, never the real Zomboid folder) with a copy of Gunworks and of this
+repo's mods, runs the whole self-test once the server is up (`server/ZGB/ZGB_AutoTest.lua`,
+only when the profile has `Lua/ZGB_autotest.txt`), stops the server and copies the
+report and the log to `.cache/pzserver/`:
+
+```
+powershell -ExecutionPolicy Bypass -File tools/pzserver/run_test.ps1
+```
+
+It checks items, scripts, sounds, the Gunworks registration and stats as the real game
+loads them, in about two minutes. Rendering, animations and hands are client-only: those
+still need the game itself.
+
 ### Self-test (one click, debug mode)
 
 Start the game with `-debug`, load a save, right-click the ground:
