@@ -49,7 +49,7 @@ local WF = ZGB.WeaponFactory
 local MF = ZGB.MagazineFactory
 
 local REQUIRED = { "id", "archetype", "displayName", "caliber" }
-WF.MAG_FREE_RELOADS = { shotgun = true, boltactionnomag = true, revolver = true, doublebarrelshotgun = true }
+WF.MAG_FREE_RELOADS = { shotgun = true, boltactionnomag = true, revolver = true, doublebarrelshotgun = true, leveraction = true }
 
 -- How strongly muzzle energy moves each stat (stat *= (E / E_ref) ^ exponent).
 WF.ENERGY_EXPONENT = { minDamage = 0.35, maxDamage = 0.35, range = 0.15, recoilDelay = 0.30, soundRadius = 0.20 }
@@ -94,7 +94,7 @@ local function validate(def, spec)
             if not mags.standard then errs[#errs + 1] = "mag-fed weapon needs magazines.standard" end
             if def.internalCapacity then errs[#errs + 1] = "mag-fed weapon can't have internalCapacity" end
         else
-            if next(mags) then errs[#errs + 1] = spec.reloadType .. " weapon can't take magazines" end
+            if not ZGB.isEmpty(mags) then errs[#errs + 1] = spec.reloadType .. " weapon can't take magazines" end
             if type(spec.internalCapacity) ~= "number" or spec.internalCapacity < 1 then
                 errs[#errs + 1] = "tube/internal weapon needs internalCapacity"
             end
@@ -105,11 +105,11 @@ local function validate(def, spec)
             end
         end
         local AF, RF = ZGB.AnimFactory, ZGB.RecoilFactory
-        if AF and next(AF._types) and not AF.getType(spec.animType or "") then
+        if AF and not ZGB.isEmpty(AF._types) and not AF.getType(spec.animType or "") then
             errs[#errs + 1] = "unknown animType '" .. tostring(spec.animType) .. "' (see ZGB_Def_Anims)"
         end
         local pattern = spec.recoil and spec.recoil.pattern
-        if RF and pattern and next(RF._profiles) and not RF.getProfile(pattern) then
+        if RF and pattern and not ZGB.isEmpty(RF._profiles) and not RF.getProfile(pattern) then
             errs[#errs + 1] = "unknown recoil pattern '" .. pattern .. "' (see ZGB_Def_Recoil)"
         end
     end
@@ -131,6 +131,8 @@ function WF.define(def)
     local spec = ZGB.merge(arch, def)
     spec.fullType = ZGB.fullType(def.id)
     spec.slots    = spec.slots or {}
+    -- recorded sounds by family (ZGB_Def_Sounds); the definition's own sounds win
+    if ZGB.Sounds then spec.sounds = ZGB.merge(ZGB.Sounds.forSpec(spec), def.sounds or {}) end
     spec.sounds   = spec.sounds or {}
     spec.fp       = spec.fp or {}
     spec.category = def.category or arch.category

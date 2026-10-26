@@ -5,8 +5,8 @@
     Core uses the list to tell the player when an ESSENTIAL addon is missing,
     and addons use it to check for each other without reading mod ids.
 
-      ZGB.Addons.register{ id = "reload", name = "Reloading", modId = "ZEGunsOfBohemiaReload",
-                           version = "0.6.0", essential = true }
+      ZGB.Addons.register{ id = "holding", name = "Tactical Holding", modId = "ZEGunsOfBohemiaHolding",
+                           version = "0.8.0", essential = true }
 ]]
 require "ZGB/ZGB_Core"
 
@@ -15,7 +15,6 @@ local AD = ZGB.Addons
 
 -- Addons the mod is designed around: enable them together with Core.
 AD.ESSENTIAL = {
-    { id = "reload",  name = "ZE Guns Of Bohemia - Reloading",       modId = "ZEGunsOfBohemiaReload" },
     { id = "holding", name = "ZE Guns Of Bohemia - Tactical Holding", modId = "ZEGunsOfBohemiaHolding" },
 }
 

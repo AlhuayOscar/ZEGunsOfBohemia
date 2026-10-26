@@ -24,16 +24,21 @@ function IM.modelFor(item, spec)
     return ZGB.MODULE .. "." .. V.modelId(spec, I.getAttachments(item))
 end
 
-function IM.apply(player, item, spec)
+--- partsChanged: an attachment went on or off. Parts vanilla draws (suppressors, optics...)
+--- sit on the same variant, so the hands are redrawn even when the model id is unchanged:
+--- without that the suppressor never showed up in game.
+function IM.apply(player, item, spec, partsChanged)
     if not item or not spec then return end
     local model = IM.modelFor(item, spec)
     local st = I.state(item)
-    if st.model == model then return end
-    if I.setWeaponModel(item, model) then
+    if st.model ~= model then
+        if not I.setWeaponModel(item, model) then return end
         st.model = model
-        if player then I.refreshHandModels(player) end
         ZGB.debug("Iso model ->", model)
+    elseif not partsChanged then
+        return
     end
+    if player then I.refreshHandModels(player) end
 end
 
 return IM

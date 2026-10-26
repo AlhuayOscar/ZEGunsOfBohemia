@@ -203,11 +203,17 @@ function V.previewRects(spec, att)
                math.max(1, math.ceil((b.max[2] - b.min[2]) * ppm + pad * 2))
     end
     local layers = V.previewLayers(spec, att)
-    local gb = MF.bounds(layers[1].model.prims)
+    -- real models (ZGB_Def_RealModels) have their own fitted bounds; placeholders use their prims
+    local function boundsOf(model)
+        local r = MF.REAL and MF.REAL[model.id]
+        if r then return { min = r.min, max = r.max } end
+        return MF.bounds(model.prims)
+    end
+    local gb = boundsOf(layers[1].model)
     local function gunPx(x, y) return (x - gb.min[1]) * ppm + pad, (gb.max[2] - y) * ppm + pad end
     local rects, x0, y0, x1, y1 = {}, math.huge, math.huge, -math.huge, -math.huge
     for i, l in ipairs(layers) do
-        local b = i == 1 and gb or MF.bounds(l.model.prims)
+        local b = i == 1 and gb or boundsOf(l.model)
         local w, h = size(b)
         local x, y = 0, 0
         if i > 1 then
@@ -219,7 +225,9 @@ function V.previewRects(spec, att)
         x0, y0 = math.min(x0, x), math.min(y0, y)
         x1, y1 = math.max(x1, x + w), math.max(y1, y + h)
     end
-    return { rects = rects, bounds = { x0, y0, x1, y1 } }
+    -- gunPx(x, y): a point of the gun model (metres, forward / up) in the same pixel space,
+    -- so the inspect screen can put each slot next to where its part goes
+    return { rects = rects, bounds = { x0, y0, x1, y1 }, gunPx = gunPx }
 end
 
 --- The vanilla visual twin of a rendered part (a WeaponPart item that only draws).

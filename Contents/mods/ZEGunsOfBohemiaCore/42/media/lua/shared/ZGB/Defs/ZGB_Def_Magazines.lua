@@ -26,6 +26,8 @@ mag("CZ75_Mag16",      "9x19", "standard", 16, "CZ 75 16rd Magazine",           
 mag("CZ75_Mag26",      "9x19", "extended", 26, "CZ 75 26rd Extended Magazine",  0.14)
 mag("M17_Mag17",       "9x19", "standard", 17, "SIG M17 17rd Magazine",         0.09)
 mag("M17_Mag21",       "9x19", "extended", 21, "SIG M17 21rd Extended Magazine", 0.11)
+mag("Prodigy_Mag17",   "9x19", "standard", 17, "Prodigy 17rd Magazine",         0.09)
+mag("Prodigy_Mag20",   "9x19", "extended", 20, "Prodigy 20rd Extended Magazine", 0.10)
 mag("MP5_Mag30",       "9x19", "standard", 30, "MP5 30rd Magazine",             0.12)
 mag("MP5_CMag100",     "9x19", "drum",    100, "MP5 100rd Twin Drum (C-Mag)",   0.90)
 mag("Uzi_Mag32",       "9x19", "standard", 32, "Uzi 32rd Magazine",             0.20)

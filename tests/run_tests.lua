@@ -5,6 +5,10 @@
 ]]
 package.path = "Contents/mods/ZEGunsOfBohemiaCore/42/media/lua/shared/?.lua;" .. package.path
 
+-- PZ's Kahlua has no `next`: hide it from the mod code, so a call fails here and not only in game
+local next = next
+_G.next = nil
+
 require "ZGB/ZGB_Core"
 require "ZGB/ZGB_Mode"
 require "ZGB/Defs/ZGB_Def_Parts"
@@ -28,10 +32,10 @@ print("factory")
 local function near(a, b, msg) if math.abs(a - b) > 1e-6 then error((msg or "") .. " expected " .. tostring(b) .. ", got " .. tostring(a), 2) end end
 
 test("whole catalogue registers with no errors", function()
-    eq(#WF.all(), 70); eq(#WF.errors, 0); eq(#MF.errors, 0); eq(#PF.errors, 0)
+    eq(#WF.all(), 76); eq(#WF.errors, 0); eq(#MF.errors, 0); eq(#PF.errors, 0)
 end)
 test("catalogue counts per category", function()
-    local want = { handgun = 16, revolver = 12, assault_rifle = 8, dmr = 4, sniper = 8, smg = 8, shotgun = 8, lever = 6 }
+    local want = { handgun = 18, revolver = 12, assault_rifle = 10, dmr = 4, sniper = 9, smg = 8, shotgun = 9, lever = 6 }
     local got = {}
     for _, s in ipairs(WF.all()) do got[s.category] = (got[s.category] or 0) + 1 end
     for cat, n in pairs(want) do eq(got[cat], n, cat .. ":") end
@@ -90,7 +94,7 @@ test("every gun: at most one magazine per tier, all its own caliber", function()
     end
 end)
 test("shared magazines feed several guns", function()
-    eq(#WF.gunsForMagazine("ZGB.STANAG_Mag30"), 4)
+    eq(#WF.gunsForMagazine("ZGB.STANAG_Mag30"), 6)        -- M16A2, M4A1, M4A4, M4A1-S, HK416, Mk 12
     local vector = WF.get("KrissVector")
     eq(vector.magazine.item, "ZGB.Glock21_Mag13")
 end)
@@ -220,6 +224,33 @@ test("weapon script gets capacity, mag and anims from provider", function()
     local params = {}
     for _, kv in ipairs(ZGB.ScriptApply.paramsFor(ak, { SwingAnim = "Rifle" })) do params[kv[1]] = kv[2] end
     eq(params.MaxAmmo, 30); eq(params.MagazineType, "ZGB.AK47_Mag30"); eq(params.SwingAnim, "Rifle")
+end)
+test("B42 ammo types: every round has a registry id, ours are in media/registries.lua", function()
+    local AC = ZGB.AmmoCatalog
+    eq(AC.registryId("Base.Bullets45"), "base:bullets_45"); eq(AC.registryId("ZGB.Ammo_9x19_HP"), "zgb:ammo_9x19_hp")
+    local reg = assert(io.open("Contents/mods/ZEGunsOfBohemiaCore/42/media/registries.lua"), "run tools/gen_scripts.lua"):read("*a")
+    for calId, cal in pairs(AC.CALIBERS) do
+        for key, ft in pairs(cal.vanilla or {}) do
+            assert(AC.VANILLA_AMMO_IDS[ft], calId .. "." .. key .. ": " .. ft .. " has no B42 ammo type (item removed in B42?)")
+        end
+    end
+    for _, r in ipairs(AC.registrations()) do
+        assert(reg:find('AmmoType.register("' .. r[1] .. '", "' .. r[2] .. '")', 1, true), r[1] .. " missing: run tools/gen_scripts.lua")
+    end
+    for _, g in ipairs(WF.all()) do
+        local id = AC.registryId(g.ammo)
+        assert(id:find("^base:") or reg:find('"' .. id .. '"', 1, true), g.id .. ": ammo type " .. id .. " is never registered")
+    end
+end)
+test("whole-number script fields are written as integers for every gun (B42 rejects 12.5)", function()
+    local SA = ZGB.ScriptApply
+    for _, g in ipairs(WF.all()) do
+        for _, kv in ipairs(SA.paramsFor(g)) do
+            if SA.INT_FIELDS[kv[1]] then
+                assert(kv[2] == math.floor(kv[2]), g.id .. "." .. kv[1] .. " = " .. tostring(kv[2]) .. " is not a whole number")
+            end
+        end
+    end
 end)
 
 print("mode gate")
@@ -427,13 +458,13 @@ end)
 test("load all FMJ: fills 30rd then drum, skips AP mag, spends ammo", function()
     local p, mag30, drum, apMag = setup()
     ZGB.LoadAll.queueLoadAll(p, "762x39", FMJ); Mock.runQueue()
-    eq(mag30.ammo, 30); eq(drum.ammo, 20); eq(apMag.ammo, 10); eq(apMag.ammoType, AP)
+    eq(mag30.ammo, 30); eq(drum.ammo, 20); eq(apMag.ammo, 10); eq(apMag:getAmmoType():getItemKey(), AP)
     eq(ZGB.Item.ammoCounts(p.inv, "762x39")[FMJ], 0)
 end)
 test("load all AP: tops off AP mag first", function()
     local p, mag30, drum, apMag = setup()
     ZGB.LoadAll.queueLoadAll(p, "762x39", AP); Mock.runQueue()
-    eq(apMag.ammo, 30); eq(mag30.ammo, 5); eq(mag30.ammoType, AP); eq(drum.ammo, 0)
+    eq(apMag.ammo, 30); eq(mag30.ammo, 5); eq(mag30:getAmmoType():getItemKey(), AP); eq(drum.ammo, 0)
 end)
 test("action re-checks inventory at completion (no overspend)", function()
     local p, mag30 = setup()
@@ -494,8 +525,8 @@ test("events reach every listener; a failing one doesn't stop the rest", functio
 end)
 test("missing essential addons are reported until they register", function()
     AD._reset()
-    eq(#AD.missingEssentials(), 2)
-    AD.register{ id = "reload" }; AD.register{ id = "holding" }
+    eq(#AD.missingEssentials(), 1)          -- since v0.8 reloading is Gunworks': holding only
+    AD.register{ id = "holding" }
     eq(#AD.missingEssentials(), 0)
     AD._reset()
 end)
@@ -669,7 +700,7 @@ test("every addon has mod.info requiring Core, and a common/ folder", function()
     end
 end)
 test("every sandbox option has a label", function()
-    for _, m in ipairs({ "ZEGunsOfBohemiaIso", "ZEGunsOfBohemiaReload", "ZEGunsOfBohemiaHolding", "ZEGunsOfBohemiaCalls" }) do
+    for _, m in ipairs({ "ZEGunsOfBohemiaIso", "ZEGunsOfBohemiaHolding", "ZEGunsOfBohemiaCalls" }) do
         local opts = io.open(MODS .. m .. "/42/media/sandbox-options.txt"):read("*a")
         local labels = io.open(MODS .. m .. "/42/media/lua/shared/Translate/EN/Sandbox_EN.txt"):read("*a")
         for key in string.gmatch(opts, "translation = ([%w_]+)") do
@@ -783,8 +814,93 @@ test("generated files match the catalogue (run tools/gen_models.lua + gen_script
     for twin, model in string.gmatch(weapons, "ModelWeaponPart = (%S+) (%S+) anchor") do
         assert(string.find(models, "model " .. model:gsub("^ZGB%.", "") .. "\n", 1, true), "ModelWeaponPart points at missing model " .. model)
     end
-    assert(readFile("Contents/mods/ZEGunsOfBohemiaCore/42/media/models_X/ZGB/Guns/AssaultRifles/AK47/AK47__Mount_AK_SideRail.X"))
-    assert(readFile("Contents/mods/ZEGunsOfBohemiaCore/42/media/models_X/ZGB/Attachments/Suppressors/Suppressor_Rifle556/Suppressor_Rifle556.X"))
+    -- every model script points at a mesh that exists: a placeholder .X or a real .fbx
+    local n = 0
+    for mesh in string.gmatch(models, "mesh = ([^,]+),") do
+        local base = "Contents/mods/ZEGunsOfBohemiaCore/42/media/models_X/" .. mesh
+        assert(readFile(base .. ".X") or readFile(base .. ".fbx"), "no mesh file for " .. mesh)
+        n = n + 1
+    end
+    assert(n >= 490, "only " .. n .. " model scripts")
+end)
+test("gun models: the muzzle is in front of the grip and the stock behind it", function()
+    -- the grip is the model origin (where the hand holds it); MAC10 once had its muzzle at -0.03
+    for _, g in ipairs(WF.all()) do
+        local m = MDF.gunModel(g)
+        if m and m.points.muzzle then
+            assert(m.points.muzzle[1] > 0.05, g.id .. ": muzzle at x = " .. m.points.muzzle[1] .. ", behind the grip")
+            if m.points.stock then
+                assert(m.points.stock[1] < m.points.muzzle[1], g.id .. ": stock in front of the muzzle")
+            end
+        end
+    end
+end)
+test("model scripts: points are at game scale, in the vanilla frame (muzzle = +Y)", function()
+    -- vanilla guns are ~0.6 of real length; at real size ours looked too big in game
+    assert(MDF.GAME_SCALE > 0.4 and MDF.GAME_SCALE < 0.8, "GAME_SCALE out of the vanilla range")
+    local text = assert(readFile(SCRIPTS .. "ZGB_models.txt"))
+    for _, id in ipairs({ "Glock17", "AK47", "Rem870", "AI_AWM", "SW_Model29", "Uzi" }) do
+        local spec = WF.get(id)
+        local m = MDF.gunModel(spec)
+        -- one-handed guns use vanilla's upside-down pistol rig, long guns the rifle rig
+        local frame = spec.twoHanded and MDF.FRAMES.long or MDF.FRAMES.hand
+        local block = assert(text:match("\n    model " .. id .. "\n    {(.-)\n    }"), id .. ": no model script")
+        local x, y, z, rot = block:match("attachment muzzle\n%s*{%s*offset = ([-%d%.]+) ([-%d%.]+) ([-%d%.]+),%s*rotate = ([^,]+),")
+        assert(y, id .. ": no muzzle point (vanilla fires from it)")
+        local ex, ey, ez = frame.axes(m.points.muzzle[1], m.points.muzzle[2], m.points.muzzle[3])
+        local k = MDF.GAME_SCALE
+        assert(math.abs(tonumber(y) - ey * k) < 0.002, string.format("%s: muzzle y %s, want %.4f", id, y, ey * k))
+        assert(math.abs(tonumber(z) - ez * k) < 0.002, id .. ": muzzle height")
+        assert(tonumber(z) * (spec.twoHanded and 1 or -1) > 0, id .. ": barrel on the wrong side for its rig")
+        eq(rot, frame.muzzleRotate, id .. " muzzle rotate:")
+    end
+end)
+test("real models: every source maps to an asset, is credited, and is built", function()
+    local S = dofile("tools/model_sources.lua")
+    local credits = assert(readFile("CREDITS.txt"), "CREDITS.txt missing (run tools/gen_models.lua)")
+    local models = assert(readFile(SCRIPTS .. "ZGB_models.txt"))
+    for id, src in pairs(S.MODELS) do
+        assert(WF.get(id) or PF.get(id), "model_sources.lua maps unknown asset " .. id)
+        local pack = assert(S.PACKS[src.pack], id .. " uses unknown pack " .. tostring(src.pack))
+        assert(pack.license and pack.author and pack.url, src.pack .. " needs license, author and url")
+        local url = pack.perModel and src.credit and src.credit.url or pack.url
+        assert(string.find(credits, url, 1, true), url .. " missing from CREDITS.txt")
+        -- one texture per real gun / part (the gun's also holds the parts baked into its variants)
+        local tex = (WF.get(id) and "Guns/" or "Parts/") .. id
+        assert(string.find(models, "model " .. id .. "\n    {\n        mesh = [^\n]*\n        texture = ZGB/" .. tex:gsub("%p", "%%%0") .. ","),
+               id .. " should use its own texture ZGB/" .. tex)
+        assert(MDF.REAL and MDF.REAL[id], id .. " has no fitted bounds (run tools/blender/import_models.py)")
+    end
+end)
+test("sounds: families follow archetype and caliber", function()
+    local SND = ZGB.Sounds
+    eq(G("AK47").sounds.fire, "ZGB_Fire_AK"); eq(G("M4A1").sounds.fire, "ZGB_Fire_AR")
+    eq(G("Glock17").sounds.family, "P9"); eq(G("Colt1911").sounds.family, "P45")
+    eq(G("SW_Model29").sounds.family, "RMAG"); eq(G("MosinNagant").sounds.family, "MOSIN")
+    eq(G("Win1897").sounds.family, "MODEL12")
+    local r870 = G("Rem870").sounds
+    eq(r870.rack, "ZGB_Pump"); eq(r870.insertAmmo, "ZGB_ShellInsert"); eq(r870.ejectAmmo, nil)
+    eq(G("Glock17").sounds.insertAmmo, "ZGB_MagIn"); eq(G("Glock17").sounds.ejectAmmo, "ZGB_MagOut")
+    assert(SND.isSuppressed({ muzzle = "ZGB.Suppressor_Pistol9" }), "a suppressor should count")
+    assert(not SND.isSuppressed({ muzzle = "ZGB.FlashHider_556" }), "a flash hider is not a suppressor")
+end)
+test("sounds: every gun's sounds are scripted and their audio files exist", function()
+    local scripts = assert(readFile(SCRIPTS .. "ZGB_sounds.txt"), "ZGB_sounds.txt missing (run tools/gen_sounds.lua)")
+    for _, g in ipairs(WF.all()) do
+        for key, name in pairs(g.sounds) do
+            if key ~= "family" then
+                local file = string.match(scripts, "sound " .. name .. "\n%s*{.-file = ([^,\n]+)")
+                assert(file, g.id .. "." .. key .. ": no sound script " .. name)
+                assert(readFile("Contents/mods/ZEGunsOfBohemiaCore/42/" .. file .. ".ogg") or
+                       readFile("Contents/mods/ZEGunsOfBohemiaCore/42/" .. file), name .. ": audio file missing " .. file)
+            end
+        end
+    end
+end)
+test("offline mod validator passes (tools/validate_mod.lua)", function()
+    local lua = arg and arg[-1] or "lua5.1"
+    local r = os.execute('"' .. lua .. '" tools/validate_mod.lua > ' .. (package.config:sub(1, 1) == "\\" and "NUL" or "/dev/null"))
+    assert(r == 0 or r == true, "validate_mod.lua found problems: run it to see them")
 end)
 test("PNG writer round-trips size and signature", function()
     package.path = "tools/lib/?.lua;" .. package.path
@@ -794,6 +910,354 @@ test("PNG writer round-trips size and signature", function()
     Img.save(im, tmp)
     local w, h = pngSize(tmp); eq(w, 5); eq(h, 3)
     os.remove(tmp)
+end)
+
+print("gunsmith inspect layout")
+require "ZGB/ZGB_InspectLayout"
+test("inspect layout: every gun, two screen sizes: slots don't overlap, stay on screen, sit by their part", function()
+    local IL = ZGB.InspectLayout
+    local stages = { { x = 0, y = 40, w = 1540, h = 980 }, { x = 0, y = 40, w = 940, h = 640 } }   -- 1080p / 720p minus the stats panel
+    local function check(spec, att, stage)
+        local lay = IL.compute(spec, att, stage)
+        local tag = spec.id .. " @" .. stage.w .. ": "
+        for i, a in ipairs(lay.slots) do
+            local bx = a.box
+            assert(bx.x >= stage.x - 0.5 and bx.y >= stage.y - 0.5 and bx.x + bx.w <= stage.x + stage.w + 0.5
+                   and bx.y + bx.h <= stage.y + stage.h + 0.5, tag .. a.slotId .. " off screen")
+            for j = i + 1, #lay.slots do
+                assert(not IL.overlap(bx, lay.slots[j].box), tag .. a.slotId .. " overlaps " .. lay.slots[j].slotId)
+            end
+            -- lanes: in front of / behind / above the gun
+            local g = lay.gun
+            if a.lane == "front" then assert(bx.x >= g.x + g.w - 1, tag .. a.slotId .. " not in front") end
+            if a.lane == "back" then assert(bx.x + bx.w <= g.x + 1, tag .. a.slotId .. " not behind") end
+            if a.lane == "top" then assert(bx.y + bx.h <= g.y + 1, tag .. a.slotId .. " not above") end
+        end
+        return lay
+    end
+    for _, g in ipairs(WF.all()) do
+        if MDF.gunModel(g) then for _, st in ipairs(stages) do check(g, {}, st) end end   -- test fixtures have no model
+    end
+    -- the muzzle goes in front, the stock behind; an AK side mount brings its optic rail along
+    local lay = check(ak, { side_mount = "ZGB.Mount_AK_SideRail" }, stages[1])
+    local lanes = {}
+    for _, s in ipairs(lay.slots) do lanes[s.slotId] = s end
+    eq(lanes.muzzle.lane, "front"); eq(lanes.stock.lane, "back")
+    assert(lanes.optic_rail and lanes.optic_rail.lane == "top", "AK optic rail above the gun")
+    eq(lanes.optic_rail.state, "open", "rail live once the mount is on:")
+    local bare = IL.compute(ak, {}, stages[1])
+    for _, s in ipairs(bare.slots) do if s.slotId == "optic_rail" then eq(s.state, "ghost", "no mount yet:") end end
+end)
+
+print("in-game self-test (against the mock game)")
+local function silently(fn) local p = print; print = function() end; local ok, r = pcall(fn); print = p; assert(ok, r); return r end
+-- In debug mode the game stops in the debugger on every Lua error, even one a pcall
+-- catches (the "break" during the in-game pose check). Run like that: list them all.
+local function debugMode(fn)
+    local caught, realPcall = {}, pcall
+    pcall = function(f, ...)
+        local res = { realPcall(f, ...) }
+        if not res[1] then caught[#caught + 1] = tostring(res[2]) end
+        return unpack(res)
+    end
+    local ok, r = realPcall(silently, fn)
+    pcall = realPcall
+    assert(ok, r)
+    return r, caught
+end
+test("self-test and pose check raise no Lua error at all (debug mode stops on caught ones too)", function()
+    -- Glock18C has no muzzle point: the case that broke into the debugger in game
+    require "ZGB/ZGB_SelfTest"
+    Mock.installGame()
+    local _, caught = debugMode(function() return ZGB.SelfTest.run({ "AK47", "Glock17", "Glock18C", "Rem870", "SW_Model29" }) end)
+    local player = Mock.posePlayer()
+    player:setPrimaryHandItem({ ft = "Base.Torch" })                -- not a gun: the hand you start with
+    local session = ZGB.SelfTest.newPoseSession(player)
+    local _, caught2 = debugMode(function() while not session:step() do end end)
+    for _, e in ipairs(caught2) do caught[#caught + 1] = e end
+    eq(#caught, 0, table.concat(caught, "\n") .. "\n")
+end)
+test("gunsmith screen: opens, draws, every slot's picker and hover, fits a part (no Lua error at all)", function()
+    local MockUI = require "mock_ui"
+    MockUI.install(1920, 1080)
+    Mock.installGame()
+    package.path = "Contents/mods/ZEGunsOfBohemiaCore/42/media/lua/client/?.lua;" .. package.path
+    local errors = {}
+    for _, id in ipairs({ "AK47", "Glock17", "Rem870", "SW_Model29", "M4A1" }) do
+        local player = Mock.posePlayer()
+        function player:getPlayerNum() return 0 end
+        local inv = player.inv
+        function player:getInventory() return inv end
+        local spec = WF.get(id)
+        local gun = inv:add(instanceItem(spec.fullType))
+        for _, p in ipairs(PF.all()) do if R.isCompatible(spec, p.fullType) then inv:add(Mock.item(p.fullType)) end end
+        local _, caught = debugMode(function()
+            require "ZGB/UI/ZGB_GunsmithWindow"
+            local w = ZGB_GunsmithWindow.open(player, gun)
+            w:createChildren()
+            assert(w.layout, id .. ": no layout")              -- a revolver may have no slots at all
+            w:prerender(); w:render()
+            for _, slot in ipairs(w.layout.slots) do
+                w:onMouseDown(-1, -1)                           -- close the open grid (it can cover this slot)
+                w:onMouseDown(slot.box.x + 2, slot.box.y + 2)
+                assert(w.picker and w.picker.slotId == slot.slotId, id .. ": slot " .. slot.slotId .. " didn't open")
+                for i = 1, #(w.partsBySlot[slot.slotId] or {}) do
+                    local r = w:pickerRect()
+                    MockUI.mouseX = r.x + 4 + ((i - 1) % 5) * 58 + 10
+                    MockUI.mouseY = r.y + 26 + math.floor((i - 1) / 5) * 58 + 10
+                    w:onMouseMove(0, 0); w:render()
+                end
+            end
+            -- fit: the first part we own that can go on now queues the timed action
+            Mock.queue = {}
+            for _, slot in ipairs(w.layout.slots) do
+                w.picker = { slotId = slot.slotId }
+                for i, row in ipairs(w.partsBySlot[slot.slotId] or {}) do
+                    if #Mock.queue == 0 and w:partState(row) == "ready" then
+                        local r = w:pickerRect()
+                        w:onMouseDown(r.x + 4 + ((i - 1) % 5) * 58 + 10, r.y + 26 + math.floor((i - 1) / 5) * 58 + 10)
+                    end
+                end
+            end
+            if #w.layout.slots > 0 then
+                assert(#Mock.queue == 1 and Mock.queue[1].Type == "ZGB_AttachPartAction", id .. ": fitting a part queued no action")
+            end
+            w:close()
+        end)
+        for _, e in ipairs(caught) do errors[#errors + 1] = id .. ": " .. e end
+    end
+    eq(#errors, 0, table.concat(errors, "\n") .. "\n")
+end)
+
+test("self-test passes on a correct install and writes its report", function()
+    require "ZGB/ZGB_SelfTest"
+    Mock.installGame()
+    local r = silently(function() return ZGB.SelfTest.run() end)
+    -- fixtures other tests registered (T_Mount, TGun...) have no generated scripts: expected FAILs
+    local real = {}
+    for _, l in ipairs(r.lines) do
+        local subject, check = l:match("^FAIL%s+(%S+)%s+(%S+)")
+        local fixture = subject and (subject:match("^T_") or subject == "TGun" or check:match("^T_"))
+        if subject and not fixture then real[#real + 1] = l end
+    end
+    for _, l in ipairs(real) do print("       " .. l) end
+    eq(#real, 0, r.summary .. ":")
+    eq(r.skip, 0, "every probe answers in the mock:")
+    assert(r.pass > 3000, "expected well over 3000 checks, got " .. r.pass)
+    assert(r.written and Mock.written[ZGB.SelfTest.FILE][1] == r.summary, "report file not written")
+end)
+test("self-test catches the in-game bugs: silent sounds, no firearm tag, pistol reload on a rifle", function()
+    Mock.installGame{ script = { ["ZGB.AK47"] = { Tags = "ZGBWeapon", WeaponReloadType = "handgun" } } }
+    local r = silently(function() return ZGB.SelfTest.run({ "AK47" }) end)
+    local text = table.concat(r.lines, "\n")
+    assert(text:find("FAIL AK47%s+tag base:firearm"), "missing firearm tag not reported")
+    assert(text:find("FAIL AK47%s+reload type%s+expected boltaction, got handgun"), "wrong reload type not reported")
+    -- sounds in module ZGB: the game doesn't know them (the silent shots and racks)
+    local path = "Contents/mods/ZEGunsOfBohemiaCore/42/media/scripts/ZGB_sounds.txt"
+    local f = io.open(path, "rb"); local original = f:read("*a"); f:close()
+    f = io.open(path, "wb"); f:write((original:gsub("\nmodule Base\n", "\nmodule ZGB\n"))); f:close()
+    local ok, r2 = pcall(function() Mock.installGame(); return silently(function() return ZGB.SelfTest.run({ "AK47" }) end) end)
+    f = io.open(path, "wb"); f:write(original); f:close()
+    Mock.installGame()
+    assert(ok, r2)
+    assert(table.concat(r2.lines, "\n"):find("FAIL AK47%s+sound fire%s+game doesn't know sound ZGB_Fire_AK"),
+        "sounds outside module Base not reported")
+end)
+test("pose check: one gun per animation type, a screenshot each, vanilla firearm pose", function()
+    Mock.installGame()
+    local player = Mock.posePlayer()
+    local before = Mock.item("ZGB.Glock17")
+    player:setPrimaryHandItem(before)
+    local session = ZGB.SelfTest.newPoseSession(player)
+    local types = {}
+    for _, g in ipairs(session.guns) do types[g.animType] = true end
+    for _, t in ipairs(ZGB.AnimFactory.types()) do
+        local used = false
+        for _, g in ipairs(WF.all()) do if g.animType == t.id then used = true end end
+        if used then assert(types[t.id], "no pose gun for anim type " .. t.id) end
+    end
+    local ticks = 0
+    silently(function() while not session:step() do ticks = ticks + 1; assert(ticks < 100000, "pose check never ends") end end)
+    eq(#Mock.screenshots, #session.guns)
+    for _, s in ipairs(Mock.screenshots) do assert(s:find("^ZGB_pose_.+%.png$"), "screenshot " .. s .. " needs .png (they came out without one in game)") end
+    local refs = 0
+    for _, s in ipairs(Mock.screenshots) do if s:find("^ZGB_pose_vanilla_") then refs = refs + 1 end end
+    eq(refs, #ZGB.SelfTest.POSE_REFERENCES, "vanilla reference shots:")
+    local r = session.report
+    local fails = {}
+    for _, l in ipairs(r.lines) do if l:sub(1, 4) == "FAIL" then fails[#fails + 1] = l end end
+    eq(#fails, 0, table.concat(fails, "\n") .. "\n")
+    eq(player:getPrimaryHandItem(), before, "the gun you held comes back:")
+    eq(#player.inv.items, 0, "test guns are removed:")
+    assert(Mock.written[ZGB.SelfTest.POSE_FILE][1] == r.summary, "pose report not written")
+end)
+test("pose check stopped halfway leaves the character usable (aim off, own gun back, test gun gone)", function()
+    -- in game an error mid-check broke into the debugger and left the character unable to shove or shoot
+    Mock.installGame()
+    local player = Mock.posePlayer()
+    local before = Mock.item("ZGB.Glock17")
+    player:setPrimaryHandItem(before)
+    local session = ZGB.SelfTest.newPoseSession(player)
+    silently(function()
+        for _ = 1, ZGB.SelfTest.POSE_START_WAIT + ZGB.SelfTest.POSE_WAIT + 3 do session:step() end   -- a gun in hand, aiming
+        assert(player.aiming and player.primaryItem ~= before, "should be mid-check")
+        session:abort("test")
+    end)
+    eq(player.aiming, false); eq(player:getPrimaryHandItem(), before); eq(#player.inv.items, 0)
+    assert(table.concat(session.report.lines, "\n"):find("FAIL .-stopped%s+test"), "stop not reported")
+    -- and the emergency reset
+    player:setIsAiming(true)
+    ZGB.SelfTest.resetCharacter(player)
+    eq(player.aiming, false)
+end)
+test("self-test reports a missing magazine script and a wrong fire sound", function()
+    Mock.installGame{ noItem = { ["ZGB.AK47_Mag30"] = true }, script = { ["ZGB.Glock17"] = { SwingSound = "M9Shoot" } } }
+    local r = silently(function() return ZGB.SelfTest.run({ "AK47", "Glock17" }) end)
+    Mock.installGame()
+    local text = table.concat(r.lines, "\n")
+    assert(text:find("FAIL magazine%s+ZGB.AK47_Mag30"), "missing magazine script not reported")
+    assert(text:find("FAIL AK47/standard%s+create magazine"), "magazine creation failure not reported")
+    assert(text:find("FAIL Glock17%s+fire sound %(script%)%s+expected ZGB_Fire_P9, got M9Shoot"), "wrong fire sound not reported")
+end)
+test("test kit gives guns, full magazines of each tier, rounds and a suppressor", function()
+    Mock.installGame()
+    local p = Mock.player()
+    function p:getInventory() return { AddItem = function(_, ft) return p.inv:add(instanceItem(ft)) end } end
+    eq(ZGB.SelfTest.giveKit(p), 3)
+    local have = {}
+    for _, it in ipairs(p.inv.items) do have[it.ft] = (have[it.ft] or 0) + 1 end
+    assert(have["ZGB.AK47"] and have["ZGB.AK47_Mag30"], "AK and its magazine")
+    eq(have[WF.get("Glock17").ammo], 30)
+    for _, it in ipairs(p.inv.items) do
+        if it.ft == "ZGB.AK47_Mag30" then eq(it:getCurrentAmmoCount(), 30) end
+    end
+end)
+test("give all: every gun and one of every attachment", function()
+    Mock.installGame()
+    local p = Mock.player()
+    function p:getInventory() return { AddItem = function(_, ft) return p.inv:add(instanceItem(ft)) end } end
+    local guns, parts = ZGB.SelfTest.giveAll(p)
+    local real = 0
+    for _, s in ipairs(WF.all()) do if ScriptManager.instance:getItem(s.fullType) then real = real + 1 end end
+    eq(guns, real); assert(guns >= 70, "every catalogue gun")
+    local realParts = 0
+    for _, s in ipairs(PF.all()) do if ScriptManager.instance:getItem(s.fullType) then realParts = realParts + 1 end end
+    eq(parts, realParts); assert(parts >= 50, "every catalogue part")
+    eq(#p.inv.items, guns + parts)
+end)
+
+print("gunworks (v0.8)")
+require "ZGB/ZGB_GunworksPlan"
+local GP = ZGB.GunworksPlan
+test("gunworks plan: one ammo family per caliber, vanilla first, library rounds after ours", function()
+    local fams = GP.families()
+    for _, spec in ipairs(WF.all()) do
+        if ZGB.AmmoCatalog.exists(spec.caliber or "") then
+            assert(fams[GP.familyName(spec.caliber)], spec.id .. " has no ammo family")
+        end
+    end
+    local f9 = fams["ZGB:9x19"]
+    eq(f9.bullets[1].type, "Base.Bullets9mm")
+    local last = f9.bullets[#f9.bullets]
+    eq(last.type, "SWMG.9x19_Bullet"); assert(last.library)
+    local seen, hasGlock, hasMag = {}, false, false
+    for _, ft in ipairs(f9.items) do
+        assert(not seen[ft], "duplicate " .. ft); seen[ft] = true
+        if ft == "ZGB.Glock17" then hasGlock = true end
+        if ZGB.MagazineFactory.get(ft) then hasMag = true end
+    end
+    assert(hasGlock and hasMag, "9x19 family lists the Glock and its magazines")
+end)
+test("gunworks plan: magazine profiles go standard -> extended -> drum; internal feeds get none", function()
+    local prof = GP.magazineProfiles()
+    local ak = prof["ZGB:AK47"]
+    eq(ak.weapon, "ZGB.AK47")
+    eq(ak.magazines[1], "ZGB.AK47_Mag30"); eq(ak.magazines[2], "ZGB.AK_Mag40"); eq(ak.magazines[3], "ZGB.AK47_Drum75")
+    eq(prof["ZGB:SW_Model10"], nil)
+end)
+test("gunworks plan: rate of fire only for auto / burst guns, bursts of 3", function()
+    local rof = GP.rateOfFire()
+    assert(rof["ZGB.Glock18C"] and rof["ZGB.Glock18C"].rpm > 0, "Glock 18C fires auto")
+    eq(rof["ZGB.M16A2"].burstCount, 3)
+    eq(rof["ZGB.Glock17"], nil)
+    local mode, possible = ZGB.ScriptApply.fireModes(G("M16A2"))
+    eq(mode, "Burst"); eq(possible, "Burst/Single")
+end)
+test("gunworks plan: our layer adjusts from the base, skips RecoilDelay in Gunworks auto", function()
+    local ak = G("AK47")
+    eq(#GP.layer(ak, {}), 0, "bare gun, nothing loaded:")
+    local rows, target = GP.layer(ak, { magazine = "ZGB.AK47_Drum75" })
+    local by = {}
+    for _, r in ipairs(rows) do eq(r.op, "Adjust"); by[r.stat] = r.value end
+    eq(by.AimingTime, 6); eq(by.ReloadTime, 12)
+    eq(target.aimTime, ak.stats.aimTime + 6)
+    local hp = select(1, GP.layer(ak, { round = "ZGB.Ammo_762x39_HP" }))
+    local dmg
+    for _, r in ipairs(hp) do if r.stat == "MaxDamage" then dmg = r.value end end
+    assert(dmg and dmg > 0, "hollow points hit harder")
+    local plusp = GP.layer(ak, { round = "ZGB.Ammo_762x39_HP", fireMode = "RealAuto", extra = { { mods = { add = { recoilDelay = 3 } } } } })
+    for _, r in ipairs(plusp) do assert(r.stat ~= "RecoilDelay", "Gunworks owns RecoilDelay in RealAuto") end
+    eq(GP.variantItem(G("M4A1"), "SWMG.556x45_Bullet_ArmorPiercing"), "ZGB.Ammo_556x45_AP")
+    eq(GP.variantItem(G("M4A1"), "SWMG.556x45_Bullet_HollowPoint"), nil, "no 5.56 HP of ours: fires as standard")
+end)
+test("gunworks adapter: registers the catalogue and runs our stat layer", function()
+    Mock.installGame()
+    -- a small stand-in for the SWMG modules (same calls and layer pass as Gunworks)
+    local reg = { families = {}, items = {}, profiles = {}, weapons = {}, rate = {}, layers = {}, handlers = {} }
+    local Stats = {}
+    function Stats.Adjust(stat, d) return function(w) w["set" .. stat](w, w["get" .. stat](w) + d) end end
+    function Stats.Set(stat, v) return function(w) w["set" .. stat](w, v) end end
+    function Stats.Multiply(stat, k) return function(w) w["set" .. stat](w, w["get" .. stat](w) * k) end end
+    function Stats.RegisterModifierLayer(id, fn, restore, applies) reg.layers[#reg.layers + 1] = { id = id, fn = fn, restore = restore, applies = applies } end
+    function Stats.RegisterRestoreHandler(id, fn) reg.handlers[#reg.handlers + 1] = fn end
+    function Stats.ReapplyAllModifiers(w)
+        local base = instanceItem(w:getFullType())
+        for _, l in ipairs(reg.layers) do
+            if not l.applies or l.applies(w) then
+                for name in pairs(l.restore) do w["set" .. name](w, base["get" .. name](base)) end
+                for _, m in ipairs(l.fn(w) or {}) do m(w) end
+            end
+        end
+        for _, h in ipairs(reg.handlers) do h(w) end
+    end
+    local Ammo = { FindBulletEntry = function() return nil end }
+    function Ammo.RegisterAmmoFamily(f, b) reg.families[f] = b end
+    function Ammo.RegisterItemWithFamily(f, items) for _, i in ipairs(items) do reg.items[i] = f end end
+    local Magazine = {}
+    function Magazine.RegisterMagazineProfile(p, list) reg.profiles[p] = list end
+    function Magazine.RegisterWeaponWithProfile(p, w) reg.weapons[w] = p end
+    local Rate = { RegisterWeapon = function(w, e) reg.rate[w] = e end }
+    package.loaded["WeaponSystems/Utils/Ammo"] = Ammo
+    package.loaded["WeaponSystems/Utils/Magazine"] = Magazine
+    package.loaded["WeaponSystems/Utils/RateOfFire"] = Rate
+    package.loaded["WeaponSystems/Utils/StatsFactory"] = Stats
+    local oldMods = getActivatedMods
+    getActivatedMods = function() return { size = function() return 1 end, get = function() return "\\SWMG" end } end
+    package.loaded["ZGB/ZGB_Gunworks"] = nil
+    ZGB.Gunworks = nil
+    require "ZGB/ZGB_Gunworks"
+    local GW = ZGB.Gunworks
+    assert(GW.register(), "registers when SWMG is active")
+    assert(GW.register(), "second call is a no-op")
+    eq(#reg.layers, 1)
+    eq(reg.weapons["ZGB.AK47"], "ZGB:AK47")
+    eq(reg.items["ZGB.AK47_Drum75"], "ZGB:762x39")
+    eq(reg.families["ZGB:9x19"][1].type, "Base.Bullets9mm")
+    assert(reg.families["ZGB:9x19"][1].enum, "each round carries its AmmoType object")
+    eq(reg.rate["ZGB.M16A2"].burstCount, 3)
+    -- a drum in the AK: our layer adds the tier's aim time on top of the base
+    local ak = instanceItem("ZGB.AK47")
+    local baseAim = ak:getAimingTime()
+    function ak:isContainsClip() return true end
+    ak:setMagazineType("ZGB.AK47_Drum75")
+    local st = ZGB.Item.applyStats(ak)
+    eq(ak:getAimingTime(), baseAim + 6)
+    eq(st.aimTime, baseAim + 6)
+    ZGB.Item.applyStats(ak)
+    eq(ak:getAimingTime(), baseAim + 6, "re-applying never stacks:")
+    GW.active = false
+    getActivatedMods = oldMods
+    for _, k in ipairs({ "Ammo", "Magazine", "RateOfFire", "StatsFactory" }) do package.loaded["WeaponSystems/Utils/" .. k] = nil end
 end)
 
 print("addon clients (stub game)")
@@ -824,10 +1288,14 @@ test("clients load and react: equip -> stance -> anim variables, reload -> callo
     require "ZGBIso/ZGB_IsoClient"
     require "ZGBHolding/ZGB_HoldingClient"
     require "ZGBCalls/ZGB_CallsClient"
-    eq(#AD.missingEssentials(), 1, "holding registered, reload not yet:")
+    eq(#AD.missingEssentials(), 0, "holding is the only essential addon:")
     require "ZGBReload/ZGB_ReloadHooks"
-    eq(#AD.missingEssentials(), 0)
+    assert(AD.has("reload"), "reload events addon registers (optional)")
 
+    -- stance animations are experimental and off by default: vanilla poses
+    E.emit("weapon.equip", { player = player, gun = {}, spec = ak })
+    eq(player.vars.ZGB_AnimType, "none", "stance animations off by default:")
+    SB.set("ZGBIso", "CustomAnimations", true)
     E.emit("weapon.equip", { player = player, gun = {}, spec = ak })
     eq(player.vars.ZGB_AnimType, "rifle"); eq(player.vars.ZGB_Stance, "novice")
     eq(player.vars.ZGB_Kick, RF.kickClass(ak))
@@ -850,8 +1318,14 @@ test("clients load and react: equip -> stance -> anim variables, reload -> callo
     ZGB.Item.setAttachments(gun, { side_mount = "ZGB.Mount_AK_SideRail" })
     ZGB.Mode.notify("onAttachmentsChanged", player, gun, ak)
     eq(gun.sprite, "ZGB.AK47__Mount_AK_SideRail"); eq(refreshed, 1)
+    -- a suppressor is drawn by vanilla on the SAME variant: the hands must still be redrawn
+    -- (in game the suppressor never showed up while we skipped this)
+    ZGB.Item.setAttachments(gun, { side_mount = "ZGB.Mount_AK_SideRail", muzzle = "ZGB.Muzzle_AK_Suppressor" })
     ZGB.Mode.notify("onAttachmentsChanged", player, gun, ak)
-    eq(refreshed, 1, "same model: no refresh:")
+    eq(gun.sprite, "ZGB.AK47__Mount_AK_SideRail", "suppressor is not baked:"); eq(refreshed, 2, "redrawn for the suppressor:")
+    -- equipping again with nothing changed does not redraw
+    ZGB.Mode.notify("onWeaponEquipped", player, gun, ak)
+    eq(refreshed, 2, "re-equip, same model: no redraw:")
     SB.set("ZGBIso", "ModelVariants", false)
     ZGB.Mode.notify("onAttachmentsChanged", player, gun, ak)
     eq(gun.sprite, "ZGB.AK47"); SB._reset()

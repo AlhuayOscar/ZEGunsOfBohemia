@@ -1,30 +1,28 @@
 --[[
     ZGB_ReloadHooks.lua  —  the reloading addon's link to vanilla reloading.
-    (Moved out of Core in v0.5: reloading is an essential addon now.)
+    (Moved out of Core in v0.5.)
 
-    1. Reload key (R) with an empty gun: before vanilla looks for a magazine of
-       the gun's MagazineType, we point MagazineType at the best compatible
-       magazine you carry (most rounds; ties keep the type you were using).
-    2. After ANY magazine insert (R key, our menu, vanilla menu) we record which
-       magazine is loaded and re-apply stats.
-    3. Every reload is planned by ZGB.Reload (kind, steps, timing). The vanilla
-       action is scaled to the plan, and reload.start / reload.step /
-       reload.complete / ammo.lastMag are emitted for the views and callouts.
+    Since v0.8 Gunworks (SWMG) does the reloading itself: it picks the best magazine,
+    keeps mixed rounds in a magazine, sets the reload speed and handles speedloaders.
+    This addon only follows those actions to tell the rest of the mod:
+      * every reload is planned by ZGB.Reload (kind, steps, timing) and
+        reload.start / reload.step / reload.complete / ammo.lastMag are emitted
+        for the views (case dropping) and the callouts;
+      * after a magazine goes in, the stats are recomputed (the magazine tier counts).
 
     Wrappers are installed once at OnGameStart and always call the original.
-    Other gun / reload frameworks are incompatible (Core blocks them).
+    Gun frameworks other than Gunworks are incompatible (Core blocks them).
     -- VERIFY names/fields
 ]]
 require "ZGB/ZGB_ItemBridge"
 require "ZGB/ZGB_Events"
-require "ZGB/ZGB_Sandbox"
 require "ZGB/ZGB_Addons"
 require "ZGBReload/ZGB_Reload"
 
-local I, M, E, SB, R = ZGB.Item, ZGB.Magazines, ZGB.Events, ZGB.Sandbox, ZGB.Reload
+local I, M, E, R = ZGB.Item, ZGB.Magazines, ZGB.Events, ZGB.Reload
 
 ZGB.Addons.register{ id = "reload", name = "ZE Guns Of Bohemia - Reloading", modId = "ZEGunsOfBohemiaReload",
-                     version = "0.6.0", essential = true }
+                     version = "0.8.0", essential = false }
 
 -- ---------------------------------------------------------------- planned reloads
 local active = setmetatable({}, { __mode = "k" })   -- action -> { plan, payload, t0, next }
@@ -45,8 +43,7 @@ local function begin(action, magItem)
     end
     local plan = R.plan(spec, { rounds = I.gunAmmo(gun), magTier = tier },
                         { skill = I.perkLevel(action.character, "Reloading"),
-                          speed = SB.get("ZGBReload", "Speed", 100) })
-    I.scaleActionTime(action, R.actionFactor(plan.kind, tier, SB.get("ZGBReload", "Speed", 100)))
+                          speed = 100 })     -- the real speed is Gunworks': the plan only times the events
     local payload = { player = action.character, gun = gun, spec = spec, kind = plan.kind,
                       duration = plan.duration, spent = plan.spent, plan = plan }
     active[action] = { plan = plan, payload = payload, t0 = clock(), next = 1 }
@@ -69,7 +66,7 @@ local function finish(action)
 end
 
 Events.OnTick.Add(function()
-    if next(active) == nil then return end
+    if ZGB.isEmpty(active) then return end
     local t = clock()
     for action, a in pairs(active) do
         local due
@@ -86,52 +83,7 @@ end)
 local function onInserted(action)
     local gun = action and (action.gun or action.weapon)              -- VERIFY field name
     if not gun or not ZGB.WeaponFactory.isOurs(gun) then return end
-    local mag = action.magazine
-    local ft
-    if mag then pcall(function() ft = mag:getFullType() end) end
-    if not ft then pcall(function() ft = gun:getMagazineType() end) end
-    if ft then I.state(gun).loadedMag = ft end
-    -- the gun now fires whatever variant the magazine held
-    local variant
-    if mag then pcall(function() variant = mag:getAmmoType() end) end
-    if variant and ZGB.AmmoCatalog.variantOfItem(variant) then I.setGunAmmo(gun, variant) end
     I.applyStats(gun)
-end
-
--- Vanilla eject creates a fresh magazine item from the script, which would reset
--- it to the default ammo. Re-tag the newest magazine with the variant it held.
-local function ejectBefore(action)
-    local gun = action and (action.gun or action.weapon)              -- VERIFY field name
-    if not gun or not ZGB.WeaponFactory.isOurs(gun) then return nil end
-    local magType, variant
-    pcall(function() magType = gun:getMagazineType() end)
-    variant = I.loadedAmmo(gun)
-    return { gun = gun, magType = magType, variant = variant }
-end
-
-local function ejectAfter(action, ctx)
-    if not ctx or not ctx.magType or not ctx.variant then return end
-    local items = action.character:getInventory():getItems()
-    for i = items:size() - 1, 0, -1 do                                 -- newest first
-        local it = items:get(i)
-        if it:getFullType() == ctx.magType then
-            pcall(function() it:setAmmoType(ctx.variant) end)
-            return
-        end
-    end
-end
-
-local function wrapAround(tbl, name, before, after)
-    local orig = tbl and tbl[name]
-    if type(orig) ~= "function" then return false end
-    tbl[name] = function(self, ...)
-        local okB, ctx = pcall(before, self)
-        local r = orig(self, ...)
-        local ok, e = pcall(after, self, okB and ctx or nil)
-        if not ok then ZGB.err("hook", name, e) end
-        return r
-    end
-    return true
 end
 
 local function wrap(tbl, name, after)
@@ -150,12 +102,11 @@ local function installHooks()
     if ZGB._reloadHooksInstalled then return end   -- never double-wrap
     if ZGB.Mode.isBlocked() then return end        -- a foreign reload mod owns these functions
     ZGB._reloadHooksInstalled = true
-    -- (2) record magazine after insert. B42 does the work in complete(); also wrap
-    -- perform() so SP on builds without complete() is covered. applyStats is idempotent.
+    -- after an insert: stats again (B42 does the work in complete(); perform() covers older builds)
     if ISInsertMagazine then
         wrap(ISInsertMagazine, "complete", onInserted)
         wrap(ISInsertMagazine, "perform", onInserted)
-        -- (3) planned reloads: start -> plan + events, complete/perform -> done, stop -> cancelled
+        -- planned reloads: start -> plan + events, complete/perform -> done, stop -> cancelled
         wrap(ISInsertMagazine, "start", function(self) begin(self, self.magazine) end)
         wrap(ISInsertMagazine, "complete", finish)
         wrap(ISInsertMagazine, "perform", finish)
@@ -172,31 +123,6 @@ local function installHooks()
         wrap(ISReloadWeaponAction, "complete", finish)
         wrap(ISReloadWeaponAction, "perform", finish)
         wrap(ISReloadWeaponAction, "stop", function(self) active[self] = nil end)
-    end
-    if ISEjectMagazine then
-        wrapAround(ISEjectMagazine, "complete", ejectBefore, ejectAfter)
-        wrapAround(ISEjectMagazine, "perform", ejectBefore, ejectAfter)
-    else
-        ZGB.warn("ISEjectMagazine not found - ejected mags revert to default ammo")
-    end
-
-    -- (1) choose best magazine on R
-    if ISReloadWeaponAction and ISReloadWeaponAction.BeginAutomaticReload then
-        local orig = ISReloadWeaponAction.BeginAutomaticReload
-        ISReloadWeaponAction.BeginAutomaticReload = function(playerObj, ...)
-            pcall(function()
-                local gun = playerObj:getPrimaryHandItem()
-                local spec = ZGB.WeaponFactory.specOf(gun)
-                if spec and #M.list(spec) > 1 and not I.containsClip(gun) then
-                    local current = I.state(gun).loadedMag or spec.magazine.item
-                    local best = M.chooseBest(spec, I.compatibleMagazinesIn(playerObj:getInventory(), spec), current)
-                    if best then I.setLoadedMagazine(gun, best.fullType) end
-                end
-            end)
-            return orig(playerObj, ...)
-        end
-    else
-        ZGB.warn("ISReloadWeaponAction.BeginAutomaticReload not found - R key uses default mag only")
     end
 end
 

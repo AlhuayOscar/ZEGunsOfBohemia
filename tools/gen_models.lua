@@ -1,23 +1,28 @@
 --[[
-    Generates every placeholder model from the model factory, one folder per
-    item so the 3D artist can replace them one by one:
+    Plans every model of the mod, one folder per item so the 3D artist can
+    replace them one by one; tools/blender/import_models.py then builds them:
 
-      media/models_X/ZGB/Guns/<Category>/<GunId>/<GunId>.X           base gun
-      media/models_X/ZGB/Guns/<Category>/<GunId>/<GunId>__<Parts>.X  variants (baked parts)
-      media/models_X/ZGB/Attachments/<Type>/<PartId>/<PartId>.X      e.g. Attachments/Suppressors/Suppressor_Rifle556/
-      media/models_X/ZGB/Magazines/<Caliber>/<MagId>/<MagId>.X
-      media/models_X/ZGB/Casings/<CasingId>/<CasingId>.X
-      media/textures/ZGB/ZGB_Placeholder.png       colour atlas shared by every placeholder
-      media/textures/Item_ZGB_<Id>.png              inventory icons (side view)
+      media/models_X/ZGB/Guns/<Category>/<GunId>/<GunId>.fbx           base gun
+      media/models_X/ZGB/Guns/<Category>/<GunId>/<GunId>__<Parts>.fbx  variants (built-in parts)
+      media/models_X/ZGB/Attachments/<Type>/<PartId>/<PartId>.fbx      e.g. Attachments/Suppressors/Suppressor_Rifle556/
+      media/models_X/ZGB/Magazines/<Caliber>/<MagId>/<MagId>.fbx
+      media/models_X/ZGB/Casings/<CasingId>/<CasingId>.fbx
+      media/textures/ZGB/ZGB_Atlas.png              palette texture of placeholder-only models (Blender step)
+      media/textures/ZGB/Guns/<Id>.png              one texture per gun with a real model: the gun and every
+                                                    part baked into its variants (Blender step)
+      media/textures/ZGB/Parts/<Id>.png             one texture per real attachment model (Blender step)
+      media/textures/Item_ZGB_<Id>.png              inventory icons (side view; real models: Blender step)
       media/textures/ZGB/Preview/<Id>.png           Gunsmith preview sprites (side view, 300 px/m)
       media/scripts/ZGB_models.txt                  model scripts + attachment points (GENERATED)
 
-    Run from the repo root after editing ZGB_Def_Models.lua, parts or guns:
+    This step writes the model scripts, the placeholder icons / previews, the
+    credits and .cache/model_manifest.json; every mesh is built and exported
+    as FBX by the Blender step, placeholders included (one format to verify).
 
         lua5.1 tools/gen_models.lua
+        blender -b -P tools/blender/import_models.py
 
-    !! VERIFY in game: the .X axis convention / winding, the model script
-    !! syntax, and `scale`. Change AXES / WINDING / SCALE below, not the data.
+    !! VERIFY in game: FBX units / axes and the model script syntax and `scale`.
 ]]
 local CORE = "Contents/mods/ZEGunsOfBohemiaCore/42/media/"
 package.path = CORE .. "lua/shared/?.lua;tools/lib/?.lua;" .. package.path
@@ -32,11 +37,21 @@ local Img = require "zgb_image"
 
 local WF, PF, MGF, MF, V, AC = ZGB.WeaponFactory, ZGB.PartFactory, ZGB.MagazineFactory, ZGB.ModelFactory, ZGB.Visuals, ZGB.AmmoCatalog
 
-local AXES    = function(x, y, z) return x, y, z end   -- our (forward, up, right) -> file axes. VERIFY
-local WINDING = "ccw"                                    -- "ccw" | "cw". VERIFY (inside-out faces = flip)
-local SCALE   = 1.0                                      -- model script scale. VERIFY
-local SEGMENTS = 8
-local ATLAS = "ZGB_Placeholder"
+local function frameOf(spec) return spec and not spec.twoHanded and MF.FRAMES.hand or MF.FRAMES.long end
+-- real size -> game scale, in a frame
+local AXES  = function(x, y, z, frame)
+    local k = MF.GAME_SCALE
+    local a, b, c = (frame or MF.FRAMES.long).axes(x, y, z)
+    return a * k, b * k, c * k
+end
+local SCALE = 1.0                                      -- model script scale: GAME_SCALE is baked into meshes and points
+local ATLAS = "ZGB_Atlas"                              -- written by the Blender step
+-- Texture of a model. A model script names ONE texture, so everything baked into one mesh
+-- shares it: a gun with a real model gets its own (the gun plus every part of its variants),
+-- a real attachment its own, placeholder-only models the palette atlas. Detailed models get
+-- 1024 px for the gun (first person needs it); the atlas grows to fit (import_models.py).
+local function gunAtlas(spec) return "Guns/" .. spec.id end
+local function partAtlas(part) return "Parts/" .. part.id end
 
 local isWindows = package.config:sub(1, 1) == "\\"
 local function mkdir(path)
@@ -51,120 +66,10 @@ local function write(path, text)
     local f = assert(io.open(path, "wb")); f:write(text); f:close()
 end
 
--- ---------------------------------------------------------------- folders
-local CATEGORY_FOLDER = { handgun = "Handguns", revolver = "RevolversHandCannons", assault_rifle = "AssaultRifles",
-    dmr = "DMRs", sniper = "SniperRifles", smg = "SMGs", shotgun = "Shotguns", lever = "LeverActions" }
-local function partFolder(p)
-    local id = p.id
-    if p.kind == "muzzle" then
-        if id:find("Suppressor") then return "Suppressors" end
-        if id:find("FlashHider") then return "FlashHiders" end
-        if id:find("Choke") then return "Chokes" end
-        return "MuzzleBrakes"
-    end
-    if p.kind == "underbarrel" then
-        if id:find("^Grip") then return "Grips" end
-        if id:find("^Laser") then return "Lasers" end
-        return "Lights"
-    end
-    local map = { optic = "Optics", mount = "Mounts", handguard = "Handguards", adapter = "Adapters", bipod = "Bipods",
-                  stock = "Stocks", sidesaddle = "ShellHolders", shellholder = "ShellHolders", recoilpad = "RecoilPads", sling = "Slings" }
-    return map[p.kind] or "Other"
-end
-local function calFolder(id) return (AC.CALIBERS[id].label:gsub("[^%w]+", "")) end
-
--- ---------------------------------------------------------------- meshes
-local function uvFor(mat)
-    local m = MF.MATERIALS[mat] or MF.MATERIALS.steel
-    local g = MF.ATLAS_GRID
-    return ((m.i % g) + 0.5) / g, (math.floor(m.i / g) + 0.5) / g
-end
-
-local function meshOf(prims)
-    local verts, norms, uvs, faces = {}, {}, {}, {}
-    local function v(x, y, z, nx, ny, nz, u, w)
-        verts[#verts + 1] = { AXES(x, y, z) }; norms[#norms + 1] = { AXES(nx, ny, nz) }; uvs[#uvs + 1] = { u, w }
-        return #verts - 1
-    end
-    local function tri(a, b, c)
-        if WINDING == "ccw" then faces[#faces + 1] = { a, b, c } else faces[#faces + 1] = { a, c, b } end
-    end
-    local function quad(p1, p2, p3, p4, n, u, w)
-        local a = v(p1[1], p1[2], p1[3], n[1], n[2], n[3], u, w)
-        local b = v(p2[1], p2[2], p2[3], n[1], n[2], n[3], u, w)
-        local c = v(p3[1], p3[2], p3[3], n[1], n[2], n[3], u, w)
-        local d = v(p4[1], p4[2], p4[3], n[1], n[2], n[3], u, w)
-        tri(a, b, c); tri(a, c, d)
-    end
-    for _, p in ipairs(prims) do
-        local u, w = uvFor(p.m)
-        if p.t == "box" then
-            local x0, y0, z0, x1, y1, z1 = p.a[1], p.a[2], p.a[3], p.b[1], p.b[2], p.b[3]
-            quad({ x1, y0, z0 }, { x1, y1, z0 }, { x1, y1, z1 }, { x1, y0, z1 }, { 1, 0, 0 }, u, w)
-            quad({ x0, y0, z1 }, { x0, y1, z1 }, { x0, y1, z0 }, { x0, y0, z0 }, { -1, 0, 0 }, u, w)
-            quad({ x0, y1, z0 }, { x0, y1, z1 }, { x1, y1, z1 }, { x1, y1, z0 }, { 0, 1, 0 }, u, w)
-            quad({ x0, y0, z1 }, { x0, y0, z0 }, { x1, y0, z0 }, { x1, y0, z1 }, { 0, -1, 0 }, u, w)
-            quad({ x0, y0, z1 }, { x1, y0, z1 }, { x1, y1, z1 }, { x0, y1, z1 }, { 0, 0, 1 }, u, w)
-            quad({ x1, y0, z0 }, { x0, y0, z0 }, { x0, y1, z0 }, { x1, y1, z0 }, { 0, 0, -1 }, u, w)
-        else
-            -- local frame: t along the axis, (s1, s2) across it
-            local function at(t, a1, a2)
-                local c = p.c
-                if p.axis == "x" then return { c[1] + t, c[2] + a1, c[3] + a2 } end
-                if p.axis == "y" then return { c[1] + a2, c[2] + t, c[3] + a1 } end
-                return { c[1] + a1, c[2] + a2, c[3] + t }
-            end
-            local function dir(a1, a2) local q = at(0, a1, a2); return { q[1] - p.c[1], q[2] - p.c[2], q[3] - p.c[3] } end
-            local axisN = dir(0, 0); axisN = (p.axis == "x" and { 1, 0, 0 }) or (p.axis == "y" and { 0, 1, 0 }) or { 0, 0, 1 }
-            for i = 0, SEGMENTS - 1 do
-                local t0, t1 = i / SEGMENTS * 2 * math.pi, (i + 1) / SEGMENTS * 2 * math.pi
-                local c0, s0, c1, s1 = math.cos(t0), math.sin(t0), math.cos(t1), math.sin(t1)
-                local n0 = dir(c0, s0)
-                quad(at(0, p.r * c0, p.r * s0), at(0, p.r * c1, p.r * s1), at(p.len, p.r * c1, p.r * s1), at(p.len, p.r * c0, p.r * s0),
-                     { n0[1], n0[2], n0[3] }, u, w)
-                -- caps
-                local a = v(at(p.len, 0, 0)[1], at(p.len, 0, 0)[2], at(p.len, 0, 0)[3], axisN[1], axisN[2], axisN[3], u, w)
-                local q0, q1 = at(p.len, p.r * c0, p.r * s0), at(p.len, p.r * c1, p.r * s1)
-                local b = v(q0[1], q0[2], q0[3], axisN[1], axisN[2], axisN[3], u, w)
-                local c = v(q1[1], q1[2], q1[3], axisN[1], axisN[2], axisN[3], u, w)
-                tri(a, b, c)
-                local e = at(0, 0, 0)
-                local a2 = v(e[1], e[2], e[3], -axisN[1], -axisN[2], -axisN[3], u, w)
-                local r0, r1 = at(0, p.r * c0, p.r * s0), at(0, p.r * c1, p.r * s1)
-                local b2 = v(r0[1], r0[2], r0[3], -axisN[1], -axisN[2], -axisN[3], u, w)
-                local c2 = v(r1[1], r1[2], r1[3], -axisN[1], -axisN[2], -axisN[3], u, w)
-                tri(a2, c2, b2)
-            end
-        end
-    end
-    return verts, norms, uvs, faces
-end
+-- ---------------------------------------------------------------- folders (shared with gen_model_list.lua)
+local Paths = require "zgb_paths"
 
 local function f4(n) local s = string.format("%.4f", n); if s == "-0.0000" then s = "0.0000" end return s end
-local function xFile(prims)
-    local verts, norms, uvs, faces = meshOf(prims)
-    local o = { "xof 0303txt 0032\n\n",
-        "Material ", ATLAS, " {\n 1.000000;1.000000;1.000000;1.000000;;\n 8.000000;\n 0.000000;0.000000;0.000000;;\n 0.000000;0.000000;0.000000;;\n",
-        " TextureFilename { \"", ATLAS, ".png\"; }\n}\n\n",
-        "Frame ZGB_Root {\n FrameTransformMatrix { 1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,1.0;; }\n",
-        " Mesh ZGB_Mesh {\n  ", #verts, ";\n" }
-    local function list(items, fmt)
-        for i, it in ipairs(items) do o[#o + 1] = "  " .. fmt(it) .. (i == #items and ";\n" or ",\n") end
-    end
-    list(verts, function(p) return f4(p[1]) .. ";" .. f4(p[2]) .. ";" .. f4(p[3]) .. ";" end)
-    o[#o + 1] = "  " .. #faces .. ";\n"
-    list(faces, function(f) return "3;" .. f[1] .. "," .. f[2] .. "," .. f[3] .. ";" end)
-    o[#o + 1] = "  MeshNormals {\n  " .. #norms .. ";\n"
-    list(norms, function(p) return f4(p[1]) .. ";" .. f4(p[2]) .. ";" .. f4(p[3]) .. ";" end)
-    o[#o + 1] = "  " .. #faces .. ";\n"
-    list(faces, function(f) return "3;" .. f[1] .. "," .. f[2] .. "," .. f[3] .. ";" end)
-    o[#o + 1] = "  }\n  MeshTextureCoords {\n  " .. #uvs .. ";\n"
-    list(uvs, function(t) return f4(t[1]) .. ";" .. f4(t[2]) .. ";" end)
-    o[#o + 1] = "  }\n  MeshMaterialList {\n  1;\n  " .. #faces .. ";\n"
-    for i = 1, #faces do o[#o + 1] = "  0" .. (i == #faces and ";;\n" or ",\n") end
-    o[#o + 1] = "  {" .. ATLAS .. "}\n  }\n }\n}\n"
-    return table.concat(o), #faces
-end
 
 -- ---------------------------------------------------------------- outputs
 local MODELS, TEX = CORE .. "models_X/ZGB/", CORE .. "textures/ZGB/"
@@ -174,26 +79,31 @@ else os.execute('rm -f "' .. CORE .. 'textures/"Item_ZGB_*.png') end
 mkdir(TEX .. "Preview")
 local scripts = { "/*\n    ZE Guns Of Bohemia - model scripts.\n    GENERATED by tools/gen_models.lua from ZGB_Def_Models.lua - do not edit by hand.\n",
                   "    Attachment points are where parts mount; part models mount by their \"anchor\".\n    VERIFY: syntax, scale and axes on your build.\n*/\nmodule ZGB\n{\n    imports { Base }\n" }
-local stats = { models = 0, faces = 0, icons = 0, previews = 0 }
+local stats = { models = 0, icons = 0, previews = 0 }
 
-local function modelScript(id, mesh, points)
-    local o = { string.format("\n    model %s\n    {\n        mesh = %s,\n        texture = ZGB/%s,\n        scale = %s,\n", id, mesh, ATLAS, tostring(SCALE)) }
-    for _, name in ipairs(ZGB.sortedKeys(points)) do
-        local p = points[name]
-        local x, y, z = AXES(p[1], p[2], p[3])
-        o[#o + 1] = string.format("        attachment %s\n        {\n            offset = %s %s %s,\n            rotate = 0.0000 0.0000 0.0000,\n        }\n", name, f4(x), f4(y), f4(z))
+-- gun = the gun spec for gun models (frame, muzzle); nil for parts, magazines, casings
+local function modelScript(id, mesh, points, texture, gun)
+    local frame = frameOf(gun)
+    local o = { string.format("\n    model %s\n    {\n        mesh = %s,\n        texture = ZGB/%s,\n        scale = %s,\n", id, mesh, texture or ATLAS, tostring(SCALE)) }
+    local all = {}
+    for name, p in pairs(points) do all[name] = p end
+    -- every vanilla gun has "muzzle": where the shot and the muzzle flash start. Without it,
+    -- ours did not fire (fourth in-game test)
+    if gun then all.muzzle = all.canon or MF.gunModel(gun).points.muzzle end
+    for _, name in ipairs(ZGB.sortedKeys(all)) do
+        local p = all[name]
+        local x, y, z = AXES(p[1], p[2], p[3], gun and frame or nil)
+        local rotate = "0.0000 0.0000 0.0000"
+        if gun and name == "muzzle" then rotate = frame.muzzleRotate
+        elseif gun and name ~= "world" then rotate = frame.partRotate end
+        o[#o + 1] = string.format("        attachment %s\n        {\n            offset = %s %s %s,\n            rotate = %s,\n        }\n",
+            name, f4(x), f4(y), f4(z), rotate)
     end
     o[#o + 1] = "    }\n"
     scripts[#scripts + 1] = table.concat(o)
 end
 
-local function emitModel(folder, id, prims, points)
-    mkdir(MODELS .. folder)
-    local text, nf = xFile(prims)
-    write(MODELS .. folder .. "/" .. id .. ".X", text)
-    modelScript(id, "ZGB/" .. folder .. "/" .. id, points)
-    stats.models, stats.faces = stats.models + 1, stats.faces + nf
-end
+local emitModel   -- defined after the manifest: a placeholder is a Blender job with prims only
 
 local function icon(name, prims)
     local b = MF.bounds(prims)
@@ -219,23 +129,81 @@ local function preview(name, prims, bounds)
     stats.previews = stats.previews + 1
 end
 
--- atlas
-local G = MF.ATLAS_GRID
-local atlas = Img.new(G * 16, G * 16)
-for _, m in pairs(MF.MATERIALS) do
-    local cx, cy = (m.i % G) * 16, math.floor(m.i / G) * 16
-    Img.fillRect(atlas, cx, cy, cx + 16, cy + 16, m.rgb[1] * 255, m.rgb[2] * 255, m.rgb[3] * 255, 255)
+-- ---------------------------------------------------------------- real models (tools/model_sources.lua)
+-- Anything with a real source becomes a job for the Blender step
+-- (tools/blender/import_models.py) instead of a placeholder .X: the real mesh
+-- is fitted into the placeholder's box, baked into the shared atlas and
+-- composed with other parts for variants. The manifest tells Blender what to do.
+local Sources = dofile("tools/model_sources.lua")
+local REAL_ATLAS = ATLAS
+local manifest = { ppm = MF.PREVIEW_PPM, pad = MF.PREVIEW_PAD, atlas = REAL_ATLAS, tile = 256, game_scale = MF.GAME_SCALE,
+                   palette = {}, paletteGrid = MF.ATLAS_GRID, sources = {}, assets = {}, jobs = {}, previews = {}, icons = {},
+                   out = { models = MODELS, textures = TEX, icons = CORE .. "textures/", lua = CORE .. "lua/shared/ZGB/Defs/" } }
+for name, m in pairs(MF.MATERIALS) do manifest.palette[name] = { i = m.i, rgb = m.rgb } end
+local function isReal(id) return Sources.MODELS[id] ~= nil end
+local cacheOk = io.open(".cache/model_sources/LowPolyFirearms.blend", "rb")
+if cacheOk then cacheOk:close() else
+    print("WARNING: .cache/model_sources/ is missing - real models need it (see tools/model_sources.lua). Run the Blender step only with it.")
 end
-Img.save(atlas, TEX .. ATLAS .. ".png")
+for id, src in pairs(Sources.MODELS) do
+    local pack = Sources.PACKS[src.pack]
+    local file = ".cache/model_sources/" .. (pack.dir ~= "" and (pack.dir .. "/") or "") .. (src.file or pack.file)
+    manifest.sources[id] = { file = file, object = src.object, fix = src.fix or {}, pack = src.pack,
+                             -- baked texture size and face budget: detailed packs get more of both
+                             texture = src.texture or pack.texture or 256, maxFaces = src.maxFaces or pack.maxFaces }
+end
+local function realAsset(id, kind, folder, prims)
+    manifest.assets[id] = { kind = kind, folder = folder, bounds = MF.bounds(prims), prims = prims }
+end
+local function job(id, folder, components, points, gun, atlas)
+    mkdir(MODELS .. folder)
+    atlas = atlas or REAL_ATLAS
+    -- roll: see MF.FRAMES (long guns and parts roll at export, one-handed guns don't)
+    manifest.jobs[#manifest.jobs + 1] = { id = id, folder = folder, components = components, roll = frameOf(gun).roll,
+                                          atlas = atlas }
+    modelScript(id, "ZGB/" .. folder .. "/" .. id, points, atlas, gun)
+    stats.models = stats.models + 1
+end
+emitModel = function(folder, id, prims, points, gun) job(id, folder, { { prims = prims } }, points, gun) end
 
 -- guns: base + every variant, icons, preview sprites (with hidden pieces left out)
 for _, spec in ipairs(WF.all()) do
-    local folder = "Guns/" .. (CATEGORY_FOLDER[spec.category] or "Other") .. "/" .. spec.id
+    local folder = Paths.gun(spec)
     local base = MF.gunModel(spec)
+    local gunReal = isReal(spec.id)
+    if gunReal then realAsset(spec.id, "gun", folder, base.prims) end
     for _, att in ipairs(V.variants(spec)) do
         local vm = V.variantModel(spec, att)
-        emitModel(folder, vm.id, vm.prims, vm.points)
+        local placed, anyReal = {}, gunReal
+        for _, pl in ipairs(V.layout(spec, att).placed) do
+            if pl.mode == "baked" then
+                placed[#placed + 1] = pl
+                if isReal(pl.part.id) then anyReal = true end
+            end
+        end
+        if not anyReal then
+            emitModel(folder, vm.id, vm.prims, vm.points, spec)
+        else
+            local hidden, comps = V.hiddenTags(spec, att), {}
+            if gunReal then comps[1] = { real = spec.id, pos = { 0, 0, 0 } }
+            else
+                local prims = {}
+                for _, p in ipairs(base.prims) do if not (p.tag and hidden[p.tag]) then prims[#prims + 1] = p end end
+                comps[1] = { prims = prims }
+            end
+            for _, pl in ipairs(placed) do
+                if isReal(pl.part.id) then comps[#comps + 1] = { real = pl.part.id, pos = pl.pos }
+                else comps[#comps + 1] = { prims = MF.translate(MF.partModel(pl.part).prims, pl.pos[1], pl.pos[2], pl.pos[3]) } end
+            end
+            job(vm.id, folder, comps, vm.points, spec, gunAtlas(spec))
+        end
     end
+    if gunReal then
+        manifest.icons[#manifest.icons + 1] = spec.id
+        for _, suffix in ipairs({ "", "_nostock", "_nohandguard", "_nostock_nohandguard" }) do
+            manifest.previews[#manifest.previews + 1] = { name = spec.id .. suffix, asset = spec.id }
+        end
+    else
     icon(spec.id, base.prims)
     local full = MF.bounds(base.prims)
     preview(spec.id, base.prims, full)
@@ -249,13 +217,20 @@ for _, spec in ipairs(WF.all()) do
     if hasTag.stock then preview(spec.id .. "_nostock", without({ stock = true }), full) end
     if hasTag.handguard then preview(spec.id .. "_nohandguard", without({ handguard = true }), full) end
     if hasTag.stock and hasTag.handguard then preview(spec.id .. "_nostock_nohandguard", without({ stock = true, handguard = true }), full) end
+    end
 end
 
 -- attachments
 for _, part in ipairs(PF.all()) do
     local m = MF.partModel(part)
-    if m then
-        emitModel("Attachments/" .. partFolder(part) .. "/" .. part.id, part.id, m.prims, ZGB.merge({ anchor = { 0, 0, 0 }, world = { 0, 0, 0 } }, m.provides))
+    local points = m and ZGB.merge({ anchor = { 0, 0, 0 }, world = { 0, 0, 0 } }, m.provides)
+    if m and isReal(part.id) then
+        realAsset(part.id, "part", Paths.part(part), m.prims)
+        job(part.id, Paths.part(part), { { real = part.id, pos = { 0, 0, 0 } } }, points, nil, partAtlas(part))
+        manifest.icons[#manifest.icons + 1] = part.id
+        manifest.previews[#manifest.previews + 1] = { name = part.id, asset = part.id }
+    elseif m then
+        emitModel(Paths.part(part), part.id, m.prims, points)
         icon(part.id, m.prims)
         preview(part.id, m.prims)
     else
@@ -266,7 +241,7 @@ end
 -- magazines and casings
 for _, mag in ipairs(MGF.all()) do
     local m = MF.magazineModel(mag)
-    emitModel("Magazines/" .. calFolder(mag.caliber) .. "/" .. mag.id, mag.id, m.prims, { anchor = { 0, 0, 0 }, world = { 0, 0, 0 } })
+    emitModel(Paths.magazine(mag, AC.CALIBERS[mag.caliber].label), mag.id, m.prims, { anchor = { 0, 0, 0 }, world = { 0, 0, 0 } })
     icon(mag.id, m.prims)
 end
 local doneCasing = {}
@@ -274,12 +249,19 @@ for group, c in pairs(AC.CASINGS) do
     if not doneCasing[c.id] then
         doneCasing[c.id] = true
         local m = MF.casingModel(c.id, group)
-        emitModel("Casings/" .. c.id, c.id, m.prims, { world = { 0, 0, 0 } })
+        emitModel(Paths.casing(c.id), c.id, m.prims, { world = { 0, 0, 0 } })
         icon(c.id, m.prims)
     end
 end
 
 scripts[#scripts + 1] = "}\n"
 write(CORE .. "scripts/ZGB_models.txt", table.concat(scripts))
-print(string.format("wrote %d models (%d triangles), %d icons, %d preview sprites, atlas %s.png",
-      stats.models, stats.faces, stats.icons, stats.previews, ATLAS))
+
+-- manifest for the Blender step, and the credits for every real model
+mkdir(".cache")
+write(".cache/model_manifest.json", require("zgb_json").encode(manifest))
+dofile("tools/gen_credits.lua")
+local nReal = 0
+for _ in pairs(manifest.assets) do nReal = nReal + 1 end
+print(string.format("real models: %d assets, %d Blender jobs -> run tools/blender/import_models.py next", nReal, #manifest.jobs))
+print(string.format("planned %d models, wrote %d icons and %d preview sprites", stats.models, stats.icons, stats.previews))

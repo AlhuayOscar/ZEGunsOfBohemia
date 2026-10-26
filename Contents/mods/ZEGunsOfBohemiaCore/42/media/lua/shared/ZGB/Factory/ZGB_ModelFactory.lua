@@ -51,6 +51,30 @@ MF.ATLAS_GRID = 4          -- 4 x 4 swatches
 
 -- Gunsmith preview sprites (side views): pixels per metre and margin. The UI
 -- places part sprites with the same numbers, so keep them in one place.
+-- Models are designed at real size (metres) and shrunk to the game's scale on export:
+-- vanilla guns are ~0.6 of their real length (M9 0.59, M16 0.57, M14 0.61, Rem 700 0.63,
+-- L92 0.56; measured from the game's .X files). At real size ours looked too big in hand.
+-- Applied to meshes AND attachment points, so model scripts keep scale = 1.
+MF.GAME_SCALE = 0.6
+-- Our points are (forward, up, right) at real size. In game, vanilla guns point along +Y, and
+-- the two rigs disagree on "up": long guns use +Z, one-handed guns are held upside down (-Z;
+-- the vanilla M9's scope sits below its muzzle). Fourth in-game test: our long guns showed up
+-- rolled 180 degrees (magazine up), the pistols looked right.
+--   long  points (right, forward, up); the Blender step rolls the mesh 180 deg (job.roll)
+--   hand  points (-right, forward, -up); mesh as is
+-- Parts are modelled in the long frame; on a one-handed gun their mount points carry a
+-- 180 deg roll (partRotate, as vanilla's pistol scope: 180 0 -180).
+MF.FRAMES = {
+    long = { axes = function(x, y, z) return z, x, y end, roll = true, muzzleRotate = "-90.0000 0.0000 180.0000",
+             partRotate = "0.0000 0.0000 0.0000" },
+    hand = { axes = function(x, y, z) return -z, x, -y end, roll = false, muzzleRotate = "-90.0000 0.0000 0.0000",
+             partRotate = "180.0000 0.0000 180.0000",
+             -- vanilla's hand holds a pistol 2.4 cm below the barrel (M9 muzzle z -0.028 x 0.85);
+             -- ours sat at 1.1 cm and the hand went into the slide (fifth in-game test). The whole
+             -- model goes up this much (real metres) so the hand holds it lower on the grip.
+             gripDrop = 0.022 },
+}
+
 MF.PREVIEW_PPM = 300
 MF.PREVIEW_PAD = 2
 
@@ -149,6 +173,14 @@ function MF.gunModel(spec)
     local shape = dims and MF._shapes[dims.shape]
     if not shape then return nil end
     local m = finish(shape(dims, spec))
+    -- one-handed guns sit higher in the hand (MF.FRAMES.hand.gripDrop): prims and points together
+    local drop = (not spec.twoHanded) and MF.FRAMES.hand.gripDrop or 0
+    if drop ~= 0 then
+        m.prims = MF.translate(m.prims, 0, drop, 0)
+        for _, set in ipairs({ m.points, m.provides }) do
+            for name, p in pairs(set) do set[name] = { p[1], p[2] + drop, p[3] } end
+        end
+    end
     m.id, m.kind = spec.id, "gun"
     MF._cache[key] = m
     return m

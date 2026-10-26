@@ -7,7 +7,7 @@
 
 ZGB = ZGB or {}
 
-ZGB.VERSION = "0.6.0"
+ZGB.VERSION = "0.8.0"
 ZGB.MODULE  = "ZGB"          -- script module of our items: ZGB.AK47, ZGB.Optic_RedDot, ...
 ZGB.DEBUG   = (getDebug ~= nil and getDebug()) or false
 
@@ -25,6 +25,12 @@ function ZGB.err(...)   print("[ZGB][ERROR] " .. join(...)) end
 function ZGB.debug(...) if ZGB.DEBUG then print("[ZGB][DBG] " .. join(...)) end end
 
 -- ---------------------------------------------------------------- tables
+--- True when the table has no entries. PZ's Kahlua has no `next`, so never call it.
+function ZGB.isEmpty(t)
+    for _ in pairs(t or {}) do return false end
+    return true
+end
+
 function ZGB.copy(t)
     if type(t) ~= "table" then return t end
     local out = {}

@@ -1,0 +1,16 @@
+Sandbox_EN = {
+    Sandbox_ZGB = "ZE Guns Of Bohemia",
+    Sandbox_ZGBIso_Casings = "Drop spent casings",
+    Sandbox_ZGBIso_Casings_tooltip = "Spent casings and shotgun hulls land next to the shooter (isometric view).",
+    Sandbox_ZGBIso_CasingLifetime = "Casing lifetime (minutes)",
+    Sandbox_ZGBIso_CasingLifetime_tooltip = "In-game minutes before dropped casings are cleaned up. 0 keeps them until the cap is reached.",
+    Sandbox_ZGBIso_MaxCasings = "Maximum casings on the ground",
+    Sandbox_ZGBIso_MaxCasings_tooltip = "Oldest casings are removed first once this many are on the ground.",
+    Sandbox_ZGBIso_RecoilPenalty = "Recoil affects sustained fire",
+    Sandbox_ZGBIso_RecoilPenalty_tooltip = "Each shot in a burst lowers hit chance along the gun's spray pattern; it resets when you stop firing.",
+
+    Sandbox_ZGBIso_ModelVariants = "Guns show their attachments",
+    Sandbox_ZGBIso_ModelVariants_tooltip = "Mounts, handguards, lasers, lights, shell holders and recoil pads change the gun's model. Off: the bare gun model.",
+    Sandbox_ZGBIso_CustomAnimations = "Stance animations (experimental)",
+    Sandbox_ZGBIso_CustomAnimations_tooltip = "Experimental: hold speed and sway by Aiming level, built on the vanilla gun poses. Off (default): plain vanilla gun animations.",
+}

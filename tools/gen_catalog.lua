@@ -7,7 +7,7 @@
         lua5.1 tools/gen_catalog.lua out.json   -> somewhere else
 ]]
 local ROOT = "Contents/mods/ZEGunsOfBohemiaCore/42/media/"
-package.path = ROOT .. "lua/shared/?.lua;" .. package.path
+package.path = ROOT .. "lua/shared/?.lua;tools/lib/?.lua;" .. package.path
 local realPrint = print
 print = function() end          -- silence mod logging
 require "ZGB/Defs/ZGB_Def_Parts"
@@ -18,25 +18,7 @@ print = realPrint
 
 local WF, MF, PF, AC, R = ZGB.WeaponFactory, ZGB.MagazineFactory, ZGB.PartFactory, ZGB.AmmoCatalog, ZGB.Attachments
 
--- ---------------------------------------------------------------- tiny JSON encoder
-local function encode(v)
-    local t = type(v)
-    if t == "string" then
-        return '"' .. v:gsub('[%c"\\]', function(c)
-            local map = { ['"'] = '\\"', ["\\"] = "\\\\", ["\n"] = "\\n", ["\t"] = "\\t" }
-            return map[c] or string.format("\\u%04x", c:byte())
-        end) .. '"'
-    elseif t == "number" or t == "boolean" then return tostring(v)
-    elseif t == "nil" then return "null"
-    end
-    local out = {}
-    if v[1] ~= nil or next(v) == nil then
-        for _, x in ipairs(v) do out[#out + 1] = encode(x) end
-        return "[" .. table.concat(out, ",") .. "]"
-    end
-    for _, k in ipairs(ZGB.sortedKeys(v)) do out[#out + 1] = encode(tostring(k)) .. ":" .. encode(v[k]) end
-    return "{" .. table.concat(out, ",") .. "}"
-end
+local encode = require("zgb_json").encode
 
 -- ---------------------------------------------------------------- slot trees
 local function sortedSlots(slots)

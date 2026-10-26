@@ -14,7 +14,6 @@ module ZGB
         Icon            = ZGB_Casing_RifleLarge,
         WorldStaticModel = ZGB.Casing_RifleLarge,
         Weight          = 0.005,
-        Tags            = ZGBCasing,
     }
 
     item Casing_Pistol
@@ -25,7 +24,6 @@ module ZGB
         Icon            = ZGB_Casing_Pistol,
         WorldStaticModel = ZGB.Casing_Pistol,
         Weight          = 0.005,
-        Tags            = ZGBCasing,
     }
 
     item Casing_Rifle
@@ -36,7 +34,6 @@ module ZGB
         Icon            = ZGB_Casing_Rifle,
         WorldStaticModel = ZGB.Casing_Rifle,
         Weight          = 0.005,
-        Tags            = ZGBCasing,
     }
 
     item Casing_ShotgunHull
@@ -47,6 +44,5 @@ module ZGB
         Icon            = ZGB_Casing_ShotgunHull,
         WorldStaticModel = ZGB.Casing_ShotgunHull,
         Weight          = 0.005,
-        Tags            = ZGBCasing,
     }
 }

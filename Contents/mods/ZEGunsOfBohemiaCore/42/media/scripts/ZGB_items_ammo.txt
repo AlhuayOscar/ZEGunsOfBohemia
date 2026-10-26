@@ -17,7 +17,8 @@ module ZGB
         Icon            = ShotgunShells,
         Weight          = 0.04,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_12ga_bird,
+        Tags            = base:ammo;base:shotgunshell,
     }
 
     item Ammo_12ga_SLUG
@@ -28,7 +29,8 @@ module ZGB
         Icon            = ShotgunShells,
         Weight          = 0.04,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_12ga_slug,
+        Tags            = base:ammo;base:shotgunshell,
     }
 
     item Ammo_12ga_FLECHETTE
@@ -39,7 +41,20 @@ module ZGB
         Icon            = ShotgunShells,
         Weight          = 0.04,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_12ga_flechette,
+        Tags            = base:ammo;base:shotgunshell,
+    }
+
+    item Ammo_223rem_FMJ
+    {
+        DisplayCategory = Ammo,
+        ItemType        = base:normal,
+        DisplayName     = .223 Rem FMJ,
+        Icon            = 556Bullets,
+        Weight          = 0.015,
+        Count           = 5,
+        AmmoType        = zgb:ammo_223rem_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_223rem_HP
@@ -50,7 +65,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_223rem_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_223rem_SP
@@ -61,7 +77,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_223rem_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_22lr_FMJ
@@ -72,7 +89,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.005,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_22lr_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_22lr_HV
@@ -83,7 +101,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.005,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_22lr_hv,
+        Tags            = base:ammo,
     }
 
     item Ammo_22lr_HP
@@ -94,7 +113,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.005,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_22lr_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_22lr_SUBSONIC
@@ -105,7 +125,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.005,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_22lr_subsonic,
+        Tags            = base:ammo,
     }
 
     item Ammo_3006_FMJ
@@ -116,7 +137,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_3006_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_3006_SP
@@ -127,7 +149,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_3006_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_3006_AP
@@ -138,7 +161,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_3006_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_3006_TRACER
@@ -149,7 +173,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_3006_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_3030_SP
@@ -160,7 +185,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_3030_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_3030_HP
@@ -171,7 +197,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_3030_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_303brit_FMJ
@@ -182,7 +209,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_303brit_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_303brit_SP
@@ -193,7 +221,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_303brit_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_303brit_TRACER
@@ -204,7 +233,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_303brit_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_303brit_AP
@@ -215,7 +245,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_303brit_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_308win_AP
@@ -226,7 +257,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_308win_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_308win_TRACER
@@ -237,7 +269,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_308win_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_308win_SP
@@ -248,7 +281,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_308win_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_308win_MATCH
@@ -259,7 +293,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_308win_match,
+        Tags            = base:ammo,
     }
 
     item Ammo_338lm_MATCH
@@ -270,7 +305,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.05,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_338lm_match,
+        Tags            = base:ammo,
     }
 
     item Ammo_338lm_AP
@@ -281,7 +317,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.05,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_338lm_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_338lm_SP
@@ -292,7 +329,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.05,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_338lm_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_357mag_SP
@@ -303,7 +341,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_357mag_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_357mag_HP
@@ -314,7 +353,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_357mag_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_357mag_FMJ
@@ -325,7 +365,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_357mag_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_380acp_FMJ
@@ -336,7 +377,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_380acp_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_380acp_HP
@@ -347,7 +389,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_380acp_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_38spl_HP
@@ -358,7 +401,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_38spl_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_38spl_PLUSP
@@ -369,7 +413,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_38spl_plusp,
+        Tags            = base:ammo,
     }
 
     item Ammo_38spl_WC
@@ -380,7 +425,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_38spl_wc,
+        Tags            = base:ammo,
     }
 
     item Ammo_40sw_FMJ
@@ -391,7 +437,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_40sw_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_40sw_HP
@@ -402,7 +449,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_40sw_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_410ga_BUCK
@@ -413,7 +461,8 @@ module ZGB
         Icon            = ShotgunShells,
         Weight          = 0.04,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_410ga_buck,
+        Tags            = base:ammo;base:shotgunshell,
     }
 
     item Ammo_410ga_BIRD
@@ -424,7 +473,8 @@ module ZGB
         Icon            = ShotgunShells,
         Weight          = 0.04,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_410ga_bird,
+        Tags            = base:ammo;base:shotgunshell,
     }
 
     item Ammo_410ga_SLUG
@@ -435,7 +485,8 @@ module ZGB
         Icon            = ShotgunShells,
         Weight          = 0.04,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_410ga_slug,
+        Tags            = base:ammo;base:shotgunshell,
     }
 
     item Ammo_44mag_HP
@@ -446,7 +497,8 @@ module ZGB
         Icon            = Bullets44,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_44mag_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_44mag_SP
@@ -457,7 +509,8 @@ module ZGB
         Icon            = Bullets44,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_44mag_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_454casull_SP
@@ -468,7 +521,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_454casull_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_454casull_HP
@@ -479,7 +533,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_454casull_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_4570_SP
@@ -490,7 +545,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_4570_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_4570_HP
@@ -501,7 +557,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_4570_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_45acp_HP
@@ -512,7 +569,8 @@ module ZGB
         Icon            = Bullets45,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_45acp_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_45acp_PLUSP
@@ -523,7 +581,8 @@ module ZGB
         Icon            = Bullets45,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_45acp_plusp,
+        Tags            = base:ammo,
     }
 
     item Ammo_45colt_FMJ
@@ -534,7 +593,8 @@ module ZGB
         Icon            = Bullets45,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_45colt_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_45colt_HP
@@ -545,7 +605,8 @@ module ZGB
         Icon            = Bullets45,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_45colt_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_500sw_SP
@@ -556,7 +617,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_500sw_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_500sw_HP
@@ -567,7 +629,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_500sw_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_50ae_FMJ
@@ -578,7 +641,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_50ae_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_50ae_HP
@@ -589,7 +653,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_50ae_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_50bmg_FMJ
@@ -600,7 +665,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.12,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_50bmg_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_50bmg_AP
@@ -611,7 +677,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.12,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_50bmg_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_50bmg_TRACER
@@ -622,7 +689,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.12,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_50bmg_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_50bmg_MATCH
@@ -633,7 +701,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.12,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_50bmg_match,
+        Tags            = base:ammo,
     }
 
     item Ammo_545x39_FMJ
@@ -644,7 +713,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_545x39_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_545x39_AP
@@ -655,7 +725,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_545x39_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_545x39_TRACER
@@ -666,7 +737,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_545x39_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_545x39_HP
@@ -677,7 +749,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_545x39_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_556x45_AP
@@ -688,7 +761,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_556x45_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_556x45_TRACER
@@ -699,7 +773,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_556x45_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_556x45_SP
@@ -710,7 +785,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_556x45_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_556x45_MATCH
@@ -721,7 +797,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_556x45_match,
+        Tags            = base:ammo,
     }
 
     item Ammo_57x28_FMJ
@@ -732,7 +809,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_57x28_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_57x28_AP
@@ -743,7 +821,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_57x28_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_57x28_TRACER
@@ -754,7 +833,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_57x28_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_57x28_SUBSONIC
@@ -765,7 +845,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_57x28_subsonic,
+        Tags            = base:ammo,
     }
 
     item Ammo_65cm_MATCH
@@ -776,7 +857,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_65cm_match,
+        Tags            = base:ammo,
     }
 
     item Ammo_65cm_SP
@@ -787,7 +869,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_65cm_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_65cm_HP
@@ -798,7 +881,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_65cm_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x25_FMJ
@@ -809,7 +893,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x25_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x25_AP
@@ -820,7 +905,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x25_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x38r_FMJ
@@ -831,7 +917,8 @@ module ZGB
         Icon            = Bullets38,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x38r_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x39_FMJ
@@ -842,7 +929,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x39_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x39_AP
@@ -853,7 +941,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x39_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x39_TRACER
@@ -864,7 +953,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x39_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x39_HP
@@ -875,7 +965,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x39_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x39_SP
@@ -886,7 +977,8 @@ module ZGB
         Icon            = 556Bullets,
         Weight          = 0.015,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x39_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x54r_FMJ
@@ -897,7 +989,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x54r_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x54r_AP
@@ -908,7 +1001,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x54r_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x54r_TRACER
@@ -919,7 +1013,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x54r_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x54r_SP
@@ -930,7 +1025,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x54r_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_762x54r_MATCH
@@ -941,7 +1037,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_762x54r_match,
+        Tags            = base:ammo,
     }
 
     item Ammo_792x57_FMJ
@@ -952,7 +1049,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_792x57_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_792x57_AP
@@ -963,7 +1061,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_792x57_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_792x57_TRACER
@@ -974,7 +1073,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_792x57_tracer,
+        Tags            = base:ammo,
     }
 
     item Ammo_792x57_SP
@@ -985,7 +1085,8 @@ module ZGB
         Icon            = 308Bullets,
         Weight          = 0.03,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_792x57_sp,
+        Tags            = base:ammo,
     }
 
     item Ammo_9x18_FMJ
@@ -996,7 +1097,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_9x18_fmj,
+        Tags            = base:ammo,
     }
 
     item Ammo_9x18_HP
@@ -1007,7 +1109,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_9x18_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_9x18_AP
@@ -1018,7 +1121,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_9x18_ap,
+        Tags            = base:ammo,
     }
 
     item Ammo_9x19_HP
@@ -1029,7 +1133,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_9x19_hp,
+        Tags            = base:ammo,
     }
 
     item Ammo_9x19_PLUSP
@@ -1040,7 +1145,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_9x19_plusp,
+        Tags            = base:ammo,
     }
 
     item Ammo_9x19_SUBSONIC
@@ -1051,7 +1157,8 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_9x19_subsonic,
+        Tags            = base:ammo,
     }
 
     item Ammo_9x19_AP
@@ -1062,6 +1169,7 @@ module ZGB
         Icon            = Bullets9mm,
         Weight          = 0.012,
         Count           = 5,
-        Tags            = ZGBAmmo,
+        AmmoType        = zgb:ammo_9x19_ap,
+        Tags            = base:ammo,
     }
 }

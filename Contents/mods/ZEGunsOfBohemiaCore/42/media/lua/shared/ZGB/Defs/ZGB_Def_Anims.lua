@@ -54,6 +54,7 @@ AF.defineType{
 }
 AF.defineType{
     id = "bolt_mag", label = "Bolt action (detachable magazine)", hands = "two", feed = "magazine",
+    manualAction = true,          -- racked by hand after every shot (vanilla RackAfterShoot)
     clips = clips{ "cycle", "magOut", "magDrop", "magIn", "openAction", "closeAction" },
     timings = { cycle = 0.7, magOut = 0.7, magDrop = 0.3, magIn = 0.9, openAction = 0.4, closeAction = 0.4, draw = 0.9, holster = 1.0 },
     reloads = {
@@ -72,7 +73,7 @@ AF.defineType{
     internalReload = "single",
 }
 AF.defineType{
-    id = "lever", label = "Lever action", hands = "two", feed = "tube",
+    id = "lever", label = "Lever action", hands = "two", feed = "tube", manualAction = true,
     clips = clips{ "cycle", "loadRound" },
     timings = { cycle = 0.45, loadRound = 0.6, draw = 0.8, holster = 0.9 },
     reloads = { single = { { clip = "loadRound", perRound = true }, { clip = "cycle", ifEmpty = true } } },
@@ -80,7 +81,7 @@ AF.defineType{
     casing = { on = "fire", delay = 0.35, side = "up" },     -- lever throws the case up and out
 }
 AF.defineType{
-    id = "pump", label = "Pump-action shotgun", hands = "two", feed = "tube",
+    id = "pump", label = "Pump-action shotgun", hands = "two", feed = "tube", manualAction = true,
     clips = clips{ "cycle", "loadRound" },
     timings = { cycle = 0.5, loadRound = 0.55, draw = 0.8, holster = 0.9 },
     reloads = { single = { { clip = "loadRound", perRound = true }, { clip = "cycle", ifEmpty = true } } },
@@ -88,7 +89,7 @@ AF.defineType{
     casing = { on = "fire", delay = 0.4, side = "right" },
 }
 AF.defineType{
-    id = "semi_shotgun", base = "pump", label = "Semi-automatic shotgun",
+    id = "semi_shotgun", base = "pump", label = "Semi-automatic shotgun", manualAction = false,
     clips = clips{ "loadRound", "boltRelease" },
     timings = { boltRelease = 0.3 },
     reloads = { single = { { clip = "loadRound", perRound = true }, { clip = "boltRelease", ifEmpty = true } } },

@@ -13,7 +13,7 @@
     (see ZGB_WeaponFactory.caliberScale), unless its definition sets them.
 
     `category`: the catalogue group the gun is listed under (docs, loot, UI).
-    reloadType values are vanilla WeaponReloadType names. -- VERIFY vs your build
+    reloadType values are vanilla WeaponReloadType names, as the B42 guns use them (tools/data/vanilla_guns.lua).
 ]]
 require "ZGB/ZGB_Core"
 
@@ -41,6 +41,7 @@ local HUNTING_SOUNDS = { fire = "HuntingRifleShoot" }
 A.pistol = {
     animType    = "handgun",           -- see Defs/ZGB_Def_Anims.lua
     category    = "handgun",
+    vanillaGun  = "Pistol",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "9x19",
     twoHanded   = false,
     reloadType  = "handgun",          -- vanilla WeaponReloadType
@@ -58,6 +59,7 @@ A.pistol = {
 A.revolver = {
     animType    = "revolver",           -- see Defs/ZGB_Def_Anims.lua
     category    = "revolver",
+    vanillaGun  = "Revolver",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "38spl",
     twoHanded   = false,
     reloadType  = "revolver",
@@ -75,9 +77,10 @@ A.revolver = {
 A.smg = {
     animType    = "smg",           -- see Defs/ZGB_Def_Anims.lua
     category    = "smg",
+    vanillaGun  = "AssaultRifle",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "9x19",
     twoHanded   = true,
-    reloadType  = "handgun",
+    reloadType  = "boltaction",       -- B42: the vanilla mag-fed rifles (AssaultRifle, M14) use boltaction
     attachSlot  = "Rifle",
     fireModes   = { "auto", "single" },
     sounds      = PISTOL_SOUNDS,
@@ -92,9 +95,10 @@ A.smg = {
 A.assault_rifle = {
     animType    = "rifle",           -- see Defs/ZGB_Def_Anims.lua
     category    = "assault_rifle",
+    vanillaGun  = "AssaultRifle",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "556x45",
     twoHanded   = true,
-    reloadType  = "handgun",          -- vanilla mag-fed rifles use "handgun" reload. VERIFY vs your build
+    reloadType  = "boltaction",       -- B42 AssaultRifle uses boltaction (handgun gave pistol reload anims)
     attachSlot  = "Rifle",
     fireModes   = { "auto", "single" },
     sounds      = RIFLE_SOUNDS,
@@ -109,9 +113,10 @@ A.assault_rifle = {
 A.dmr = {
     animType    = "rifle",           -- see Defs/ZGB_Def_Anims.lua
     category    = "dmr",
+    vanillaGun  = "AssaultRifle2",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "308win",
     twoHanded   = true,
-    reloadType  = "handgun",
+    reloadType  = "boltaction",       -- like vanilla AssaultRifle2 (M14)
     attachSlot  = "Rifle",
     fireModes   = { "single" },
     sounds      = RIFLE_SOUNDS,
@@ -126,6 +131,7 @@ A.dmr = {
 A.shotgun = {
     animType    = "pump",           -- see Defs/ZGB_Def_Anims.lua
     category    = "shotgun",
+    vanillaGun  = "Shotgun",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "12ga",
     twoHanded   = true,
     reloadType  = "shotgun",
@@ -144,6 +150,7 @@ A.shotgun = {
 A.bolt_rifle = {
     animType    = "bolt_mag",           -- see Defs/ZGB_Def_Anims.lua
     category    = "sniper",
+    vanillaGun  = "HuntingRifle",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "308win",
     twoHanded   = true,
     reloadType  = "boltaction",       -- detachable magazine; internal ones use "boltactionnomag"
@@ -161,9 +168,10 @@ A.bolt_rifle = {
 A.lever_rifle = {
     animType    = "lever",           -- see Defs/ZGB_Def_Anims.lua
     category    = "lever",
+    vanillaGun  = "L94_Rifle",          -- mechanics template (tools/data/vanilla_guns.lua)
     refCaliber  = "3030",
     twoHanded   = true,
-    reloadType  = "boltactionnomag",  -- loads one round at a time into the tube. VERIFY: no vanilla lever type
+    reloadType  = "leveraction",      -- B42 has a lever type (vanilla L92 / L94)
     attachSlot  = "Rifle",
     fireModes   = { "single" },
     sounds      = HUNTING_SOUNDS,

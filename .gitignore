@@ -1,3 +1,6 @@
 *.zip
 .DS_Store
 Thumbs.db
+
+# downloaded 3D model sources (see tools/model_sources.lua for where they come from)
+.cache/

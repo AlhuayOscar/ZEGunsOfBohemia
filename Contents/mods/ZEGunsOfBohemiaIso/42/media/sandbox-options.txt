@@ -32,6 +32,6 @@ option ZGBIso.ModelVariants
 
 option ZGBIso.CustomAnimations
 {
-    type = boolean, default = true,
+    type = boolean, default = false,
     page = ZGB, translation = ZGBIso_CustomAnimations,
 }

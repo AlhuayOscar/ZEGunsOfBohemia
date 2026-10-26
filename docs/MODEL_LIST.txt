@@ -1,0 +1,1605 @@
+ZE GUNS OF BOHEMIA - LISTA DE MODELOS 3D (v0.8.0)
+Gerado por tools/gen_model_list.lua a partir dos dados do mod. Não editar à mão.
+==============================================================================
+TOTAL: 202 modelos para fazer
+   76 armas
+   55 attachments (+ 3 sem modelo: chokes internos)
+   67 carregadores
+    4 cápsulas vazias
+
+[x] = já tem modelo real baixado (CC0 / CC-BY, ver CREDITS.txt): 109
+[ ] = ainda é placeholder: 93
+
+REGRAS
+  - Nome do arquivo = ID do item. Ex.: AK47.fbx, Optic_RedDot.fbx
+  - Cada item tem sua pasta em Contents/mods/ZEGunsOfBohemiaCore/42/media/models_X/ZGB/
+    (hoje tem um placeholder lá: troque pelo seu modelo com o mesmo nome).
+  - Unidade: metros. Eixos: x = para frente (boca do cano), y = para cima, z = para a direita.
+  - Origem da arma: topo do punho, onde a mão segura.
+  - Origem do attachment: o ponto onde ele encaixa. Supressores/freios crescem para
+    frente, coronhas para trás, miras para cima, empunhaduras/lanternas para baixo.
+  - Tamanhos abaixo: arma = comprimento real; attachment = tamanho do placeholder
+    (comprimento x altura x largura), só como referência.
+  - Variantes (ex.: AK47__Mount_AK_SideRail) NÃO entram nesta lista: modele a arma
+    base e cada peça separada. As variantes são a arma com a peça já montada.
+  - Guia completo: docs/MODELS.md
+
+==============================================================================
+1. ARMAS (76)
+==============================================================================
+
+PISTOLAS (18)
+------------------------------------------------------------------------------
+[x] Glock17 - Glock 17
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/Glock17/Glock17.fbx
+    Calibre:     9x19mm   Comprimento: 0,19 m   Acabamento: polímero preto
+    Carregador:  Glock17_Mag17 (padrão, 17) | Glock17_Mag33 (estendido, 33) | Glock_Drum50 (tambor, 50)
+    Encaixes:
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Pistol9, Comp_Pistol9
+    Obs.:        Threaded barrel variant so the muzzle slot is real.
+
+[x] Glock19 - Glock 19
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/Glock19/Glock19.fbx
+    Calibre:     9x19mm   Comprimento: 0,17 m   Acabamento: polímero preto
+    Carregador:  Glock19_Mag15 (padrão, 15) | Glock17_Mag33 (estendido, 33) | Glock_Drum50 (tambor, 50)
+    Encaixes:
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Pistol9, Comp_Pistol9
+
+[x] Glock18C - Glock 18C
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/Glock18C/Glock18C.fbx
+    Calibre:     9x19mm   Comprimento: 0,19 m   Acabamento: polímero preto
+    Carregador:  Glock17_Mag17 (padrão, 17) | Glock17_Mag33 (estendido, 33) | Glock_Drum50 (tambor, 50)
+    Encaixes:
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+    Obs.:        Ported (compensated) slide: no muzzle slot.
+
+[x] Beretta92FS - Beretta 92FS
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/Beretta92FS/Beretta92FS.fbx
+    Calibre:     9x19mm   Comprimento: 0,22 m   Acabamento: aço
+    Carregador:  Beretta92_Mag15 (padrão, 15) | Beretta92_Mag30 (estendido, 30)
+    Encaixes:
+      - Muzzle: Suppressor_Pistol9, Comp_Pistol9
+
+[x] SIG_P226 - SIG Sauer P226
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/SIG_P226/SIG_P226.fbx
+    Calibre:     9x19mm   Comprimento: 0,20 m   Acabamento: aço
+    Carregador:  P226_Mag15 (padrão, 15) | P226_Mag20 (estendido, 20)
+    Encaixes:
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+
+[x] CZ75 - CZ 75
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/CZ75/CZ75.fbx
+    Calibre:     9x19mm   Comprimento: 0,21 m   Acabamento: aço
+    Carregador:  CZ75_Mag16 (padrão, 16) | CZ75_Mag26 (estendido, 26)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] SIG_M17 - SIG Sauer M17
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/SIG_M17/SIG_M17.fbx
+    Calibre:     9x19mm   Comprimento: 0,20 m   Acabamento: areia (tan)
+    Carregador:  M17_Mag17 (padrão, 17) | M17_Mag21 (estendido, 21)
+    Encaixes:
+      - Optic rail: Optic_Pistol_RMR
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+    Obs.:        Optics-ready slide (RMR cut).
+
+[x] Colt1911 - Colt M1911A1
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/Colt1911/Colt1911.fbx
+    Calibre:     .45 ACP   Comprimento: 0,22 m   Acabamento: aço
+    Carregador:  M1911_Mag7 (padrão, 7) | M1911_Mag10 (estendido, 10)
+    Encaixes:
+      - Muzzle: Suppressor_Pistol45
+
+[x] M45A1 - Colt M45A1 CQBP
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/M45A1/M45A1.fbx
+    Calibre:     .45 ACP   Comprimento: 0,22 m   Acabamento: areia (tan)
+    Carregador:  M1911_Mag7 (padrão, 7) | M1911_Mag10 (estendido, 10)
+    Encaixes:
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+    Obs.:        USMC MARSOC 1911: desert tan, accessory rail under the dust cover. Standard barrel, not threaded.
+
+[x] SpringfieldProdigy - Springfield Armory Prodigy
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/SpringfieldProdigy/SpringfieldProdigy.fbx
+    Calibre:     9x19mm   Comprimento: 0,22 m   Acabamento: polímero preto
+    Carregador:  Prodigy_Mag17 (padrão, 17) | Prodigy_Mag20 (estendido, 20)
+    Encaixes:
+      - Optic rail: Optic_Pistol_RMR
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+    Obs.:        Double-stack 1911 (2011 style): accessory rail and an optics-ready slide (RMR cut).
+
+[x] Glock21 - Glock 21
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/Glock21/Glock21.fbx
+    Calibre:     .45 ACP   Comprimento: 0,21 m   Acabamento: polímero preto
+    Carregador:  Glock21_Mag13 (padrão, 13) | Glock21_Mag26 (estendido, 26)
+    Encaixes:
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Pistol45
+
+[x] HK_USP45 - HK USP45 Tactical
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/HK_USP45/HK_USP45.fbx
+    Calibre:     .45 ACP   Comprimento: 0,22 m   Acabamento: polímero preto
+    Carregador:  USP45_Mag12 (padrão, 12)
+    Encaixes:
+      - USP rail: Adapter_USP_Rail
+          - Under rail (depois de Adapter_USP_Rail): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Pistol45
+    Obs.:        Proprietary rail: lights need the USP rail adapter first.
+
+[x] Glock22 - Glock 22
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/Glock22/Glock22.fbx
+    Calibre:     .40 S&W   Comprimento: 0,19 m   Acabamento: polímero preto
+    Carregador:  Glock22_Mag15 (padrão, 15) | Glock22_Mag22 (estendido, 22)
+    Encaixes:
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+    Obs.:        Police service pistol: common in police stations.
+
+[x] WaltherPPK - Walther PPK
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/WaltherPPK/WaltherPPK.fbx
+    Calibre:     .380 ACP   Comprimento: 0,15 m   Acabamento: aço
+    Carregador:  PPK_Mag7 (padrão, 7)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] RugerMkII - Ruger Mk II
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/RugerMkII/RugerMkII.fbx
+    Calibre:     .22 LR   Comprimento: 0,27 m   Acabamento: aço
+    Carregador:  MkII_Mag10 (padrão, 10)
+    Encaixes:
+      - Muzzle: Suppressor_Rimfire
+
+[x] MakarovPM - Makarov PM
+    Modelo real: Free CC0 Guns & Explosives Pack (3DModelsCC0, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/MakarovPM/MakarovPM.fbx
+    Calibre:     9x18mm Makarov   Comprimento: 0,16 m   Acabamento: aço oxidado
+    Carregador:  PM_Mag8 (padrão, 8)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] TokarevTT33 - Tokarev TT-33
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/TokarevTT33/TokarevTT33.fbx
+    Calibre:     7.62x25mm Tokarev   Comprimento: 0,20 m   Acabamento: aço oxidado
+    Carregador:  TT33_Mag8 (padrão, 8)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] FN_FiveSeven - FN Five-seveN
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Handguns/FN_FiveSeven/FN_FiveSeven.fbx
+    Calibre:     5.7x28mm   Comprimento: 0,21 m   Acabamento: polímero preto
+    Carregador:  FiveSeven_Mag20 (padrão, 20) | FiveSeven_Mag30 (estendido, 30)
+    Encaixes:
+      - Optic rail: Optic_Pistol_RMR
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+    Obs.:        MRD slide (optic cut).
+
+
+REVÓLVERES E HAND CANNONS (12)
+------------------------------------------------------------------------------
+[x] SW_Model10 - S&W Model 10
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/SW_Model10/SW_Model10.fbx
+    Calibre:     .38 Special   Comprimento: 0,24 m   Acabamento: aço oxidado
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] ColtPython - Colt Python
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/ColtPython/ColtPython.fbx
+    Calibre:     .357 Magnum   Comprimento: 0,29 m   Acabamento: aço oxidado
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] RugerGP100 - Ruger GP100
+    Modelo real: Ultimate Gun Pack (Quaternius, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/RugerGP100/RugerGP100.fbx
+    Calibre:     .357 Magnum   Comprimento: 0,24 m   Acabamento: aço
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] SW_686Plus - S&W 686 Plus
+    Modelo real: Ultimate Gun Pack (Quaternius, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/SW_686Plus/SW_686Plus.fbx
+    Calibre:     .357 Magnum   Comprimento: 0,28 m   Acabamento: aço
+    Carregador:  interno, 7 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] SW_Model29 - S&W Model 29
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/SW_Model29/SW_Model29.fbx
+    Calibre:     .44 Magnum   Comprimento: 0,30 m   Acabamento: aço oxidado
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] ColtAnaconda - Colt Anaconda
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/ColtAnaconda/ColtAnaconda.fbx
+    Calibre:     .44 Magnum   Comprimento: 0,33 m   Acabamento: aço
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] ColtSAA - Colt Single Action Army
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/ColtSAA/ColtSAA.fbx
+    Calibre:     .45 Colt   Comprimento: 0,28 m   Acabamento: aço oxidado
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+    Obs.:        Single action, loading gate: loads one chamber at a time (slower reload).
+
+[x] TaurusJudge - Taurus Judge
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/TaurusJudge/TaurusJudge.fbx
+    Calibre:     .410 Bore   Comprimento: 0,24 m   Acabamento: aço oxidado
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] RugerSuperRedhawk - Ruger Super Redhawk
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/RugerSuperRedhawk/RugerSuperRedhawk.fbx
+    Calibre:     .454 Casull   Comprimento: 0,33 m   Acabamento: aço
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Integral ring cuts: Mount_Ruger_Rings
+          - Optic rail (depois de Mount_Ruger_Rings): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+
+[x] SW_Model500 - S&W Model 500
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/SW_Model500/SW_Model500.fbx
+    Calibre:     .500 S&W Magnum   Comprimento: 0,38 m   Acabamento: aço
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+
+[x] NagantM1895 - Nagant M1895
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/NagantM1895/NagantM1895.fbx
+    Calibre:     7.62x38mmR Nagant   Comprimento: 0,23 m   Acabamento: aço oxidado
+    Carregador:  interno, 7 cartuchos (sem modelo de carregador)
+    Encaixes:    nenhum (só mira de ferro)
+    Obs.:        Gas-seal revolver, loads through a gate one round at a time.
+
+[x] DesertEagle - Desert Eagle Mark XIX
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/RevolversHandCannons/DesertEagle/DesertEagle.fbx
+    Calibre:     .50 AE   Comprimento: 0,27 m   Acabamento: aço
+    Carregador:  DEagle_Mag7 (padrão, 7)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+    Obs.:        Mag-fed hand cannon; integral top rail.
+
+
+FUZIS DE ASSALTO (10)
+------------------------------------------------------------------------------
+[x] AK47 - AK-47
+    Modelo real: Free CC0 Guns & Explosives Pack (3DModelsCC0, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/AK47/AK47.fbx
+    Calibre:     7.62x39mm   Comprimento: 0,88 m   Acabamento: madeira + aço oxidado
+    Carregador:  AK47_Mag30 (padrão, 30) | AK_Mag40 (estendido, 40) | AK47_Drum75 (tambor, 75)
+    Encaixes:
+      - Side mount: Mount_AK_SideRail
+          - Optic rail (depois de Mount_AK_SideRail): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Muzzle: Muzzle_AK_Suppressor, Muzzle_AK_Compensator, Muzzle_AK_FlashHider
+      - Handguard: Handguard_AK_Quad
+          - Under rail (depois de Handguard_AK_Quad): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Stock: Stock_AK_Folding
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] AK74 - AK-74
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/AK74/AK74.fbx
+    Calibre:     5.45x39mm   Comprimento: 0,94 m   Acabamento: polímero preto
+    Carregador:  AK74_Mag30 (padrão, 30) | AK74_Mag45 (estendido, 45)
+    Encaixes:
+      - Side mount: Mount_AK_SideRail
+          - Optic rail (depois de Mount_AK_SideRail): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Handguard: Handguard_AK_Quad
+          - Under rail (depois de Handguard_AK_Quad): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_AK74, Brake_AK74
+      - Stock: Stock_AK_Folding
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] M16A2 - M16A2
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/M16A2/M16A2.fbx
+    Calibre:     5.56x45mm   Comprimento: 1,00 m   Acabamento: polímero preto
+    Carregador:  STANAG_Mag30 (padrão, 30) | STANAG_Mag40 (estendido, 40) | STANAG_CMag100 (tambor, 100)
+    Encaixes:
+      - Carry handle: Mount_AR_CarryHandle
+          - Optic rail (depois de Mount_AR_CarryHandle): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Handguard: Handguard_AR_Quad
+          - Under rail (depois de Handguard_AR_Quad): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Carry handle and fixed A2 stock; optics need the carry-handle mount.
+
+[x] M4A1 - M4A1
+    Modelo real: Free CC0 Guns & Explosives Pack (3DModelsCC0, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/M4A1/M4A1.fbx
+    Calibre:     5.56x45mm   Comprimento: 0,84 m   Acabamento: polímero preto
+    Carregador:  STANAG_Mag30 (padrão, 30) | STANAG_Mag40 (estendido, 40) | STANAG_CMag100 (tambor, 100)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
+      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] M4A4 - M4A4
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/M4A4/M4A4.fbx
+    Calibre:     5.56x45mm   Comprimento: 0,84 m   Acabamento: polímero preto
+    Carregador:  STANAG_Mag30 (padrão, 30) | STANAG_Mag40 (estendido, 40) | STANAG_CMag100 (tambor, 100)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
+      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Counter-Strike's M4: not a real service designation. Built as a flat-top full-auto M4 carbine.
+
+[x] M4A1S - M4A1-S
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/M4A1S/M4A1S.fbx
+    Calibre:     5.56x45mm   Comprimento: 0,84 m   Acabamento: polímero preto
+    Carregador:  STANAG_Mag30 (padrão, 30) | STANAG_Mag40 (estendido, 40) | STANAG_CMag100 (tambor, 100)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
+      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Counter-Strike's suppressor-ready M4A1: the same carbine, made to wear a 5.56 suppressor.
+
+[x] HK416 - HK416
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/HK416/HK416.fbx
+    Calibre:     5.56x45mm   Comprimento: 0,90 m   Acabamento: areia (tan)
+    Carregador:  STANAG_Mag30 (padrão, 30) | STANAG_Mag40 (estendido, 40) | STANAG_CMag100 (tambor, 100)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
+      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] SteyrAUG - Steyr AUG A1
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/SteyrAUG/SteyrAUG.fbx
+    Calibre:     5.56x45mm   Comprimento: 0,79 m   Acabamento: verde-oliva
+    Carregador:  AUG_Mag30 (padrão, 30) | AUG_Mag42 (estendido, 42)
+    Encaixes:
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Bullpup with an integral 1.5x optic in the carry handle: no optic slot.
+
+[x] IMI_Galil - IMI Galil ARM
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/IMI_Galil/IMI_Galil.fbx
+    Calibre:     5.56x45mm   Comprimento: 0,98 m   Acabamento: polímero preto
+    Carregador:  Galil_Mag35 (padrão, 35) | Galil_Mag50 (estendido, 50)
+    Encaixes:
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Built-in folding stock and bipod (part of the gun model).
+
+[x] HK_G36 - HK G36
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/AssaultRifles/HK_G36/HK_G36.fbx
+    Calibre:     5.56x45mm   Comprimento: 1,00 m   Acabamento: polímero preto
+    Carregador:  G36_Mag30 (padrão, 30) | G36_CMag100 (tambor, 100)
+    Encaixes:
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Integral optic in the carry handle: no optic slot.
+
+
+FUZIS DMR (ATIRADOR DESIGNADO) (4)
+------------------------------------------------------------------------------
+[x] M14 - M14
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/DMRs/M14/M14.fbx
+    Calibre:     .308 Win / 7.62x51mm   Comprimento: 1,12 m   Acabamento: madeira + aço oxidado
+    Carregador:  M14_Mag20 (padrão, 20) | M14_Mag30 (estendido, 30)
+    Encaixes:
+      - Receiver mount: Mount_M14
+          - Optic rail (depois de Mount_M14): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Muzzle: Suppressor_Rifle308, Brake_Rifle308, FlashHider_308
+      - Recoil pad: RecoilPad_Rubber
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] SVD - SVD Dragunov
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/DMRs/SVD/SVD.fbx
+    Calibre:     7.62x54mmR   Comprimento: 1,22 m   Acabamento: madeira + aço oxidado
+    Carregador:  SVD_Mag10 (padrão, 10)
+    Encaixes:
+      - Optic rail: Optic_PSO1
+      - Recoil pad: RecoilPad_Rubber
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Side rail takes the PSO-1 only.
+
+[x] SR25 - Knight's SR-25
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/DMRs/SR25/SR25.fbx
+    Calibre:     .308 Win / 7.62x51mm   Comprimento: 1,12 m   Acabamento: polímero preto
+    Carregador:  SR25_Mag20 (padrão, 20) | SR25_Mag25 (estendido, 25)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Rifle308, Brake_Rifle308, FlashHider_308
+      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] Mk12SPR - Mk 12 SPR
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/DMRs/Mk12SPR/Mk12SPR.fbx
+    Calibre:     5.56x45mm   Comprimento: 0,96 m   Acabamento: areia (tan)
+    Carregador:  STANAG_Mag30 (padrão, 30) | STANAG_Mag40 (estendido, 40) | STANAG_CMag100 (tambor, 100)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Rifle556, Brake_Rifle556, FlashHider_556
+      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Sling: Sling_2Point, Sling_1Point
+
+
+FUZIS DE PRECISÃO (FERROLHO) (9)
+------------------------------------------------------------------------------
+[x] Rem700 - Remington 700
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/Rem700/Rem700.fbx
+    Calibre:     .308 Win / 7.62x51mm   Comprimento: 1,06 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 4 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Bipod stud: Bipod_Harris
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] M24 - M24 SWS
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/M24/M24.fbx
+    Calibre:     .308 Win / 7.62x51mm   Comprimento: 1,09 m   Acabamento: verde-oliva
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Bipod stud: Bipod_Harris
+      - Recoil pad: RecoilPad_Rubber
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        US Army sniper rifle: Remington 700 long action in a fibreglass stock, 7.62x51 internal box of 5.
+
+[x] Win70 - Winchester Model 70
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/Win70/Win70.fbx
+    Calibre:     .30-06 Springfield   Comprimento: 1,13 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Bipod stud: Bipod_Harris
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] MosinNagant - Mosin-Nagant M91/30
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/MosinNagant/MosinNagant.fbx
+    Calibre:     7.62x54mmR   Comprimento: 1,23 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Receiver side mount: Mount_Mosin_PU
+          - PU scope mount (depois de Mount_Mosin_PU): Optic_PU
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] Kar98k - Mauser Kar98k
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/Kar98k/Kar98k.fbx
+    Calibre:     7.92x57mm Mauser   Comprimento: 1,11 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] LeeEnfieldNo4 - Lee-Enfield No. 4
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/LeeEnfieldNo4/LeeEnfieldNo4.fbx
+    Calibre:     .303 British   Comprimento: 1,13 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 10 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Fixed 10-round box loaded with stripper clips; treated as internal.
+
+[x] AI_AWM - Accuracy International AWM
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/AI_AWM/AI_AWM.fbx
+    Calibre:     .338 Lapua Magnum   Comprimento: 1,23 m   Acabamento: verde-oliva
+    Carregador:  AWM_Mag5 (padrão, 5)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Muzzle: Suppressor_338
+      - Bipod stud: Bipod_Harris
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] RugerRPR - Ruger Precision Rifle
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/RugerRPR/RugerRPR.fbx
+    Calibre:     6.5 Creedmoor   Comprimento: 1,08 m   Acabamento: polímero preto
+    Carregador:  AICS_Mag10 (padrão, 10)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Muzzle: Suppressor_Rifle308, Brake_Rifle308, FlashHider_308
+      - Stock: Stock_AR_Collapsible, Stock_AR_Precision
+      - Bipod stud: Bipod_Harris
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        5/8-24 thread takes the .308 can; AR buffer tube takes AR stocks.
+
+[x] BarrettM95 - Barrett M95
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SniperRifles/BarrettM95/BarrettM95.fbx
+    Calibre:     .50 BMG   Comprimento: 1,14 m   Acabamento: polímero preto
+    Carregador:  M95_Mag5 (padrão, 5)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Bullpup, integral bipod and muzzle brake (part of the gun model).
+
+
+SUBMETRALHADORAS (8)
+------------------------------------------------------------------------------
+[x] MP5A3 - HK MP5A3
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/MP5A3/MP5A3.fbx
+    Calibre:     9x19mm   Comprimento: 0,70 m   Acabamento: polímero preto
+    Carregador:  MP5_Mag30 (padrão, 30) | MP5_CMag100 (tambor, 100)
+    Encaixes:
+      - Claw mount: Mount_HK_Claw
+          - Optic rail (depois de Mount_HK_Claw): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Handguard: Handguard_MP5_Rail
+          - Under rail (depois de Handguard_MP5_Rail): Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - 3-lug barrel: Adapter_HK_3Lug
+          - Muzzle thread (depois de Adapter_HK_3Lug): Suppressor_Pistol9, Comp_Pistol9
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Suppressor chain: 3-lug adapter first, then a 9mm can.
+
+[x] Uzi - IMI Uzi
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/Uzi/Uzi.fbx
+    Calibre:     9x19mm   Comprimento: 0,64 m   Acabamento: aço
+    Carregador:  Uzi_Mag32 (padrão, 32) | Uzi_Mag50 (estendido, 50)
+    Encaixes:
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] MAC10 - MAC-10
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/MAC10/MAC10.fbx
+    Calibre:     .45 ACP   Comprimento: 0,30 m   Acabamento: aço
+    Carregador:  MAC10_Mag30 (padrão, 30)
+    Encaixes:
+      - Muzzle: Suppressor_Pistol45
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] ThompsonM1928 - Thompson M1928A1
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/ThompsonM1928/ThompsonM1928.fbx
+    Calibre:     .45 ACP   Comprimento: 0,85 m   Acabamento: madeira + aço oxidado
+    Carregador:  Thompson_Mag20 (padrão, 20) | Thompson_Mag30 (estendido, 30) | Thompson_Drum50 (tambor, 50)
+    Encaixes:
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] UMP45 - HK UMP45
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/UMP45/UMP45.fbx
+    Calibre:     .45 ACP   Comprimento: 0,69 m   Acabamento: polímero preto
+    Carregador:  UMP45_Mag25 (padrão, 25)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Pistol45
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] FN_P90 - FN P90
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/FN_P90/FN_P90.fbx
+    Calibre:     5.7x28mm   Comprimento: 0,50 m   Acabamento: polímero preto
+    Carregador:  P90_Mag50 (padrão, 50)
+    Encaixes:
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Top-mounted translucent magazine; integral ring sight.
+
+[x] KrissVector - KRISS Vector
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/KrissVector/KrissVector.fbx
+    Calibre:     .45 ACP   Comprimento: 0,62 m   Acabamento: polímero preto
+    Carregador:  Glock21_Mag13 (padrão, 13) | Glock21_Mag26 (estendido, 26)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Muzzle: Suppressor_Pistol45
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Takes Glock 21 magazines.
+
+[x] PPSh41 - PPSh-41
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/SMGs/PPSh41/PPSh41.fbx
+    Calibre:     7.62x25mm Tokarev   Comprimento: 0,84 m   Acabamento: madeira + aço oxidado
+    Carregador:  PPSh_Mag35 (padrão, 35) | PPSh_Drum71 (tambor, 71)
+    Encaixes:
+      - Sling: Sling_2Point, Sling_1Point
+
+
+ESCOPETAS (9)
+------------------------------------------------------------------------------
+[x] M590 - Mossberg 590
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/M590/M590.fbx
+    Calibre:     12 Gauge   Comprimento: 1,00 m   Acabamento: polímero preto
+    Carregador:  interno, 8 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Stock: Stock_M590_PistolGrip
+      - Receiver side: Sidesaddle_Shotgun
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] Rem870 - Remington 870
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/Rem870/Rem870.fbx
+    Calibre:     12 Gauge   Comprimento: 1,06 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 4 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Muzzle: Choke_Full, Choke_Modified, Choke_ImprovedCylinder
+      - Stock: Stock_870_Folding
+      - Receiver side: Sidesaddle_Shotgun
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] BenelliM4 - Benelli M4
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/BenelliM4/BenelliM4.fbx
+    Calibre:     12 Gauge   Comprimento: 1,01 m   Acabamento: polímero preto
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Muzzle: Choke_Full, Choke_Modified, Choke_ImprovedCylinder
+      - Receiver side: Sidesaddle_Shotgun
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Semi-automatic: faster follow-up shots.
+
+[x] SPAS12 - Franchi SPAS-12
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/SPAS12/SPAS12.fbx
+    Calibre:     12 Gauge   Comprimento: 1,04 m   Acabamento: polímero preto
+    Carregador:  interno, 8 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Muzzle: Choke_Full, Choke_Modified, Choke_ImprovedCylinder
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Pump-action with the folding stock and its arm hook; the semi-auto mode is not modelled.
+
+[x] Saiga12 - Saiga-12
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/Saiga12/Saiga12.fbx
+    Calibre:     12 Gauge   Comprimento: 1,15 m   Acabamento: polímero preto
+    Carregador:  Saiga12_Mag5 (padrão, 5) | Saiga12_Mag10 (estendido, 10) | Saiga12_Drum20 (tambor, 20)
+    Encaixes:
+      - Side mount: Mount_AK_SideRail
+          - Optic rail (depois de Mount_AK_SideRail): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] KSG - Kel-Tec KSG
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/KSG/KSG.fbx
+    Calibre:     12 Gauge   Comprimento: 0,66 m   Acabamento: polímero preto
+    Carregador:  interno, 14 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Under rail: Grip_Vertical, Light_Weapon, Light_Pistol, Grip_Angled, Grip_Stubby, Laser_Rifle, Laser_Pistol
+      - Recoil pad: RecoilPad_Rubber
+      - Sling: Sling_2Point, Sling_1Point
+    Obs.:        Bullpup with two 7-round tubes.
+
+[x] CoachGun - Double-Barrel Coach Gun
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/CoachGun/CoachGun.fbx
+    Calibre:     12 Gauge   Comprimento: 0,94 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 2 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+
+[x] Win1897 - Winchester Model 1897
+    Modelo real: Ultimate Gun Pack (Quaternius, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/Win1897/Win1897.fbx
+    Calibre:     12 Gauge   Comprimento: 1,00 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 5 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] AA12 - AA-12
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/Shotguns/AA12/AA12.fbx
+    Calibre:     12 Gauge   Comprimento: 0,97 m   Acabamento: polímero preto
+    Carregador:  AA12_Mag8 (padrão, 8) | AA12_Drum32 (tambor, 32)
+    Encaixes:
+      - Optic rail: Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Sling: Sling_2Point, Sling_1Point
+
+
+RIFLES DE ALAVANCA (6)
+------------------------------------------------------------------------------
+[x] Win1894 - Winchester Model 1894
+    Modelo real: Low Poly Gun Models (chilly-durango, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/LeverActions/Win1894/Win1894.fbx
+    Calibre:     .30-30 Win   Comprimento: 0,96 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 7 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] Marlin336 - Marlin 336
+    Modelo real: Low Poly Gun Models (chilly-durango, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/LeverActions/Marlin336/Marlin336.fbx
+    Calibre:     .30-30 Win   Comprimento: 0,97 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] HenryBigBoy - Henry Big Boy
+    Modelo real: Low Poly Gun Models (chilly-durango, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/LeverActions/HenryBigBoy/HenryBigBoy.fbx
+    Calibre:     .44 Magnum   Comprimento: 0,97 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 10 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] Marlin1894 - Marlin 1894C
+    Modelo real: Low Poly Gun Models (chilly-durango, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/LeverActions/Marlin1894/Marlin1894.fbx
+    Calibre:     .357 Magnum   Comprimento: 0,91 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 9 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] HenryH001 - Henry H001 .22
+    Modelo real: Low Poly Gun Models (chilly-durango, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/LeverActions/HenryH001/HenryH001.fbx
+    Calibre:     .22 LR   Comprimento: 0,93 m   Acabamento: madeira + aço oxidado
+    Carregador:  interno, 15 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Optic rail: Optic_Rimfire4x
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+[x] Marlin1895GG - Marlin 1895 Guide Gun
+    Modelo real: Low Poly Gun Models (chilly-durango, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Guns/LeverActions/Marlin1895GG/Marlin1895GG.fbx
+    Calibre:     .45-70 Govt   Comprimento: 0,95 m   Acabamento: aço
+    Carregador:  interno, 6 cartuchos (sem modelo de carregador)
+    Encaixes:
+      - Scope base: Mount_ScopeBase
+          - Optic rail (depois de Mount_ScopeBase): Optic_RedDot, Optic_Holo, Optic_4x, Optic_Hunting3x9, Optic_Scope8x
+      - Recoil pad: RecoilPad_Rubber
+      - Buttstock sleeve: ShellHolder_Butt
+      - Sling: Sling_2Point, Sling_1Point
+
+==============================================================================
+2. ATTACHMENTS (55 com modelo)
+==============================================================================
+
+MIRAS (9)
+------------------------------------------------------------------------------
+[x] Optic_RedDot - Red Dot Sight
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_RedDot/Optic_RedDot.fbx
+    Tamanho:     5,0 x 4,1 x 3,0 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  DesertEagle, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, AI_AWM, RugerRPR, BarrettM95, UMP45, KrissVector, BenelliM4, KSG, AA12
+    Com peça antes: RugerSuperRedhawk (precisa Mount_Ruger_Rings), AK47 (precisa Mount_AK_SideRail), AK74 (precisa Mount_AK_SideRail), M16A2 (precisa Mount_AR_CarryHandle), M14 (precisa Mount_M14), Rem700 (precisa Mount_ScopeBase), M24 (precisa Mount_ScopeBase), Win70 (precisa Mount_ScopeBase), MP5A3 (precisa Mount_HK_Claw), M590 (precisa Mount_ScopeBase), Rem870 (precisa Mount_ScopeBase), Saiga12 (precisa Mount_AK_SideRail), Win1894 (precisa Mount_ScopeBase), Marlin336 (precisa Mount_ScopeBase), HenryBigBoy (precisa Mount_ScopeBase), Marlin1894 (precisa Mount_ScopeBase), Marlin1895GG (precisa Mount_ScopeBase)
+
+[x] Optic_Holo - Holographic Sight
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_Holo/Optic_Holo.fbx
+    Tamanho:     9,0 x 4,5 x 3,5 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  DesertEagle, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, AI_AWM, RugerRPR, BarrettM95, UMP45, KrissVector, BenelliM4, KSG, AA12
+    Com peça antes: RugerSuperRedhawk (precisa Mount_Ruger_Rings), AK47 (precisa Mount_AK_SideRail), AK74 (precisa Mount_AK_SideRail), M16A2 (precisa Mount_AR_CarryHandle), M14 (precisa Mount_M14), Rem700 (precisa Mount_ScopeBase), M24 (precisa Mount_ScopeBase), Win70 (precisa Mount_ScopeBase), MP5A3 (precisa Mount_HK_Claw), M590 (precisa Mount_ScopeBase), Rem870 (precisa Mount_ScopeBase), Saiga12 (precisa Mount_AK_SideRail), Win1894 (precisa Mount_ScopeBase), Marlin336 (precisa Mount_ScopeBase), HenryBigBoy (precisa Mount_ScopeBase), Marlin1894 (precisa Mount_ScopeBase), Marlin1895GG (precisa Mount_ScopeBase)
+
+[x] Optic_4x - 4x Combat Scope
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_4x/Optic_4x.fbx
+    Tamanho:     14,0 x 5,2 x 3,4 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  DesertEagle, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, AI_AWM, RugerRPR, BarrettM95, UMP45, KrissVector, BenelliM4, KSG, AA12
+    Com peça antes: RugerSuperRedhawk (precisa Mount_Ruger_Rings), AK47 (precisa Mount_AK_SideRail), AK74 (precisa Mount_AK_SideRail), M16A2 (precisa Mount_AR_CarryHandle), M14 (precisa Mount_M14), Rem700 (precisa Mount_ScopeBase), M24 (precisa Mount_ScopeBase), Win70 (precisa Mount_ScopeBase), MP5A3 (precisa Mount_HK_Claw), M590 (precisa Mount_ScopeBase), Rem870 (precisa Mount_ScopeBase), Saiga12 (precisa Mount_AK_SideRail), Win1894 (precisa Mount_ScopeBase), Marlin336 (precisa Mount_ScopeBase), HenryBigBoy (precisa Mount_ScopeBase), Marlin1894 (precisa Mount_ScopeBase), Marlin1895GG (precisa Mount_ScopeBase)
+
+[x] Optic_Hunting3x9 - 3-9x Hunting Scope
+    Modelo real: Ultimate Gun Pack (Quaternius, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_Hunting3x9/Optic_Hunting3x9.fbx
+    Tamanho:     31,0 x 5,6 x 4,2 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  DesertEagle, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, AI_AWM, RugerRPR, BarrettM95, UMP45, KrissVector, BenelliM4, KSG, AA12
+    Com peça antes: RugerSuperRedhawk (precisa Mount_Ruger_Rings), AK47 (precisa Mount_AK_SideRail), AK74 (precisa Mount_AK_SideRail), M16A2 (precisa Mount_AR_CarryHandle), M14 (precisa Mount_M14), Rem700 (precisa Mount_ScopeBase), M24 (precisa Mount_ScopeBase), Win70 (precisa Mount_ScopeBase), MP5A3 (precisa Mount_HK_Claw), M590 (precisa Mount_ScopeBase), Rem870 (precisa Mount_ScopeBase), Saiga12 (precisa Mount_AK_SideRail), Win1894 (precisa Mount_ScopeBase), Marlin336 (precisa Mount_ScopeBase), HenryBigBoy (precisa Mount_ScopeBase), Marlin1894 (precisa Mount_ScopeBase), Marlin1895GG (precisa Mount_ScopeBase)
+
+[x] Optic_Scope8x - 8x Precision Scope
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_Scope8x/Optic_Scope8x.fbx
+    Tamanho:     36,0 x 6,6 x 5,2 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  DesertEagle, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, AI_AWM, RugerRPR, BarrettM95, UMP45, KrissVector, BenelliM4, KSG, AA12
+    Com peça antes: RugerSuperRedhawk (precisa Mount_Ruger_Rings), AK47 (precisa Mount_AK_SideRail), AK74 (precisa Mount_AK_SideRail), M16A2 (precisa Mount_AR_CarryHandle), M14 (precisa Mount_M14), Rem700 (precisa Mount_ScopeBase), M24 (precisa Mount_ScopeBase), Win70 (precisa Mount_ScopeBase), MP5A3 (precisa Mount_HK_Claw), M590 (precisa Mount_ScopeBase), Rem870 (precisa Mount_ScopeBase), Saiga12 (precisa Mount_AK_SideRail), Win1894 (precisa Mount_ScopeBase), Marlin336 (precisa Mount_ScopeBase), HenryBigBoy (precisa Mount_ScopeBase), Marlin1894 (precisa Mount_ScopeBase), Marlin1895GG (precisa Mount_ScopeBase)
+
+[x] Optic_Pistol_RMR - Pistol Red Dot (RMR)
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_Pistol_RMR/Optic_Pistol_RMR.fbx
+    Tamanho:     4,5 x 2,6 x 2,6 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  SIG_M17, SpringfieldProdigy, FN_FiveSeven
+
+[x] Optic_PSO1 - PSO-1 4x Scope
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_PSO1/Optic_PSO1.fbx
+    Tamanho:     37,5 x 7,6 x 4,1 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  SVD
+
+[x] Optic_PU - PU 3.5x Scope
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_PU/Optic_PU.fbx
+    Tamanho:     17,0 x 2,4 x 2,4 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Com peça antes: MosinNagant (precisa Mount_Mosin_PU)
+
+[x] Optic_Rimfire4x - 4x Rimfire Scope
+    Modelo real: Ultimate Gun Pack (Quaternius, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Optics/Optic_Rimfire4x/Optic_Rimfire4x.fbx
+    Tamanho:     27,0 x 3,5 x 1,9 cm
+    Aparece:     desenhado pelo jogo no ponto mira (scope) da arma
+    Encaixa em:  HenryH001
+
+
+MONTAGENS (7)
+------------------------------------------------------------------------------
+[x] Mount_AK_SideRail - AK Side Rail Optic Mount
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Mounts/Mount_AK_SideRail/Mount_AK_SideRail.fbx
+    Tamanho:     9,0 x 7,5 x 3,7 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  AK47, AK74, Saiga12
+    Cria encaixe: Optic rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Mount_AR_CarryHandle - Carry Handle Rail Mount
+    Pasta:       models_X/ZGB/Attachments/Mounts/Mount_AR_CarryHandle/Mount_AR_CarryHandle.fbx
+    Tamanho:     10,0 x 0,9 x 2,2 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  M16A2
+    Cria encaixe: Optic rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Mount_ScopeBase - Picatinny Scope Base
+    Pasta:       models_X/ZGB/Attachments/Mounts/Mount_ScopeBase/Mount_ScopeBase.fbx
+    Tamanho:     12,0 x 0,9 x 2,2 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  Rem700, M24, Win70, M590, Rem870, Win1894, Marlin336, HenryBigBoy, Marlin1894, Marlin1895GG
+    Cria encaixe: Optic rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Mount_HK_Claw - HK Claw Rail Mount
+    Pasta:       models_X/ZGB/Attachments/Mounts/Mount_HK_Claw/Mount_HK_Claw.fbx
+    Tamanho:     10,0 x 3,3 x 3,0 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  MP5A3
+    Cria encaixe: Optic rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Mount_M14 - M14 Scope Mount
+    Pasta:       models_X/ZGB/Attachments/Mounts/Mount_M14/Mount_M14.fbx
+    Tamanho:     12,0 x 6,9 x 3,1 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  M14
+    Cria encaixe: Optic rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Mount_Mosin_PU - Mosin PU Side Mount
+    Pasta:       models_X/ZGB/Attachments/Mounts/Mount_Mosin_PU/Mount_Mosin_PU.fbx
+    Tamanho:     8,0 x 4,1 x 3,0 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  MosinNagant
+    Cria encaixe: PU scope mount (deixe espaço/ponto para a peça de cima)
+
+[ ] Mount_Ruger_Rings - Ruger Ring Mount Rail
+    Pasta:       models_X/ZGB/Attachments/Mounts/Mount_Ruger_Rings/Mount_Ruger_Rings.fbx
+    Tamanho:     9,0 x 2,5 x 3,0 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  RugerSuperRedhawk
+    Cria encaixe: Optic rail (deixe espaço/ponto para a peça de cima)
+
+
+GUARDA-MÃOS (3)
+------------------------------------------------------------------------------
+[ ] Handguard_AK_Quad - AK Quad-Rail Handguard
+    Pasta:       models_X/ZGB/Attachments/Handguards/Handguard_AK_Quad/Handguard_AK_Quad.fbx
+    Tamanho:     21,0 x 6,4 x 5,6 cm
+    Aparece:     montado dentro da variante da arma (substitui: handguard da arma)
+    Encaixa em:  AK47, AK74
+    Cria encaixe: Under rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Handguard_AR_Quad - AR Quad-Rail Handguard
+    Pasta:       models_X/ZGB/Attachments/Handguards/Handguard_AR_Quad/Handguard_AR_Quad.fbx
+    Tamanho:     30,0 x 6,4 x 5,6 cm
+    Aparece:     montado dentro da variante da arma (substitui: handguard da arma)
+    Encaixa em:  M16A2
+    Cria encaixe: Under rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Handguard_MP5_Rail - MP5 Railed Handguard
+    Pasta:       models_X/ZGB/Attachments/Handguards/Handguard_MP5_Rail/Handguard_MP5_Rail.fbx
+    Tamanho:     14,0 x 6,0 x 5,2 cm
+    Aparece:     montado dentro da variante da arma (substitui: handguard da arma)
+    Encaixa em:  MP5A3
+    Cria encaixe: Under rail (deixe espaço/ponto para a peça de cima)
+
+
+ADAPTADORES (2)
+------------------------------------------------------------------------------
+[x] Adapter_USP_Rail - USP Rail Adapter
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Adapters/Adapter_USP_Rail/Adapter_USP_Rail.fbx
+    Tamanho:     5,0 x 1,0 x 2,4 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  HK_USP45
+    Cria encaixe: Under rail (deixe espaço/ponto para a peça de cima)
+
+[ ] Adapter_HK_3Lug - HK 3-Lug Thread Adapter
+    Pasta:       models_X/ZGB/Attachments/Adapters/Adapter_HK_3Lug/Adapter_HK_3Lug.fbx
+    Tamanho:     3,0 x 2,4 x 2,4 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  MP5A3
+    Cria encaixe: Muzzle thread (deixe espaço/ponto para a peça de cima)
+
+
+EMPUNHADURAS (3)
+------------------------------------------------------------------------------
+[x] Grip_Vertical - Vertical Foregrip
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Grips/Grip_Vertical/Grip_Vertical.fbx
+    Tamanho:     3,2 x 10,0 x 3,2 cm
+    Aparece:     desenhado pelo jogo no ponto embaixo do cano (recoilpad) da arma
+    Encaixa em:  Glock17, Glock19, Glock18C, SIG_P226, SIG_M17, M45A1, SpringfieldProdigy, Glock21, Glock22, FN_FiveSeven, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, UMP45, KrissVector, KSG
+    Com peça antes: HK_USP45 (precisa Adapter_USP_Rail), AK47 (precisa Handguard_AK_Quad), AK74 (precisa Handguard_AK_Quad), M16A2 (precisa Handguard_AR_Quad), MP5A3 (precisa Handguard_MP5_Rail)
+
+[x] Grip_Angled - Angled Foregrip
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Grips/Grip_Angled/Grip_Angled.fbx
+    Tamanho:     8,0 x 4,5 x 2,6 cm
+    Aparece:     desenhado pelo jogo no ponto embaixo do cano (recoilpad) da arma
+    Encaixa em:  Glock17, Glock19, Glock18C, SIG_P226, SIG_M17, M45A1, SpringfieldProdigy, Glock21, Glock22, FN_FiveSeven, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, UMP45, KrissVector, KSG
+    Com peça antes: HK_USP45 (precisa Adapter_USP_Rail), AK47 (precisa Handguard_AK_Quad), AK74 (precisa Handguard_AK_Quad), M16A2 (precisa Handguard_AR_Quad), MP5A3 (precisa Handguard_MP5_Rail)
+
+[x] Grip_Stubby - Stubby Grip
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Grips/Grip_Stubby/Grip_Stubby.fbx
+    Tamanho:     3,4 x 5,5 x 3,4 cm
+    Aparece:     desenhado pelo jogo no ponto embaixo do cano (recoilpad) da arma
+    Encaixa em:  Glock17, Glock19, Glock18C, SIG_P226, SIG_M17, M45A1, SpringfieldProdigy, Glock21, Glock22, FN_FiveSeven, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, UMP45, KrissVector, KSG
+    Com peça antes: HK_USP45 (precisa Adapter_USP_Rail), AK47 (precisa Handguard_AK_Quad), AK74 (precisa Handguard_AK_Quad), M16A2 (precisa Handguard_AR_Quad), MP5A3 (precisa Handguard_MP5_Rail)
+
+
+LANTERNAS (2)
+------------------------------------------------------------------------------
+[x] Light_Weapon - Weapon Light
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Lights/Light_Weapon/Light_Weapon.fbx
+    Tamanho:     12,4 x 3,0 x 3,0 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  Glock17, Glock19, Glock18C, SIG_P226, SIG_M17, M45A1, SpringfieldProdigy, Glock21, Glock22, FN_FiveSeven, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, UMP45, KrissVector, KSG
+    Com peça antes: HK_USP45 (precisa Adapter_USP_Rail), AK47 (precisa Handguard_AK_Quad), AK74 (precisa Handguard_AK_Quad), M16A2 (precisa Handguard_AR_Quad), MP5A3 (precisa Handguard_MP5_Rail)
+
+[x] Light_Pistol - Pistol Light
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Lights/Light_Pistol/Light_Pistol.fbx
+    Tamanho:     6,3 x 3,0 x 2,8 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  Glock17, Glock19, Glock18C, SIG_P226, SIG_M17, M45A1, SpringfieldProdigy, Glock21, Glock22, FN_FiveSeven, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, UMP45, KrissVector, KSG
+    Com peça antes: HK_USP45 (precisa Adapter_USP_Rail), AK47 (precisa Handguard_AK_Quad), AK74 (precisa Handguard_AK_Quad), M16A2 (precisa Handguard_AR_Quad), MP5A3 (precisa Handguard_MP5_Rail)
+
+
+LASERS (2)
+------------------------------------------------------------------------------
+[x] Laser_Rifle - Rifle Laser Module
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Lasers/Laser_Rifle/Laser_Rifle.fbx
+    Tamanho:     8,4 x 3,0 x 3,4 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  Glock17, Glock19, Glock18C, SIG_P226, SIG_M17, M45A1, SpringfieldProdigy, Glock21, Glock22, FN_FiveSeven, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, UMP45, KrissVector, KSG
+    Com peça antes: HK_USP45 (precisa Adapter_USP_Rail), AK47 (precisa Handguard_AK_Quad), AK74 (precisa Handguard_AK_Quad), M16A2 (precisa Handguard_AR_Quad), MP5A3 (precisa Handguard_MP5_Rail)
+
+[x] Laser_Pistol - Pistol Laser
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Lasers/Laser_Pistol/Laser_Pistol.fbx
+    Tamanho:     5,3 x 2,2 x 2,6 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  Glock17, Glock19, Glock18C, SIG_P226, SIG_M17, M45A1, SpringfieldProdigy, Glock21, Glock22, FN_FiveSeven, M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, UMP45, KrissVector, KSG
+    Com peça antes: HK_USP45 (precisa Adapter_USP_Rail), AK47 (precisa Handguard_AK_Quad), AK74 (precisa Handguard_AK_Quad), M16A2 (precisa Handguard_AR_Quad), MP5A3 (precisa Handguard_MP5_Rail)
+
+
+BIPÉS (1)
+------------------------------------------------------------------------------
+[x] Bipod_Harris - Harris Bipod
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Bipods/Bipod_Harris/Bipod_Harris.fbx
+    Tamanho:     4,0 x 20,0 x 10,0 cm
+    Aparece:     desenhado pelo jogo no ponto embaixo do cano (recoilpad) da arma
+    Encaixa em:  Rem700, M24, Win70, AI_AWM, RugerRPR
+
+
+SUPRESSORES (8)
+------------------------------------------------------------------------------
+[x] Suppressor_Pistol9 - 9mm Pistol Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Suppressor_Pistol9/Suppressor_Pistol9.fbx
+    Tamanho:     17,0 x 3,4 x 3,4 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  Glock17, Glock19, Beretta92FS
+    Com peça antes: MP5A3 (precisa Adapter_HK_3Lug)
+
+[x] Suppressor_Pistol45 - .45 Pistol Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Suppressor_Pistol45/Suppressor_Pistol45.fbx
+    Tamanho:     19,0 x 3,8 x 3,8 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  Colt1911, Glock21, HK_USP45, MAC10, UMP45, KrissVector
+
+[x] Suppressor_Rimfire - .22 Rimfire Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Suppressor_Rimfire/Suppressor_Rimfire.fbx
+    Tamanho:     14,0 x 2,6 x 2,6 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  RugerMkII
+
+[x] Suppressor_Rifle556 - 5.56 Rifle Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Suppressor_Rifle556/Suppressor_Rifle556.fbx
+    Tamanho:     17,0 x 4,0 x 4,0 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, Mk12SPR
+
+[x] Suppressor_Rifle308 - .308 Rifle Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Suppressor_Rifle308/Suppressor_Rifle308.fbx
+    Tamanho:     20,0 x 4,6 x 4,6 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  M14, SR25, RugerRPR
+
+[x] Muzzle_AK_Suppressor - AK Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Muzzle_AK_Suppressor/Muzzle_AK_Suppressor.fbx
+    Tamanho:     18,0 x 4,4 x 4,4 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  AK47
+
+[x] Suppressor_AK74 - AK-74 Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Suppressor_AK74/Suppressor_AK74.fbx
+    Tamanho:     18,0 x 4,2 x 4,2 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  AK74
+
+[x] Suppressor_338 - .338 Magnum Suppressor
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Suppressors/Suppressor_338/Suppressor_338.fbx
+    Tamanho:     24,0 x 5,0 x 5,0 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  AI_AWM
+
+
+QUEBRA-CHAMAS (3)
+------------------------------------------------------------------------------
+[x] FlashHider_556 - 5.56 Flash Hider
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/FlashHiders/FlashHider_556/FlashHider_556.fbx
+    Tamanho:     5,5 x 2,2 x 2,2 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, Mk12SPR
+
+[x] FlashHider_308 - .308 Flash Hider
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/FlashHiders/FlashHider_308/FlashHider_308.fbx
+    Tamanho:     6,0 x 2,6 x 2,6 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  M14, SR25, RugerRPR
+
+[ ] Muzzle_AK_FlashHider - AK Flash Hider
+    Pasta:       models_X/ZGB/Attachments/FlashHiders/Muzzle_AK_FlashHider/Muzzle_AK_FlashHider.fbx
+    Tamanho:     6,0 x 2,2 x 2,2 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  AK47
+
+
+FREIOS DE BOCA E COMPENSADORES (5)
+------------------------------------------------------------------------------
+[x] Brake_Rifle556 - 5.56 Muzzle Brake
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/MuzzleBrakes/Brake_Rifle556/Brake_Rifle556.fbx
+    Tamanho:     5,5 x 2,4 x 2,9 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  M16A2, M4A1, M4A4, M4A1S, HK416, Mk12SPR
+
+[x] Brake_Rifle308 - .308 Muzzle Brake
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/MuzzleBrakes/Brake_Rifle308/Brake_Rifle308.fbx
+    Tamanho:     7,0 x 2,8 x 3,4 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  M14, SR25, RugerRPR
+
+[x] Muzzle_AK_Compensator - AK Compensator
+    Modelo real: Sketchfab models (one credit per model, below) (various, CC-BY 4.0 / CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/MuzzleBrakes/Muzzle_AK_Compensator/Muzzle_AK_Compensator.fbx
+    Tamanho:     7,0 x 2,4 x 2,9 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  AK47
+
+[ ] Brake_AK74 - AK-74 Muzzle Brake
+    Pasta:       models_X/ZGB/Attachments/MuzzleBrakes/Brake_AK74/Brake_AK74.fbx
+    Tamanho:     7,5 x 2,4 x 2,9 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  AK74
+
+[ ] Comp_Pistol9 - 9mm Pistol Compensator
+    Pasta:       models_X/ZGB/Attachments/MuzzleBrakes/Comp_Pistol9/Comp_Pistol9.fbx
+    Tamanho:     3,5 x 2,7 x 2,6 cm
+    Aparece:     desenhado pelo jogo no ponto boca do cano (canon) da arma
+    Encaixa em:  Glock17, Glock19, Beretta92FS
+    Com peça antes: MP5A3 (precisa Adapter_HK_3Lug)
+
+
+CORONHAS (5)
+------------------------------------------------------------------------------
+[x] Stock_AK_Folding - AK Folding Stock
+    Modelo real: Ultimate Gun Pack (Quaternius, CC0 1.0) - o artista pode substituir
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AK_Folding/Stock_AK_Folding.fbx
+    Tamanho:     25,0 x 8,0 x 0,8 cm
+    Aparece:     montado dentro da variante da arma (substitui: stock da arma)
+    Encaixa em:  AK47, AK74
+
+[ ] Stock_AR_Collapsible - AR Collapsible Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AR_Collapsible/Stock_AR_Collapsible.fbx
+    Tamanho:     26,0 x 9,0 x 3,8 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR
+
+[ ] Stock_AR_Precision - AR Precision Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_AR_Precision/Stock_AR_Precision.fbx
+    Tamanho:     26,0 x 14,0 x 4,4 cm
+    Aparece:     desenhado pelo jogo no ponto coronha (stock) da arma
+    Encaixa em:  M4A1, M4A4, M4A1S, HK416, SR25, Mk12SPR, RugerRPR
+
+[ ] Stock_M590_PistolGrip - Mossberg Pistol-Grip Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_M590_PistolGrip/Stock_M590_PistolGrip.fbx
+    Tamanho:     32,0 x 15,5 x 4,4 cm
+    Aparece:     montado dentro da variante da arma (substitui: stock da arma)
+    Encaixa em:  M590
+
+[ ] Stock_870_Folding - Remington 870 Folding Stock
+    Pasta:       models_X/ZGB/Attachments/Stocks/Stock_870_Folding/Stock_870_Folding.fbx
+    Tamanho:     28,0 x 8,2 x 1,0 cm
+    Aparece:     montado dentro da variante da arma (substitui: stock da arma)
+    Encaixa em:  Rem870
+
+
+PORTA-CARTUCHOS (2)
+------------------------------------------------------------------------------
+[ ] Sidesaddle_Shotgun - Shotgun Side Saddle
+    Pasta:       models_X/ZGB/Attachments/ShellHolders/Sidesaddle_Shotgun/Sidesaddle_Shotgun.fbx
+    Tamanho:     13,0 x 6,5 x 2,6 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  M590, Rem870, BenelliM4
+
+[ ] ShellHolder_Butt - Buttstock Shell Holder
+    Pasta:       models_X/ZGB/Attachments/ShellHolders/ShellHolder_Butt/ShellHolder_Butt.fbx
+    Tamanho:     12,0 x 8,0 x 2,6 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  Rem700, Win70, MosinNagant, Kar98k, LeeEnfieldNo4, M590, Rem870, BenelliM4, CoachGun, Win1897, Win1894, Marlin336, HenryBigBoy, Marlin1894, HenryH001, Marlin1895GG
+
+
+SOLEIRAS (RECOIL PADS) (1)
+------------------------------------------------------------------------------
+[ ] RecoilPad_Rubber - Rubber Recoil Pad
+    Pasta:       models_X/ZGB/Attachments/RecoilPads/RecoilPad_Rubber/RecoilPad_Rubber.fbx
+    Tamanho:     2,5 x 11,5 x 4,8 cm
+    Aparece:     montado dentro da variante da arma
+    Encaixa em:  M14, SVD, Rem700, M24, Win70, MosinNagant, Kar98k, LeeEnfieldNo4, M590, Rem870, BenelliM4, KSG, CoachGun, Win1897, Win1894, Marlin336, HenryBigBoy, Marlin1894, HenryH001, Marlin1895GG
+
+
+BANDOLEIRAS (2)
+------------------------------------------------------------------------------
+[ ] Sling_2Point - 2-Point Sling
+    Pasta:       models_X/ZGB/Attachments/Slings/Sling_2Point/Sling_2Point.fbx
+    Tamanho:     45,0 x 10,0 x 2,4 cm
+    Aparece:     desenhado pelo jogo no ponto bandoleira (sling) da arma
+    Encaixa em:  AK47, AK74, M16A2, M4A1, M4A4, M4A1S, HK416, SteyrAUG, IMI_Galil, HK_G36, M14, SVD, SR25, Mk12SPR, Rem700, M24, Win70, MosinNagant, Kar98k, LeeEnfieldNo4, AI_AWM, RugerRPR, BarrettM95, MP5A3, Uzi, MAC10, ThompsonM1928, UMP45, FN_P90, KrissVector, PPSh41, M590, Rem870, BenelliM4, SPAS12, Saiga12, KSG, Win1897, AA12, Win1894, Marlin336, HenryBigBoy, Marlin1894, HenryH001, Marlin1895GG
+
+[ ] Sling_1Point - 1-Point Sling
+    Pasta:       models_X/ZGB/Attachments/Slings/Sling_1Point/Sling_1Point.fbx
+    Tamanho:     1,0 x 20,0 x 2,4 cm
+    Aparece:     desenhado pelo jogo no ponto bandoleira (sling) da arma
+    Encaixa em:  AK47, AK74, M16A2, M4A1, M4A4, M4A1S, HK416, SteyrAUG, IMI_Galil, HK_G36, M14, SVD, SR25, Mk12SPR, Rem700, M24, Win70, MosinNagant, Kar98k, LeeEnfieldNo4, AI_AWM, RugerRPR, BarrettM95, MP5A3, Uzi, MAC10, ThompsonM1928, UMP45, FN_P90, KrissVector, PPSh41, M590, Rem870, BenelliM4, SPAS12, Saiga12, KSG, Win1897, AA12, Win1894, Marlin336, HenryBigBoy, Marlin1894, HenryH001, Marlin1895GG
+
+SEM MODELO (internos, só ícone): Choke_Full, Choke_Modified, Choke_ImprovedCylinder
+
+==============================================================================
+3. CARREGADORES (67)
+==============================================================================
+
+9x19mm (18)
+------------------------------------------------------------------------------
+[ ] Glock17_Mag17 - Glock 17rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Glock17_Mag17/Glock17_Mag17.fbx
+    Tipo:        padrão, 17 cartuchos   Usado por: Glock17, Glock18C
+
+[ ] Glock19_Mag15 - Glock 19 15rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Glock19_Mag15/Glock19_Mag15.fbx
+    Tipo:        padrão, 15 cartuchos   Usado por: Glock19
+
+[ ] Glock17_Mag33 - Glock 33rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Glock17_Mag33/Glock17_Mag33.fbx
+    Tipo:        estendido, 33 cartuchos   Usado por: Glock17, Glock19, Glock18C
+
+[ ] Glock_Drum50 - Glock 50rd Drum
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Glock_Drum50/Glock_Drum50.fbx
+    Tipo:        tambor, 50 cartuchos   Usado por: Glock17, Glock19, Glock18C
+
+[ ] Beretta92_Mag15 - Beretta 92 15rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Beretta92_Mag15/Beretta92_Mag15.fbx
+    Tipo:        padrão, 15 cartuchos   Usado por: Beretta92FS
+
+[ ] Beretta92_Mag30 - Beretta 92 30rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Beretta92_Mag30/Beretta92_Mag30.fbx
+    Tipo:        estendido, 30 cartuchos   Usado por: Beretta92FS
+
+[ ] P226_Mag15 - SIG P226 15rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/P226_Mag15/P226_Mag15.fbx
+    Tipo:        padrão, 15 cartuchos   Usado por: SIG_P226
+
+[ ] P226_Mag20 - SIG P226 20rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/P226_Mag20/P226_Mag20.fbx
+    Tipo:        estendido, 20 cartuchos   Usado por: SIG_P226
+
+[ ] CZ75_Mag16 - CZ 75 16rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/CZ75_Mag16/CZ75_Mag16.fbx
+    Tipo:        padrão, 16 cartuchos   Usado por: CZ75
+
+[ ] CZ75_Mag26 - CZ 75 26rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/CZ75_Mag26/CZ75_Mag26.fbx
+    Tipo:        estendido, 26 cartuchos   Usado por: CZ75
+
+[ ] M17_Mag17 - SIG M17 17rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/M17_Mag17/M17_Mag17.fbx
+    Tipo:        padrão, 17 cartuchos   Usado por: SIG_M17
+
+[ ] M17_Mag21 - SIG M17 21rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/M17_Mag21/M17_Mag21.fbx
+    Tipo:        estendido, 21 cartuchos   Usado por: SIG_M17
+
+[ ] Prodigy_Mag17 - Prodigy 17rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Prodigy_Mag17/Prodigy_Mag17.fbx
+    Tipo:        padrão, 17 cartuchos   Usado por: SpringfieldProdigy
+
+[ ] Prodigy_Mag20 - Prodigy 20rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Prodigy_Mag20/Prodigy_Mag20.fbx
+    Tipo:        estendido, 20 cartuchos   Usado por: SpringfieldProdigy
+
+[ ] MP5_Mag30 - MP5 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/MP5_Mag30/MP5_Mag30.fbx
+    Tipo:        padrão, 30 cartuchos   Usado por: MP5A3
+
+[ ] MP5_CMag100 - MP5 100rd Twin Drum (C-Mag)
+    Pasta:       models_X/ZGB/Magazines/9x19mm/MP5_CMag100/MP5_CMag100.fbx
+    Tipo:        tambor, 100 cartuchos   Usado por: MP5A3
+
+[ ] Uzi_Mag32 - Uzi 32rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Uzi_Mag32/Uzi_Mag32.fbx
+    Tipo:        padrão, 32 cartuchos   Usado por: Uzi
+
+[ ] Uzi_Mag50 - Uzi 50rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/9x19mm/Uzi_Mag50/Uzi_Mag50.fbx
+    Tipo:        estendido, 50 cartuchos   Usado por: Uzi
+
+
+.45 ACP (10)
+------------------------------------------------------------------------------
+[ ] M1911_Mag7 - M1911 7rd Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/M1911_Mag7/M1911_Mag7.fbx
+    Tipo:        padrão, 7 cartuchos   Usado por: Colt1911, M45A1
+
+[ ] M1911_Mag10 - M1911 10rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/M1911_Mag10/M1911_Mag10.fbx
+    Tipo:        estendido, 10 cartuchos   Usado por: Colt1911, M45A1
+
+[ ] Glock21_Mag13 - Glock 21 13rd Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/Glock21_Mag13/Glock21_Mag13.fbx
+    Tipo:        padrão, 13 cartuchos   Usado por: Glock21, KrissVector
+
+[ ] Glock21_Mag26 - Glock 21 26rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/Glock21_Mag26/Glock21_Mag26.fbx
+    Tipo:        estendido, 26 cartuchos   Usado por: Glock21, KrissVector
+
+[ ] USP45_Mag12 - HK USP45 12rd Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/USP45_Mag12/USP45_Mag12.fbx
+    Tipo:        padrão, 12 cartuchos   Usado por: HK_USP45
+
+[ ] MAC10_Mag30 - MAC-10 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/MAC10_Mag30/MAC10_Mag30.fbx
+    Tipo:        padrão, 30 cartuchos   Usado por: MAC10
+
+[ ] Thompson_Mag20 - Thompson 20rd Stick Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/Thompson_Mag20/Thompson_Mag20.fbx
+    Tipo:        padrão, 20 cartuchos   Usado por: ThompsonM1928
+
+[ ] Thompson_Mag30 - Thompson 30rd Stick Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/Thompson_Mag30/Thompson_Mag30.fbx
+    Tipo:        estendido, 30 cartuchos   Usado por: ThompsonM1928
+
+[ ] Thompson_Drum50 - Thompson 50rd L-Drum
+    Pasta:       models_X/ZGB/Magazines/45ACP/Thompson_Drum50/Thompson_Drum50.fbx
+    Tipo:        tambor, 50 cartuchos   Usado por: ThompsonM1928
+
+[ ] UMP45_Mag25 - UMP45 25rd Magazine
+    Pasta:       models_X/ZGB/Magazines/45ACP/UMP45_Mag25/UMP45_Mag25.fbx
+    Tipo:        padrão, 25 cartuchos   Usado por: UMP45
+
+
+.40 S&W (2)
+------------------------------------------------------------------------------
+[ ] Glock22_Mag15 - Glock 22 15rd Magazine
+    Pasta:       models_X/ZGB/Magazines/40SW/Glock22_Mag15/Glock22_Mag15.fbx
+    Tipo:        padrão, 15 cartuchos   Usado por: Glock22
+
+[ ] Glock22_Mag22 - Glock 22 22rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/40SW/Glock22_Mag22/Glock22_Mag22.fbx
+    Tipo:        estendido, 22 cartuchos   Usado por: Glock22
+
+
+.380 ACP (1)
+------------------------------------------------------------------------------
+[ ] PPK_Mag7 - Walther PPK 7rd Magazine
+    Pasta:       models_X/ZGB/Magazines/380ACP/PPK_Mag7/PPK_Mag7.fbx
+    Tipo:        padrão, 7 cartuchos   Usado por: WaltherPPK
+
+
+.22 LR (1)
+------------------------------------------------------------------------------
+[ ] MkII_Mag10 - Ruger Mk II 10rd Magazine
+    Pasta:       models_X/ZGB/Magazines/22LR/MkII_Mag10/MkII_Mag10.fbx
+    Tipo:        padrão, 10 cartuchos   Usado por: RugerMkII
+
+
+9x18mm Makarov (1)
+------------------------------------------------------------------------------
+[ ] PM_Mag8 - Makarov PM 8rd Magazine
+    Pasta:       models_X/ZGB/Magazines/9x18mmMakarov/PM_Mag8/PM_Mag8.fbx
+    Tipo:        padrão, 8 cartuchos   Usado por: MakarovPM
+
+
+7.62x25mm Tokarev (3)
+------------------------------------------------------------------------------
+[ ] TT33_Mag8 - Tokarev TT-33 8rd Magazine
+    Pasta:       models_X/ZGB/Magazines/762x25mmTokarev/TT33_Mag8/TT33_Mag8.fbx
+    Tipo:        padrão, 8 cartuchos   Usado por: TokarevTT33
+
+[ ] PPSh_Mag35 - PPSh-41 35rd Box Magazine
+    Pasta:       models_X/ZGB/Magazines/762x25mmTokarev/PPSh_Mag35/PPSh_Mag35.fbx
+    Tipo:        padrão, 35 cartuchos   Usado por: PPSh41
+
+[ ] PPSh_Drum71 - PPSh-41 71rd Drum
+    Pasta:       models_X/ZGB/Magazines/762x25mmTokarev/PPSh_Drum71/PPSh_Drum71.fbx
+    Tipo:        tambor, 71 cartuchos   Usado por: PPSh41
+
+
+5.7x28mm (3)
+------------------------------------------------------------------------------
+[ ] FiveSeven_Mag20 - Five-seveN 20rd Magazine
+    Pasta:       models_X/ZGB/Magazines/57x28mm/FiveSeven_Mag20/FiveSeven_Mag20.fbx
+    Tipo:        padrão, 20 cartuchos   Usado por: FN_FiveSeven
+
+[ ] FiveSeven_Mag30 - Five-seveN 30rd Extended Magazine
+    Pasta:       models_X/ZGB/Magazines/57x28mm/FiveSeven_Mag30/FiveSeven_Mag30.fbx
+    Tipo:        estendido, 30 cartuchos   Usado por: FN_FiveSeven
+
+[ ] P90_Mag50 - P90 50rd Magazine
+    Pasta:       models_X/ZGB/Magazines/57x28mm/P90_Mag50/P90_Mag50.fbx
+    Tipo:        padrão, 50 cartuchos   Usado por: FN_P90
+
+
+.50 AE (1)
+------------------------------------------------------------------------------
+[ ] DEagle_Mag7 - Desert Eagle .50 7rd Magazine
+    Pasta:       models_X/ZGB/Magazines/50AE/DEagle_Mag7/DEagle_Mag7.fbx
+    Tipo:        padrão, 7 cartuchos   Usado por: DesertEagle
+
+
+7.62x39mm (3)
+------------------------------------------------------------------------------
+[ ] AK47_Mag30 - AK-47 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/762x39mm/AK47_Mag30/AK47_Mag30.fbx
+    Tipo:        padrão, 30 cartuchos   Usado por: AK47
+
+[ ] AK_Mag40 - RPK 40rd Magazine
+    Pasta:       models_X/ZGB/Magazines/762x39mm/AK_Mag40/AK_Mag40.fbx
+    Tipo:        estendido, 40 cartuchos   Usado por: AK47
+
+[ ] AK47_Drum75 - AK-47 75rd Drum
+    Pasta:       models_X/ZGB/Magazines/762x39mm/AK47_Drum75/AK47_Drum75.fbx
+    Tipo:        tambor, 75 cartuchos   Usado por: AK47
+
+
+5.45x39mm (2)
+------------------------------------------------------------------------------
+[ ] AK74_Mag30 - AK-74 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/545x39mm/AK74_Mag30/AK74_Mag30.fbx
+    Tipo:        padrão, 30 cartuchos   Usado por: AK74
+
+[ ] AK74_Mag45 - RPK-74 45rd Magazine
+    Pasta:       models_X/ZGB/Magazines/545x39mm/AK74_Mag45/AK74_Mag45.fbx
+    Tipo:        estendido, 45 cartuchos   Usado por: AK74
+
+
+5.56x45mm (9)
+------------------------------------------------------------------------------
+[ ] STANAG_Mag30 - STANAG 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/556x45mm/STANAG_Mag30/STANAG_Mag30.fbx
+    Tipo:        padrão, 30 cartuchos   Usado por: M16A2, M4A1, M4A4, M4A1S, HK416, Mk12SPR
+
+[ ] STANAG_Mag40 - STANAG 40rd Magazine
+    Pasta:       models_X/ZGB/Magazines/556x45mm/STANAG_Mag40/STANAG_Mag40.fbx
+    Tipo:        estendido, 40 cartuchos   Usado por: M16A2, M4A1, M4A4, M4A1S, HK416, Mk12SPR
+
+[ ] STANAG_CMag100 - STANAG 100rd Twin Drum (C-Mag)
+    Pasta:       models_X/ZGB/Magazines/556x45mm/STANAG_CMag100/STANAG_CMag100.fbx
+    Tipo:        tambor, 100 cartuchos   Usado por: M16A2, M4A1, M4A4, M4A1S, HK416, Mk12SPR
+
+[ ] AUG_Mag30 - Steyr AUG 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/556x45mm/AUG_Mag30/AUG_Mag30.fbx
+    Tipo:        padrão, 30 cartuchos   Usado por: SteyrAUG
+
+[ ] AUG_Mag42 - Steyr AUG 42rd Magazine
+    Pasta:       models_X/ZGB/Magazines/556x45mm/AUG_Mag42/AUG_Mag42.fbx
+    Tipo:        estendido, 42 cartuchos   Usado por: SteyrAUG
+
+[ ] Galil_Mag35 - Galil 35rd Magazine
+    Pasta:       models_X/ZGB/Magazines/556x45mm/Galil_Mag35/Galil_Mag35.fbx
+    Tipo:        padrão, 35 cartuchos   Usado por: IMI_Galil
+
+[ ] Galil_Mag50 - Galil 50rd Magazine
+    Pasta:       models_X/ZGB/Magazines/556x45mm/Galil_Mag50/Galil_Mag50.fbx
+    Tipo:        estendido, 50 cartuchos   Usado por: IMI_Galil
+
+[ ] G36_Mag30 - G36 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/556x45mm/G36_Mag30/G36_Mag30.fbx
+    Tipo:        padrão, 30 cartuchos   Usado por: HK_G36
+
+[ ] G36_CMag100 - G36 100rd Twin Drum (C-Mag)
+    Pasta:       models_X/ZGB/Magazines/556x45mm/G36_CMag100/G36_CMag100.fbx
+    Tipo:        tambor, 100 cartuchos   Usado por: HK_G36
+
+
+.308 Win / 7.62x51mm (4)
+------------------------------------------------------------------------------
+[ ] M14_Mag20 - M14 20rd Magazine
+    Pasta:       models_X/ZGB/Magazines/308Win762x51mm/M14_Mag20/M14_Mag20.fbx
+    Tipo:        padrão, 20 cartuchos   Usado por: M14
+
+[ ] M14_Mag30 - M14 30rd Magazine
+    Pasta:       models_X/ZGB/Magazines/308Win762x51mm/M14_Mag30/M14_Mag30.fbx
+    Tipo:        estendido, 30 cartuchos   Usado por: M14
+
+[ ] SR25_Mag20 - SR-25 20rd Magazine
+    Pasta:       models_X/ZGB/Magazines/308Win762x51mm/SR25_Mag20/SR25_Mag20.fbx
+    Tipo:        padrão, 20 cartuchos   Usado por: SR25
+
+[ ] SR25_Mag25 - SR-25 25rd Magazine
+    Pasta:       models_X/ZGB/Magazines/308Win762x51mm/SR25_Mag25/SR25_Mag25.fbx
+    Tipo:        estendido, 25 cartuchos   Usado por: SR25
+
+
+7.62x54mmR (1)
+------------------------------------------------------------------------------
+[ ] SVD_Mag10 - SVD 10rd Magazine
+    Pasta:       models_X/ZGB/Magazines/762x54mmR/SVD_Mag10/SVD_Mag10.fbx
+    Tipo:        padrão, 10 cartuchos   Usado por: SVD
+
+
+.338 Lapua Magnum (1)
+------------------------------------------------------------------------------
+[ ] AWM_Mag5 - AWM .338 5rd Magazine
+    Pasta:       models_X/ZGB/Magazines/338LapuaMagnum/AWM_Mag5/AWM_Mag5.fbx
+    Tipo:        padrão, 5 cartuchos   Usado por: AI_AWM
+
+
+6.5 Creedmoor (1)
+------------------------------------------------------------------------------
+[ ] AICS_Mag10 - AICS 10rd Magazine
+    Pasta:       models_X/ZGB/Magazines/65Creedmoor/AICS_Mag10/AICS_Mag10.fbx
+    Tipo:        padrão, 10 cartuchos   Usado por: RugerRPR
+
+
+.50 BMG (1)
+------------------------------------------------------------------------------
+[ ] M95_Mag5 - Barrett M95 5rd Magazine
+    Pasta:       models_X/ZGB/Magazines/50BMG/M95_Mag5/M95_Mag5.fbx
+    Tipo:        padrão, 5 cartuchos   Usado por: BarrettM95
+
+
+12 Gauge (5)
+------------------------------------------------------------------------------
+[ ] Saiga12_Mag5 - Saiga-12 5rd Magazine
+    Pasta:       models_X/ZGB/Magazines/12Gauge/Saiga12_Mag5/Saiga12_Mag5.fbx
+    Tipo:        padrão, 5 cartuchos   Usado por: Saiga12
+
+[ ] Saiga12_Mag10 - Saiga-12 10rd Magazine
+    Pasta:       models_X/ZGB/Magazines/12Gauge/Saiga12_Mag10/Saiga12_Mag10.fbx
+    Tipo:        estendido, 10 cartuchos   Usado por: Saiga12
+
+[ ] Saiga12_Drum20 - Saiga-12 20rd Drum
+    Pasta:       models_X/ZGB/Magazines/12Gauge/Saiga12_Drum20/Saiga12_Drum20.fbx
+    Tipo:        tambor, 20 cartuchos   Usado por: Saiga12
+
+[ ] AA12_Mag8 - AA-12 8rd Box Magazine
+    Pasta:       models_X/ZGB/Magazines/12Gauge/AA12_Mag8/AA12_Mag8.fbx
+    Tipo:        padrão, 8 cartuchos   Usado por: AA12
+
+[ ] AA12_Drum32 - AA-12 32rd Drum
+    Pasta:       models_X/ZGB/Magazines/12Gauge/AA12_Drum32/AA12_Drum32.fbx
+    Tipo:        tambor, 32 cartuchos   Usado por: AA12
+
+==============================================================================
+4. CÁPSULAS VAZIAS (4)
+==============================================================================
+Caem no chão ao atirar (vista isométrica). Modelos pequenos e simples.
+
+[ ] Casing_RifleLarge - Spent Large Rifle Casing
+    Pasta:       models_X/ZGB/Casings/Casing_RifleLarge/Casing_RifleLarge.fbx
+
+[ ] Casing_Pistol - Spent Pistol Casing
+    Pasta:       models_X/ZGB/Casings/Casing_Pistol/Casing_Pistol.fbx
+
+[ ] Casing_Rifle - Spent Rifle Casing
+    Pasta:       models_X/ZGB/Casings/Casing_Rifle/Casing_Rifle.fbx
+
+[ ] Casing_ShotgunHull - Spent Shotgun Hull
+    Pasta:       models_X/ZGB/Casings/Casing_ShotgunHull/Casing_ShotgunHull.fbx

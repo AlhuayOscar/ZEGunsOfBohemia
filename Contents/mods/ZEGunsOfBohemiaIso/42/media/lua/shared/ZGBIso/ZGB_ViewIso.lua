@@ -34,11 +34,11 @@ local IsoProvider = {
         if ZGB.IsoModels then ZGB.IsoModels.apply(player, item, spec) end
     end,
     onAttachmentsChanged = function(player, item, spec)
-        if ZGB.IsoModels then ZGB.IsoModels.apply(player, item, spec) end
+        if ZGB.IsoModels then ZGB.IsoModels.apply(player, item, spec, true) end   -- redraw: vanilla-drawn parts changed
     end,
 }
 
-ZGB.Addons.register{ id = "iso", name = "ZE Guns Of Bohemia - Isometric", modId = "ZEGunsOfBohemiaIso", version = "0.6.0" }
+ZGB.Addons.register{ id = "iso", name = "ZE Guns Of Bohemia - Isometric", modId = "ZEGunsOfBohemiaIso", version = "0.8.0" }
 
 -- Hard stop: never register alongside a first-person / Java animation mod.
 local fp = Mode.activeFpMods()

@@ -147,12 +147,16 @@ function AF.resolve(viewId, typeId, clip, stance)
     return nil
 end
 
-local function scriptParamsFor(v, typeId)
+--- Vanilla script params (SwingAnim...) a view gives an anim type, following its `base`.
+function AF.scriptParams(viewId, typeId)
+    local v = AF._views[viewId]
+    if not v then return nil end
     for _, t in ipairs(AF.lineage(typeId)) do
         if v.scriptParams[t.id] then return v.scriptParams[t.id] end
     end
     return v.scriptParams.default
 end
+local function scriptParamsFor(v, typeId) return AF.scriptParams(v.id, typeId) end
 
 --[[ Everything a view needs for one gun:
      { animType, scriptParams, clips = { [clip] = resolved }, variables = { ... } } ]]

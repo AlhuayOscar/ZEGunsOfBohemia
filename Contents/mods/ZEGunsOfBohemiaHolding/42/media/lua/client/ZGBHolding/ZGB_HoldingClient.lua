@@ -14,7 +14,7 @@ require "ZGBHolding/ZGB_Holding"
 local E, SB, I, H = ZGB.Events, ZGB.Sandbox, ZGB.Item, ZGB.Holding
 
 ZGB.Addons.register{ id = "holding", name = "ZE Guns Of Bohemia - Tactical Holding", modId = "ZEGunsOfBohemiaHolding",
-                     version = "0.6.0", essential = true }
+                     version = "0.8.0", essential = true }
 
 local current = setmetatable({}, { __mode = "k" })   -- player -> { stance, spec }
 

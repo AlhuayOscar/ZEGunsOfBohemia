@@ -1,6 +1,7 @@
-name=ZE Guns Of Bohemia - Reloading
+name=ZE Guns Of Bohemia - Reload events
 id=ZEGunsOfBohemiaReload
-description=Essential addon for ZE Guns Of Bohemia: tactical and empty magazine reloads, chambered +1, revolver, tube, gate and break-action reloads timed by gun type, magazine tier and Reloading skill.
+description=Optional addon for ZE Guns Of Bohemia: follows the reloads Gunworks performs (tactical, empty, rounds into tubes and cylinders) and tells the rest of the mod, for callouts and spent case dropping. Reloading itself is done by Gunworks.
 require=\ZEGunsOfBohemiaCore
-modversion=0.6.0
+poster=poster.png
+modversion=0.8.0
 versionMin=42.0

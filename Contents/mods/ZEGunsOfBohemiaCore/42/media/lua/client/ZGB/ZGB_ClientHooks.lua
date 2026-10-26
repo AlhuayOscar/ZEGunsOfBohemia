@@ -1,5 +1,9 @@
 --[[
     ZGB_ClientHooks.lua  —  context menu entry + keep stats fresh on equip.
+
+    With Gunworks active (the normal case since v0.8) magazines, rounds and loading are
+    its menus (radial: select magazine / ammunition, the ammo loader), so ours only
+    show without it.
 ]]
 require "ZGB/ZGB_Service"
 require "ZGB/ZGB_Events"
@@ -8,6 +12,9 @@ require "ZGB/Factory/ZGB_RecoilFactory"
 require "ZGB/UI/ZGB_GunsmithWindow"
 require "ZGB/ZGB_MagazineActions"
 require "ZGB/ZGB_AmmoActions"
+require "ZGB/ZGB_Gunworks"
+
+local function gunworks() return ZGB.Gunworks.active end
 
 local function firstItem(v)
     if instanceof(v, "InventoryItem") then return v end
@@ -99,14 +106,16 @@ local function onFillInventoryMenu(playerNum, context, items)
             context:addOption("Gunsmith...", item, function(weapon)
                 ZGB_GunsmithWindow.open(player, weapon)
             end)
-            addMagazineMenu(player, context, item)
-            addShellChoiceMenu(player, context, item, spec)
-            addLoadAllMenu(player, context, spec.caliber)
+            if not gunworks() then
+                addMagazineMenu(player, context, item)
+                addShellChoiceMenu(player, context, item, spec)
+                addLoadAllMenu(player, context, spec.caliber)
+            end
             return
         end
         -- one of our magazines, or any ammo in the catalog (vanilla FMJ included)
         local caliberId = item and ZGB.Ammo.caliberOf(item:getFullType())
-        if caliberId then
+        if caliberId and not gunworks() then
             addLoadAllMenu(player, context, caliberId)
             return
         end

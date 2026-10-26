@@ -61,6 +61,11 @@ I.SETTERS = {
     projectileCount = "setProjectileCount",
 }
 
+-- setters that take a Java int: the game truncates 12.67 to 12 (seen in the self-test),
+-- so we round first and the stats we report match what the gun really has
+I.INT_STATS = { aimTime = true, recoilDelay = true, hitChance = true, reloadTime = true,
+                soundRadius = true, projectileCount = true }
+
 local warnedSetters = {}
 
 local function callSetter(item, setter, value)
@@ -83,6 +88,8 @@ function I.setTransient(item, key, mods)
 end
 
 --- Recompute and push stats onto the instance. Idempotent — safe to call often.
+--- With Gunworks active our numbers are one of its stat layers (ZGB_Gunworks): it
+--- restores the base and re-applies every layer, ours included.
 function I.applyStats(item)
     local spec = ZGB.WeaponFactory.specOf(item)
     if not spec then return end
@@ -97,15 +104,24 @@ function I.applyStats(item)
         I.state(item).pendingRefund = removed   -- Service gives these back to the player
     end
 
+    if ZGB.Gunworks and ZGB.Gunworks.active then return ZGB.Gunworks.reapply(item) end
+
     local mag = I.loadedMagazine(item)
     local extra = {}
     for _, e in pairs(I.transient[item] or {}) do extra[#extra + 1] = e end
     local stats = ZGB.Stats.compute(spec, att, mag, I.loadedAmmo(item), extra)
     for key, setter in pairs(I.SETTERS) do
-        if stats[key] ~= nil then callSetter(item, setter, stats[key]) end
+        if stats[key] ~= nil then
+            if I.INT_STATS[key] then stats[key] = math.floor(stats[key] + 0.5) end
+            callSetter(item, setter, stats[key])
+        end
     end
     -- Ammo capacity is always the spec's (for the loaded mag), never a vanilla leftover.
     callSetter(item, "setMaxAmmo", ZGB.Magazines.capacityFor(spec, mag))   -- VERIFY
+    -- a suppressor swaps the recorded shot for its suppressed version
+    local snd = spec.sounds or {}
+    local fire = (ZGB.Sounds and ZGB.Sounds.isSuppressed(att) and snd.fireSuppressed) or snd.fire
+    if fire then callSetter(item, "setSwingSound", fire) end                 -- VERIFY
     return stats
 end
 
@@ -116,10 +132,33 @@ local function containsClip(item)
 end
 I.containsClip = containsClip
 
---- The magazine type currently IN the gun, or nil if none / tube-fed.
+--- The magazine type currently IN the gun, or nil if none / tube-fed. Gunworks points
+--- the gun's MagazineType at the magazine it inserts, so the gun itself says which one.
 function I.loadedMagazine(item)
     if not containsClip(item) then return nil end
+    local t = item.getMagazineType and item:getMagazineType()
+    if t and t ~= "" then return tostring(t) end
     return I.state(item).loadedMag
+end
+
+--- Fire mode string ("Single", "Auto", Gunworks' "RealAuto" / "RealBurst"), or nil.
+function I.fireMode(item)
+    if not item or not item.getFireMode then return nil end
+    local m = item:getFireMode()
+    return m and tostring(m) or nil
+end
+
+--- AmmoType object an item script declares (`AmmoType = ...`), or nil. Gunworks wants
+--- this object as the `enum` of each round; works for our rounds, vanilla and SWMG's.
+function I.scriptAmmoType(fullType)
+    local sm = ScriptManager and ScriptManager.instance
+    local script = sm and sm:FindItem(fullType)
+    if not script or not script.getAmmoType then return nil end
+    return script:getAmmoType()
+end
+
+function I.setWeight(item, w)
+    if item and item.setActualWeight and w then item:setActualWeight(w) end
 end
 
 --- Point vanilla at `magFullType` BEFORE it is inserted: MagazineType decides
@@ -197,9 +236,32 @@ local function ammoCount(item)
 end
 I.ammoCount = ammoCount
 
+-- B42 ammo types are registry objects (AmmoType); the rest of the mod speaks item full
+-- types ("Base.Bullets45", "ZGB.Ammo_9x19_HP"). These two convert at the edge.
 local function getAmmoType(item)
-    local ok, t = pcall(function() return item:getAmmoType() end)            -- VERIFY
-    return ok and t or nil
+    local ok, t = pcall(function() return item:getAmmoType() end)
+    if not ok or t == nil then return nil end
+    if type(t) == "string" then return t end
+    local ok2, key = pcall(function() return t:getItemKey() end)            -- same call vanilla Lua uses
+    return ok2 and key and tostring(key) or nil
+end
+I.ammoTypeOf = getAmmoType
+
+local ammoTypeCache = {}
+--- AmmoType object for an ammo item full type, or nil (logged once) if the game has none.
+function I.ammoTypeObject(ammoFt)
+    if not ammoFt then return nil end
+    if ammoTypeCache[ammoFt] ~= nil then return ammoTypeCache[ammoFt] or nil end
+    local id = ZGB.AmmoCatalog.registryId(ammoFt)
+    local ok, obj = pcall(function() return AmmoType.get(ResourceLocation.of(id)) end)   -- confirmed by the in-game self-test
+    if not ok or not obj then ZGB.warn("No B42 AmmoType", id, "for", ammoFt, ok and "" or tostring(obj)) end
+    ammoTypeCache[ammoFt] = (ok and obj) or false
+    return ammoTypeCache[ammoFt] or nil
+end
+
+local function setAmmoType(item, ammoFt)
+    local obj = I.ammoTypeObject(ammoFt)
+    if obj then callSetter(item, "setAmmoType", obj) end
 end
 
 --- Variant currently in the gun (nil if empty). Used for stats.
@@ -209,7 +271,7 @@ function I.loadedAmmo(gun)
 end
 
 function I.setGunAmmo(gun, ammoFt)
-    callSetter(gun, "setAmmoType", ammoFt)                                   -- VERIFY
+    setAmmoType(gun, ammoFt)
     I.state(gun).loadedAmmo = ammoFt
 end
 
@@ -222,7 +284,7 @@ function I.magazineState(mag)
 end
 
 function I.setMagazineContents(mag, ammoFt, count)
-    callSetter(mag, "setAmmoType", ammoFt)                                   -- VERIFY
+    setAmmoType(mag, ammoFt)
     callSetter(mag, "setCurrentAmmoCount", count)
 end
 
@@ -361,6 +423,163 @@ function I.scaleActionTime(action, factor)
         end
         return false
     end)
+end
+
+-- ------------------------------------------------------------ probes (self-test, debug tools)
+-- Never warn: the self-test reports a missing call itself as SKIP.
+
+--- New item instance that is in no container (nil if the type can't be made).
+function I.create(fullType)
+    local ok, it = pcall(function() return instanceItem(fullType) end)
+    if ok and it then return it end
+    ok, it = pcall(function() return InventoryItemFactory.CreateItem(fullType) end)
+    return ok and it or nil
+end
+
+--- Read a getter: value, or nil + "missing" when the game has no such call / it threw.
+function I.probe(item, getter)
+    local ok, v = pcall(function() return item[getter](item) end)
+    if not ok then return nil, "missing" end
+    return v
+end
+
+--- Call a setter on purpose (the self-test simulating what a timed action does).
+function I.poke(item, setter, value)
+    local ok = pcall(function() item[setter](item, value) end)
+    return ok
+end
+
+--- Pretend a timed action inserted `magFullType` holding `count` rounds (stats, MaxAmmo, chamber).
+function I.simulateInsert(gun, magFullType, count)
+    if not I.setLoadedMagazine(gun, magFullType) then return false end
+    I.state(gun).loadedMag = magFullType
+    I.poke(gun, "setContainsClip", true)
+    I.poke(gun, "setCurrentAmmoCount", count)
+    I.poke(gun, "setRoundChambered", count > 0)
+    I.applyStats(gun)
+    return true
+end
+
+function I.scriptExists(fullType)
+    local ok, s = pcall(function() return ScriptManager.instance:getItem(fullType) end)
+    return ok and s ~= nil
+end
+
+function I.modelScriptExists(fullId)
+    local ok, s = pcall(function() return ScriptManager.instance:getModelScript(fullId) end)
+    if not ok then return nil end                                              -- can't tell
+    return s ~= nil
+end
+
+--- true / false, or nil when this build can't be asked. isKnownSound is strict:
+--- getSound also answered for names that play nothing (sounds in the wrong module).
+function I.soundExists(name)
+    local ok, known = pcall(function() return GameSounds.isKnownSound(name) end)
+    if not ok then return nil end
+    return known == true
+end
+
+--- File the sound plays (first clip), or nil.
+function I.soundFile(name)
+    -- step by step: in debug mode even an error caught by pcall stops in the debugger
+    local ok, f = pcall(function()
+        local snd = GameSounds.getSound(name)
+        local clip = snd and snd:getRandomClip()
+        return clip and clip:getFile()
+    end)
+    return ok and f and tostring(f) or nil
+end
+
+--- Inventory icon of any item type (from its script), or nil. Used by the Gunsmith screen.
+local iconCache = {}
+function I.iconOf(fullType)
+    if not fullType then return nil end
+    if iconCache[fullType] ~= nil then return iconCache[fullType] or nil end
+    local tex = nil
+    local sm = ScriptManager and ScriptManager.instance
+    local script = sm and sm:getItem(fullType)
+    if script then tex = script:getNormalTexture() end
+    iconCache[fullType] = tex or false
+    return tex
+end
+
+--- Condition 0..1 of an item (1 when it can't be read).
+function I.conditionOf(item)
+    if not item then return 1 end
+    local max = item:getConditionMax()
+    if not max or max <= 0 then return 1 end
+    return (item:getCondition() or max) / max
+end
+
+--- item:hasTag(ItemTag.<KEY>), e.g. I.hasTag(gun, "FIREARM"); nil if it can't be asked.
+function I.hasTag(item, key)
+    local ok, v = pcall(function() return item:hasTag(ItemTag[key]) end)
+    if not ok then return nil end
+    return v == true
+end
+
+--- Attachment point of a model script as the game read it: x, y, z (nil if missing).
+function I.modelAttachment(modelFullId, point)
+    -- nil-checked step by step: guns without that point made getOffset index nil, and in debug
+    -- mode an error stops in the debugger even inside pcall (seen in game)
+    local ok, x, y, z = pcall(function()
+        local script = ScriptManager.instance:getModelScript(modelFullId)
+        local att = script and script:getAttachmentById(point)
+        local o = att and att:getOffset()
+        if not o then return nil end
+        return o:x(), o:y(), o:z()
+    end)
+    if not ok then return nil end
+    return x, y, z
+end
+
+-- ------------------------------------------------------------ pose check (character)
+function I.equipPrimary(character, item)
+    return pcall(function()
+        character:setPrimaryHandItem(item)
+        -- instanceof first: the item held before may be a torch, and an error stops debug mode
+        local twoHanded = item ~= nil and instanceof(item, "HandWeapon") and item:isTwoHandWeapon()
+        character:setSecondaryHandItem(twoHanded and item or nil)
+    end)
+end
+function I.primary(character)
+    local ok, it = pcall(function() return character:getPrimaryHandItem() end)
+    return ok and it or nil
+end
+function I.setAiming(character, on) return pcall(function() character:setIsAiming(on) end) end
+--- Drop every queued timed action (vanilla ISTimedActionQueue.clear).
+function I.clearActions(character) return pcall(function() ISTimedActionQueue.clear(character) end) end
+--- Name of the animation state the character is in ("aim", "idle"...), or nil.
+function I.actionState(character)
+    local ok, v = pcall(function() return character:getActionStateName() end)
+    return ok and v and tostring(v) or nil
+end
+function I.animVar(character, name)
+    local ok, v = pcall(function() return character:getVariableString(name) end)
+    return ok and v or nil
+end
+function I.removeItem(character, item)
+    return pcall(function() character:getInventory():Remove(item) end)
+end
+--- Saves a screenshot (B42 global takeScreenshot(fileName)); true if the call worked.
+function I.screenshot(fileName)
+    return (pcall(function() takeScreenshot(fileName) end))
+end
+
+--- Add an item to a character's main inventory; returns it.
+function I.give(character, fullType)
+    local ok, it = pcall(function() return character:getInventory():AddItem(fullType) end)
+    return ok and it or nil
+end
+
+--- Write lines to Zomboid/Lua/<name>. Returns true on success.
+function I.writeLines(name, lines)
+    local ok = pcall(function()
+        local w = getFileWriter(name, true, false)
+        for _, l in ipairs(lines) do w:writeln(l) end
+        w:close()
+    end)
+    return ok
 end
 
 return I

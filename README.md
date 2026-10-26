@@ -7,7 +7,7 @@ and first person — without the animation overlap, flicker and crashes you get
 when you mix isometric gun packs with ZombieBuddy-based first-person (viewpoint / ADS) mods.
 
 ![Build](https://img.shields.io/badge/Project%20Zomboid-Build%2042-8b0000)
-![Version](https://img.shields.io/badge/version-0.6.0-blue)
+![Version](https://img.shields.io/badge/version-0.7.0-blue)
 ![Status](https://img.shields.io/badge/status-pre--alpha-orange)
 ![License](https://img.shields.io/badge/license-CC0--1.0-lightgrey)
 
@@ -28,6 +28,8 @@ when you mix isometric gun packs with ZombieBuddy-based first-person (viewpoint 
 - [How it works](#how-it-works)
 - [The addons](#the-addons)
 - [3D models](#3d-models)
+- [Sounds](#sounds)
+- [Testing without starting the game](#testing-without-starting-the-game)
 - [Testing in game](#testing-in-game)
 - [Adding a gun](#adding-a-gun)
 - [Development](#development)
@@ -57,12 +59,15 @@ ZE Guns Of Bohemia is built the other way around:
 - **Nothing crashes on an unknown API.** Every game call that hasn't been
   confirmed on a real install is wrapped in `pcall`: a wrong name logs a warning
   and switches that one feature off.
-- **Self-contained on purpose.** Reloading, magazines, ammo loading and (soon)
-  tactical holding are built in, so you don't need other gun mods for the basics.
-  In return, ZE Guns Of Bohemia is **not compatible** with other reloading mods
-  or generic gun frameworks: two systems patching the same reload code is the
-  kind of bug this mod exists to avoid. Extensions are welcome as addons built
-  on our own API.
+- **Built on Gunworks.** Since v0.8 the mod runs on the
+  [Gunworks Framework](https://steamcommunity.com/sharedfiles/filedetails/?id=3722064198)
+  (mod id `SWMG`): it does the reloading (best magazine on R, mixed rounds in a
+  magazine, speedloaders), fire modes with real rate of fire and bursts, and the
+  stat layers. Our catalogue registers everything in it (`ZGB_Gunworks`, data from
+  the pure `ZGB_GunworksPlan`). We own the catalogue, the attachment rules, the
+  Gunsmith, models, sounds and loot. Other gun frameworks stay **incompatible**:
+  two systems patching the same reload code is the kind of bug this mod exists
+  to avoid. Gun packs built on Gunworks share its ammunition library with us.
 
 ## Features
 
@@ -70,9 +75,11 @@ ZE Guns Of Bohemia is built the other way around:
   interfaces (dovetail, picatinny, muzzle threads...). Parts can add new slots:
   an AK has no optic slot until you fit a side-rail mount. The game tells you
   what you're missing ("needs AK Side Rail Optic Mount").
-- **Gunsmith window.** Right-click a gun → **Gunsmith...** for the full attachment
-  tree, including "ghost" slots that appear once a mount is on, with ownership,
-  install state and a stat preview for the selected part.
+- **Gunsmith screen.** Right-click a gun → **Gunsmith...**: a full-screen inspect view
+  with the gun in the middle and every slot next to where its part goes (line to the
+  spot), "ghost" slots that appear once a mount is on, a grid of parts per slot
+  (fitted, owned, not owned, needs a mount), Weapon Data with the change the
+  hovered part would make, and what you carry for the gun (rounds, magazines).
 - **70 real guns in 32 calibers.** Pistols, revolvers and hand cannons, assault
   rifles, DMRs, bolt-action sniper rifles, SMGs, shotguns and lever actions.
   Damage, range, recoil and noise scale from each caliber's real muzzle energy.
@@ -158,18 +165,23 @@ chokes, stocks, side saddle and slings.
 
 ## Installation
 
-ZE Guns Of Bohemia isn't on the Steam Workshop yet. To run it locally:
+ZE Guns Of Bohemia isn't on the Steam Workshop yet. The repo root is a
+complete Workshop item (`workshop.txt`, `preview.png`, `Contents/mods/...`,
+a `poster.png` per mod). To run it locally:
 
-1. Clone or download this repo into your Zomboid Workshop folder:
+1. Put the repo in your Zomboid Workshop folder, or link it there so you keep
+   working in the clone (Windows, no admin needed):
    ```
-   %UserProfile%\Zomboid\Workshop\ZEGunsOfBohemia\
+   mklink /J "%UserProfile%\Zomboid\Workshop\ZEGunsOfBohemia" "C:\path\to\zegunsofbohemia"
    ```
-   The repo's `Contents/mods/...` layout is the Workshop format, so the game picks it up as-is.
-2. In **Mods**, enable:
+   The game lists it under **Workshop** in the main menu (to upload) and the
+   mods under **Mods**.
+2. Subscribe to **Gunworks Framework** (Workshop 3722064198, mod id `SWMG`). In **Mods**, enable:
+   - **Gunworks-gang** (required by Core),
    - **ZE Guns Of Bohemia - Core** (always),
-   - the essential addons **ZE Guns Of Bohemia - Reloading** and **ZE Guns Of Bohemia - Tactical Holding**,
+   - the essential addon **ZE Guns Of Bohemia - Tactical Holding**,
    - **exactly one** view addon: **ZE Guns Of Bohemia - Isometric** for now,
-   - optionally **ZE Guns Of Bohemia - Callouts**.
+   - optionally **ZE Guns Of Bohemia - Reload events** (needed by Callouts and the spent-case drop on reload) and **ZE Guns Of Bohemia - Callouts**.
 
    Core tells you on game start if a view addon or an essential addon is missing.
 3. Start a new game. Existing saves keep their vanilla guns (conversion isn't done yet).
@@ -181,13 +193,14 @@ ZE Guns Of Bohemia isn't on the Steam Workshop yet. To run it locally:
 | Core + Isometric addon | vanilla isometric camera |
 | Core + First Person addon *(planned)* | ZombieBuddy-based first-person / viewpoint mods |
 | Isometric addon + ZombieBuddy / Viewpoint | **No** — blocked on purpose, that's the overlap this mod fixes |
+| Gunworks Framework (`SWMG`) | **Required** — reloading, magazines, mixed rounds, fire modes |
+| Gun packs built on Gunworks | Expected to work: same framework, shared ammunition library (not tested yet) |
 | Other gun packs, reloading mods, generic gun frameworks | **No** — blocked on purpose (see below) |
 | Mods that only add vanilla-caliber ammo | Yes for standard rounds of vanilla calibers (we reuse the vanilla items) |
 | Addons built on ZE Guns Of Bohemia's API | Yes — this is how to extend the mod |
 
-**Why other gun mods are blocked.** This mod brings its own reloading,
-magazine, ammo and (soon) tactical holding systems, so you don't need another
-mod for the basics. Mods that rework guns or reloading in general patch the
+**Why other gun mods are blocked.** Gunworks does our reloading, magazines and
+fire modes. Mods that rework guns or reloading in general patch the
 same functions in ways we can't predict, which is exactly the overlap and
 crash problem this mod was built to fix. So Core lists known gun and reload
 mods under `incompatible=` in its `mod.info`, and if one is active anyway,
@@ -208,7 +221,7 @@ but don't send the B42 sync calls.
 Contents/mods/
   ZEGunsOfBohemiaCore/   logic, items, UI, loot. No animations, no Java. Always enabled.
   ZEGunsOfBohemiaIso/    isometric view addon (pure Lua). Registers provider "iso".
-  ZEGunsOfBohemiaReload/ essential: reloading system (reload kinds, timing, events)
+  ZEGunsOfBohemiaReload/ optional: reload events (kind, timing) for callouts and case dropping
   ZEGunsOfBohemiaHolding/ essential: tactical holding (stance by Aiming level)
   ZEGunsOfBohemiaCalls/  optional: callouts ("CHANGING MAG!")
   ZEGunsOfBohemiaFP/     (planned) first-person addon, requires ZombieBuddy. Provider "fp".
@@ -234,7 +247,9 @@ Each mod folder follows the B42 layout: `42/` (mod.info + media) and `common/`.
 | `ZGB_Casings` | when and what a gun ejects | no |
 | `ZGB_Attachments` | rules engine: canAttach / canDetach / requirement chains / UI tree | no |
 | `ZGB_Stats` | final stats = base + parts + magazine + ammo (add → mul → set → clamp) | no |
-| `ZGB_Magazines`, `ZGB_Ammo` | magazine choice and the load-all planner | no |
+| `ZGB_Magazines`, `ZGB_Ammo` | magazine choice and the load-all planner (menus used only without Gunworks) | no |
+| `ZGB_GunworksPlan` | the catalogue as Gunworks registrations: ammo families, magazine profiles, rate of fire, our stat layer | no |
+| `ZGB_Gunworks` | feeds the plan to Gunworks at boot; our stat layer and restore handler | yes |
 | `ZGB_Mode` | view-provider gate (only one owner of animations) and the foreign gun-mod block | `getActivatedMods` |
 | `ZGB_ScriptApply` | at boot, writes every spec into the item scripts | yes |
 | `ZGB_ItemBridge` | the **only** place that calls live item / weapon methods | yes |
@@ -245,7 +260,7 @@ Each mod folder follows the B42 layout: `42/` (mod.info + media) and `common/`.
 | Iso `ZGBIso/ZGB_Def_IsoView`, `ZGB_ViewIso` | the iso view: clip map, stance variants, script params | no |
 | Iso `client/ZGBIso/ZGB_IsoClient` | anim variables, burst recoil penalty, case dropping | yes |
 | Reload `ZGBReload/ZGB_Reload` | reload rules: kind, chamber +1, plan and timing | no |
-| Reload `client/ZGBReload/ZGB_ReloadHooks` | wraps vanilla reload / insert / eject, emits `reload.*` | yes |
+| Reload `client/ZGBReload/ZGB_ReloadHooks` | follows Gunworks' reload / insert actions, emits `reload.*` | yes |
 | Holding `ZGBHolding/ZGB_Holding` | stances and which one a level gets | no |
 | Calls `ZGBCalls/ZGB_Calls`, `ZGB_Def_Calls` | callout rules and lines | no |
 
@@ -281,10 +296,12 @@ Animation follows the same factory pattern as guns:
   AUG and P90 are bullpups, the SAA and Nagant load through a gate...).
 - The iso addon sets AnimSet variables `ZGB_AnimType`, `ZGB_Stance` and
   `ZGB_Kick` on the character. `tools/gen_animsets.lua` writes the matching
-  AnimSet nodes: the **idle and aim** nodes (96, one per anim type x stance)
-  ship in the Iso addon (`media/AnimSets/player/`) since v0.6; the fire-kick
-  nodes (36) are still drafts in `docs/animsets/iso/fire/`. Sandbox
-  "Holding and recoil animations" switches ours off to compare with vanilla.
+  AnimSet nodes as **drafts** in `docs/animsets/iso/` (idle, aim, fire). None
+  ship: the third in-game test showed that `x_extends` looks for the parent
+  node in our own mod folder, so nodes extending vanilla's failed to parse and
+  guns could not aim or fire. Guns use the vanilla poses (which the pose check
+  shows match the vanilla guns) until stance nodes are self-contained and
+  checked in game. `validate_mod` rejects an `x_extends` our mod can't resolve.
 - **Case dropping (iso):** semi-autos drop a casing per shot, bolt, pump and
   lever guns after the action cycles, revolvers and break-actions drop all
   their empties when you reload. Casings land on the ejection side and are
@@ -305,19 +322,23 @@ Attachments that lower recoil shrink the whole pattern.
 - **First person:** the camera will follow the pattern itself. See
   [`docs/FIRST_PERSON.md`](docs/FIRST_PERSON.md) for every difference between the two views.
 
-### Reloading (essential addon)
+### Gunworks (Core) and reload events (optional addon)
 
-- **Tactical reload** with rounds left keeps the chambered round (+1) on
-  closed-bolt guns. **Empty reloads** drop the magazine and release the slide
-  or bolt, and take longer. Open-bolt guns (Uzi, MAC-10, Thompson, PPSh-41,
-  AA-12), revolvers and break-actions have no +1.
-- Guns without magazines reload the way they're built: one round at a time
-  into tubes and internal boxes, dump-and-reload for swing-out revolvers, one
-  chamber at a time through a loading gate, open-extract-load for break-actions.
-- Time = the anim type's clip timings × magazine tier (drums are slower) ×
-  Reloading skill × sandbox **Reload speed**.
-- Emits `reload.start`, `reload.step` (each clip as it plays), `reload.complete`
-  and `ammo.lastMag` when no loaded spare magazine is left.
+- **Gunworks reloads.** R picks the fullest magazine of the gun's profile
+  (standard, then extended, then drum), a magazine can hold mixed rounds of its
+  caliber (our variants, vanilla's and the Gunworks ammunition library's), and
+  its radial menu selects magazine, ammunition and fire mode. Auto and burst
+  guns get its rate of fire (`ZGB_GunworksPlan.RPM` per archetype unless the gun
+  sets `rpm`; bursts of 3).
+- **Our stats are a Gunworks stat layer.** Gunworks restores the script base and
+  re-applies every layer; ours adds attachments, the loaded magazine's tier and
+  the round being fired, from scratch each time, so nothing stacks. While
+  Gunworks runs a gun in RealAuto / RealBurst it owns RecoilDelay.
+- **Reload events addon.** Follows the reloads Gunworks performs, plans their
+  kind and timing (`ZGB_Reload`: tactical with +1 on closed bolts, empty, one
+  round at a time, dump-and-reload, gate, break-action) and emits `reload.start`,
+  `reload.step`, `reload.complete` and `ammo.lastMag` for the callouts and the
+  spent-case drop. It does not change the reload itself.
 
 ### Tactical holding (essential addon)
 
@@ -408,12 +429,46 @@ consistent. Inserting a mag switches the gun to that ammo and its stats change
 
 ## 3D models
 
-Every gun, attachment, magazine and casing has a placeholder model generated
-from `Defs/ZGB_Def_Models.lua` (boxes and cylinders at real-world size), in its
-own folder under `media/models_X/ZGB/` so the artist can replace them one by
-one. The generator also makes inventory icons, the side-view sprites for the
-attachment window, the colour atlas and the model scripts with attachment
-points. Full guide: [`docs/MODELS.md`](docs/MODELS.md).
+Every gun, attachment, magazine and casing has a model in its own folder
+under `media/models_X/ZGB/`, so the artist can replace them one by one:
+
+- **Real models** from free-licensed sources (CC0 and CC-BY only), fitted to
+  each item's size and attachment points. Since v0.8 each gun is its own
+  detailed model from Sketchfab where one exists (`tools/sketchfab/picks.lua`),
+  with the older low-poly packs as the fallback. Sources, authors and
+  licenses, one credit per Sketchfab model: [`CREDITS.txt`](CREDITS.txt), also
+  shipped with the mod.
+- **One texture per gun** (`textures/ZGB/Guns/<Id>.png`: the gun at 1024 px for
+  detailed sources, plus every part baked into its variants) and per real
+  attachment (`Parts/<Id>.png`); placeholder-only models share the palette
+  `ZGB_Atlas.png`. A model script names one texture, so this is the unit.
+- **Placeholders** (boxes and cylinders at real-world size, from
+  `Defs/ZGB_Def_Models.lua`) for everything else: 100 items, including all
+  magazines and casings.
+- Everything (490 models with the variants) ships as FBX. [`docs/MODEL_LIST.txt`](docs/MODEL_LIST.txt) lists
+  every asset and marks which ones are still placeholders.
+
+Getting the Sketchfab models (Blender's bundled Python runs the tools):
+
+1. `tools/sketchfab/search.py` asks Sketchfab's public search for
+   downloadable CC0 / CC-BY candidates for every gun and part and makes a
+   numbered contact sheet per item (`.cache/sketchfab/sheets/`). The picks go
+   in `tools/sketchfab/picks.lua` with any `fix` (`drop_loose` for a magazine
+   lying beside the gun, `cut_top` for a built-in scope, `pca` for a model
+   tilted in its file).
+2. `tools/sketchfab/fetch.py` downloads the picks. It needs your own Sketchfab
+   API token in `SKETCHFAB_API_TOKEN` (Settings, Password & API), checks each
+   license again, skips what is already there and writes the credits to
+   `tools/sketchfab/credits.lua`.
+3. `tools/sketchfab/check_rips.py` reads the names inside every download and
+   flags models ripped from games (Call of Duty, CS, Tarkov naming). A CC-BY
+   label is only as good as the uploader: flagged models are never used.
+4. `gen_models.lua`, then `import_models.py -- --review sheet.png` to look at
+   every fitted model next to its placeholder before the full run.
+
+The pipeline also makes inventory icons, the side-view sprites for the
+attachment window and the model scripts with attachment points. Full guide:
+[`docs/MODELS.md`](docs/MODELS.md).
 
 How attachments show on the gun (`ZGB_Visuals`):
 
@@ -426,8 +481,9 @@ How attachments show on the gun (`ZGB_Visuals`):
   addon switches the gun to the variant model for its current parts
   (`AK47__Handguard_AK_Quad__Mount_AK_SideRail`). 366 variants cover every
   combination the rules allow.
-- The **attachment window** draws the build as a side view, and previews the
-  selected part on the gun before you fit it.
+- The **Gunsmith screen** draws the build as a large side view and shows the gun
+  with the hovered part before you fit it. Slot placement is `ZGB_InspectLayout`
+  (pure, tested for all 70 guns at 1080p and 720p: no overlaps, on screen, by the part).
 
 New attachments in v0.6: 5.56, .308 and AK flash hiders, a 9mm pistol
 compensator, angled and stubby grips, rifle and pistol lasers, a rubber recoil
@@ -437,20 +493,85 @@ and buttstock slots).
 Known placeholder gap: on shotguns, a recoil pad or buttstock shell holder
 stays where the original stock ended when a folding stock replaces it.
 
+## Sounds
+
+Gunshots are recordings of real guns from The Free Firearm Sound Library
+(CC0); magazine, rack and shell sounds are zer0_sol's reload recordings
+(CC0). `Defs/ZGB_Def_Sounds.lua` sorts every gun into a sound family by
+archetype and caliber (9mm pistol, .45, .22, magnum revolver, AK, AR,
+Mosin, .50 BMG, pump shotgun...): 19 families, each with a suppressed
+version. The weapon factory puts them in `spec.sounds` (a gun def can
+override any of them), and with a suppressor fitted the bridge swaps the
+fire sound for the suppressed one.
+
+`tools/gen_sounds.lua` cuts, normalises and converts the sources (ffmpeg)
+to mono Ogg in `media/sound/ZGB/` (43 files, about 650 KB) and writes the
+sound scripts `scripts/ZGB_sounds.txt`. The sources are downloaded into
+`.cache/sound_sources/` (not in git).
+
+## Testing without starting the game
+
+Project Zomboid is slow to start, so most problems can be caught offline:
+
+| Tool | What it checks |
+|---|---|
+| `lua5.1 tests/run_tests.lua` | All the game logic (136 tests), against a stub game |
+| `lua5.1 tools/validate_mod.lua` | The mod the way the game reads it: mod.info files, every item script -> icon / model / twin, every model -> mesh and texture file, every sound -> audio file, Lua syntax and `goto`, AnimSet XML, sandbox labels, PNG / FBX / OGG headers, Workshop files |
+| `lua5.1 tools/gen_pz_api.lua` | Indexes every method and field name of the installed game (jar + vanilla Lua) into `.cache/pz_api/`; from then on `validate_mod` fails on any game method we call that this build doesn't have. Rerun after a game update |
+| `blender -b -P tools/blender/check_models.py` | Re-imports every FBX and draws contact sheets into `.cache/check/` |
+| `lua5.1 tools/preview_gunsmith.lua AK47 muzzle Suppressor` | Draws the Gunsmith screen from the real UI code into `.cache/gunsmith_AK47.png` (fake UI in `tests/mock_ui.lua`: text as bars, guns as silhouettes) |
+| `blender -b -P tools/blender/import_models.py -- --review review.png` | Each real model over its placeholder, to check the fit |
+
+What only the game can tell is in the [VERIFY list](#before-the-first-in-game-run--verify-list).
+
 ## Testing in game
 
-A checklist for the first runs. Enable Core, Reloading, Tactical Holding,
-Isometric (and Callouts), start a new game, and use debug mode to spawn items
+### Self-test (one click, debug mode)
+
+Start the game with `-debug`, load a save, right-click the ground:
+
+- **ZGB: run self-test** creates every gun, magazine and round in memory and
+  checks what the game really holds: name, ammo type, capacity, magazine type,
+  model and sound scripts (strict: `GameSounds.isKnownSound`, and the file each
+  sound plays), the `base:firearm` / magazine / ammo tags, fire mode, rack
+  after shot, reload type, swing anim, muzzle flash, two-handed, the muzzle
+  point as the game read it (must be on +Y), stats after `applyStats`, each
+  magazine tier filled and inserted, a second ammo load, and the suppressed
+  shot. About 3,500 checks in a few seconds. The summary appears over your
+  head; `FAIL` and `SKIP` lines go to `console.txt` as `[ZGB][TEST]`,
+  everything to `%UserProfile%\Zomboid\Lua\ZGB_selftest.txt`. Send that file.
+- **ZGB: pose check (screenshots)** equips one gun of every animation type in
+  turn (pistol, revolver, rifle, SMG, bullpup, bolt, lever, pump, semi-auto
+  and break-action shotgun), lets the idle pose settle, aims, takes a
+  screenshot (`ZGB_pose_<type>_<gun>`) and records the animation variables the
+  game used (`Weapon` must be `firearm`) in `Zomboid\Lua\ZGB_poses.txt`. About a
+  minute; don't move. Your own gun goes back in your hands afterwards.
+- **ZGB: give test kit** puts a Glock 17, an AK-47 and a Remington 870 in your
+  inventory with full magazines of every tier, 30 rounds each and a
+  suppressor, to try firing by hand.
+- **ZGB: give ALL guns + attachments** puts every gun (empty) and one of every
+  attachment in your inventory, to look at each model up close. It is heavy:
+  drop what you are done with.
+
+The same checks run offline against `tests/mock_game.lua` (`run_tests.lua`),
+which reads our generated item, sound and model scripts the way the game does,
+so a FAIL in game means the game behaves differently from what we assumed.
+
+### Manual checklist
+
+A checklist for the first runs. Enable Gunworks, Core, Tactical Holding,
+Isometric (and Reload events + Callouts), start a new game, and use debug mode to spawn items
 (`ZGB.AK47`, `ZGB.Mount_AK_SideRail`, `ZGB.Optic_RedDot`...).
 
 | Check | What you should see | If not |
 |---|---|---|
 | Item icons | Side-view icons for ZGB guns, parts and magazines | `Icon = ZGB_<Id>` / texture naming (VERIFY 18) |
-| Gun in hand | The placeholder model of the gun, held at the grip | `WeaponSprite = ZGB.<Id>` format, `.X` axes / scale, origin (VERIFY 18-19) |
+| Gun in hand | The gun's model, held at the grip | `WeaponSprite = ZGB.<Id>` format, FBX axes / scale, origin (VERIFY 18-19, 22) |
+| Gunshot | A real gunshot per gun family; muffled with a suppressor | sound scripts, `setSwingSound` (VERIFY 23) |
 | Attachment window | Right-click gun -> Gunsmith: side view of the build at the top | `getTexture` path, `drawTextureScaled` (VERIFY 21) |
 | Optic / suppressor | The part visible on the gun after attaching | visual twin `Vis_` items, `ModelWeaponPart` (VERIFY 20) |
 | Side mount / handguard / laser | The gun switches to a model with it built in | `setWeaponSprite`, `resetEquippedHandsModels` (VERIFY 20) |
-| Holding stance | Lower, shakier carry at low Aiming | shipped AnimSets (VERIFY 13); toggle sandbox "Holding and recoil animations" |
+| Holding stance | Vanilla gun pose (stance nodes are drafts for now) | pose check screenshots next to the vanilla references |
 | Callouts | CHANGING MAG! over the character on a reload | `Say`, reload hooks (VERIFY 14, 17) |
 | Casings | Brass next to you after firing | `AddWorldInventoryItem` (VERIFY 15) |
 | Recoil | Long bursts lose accuracy, single shots don't | `OnWeaponSwing` (VERIFY 14) |
@@ -482,12 +603,16 @@ fits it, every part fits some gun, and every caliber in use has somewhere to spa
 
 ## Development
 
-Requires **Lua 5.1** (Project Zomboid's Kahlua is roughly 5.1: no `goto`, no `//`, no `utf8`).
+Requires **Lua 5.1** (Project Zomboid's Kahlua is roughly 5.1: no `goto`, no `//`, no `utf8`, and no `next()`: use `ZGB.isEmpty` or `pairs`).
 On Windows, `winget install DEVCOM.LuaJIT` works: run the same commands with `luajit`.
 LuaJIT accepts `goto`, so don't rely on it to catch that one.
 
 ```bash
-lua5.1 tests/run_tests.lua      # 113 tests: catalogue, magazines, attachments, stats, ammo, loot, mod gates, animation factory, recoil, casings, models and variants, the three addons, and the addon clients against a stub game
+lua5.1 tests/run_tests.lua      # 136 tests: catalogue, magazines, attachments, stats, ammo, loot, mod gates, animation factory, recoil, casings, models and variants, sounds, the three addons, the addon clients against a stub game, and validate_mod
+```
+
+```bash
+lua5.1 tools/validate_mod.lua   # offline check of the whole mod as the game reads it
 ```
 
 ```bash
@@ -499,11 +624,18 @@ lua5.1 tools/gen_catalog.lua    # refresh docs/catalogue.json
 ```
 
 ```bash
-lua5.1 tools/gen_animsets.lua   # refresh the iso AnimSet nodes (idle/aim shipped, fire drafts)
+lua5.1 tools/gen_animsets.lua   # refresh the iso AnimSet node drafts (docs/animsets/iso, nothing shipped)
 ```
 
 ```bash
-lua5.1 tools/gen_models.lua     # placeholder models, icons, preview sprites, model scripts (then gen_scripts.lua)
+lua5.1 tools/gen_models.lua     # placeholder models, icons, preview sprites, model scripts, credits
+blender -b -P tools/blender/import_models.py   # real models from .cache/model_sources (see docs/MODELS.md), then gen_scripts.lua
+blender -b -P tools/blender/check_models.py    # contact sheets of the exported FBX in .cache/check/
+blender -b -P tools/blender/make_art.py        # Workshop preview.png and each mod's poster.png
+```
+
+```bash
+lua5.1 tools/gen_sounds.lua     # sounds from .cache/sound_sources (needs ffmpeg), sound scripts, credits
 ```
 
 Conventions:
@@ -520,8 +652,8 @@ install to check against. Each is marked `-- VERIFY` in the code:
 
 1. **FP mod IDs** in `ZGB_Mode.FP_MOD_IDS` and `ZEGunsOfBohemiaIso/42/mod.info` — copy the exact `id=` from ZombieBuddy's and the viewpoint mod's `mod.info`.
 2. **Item script fields** (`ItemType = base:weapon`, etc.) — compare with vanilla `AssaultRifle` / `Pistol` in your build's `media/scripts`.
-3. **`AmmoType` format** — B42 may expect a registry-style id; check a vanilla gun.
-4. **HandWeapon setter names** in `ZGB_ItemBridge.SETTERS` (failures are logged once, never crash).
+3. **`AmmoType` format** — CONFIRMED on the first test: B42 uses registry ids (`base:bullets_45`). Ours are registered in the generated `media/registries.lua` (`AmmoType.register("zgb:...", "ZGB.Ammo_...")`, the B42 `ModRegistries` hook); at runtime the bridge resolves them with `AmmoType.get(ResourceLocation.of(id))` and reads `getAmmoType():getItemKey()` like vanilla. The in-game self-test confirmed all 97 ammo types resolve and magazines report them. `Base.223Bullets` no longer exists in B42, so .223 Rem is all ours.
+4. **HandWeapon setter names** in `ZGB_ItemBridge.SETTERS` — CHECKED offline: every method our Lua calls exists in build 42.21 (`tools/gen_pz_api.lua` + `validate_mod`). Existing is not the same as doing what we think: the self-test checks the values they leave.
 5. **Anim names** in `ZGB_ViewIso.lua` — copy from vanilla gun scripts.
 6. **Timed-action style** (`perform` / `complete`) — compare with vanilla `ISUpgradeWeapon`.
 7. **Magazine hooks** (`ZGB_ReloadHooks`, `ZGB_MagazineActions`): `ISInsertMagazine` / `ISEjectMagazine` constructors and the `gun` field, `ISReloadWeaponAction.BeginAutomaticReload`, `setMagazineType`, `isContainsClip`, `getAllTypeRecurse`. If one is missing, a warning is logged and that feature turns off.
@@ -539,6 +671,8 @@ install to check against. Each is marked `-- VERIFY` in the code:
 19. **Hand placement:** the gun origin is the top of the grip; if guns sit wrong in the hand, move the origin in the shapes (`ZGB_Def_Models.lua`).
 20. **Attached parts:** `base:weaponpart` item fields (`PartType`, `MountOn` with the module prefix), the `ModelWeaponPart = <twin> <model> anchor <point>` order, `instanceItem`, `attachWeaponPart`, `HandWeapon:setWeaponSprite`, `IsoGameCharacter:resetEquippedHandsModels`.
 21. **Attachment window preview:** `getTexture("media/textures/ZGB/Preview/<Id>.png")` and `ISUIElement:drawTextureScaled`.
+22. **Real models (FBX):** that B42 loads `.fbx` static meshes from `models_X` with `mesh = <path without extension>`, the scale and axes. First test: the game applies the FBX node transform, so Blender's default x100 node scale made guns giant and its -90° node rotation turned barrels sideways. Now models are plain metres with node scale 1 (like BCGTools) and the meshes are turned so the barrel points along the game's +Y with +Z up, like vanilla guns (Glock muzzle at y = 0.144, vanilla M9 0.1443); attachment offsets follow (`AXES` in gen_models). Third test: real size looked too big next to vanilla, which draws guns at ~0.6 of their real length; models and points are now shrunk by `MF.GAME_SCALE` = 0.6. Still to see: the size next to vanilla guns (pose check reference shots), the gun points where the character aims, and a 4096 x 4096 texture (`ZGB_Atlas.png`).
+23. **Sounds:** second in-game test: our shots and racks were silent with the scripts in `module ZGB`. Now in `module Base` like every vanilla sound script, and the self-test checks `GameSounds.isKnownSound` and the file each one plays. Still to hear: shot, rack, magazine and the suppressed shot.
 
 ## Roadmap
 
@@ -552,18 +686,19 @@ install to check against. Each is marked `-- VERIFY` in the code:
 - [x] Block foreign gun / reload frameworks (v0.4)
 - [x] Essential addons: Reloading and Tactical Holding; optional Callouts (v0.5)
 - [x] Animation factory with the isometric view, case dropping, spray patterns per gun (v0.5)
+- [x] Runs on the Gunworks Framework: reloading, magazine profiles, mixed rounds, fire modes, bursts (v0.8)
 - [x] Placeholder models for every gun, attachment, magazine and casing; model variants; attachment window preview; idle/aim AnimSets shipped (v0.6)
 - [ ] Confirm models, animations and the fire-kick AnimSets in game; real models and clips from the 3D side
 - [ ] First in-game test and the VERIFY list
 - [ ] Grenades (the callouts are already waiting for `grenade.throw`)
-- [ ] Speedloaders and stripper clips for revolvers and internal-box rifles
+- [ ] Speedloaders and stripper clips for revolvers and internal-box rifles (Gunworks SpeedLoader)
+- [ ] Folding stocks and bipods as Gunworks pairs; loose stocks, grips and parts in loot
 - [ ] Addon API docs (calibers, magazines, parts, guns, ammo effects)
-- [ ] Fire-mode switching
 - [ ] Weapon light behaviour
 - [ ] Converting vanilla guns in existing saves; code-spawned guns (zombie holsters)
 - [ ] Translations
 - [ ] Multiplayer sync
-- [ ] AP armor penetration and tracer visuals (the traits are data only today); mixed magazine loads
+- [ ] AP armor penetration and tracer visuals (the traits are data only today); mixed loads are Gunworks' since v0.8
 - [ ] **First Person addon** — reads `spec.fp`, `spec.recoil.fp` and each optic's `fp.sightAlignment`, which are already in the data
 
 ## Notes for the 3D side
