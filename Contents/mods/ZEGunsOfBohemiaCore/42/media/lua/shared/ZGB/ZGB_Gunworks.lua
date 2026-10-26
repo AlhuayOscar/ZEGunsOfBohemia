@@ -37,6 +37,7 @@ function GW.load()
     Magazine = require("WeaponSystems/Utils/Magazine")
     Rate = require("WeaponSystems/Utils/RateOfFire")
     Stats = require("WeaponSystems/Utils/StatsFactory")
+    GW.modules = { Ammo = Ammo, Magazine = Magazine, RateOfFire = Rate, StatsFactory = Stats }
     return Ammo ~= nil and Magazine ~= nil and Rate ~= nil and Stats ~= nil
 end
 
@@ -89,7 +90,13 @@ end
 function GW.reapply(weapon)
     if not GW.active or not weapon then return nil end
     Stats.ReapplyAllModifiers(weapon)
-    return lastTarget[weapon]
+    -- report what the gun really holds: whole-number stats are ints in the game (the test
+    -- server's self-test compared 12.35 with the gun's 12)
+    local out = {}
+    for k, v in pairs(lastTarget[weapon] or {}) do
+        out[k] = (P.INT[k] and type(v) == "number") and math.floor(v + 0.5) or v
+    end
+    return out
 end
 
 local function registerAmmo(summary)

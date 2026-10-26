@@ -227,8 +227,9 @@ function T.checkGunworks(r)
     end
     truthy(r, "Gunworks", "registered", GW and GW.active == true, "ZGB_Gunworks did not register (see console)")
     if not (GW and GW.active) then return end
-    local Ammo = package.loaded["WeaponSystems/Utils/Ammo"]
-    local Magazine = package.loaded["WeaponSystems/Utils/Magazine"]
+    -- the modules ZGB_Gunworks loaded (Kahlua has no `package` table: package.loaded crashed
+    -- the first self-test on a real server)
+    local Ammo, Magazine = GW.modules and GW.modules.Ammo, GW.modules and GW.modules.Magazine
     if type(Ammo) ~= "table" or type(Magazine) ~= "table" then
         return record(r, "FAIL", "Gunworks", "modules", "Ammo / Magazine modules not loaded")
     end

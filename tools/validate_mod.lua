@@ -7,7 +7,7 @@
     - every mod folder: 42/mod.info fields, common/, poster, required mods
     - every script: items -> icons, models, visual twins; models -> mesh and
       texture files; sounds -> audio files; every gun's sounds exist
-    - every Lua file compiles; no `goto` (Kahlua rejects it), no `next()` (Kahlua has none)
+    - every Lua file compiles; no `goto` (Kahlua rejects it), no `next()` and no `package.` (Kahlua has neither)
     - AnimSet XML is well formed; sandbox options have labels
     - PNG / FBX / OGG files have valid headers; sizes of the atlas and icons
     - Workshop packaging: workshop.txt and preview.png (256 x 256)
@@ -270,6 +270,8 @@ for _, f in ipairs(luaFiles) do
         local code = line:gsub("%-%-.*$", "")
         if code:match("%f[%w]goto%f[%W]") then fail("Lua: `goto` (Kahlua rejects it) in " .. f) end
         if code:match("%f[%w_.:]next%s*%(") then fail("Lua: `next()` (missing in Kahlua, use ZGB.isEmpty or pairs) in " .. f) end
+        -- Kahlua has no `package` table (package.loaded crashed the self-test on the test server)
+        if code:match("%f[%w_]package%.") then fail("Lua: `package.` (missing in Kahlua) in " .. f) end
         if code:match("[^/]//[^/]") and not code:match("https?://") and not code:match("['\"].-//.-['\"]") then
             fail("Lua: integer division `//` in " .. f .. ": " .. line)
         end
